@@ -29,3 +29,6 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`\n  ⚡ DevTerm Backend running at http://localhost:${PORT}\n`);
 });
+
+// Export for Vercel serverless
+module.exports = app;
