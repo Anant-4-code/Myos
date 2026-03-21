@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevTerm — Admin Panel</title>
+  <meta name="description" content="Admin dashboard for managing DevTerm content." />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/theme.css" />
+  <link rel="stylesheet" href="styles/layout.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+</head>
+<body>
+
+  <!-- ===== PASSWORD GATE ===== -->
+  <div id="admin-gate" class="admin-gate">
+    <div class="admin-gate-box">
+      <div class="landing-title" style="margin-bottom: 32px;">
+        <h1 style="font-size: 1.3rem;">🔐 Admin Access</h1>
+        <p class="subtitle">Enter admin password to continue</p>
+      </div>
+
+      <form id="admin-login-form" autocomplete="off">
+        <div class="landing-input-wrapper">
+          <span class="input-prefix">$</span>
+          <input 
+            type="password" 
+            id="admin-password" 
+            class="landing-input" 
+            placeholder="password" 
+            autocomplete="off"
+          />
+        </div>
+        <p id="admin-error" class="landing-error"></p>
+        <button type="submit" class="landing-submit">
+          🔓 Authenticate
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 20px;">
+        <a href="app.html" style="font-size: 0.75rem; color: var(--text-muted);">← Back to Explorer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ADMIN DASHBOARD ===== -->
+  <div id="admin-dashboard" class="admin-container" style="display: none; flex-direction: column;">
+    <!-- Top: Tabs -->
+    <div class="admin-header-tabs">
+      <div class="admin-tab active" id="tab-editor-btn">🛠 Content Editor</div>
+      <div class="admin-tab" id="tab-analytics-btn">📈 Analytics Dashboard</div>
+      <div style="margin-left: auto; align-self: center;">
+        <button id="btn-logout" class="btn btn-sm btn-danger">Logout</button>
+      </div>
+    </div>
+
+    <!-- MAIN VIEW AREA -->
+    <div id="admin-main-view" style="display: flex; flex: 1; overflow: hidden;">
+      
+      <!-- VIEW 1: EDITOR (The original layout) -->
+      <div id="view-editor" style="display: flex; width: 100%;">
+        <!-- Left: Tree Editor -->
+        <div class="admin-sidebar">
+          <div class="admin-sidebar-header">
+            <h2 style="font-size: 0.9rem;">📂 Content Tree</h2>
+            <a href="app.html" class="btn btn-sm btn-secondary" style="text-decoration: none;">← App</a>
+          </div>
+          
+          <!-- Search & Filter Bar -->
+          <div class="admin-filter-bar">
+            <div class="search-wrapper">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="admin-search-input" class="search-input" placeholder="Search tree..." />
+            </div>
+            <div class="filter-pills">
+              <div class="filter-pill active" data-filter="all">All</div>
+              <div class="filter-pill" data-filter="folder">Folders</div>
+              <div class="filter-pill" data-filter="question">Questions</div>
+              <div class="filter-pill" data-filter="easy">Easy</div>
+              <div class="filter-pill" data-filter="code">With Code</div>
+            </div>
+          </div>
+
+          <div class="admin-toolbar">
+            <button id="btn-add-folder" class="btn btn-sm btn-primary">+ Folder</button>
+            <button id="btn-add-question" class="btn btn-sm btn-secondary">+ Question</button>
+          </div>
+          <div id="admin-tree-container" class="admin-tree"></div>
+        </div>
+
+        <!-- Right: Editor Panel -->
+        <div id="editor-panel" class="admin-editor">
+          <div class="empty-state">
+            <div class="empty-state-icon">⚡</div>
+            <p>Select a node from the tree to edit or create a new one.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 2: ANALYTICS -->
+      <div id="view-analytics" class="analytics-container" style="display: none; width: 100%;">
+        <!-- Content will be injected by JS -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Admin Script -->
+  <script type="module">
+    import { initAdmin } from './scripts/modules/admin.js';
+    document.addEventListener('DOMContentLoaded', initAdmin);
+  </script>
+</body>
+</html>

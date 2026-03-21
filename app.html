@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevTerm — Terminal Knowledge OS</title>
+  <meta name="description" content="A terminal-driven knowledge OS. Explore structured dev content with commands, search, and zero friction." />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/theme.css" />
+  <link rel="stylesheet" href="styles/layout.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+
+  <!-- Highlight.js for syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <style>
+    body {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Mobile sidebar toggle -->
+  <button id="mobile-toggle" class="mobile-toggle" aria-label="Toggle sidebar">☰</button>
+
+  <!-- Sidebar overlay (mobile) -->
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <div class="app-container">
+    <!-- ===== SIDEBAR ===== -->
+    <aside id="sidebar" class="sidebar">
+      <!-- Branding -->
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <span>> DEVTERM_</span>
+          <span class="brand-cursor"></span>
+        </div>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="sidebar-search">
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input
+            type="text"
+            id="search-input"
+            class="search-input"
+            placeholder="Search topics..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button id="search-clear" class="search-clear">✕</button>
+          <span class="search-shortcut">⌃K</span>
+        </div>
+      </div>
+
+      <!-- Search Results (hidden by default) -->
+      <div id="search-results" class="sidebar-tree" style="display: none;"></div>
+
+      <!-- Tree -->
+      <div id="tree-container" class="sidebar-tree"></div>
+
+      <!-- Footer -->
+      <div class="sidebar-footer">
+        <span>
+          <span style="color: var(--accent-green);">●</span>
+          <span id="user-display">user</span>
+        </span>
+      </div>
+    </aside>
+
+    <!-- ===== CONTENT PANEL ===== -->
+    <main class="content-panel">
+      <!-- Header with prompt -->
+      <div class="content-header">
+        <div id="terminal-prompt" class="terminal-prompt"></div>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div style="padding: 0 24px; padding-top: 12px;">
+        <div id="breadcrumb" class="breadcrumb">
+          <span class="breadcrumb-active">~</span>
+        </div>
+      </div>
+
+      <!-- Content body -->
+      <div id="content-body" class="content-body"></div>
+
+      <!-- Command Bar -->
+      <div class="command-bar">
+        <div class="command-output-container">
+          <button id="command-output-close" class="command-output-close" title="Close output">✕</button>
+          <div id="command-output" class="command-output"></div>
+        </div>
+        <div class="command-input-wrapper">
+          <span class="command-prefix">$</span>
+          <input
+            type="text"
+            id="command-input"
+            class="command-input"
+            placeholder="Type a command..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button id="command-help-btn" class="command-help-btn" title="Show available commands">?</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- App Script -->
+  <script type="module" src="scripts/main.js"></script>
+</body>
+</html>

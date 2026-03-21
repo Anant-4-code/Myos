@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevTerm — Anant's Interactive Knowledge OS</title>
+  <meta name="description" content="A unique, terminal-based developer knowledge platform created by Anant Rai." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/theme.css" />
+  <link rel="stylesheet" href="styles/landing.css" />
+
+  <style>
+    body.landing-page {
+      opacity: 1;
+      transition: opacity 0.4s ease;
+    }
+  </style>
+</head>
+<body class="landing-page">
+
+  <!-- ===============================
+       BOOT SEQUENCE OVERLAY
+       =============================== -->
+  <div id="boot-overlay" class="boot-overlay">
+    <div class="boot-terminal">
+      <div id="boot-1" class="boot-line">ANANT_OS v1.0 initializing...</div>
+      <div id="boot-2" class="boot-line">Loading modules...</div>
+      <div id="boot-3" class="boot-line success">✔ UI/UX Engine</div>
+      <div id="boot-4" class="boot-line success">✔ Video Editing Suite</div>
+      <div id="boot-5" class="boot-line success">✔ Numerical Computing Core</div>
+      <div id="boot-6" class="boot-line system-ready">System Ready.</div>
+      <div id="boot-7" class="boot-line env-enter">> Entering developer environment...</div>
+    </div>
+  </div>
+
+  <!-- ===============================
+       MAIN PORTFOLIO LAYOUT
+       =============================== -->
+  <div class="portfolio-container">
+    
+    <!-- LEFT SIDE: TERMINAL -->
+    <main class="portfolio-left">
+      <div class="term-header">
+        <div class="term-dot red"></div>
+        <div class="term-dot yellow"></div>
+        <div class="term-dot green"></div>
+        <div style="margin-left:auto; font-size: 0.75rem; color: var(--text-muted); padding-top:2px;">
+          anant_os@v1.0
+        </div>
+      </div>
+
+      <div id="term-output" class="term-output-area">
+        <!-- Output injected by JS -->
+      </div>
+
+      <div class="term-input-line">
+        <span class="term-prompt">
+          <span>anant@devterm</span><span>:~$</span>
+        </span>
+        <input 
+          type="text" 
+          id="term-input" 
+          class="portfolio-input" 
+          autocomplete="off" 
+          spellcheck="false" 
+          autofocus
+        />
+        <span class="custom-cursor"></span>
+      </div>
+    </main>
+
+    <!-- RIGHT SIDE: VISUALS -->
+    <aside class="portfolio-right">
+      <!-- Glow Orbs -->
+      <div class="glow-orb glow-green"></div>
+      <div class="glow-orb glow-blue"></div>
+
+      <!-- Floating Snippets -->
+      <div class="floating-code fc-1">import { UI } from '@anant/design';</div>
+      <div class="floating-code fc-2">const edit = new VideoTimeline();</div>
+      <div class="floating-code fc-3">await sys.initializeCompute();</div>
+
+      <!-- Main Visual Content -->
+      <div class="visual-content">
+        <div class="avatar-container">
+          <span class="avatar-placeholder">🖥️</span>
+        </div>
+        <h1 class="visual-name">DEVTERM</h1>
+        <p class="visual-title">Interactive Knowledge OS by Anant Rai</p>
+        <button id="quick-launch-btn" class="quick-launch-btn">⚡ Enter Knowledge Base</button>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Landing Script -->
+  <script type="module" src="scripts/landing.js"></script>
+</body>
+</html>
