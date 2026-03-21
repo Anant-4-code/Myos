@@ -248,9 +248,13 @@
     "parentId": "node-mn0n95qp-yo8c3y",
     "type": "question",
     "name": "Create package vehicle with subpackages and display available models",
-    "content": "Create a package vehicle\nInside it, create subpackage types\nInside types, create modules cars.py and bikes.py\nEach module has a function available_models() returning list\nImport and display models",
-    "code": "\ud83d\udcc1 Structure:\n\nvehicle/\n \u2514\u2500\u2500 types/\n      \u251c\u2500\u2500 cars.py\n      \u2514\u2500\u2500 bikes.py\n\ncars.py\n\ndef available_models():\n    return [\"Swift\", \"i20\", \"Baleno\"]\n\nbikes.py\n\ndef available_models():\n    return [\"Pulsar\", \"Activa\", \"Royal Enfield\"]\n\nmain.py\n\nfrom vehicle.types import cars, bikes\n\nprint(\"Car Models:\", cars.available_models())\nprint(\"Bike Models:\", bikes.available_models())",
-    "language": "python"
+    "answers": [
+      {
+        "content": "Create a package vehicle\nInside it, create subpackage types\nInside types, create modules cars.py and bikes.py\nEach module has a function available_models() returning list\nImport and display models",
+        "code": "\"\"\"\ud83d\udcc1 Structure:\n\nvehicle/\n \u2514\u2500\u2500 types/\n      \u251c\u2500\u2500 cars.py\n      \u2514\u2500\u2500 bikes.py\n\"\"\"\n#cars.py\n\ndef available_models():\n    return [\"Swift\", \"i20\", \"Baleno\"]\n\n#bikes.py\n\ndef available_models():\n    return [\"Pulsar\", \"Activa\", \"Royal Enfield\"]\n\n#main.py\n\nfrom vehicle.types import cars, bikes\n\nprint(\"Car Models:\", cars.available_models())\nprint(\"Bike Models:\", bikes.available_models())",
+        "language": "python"
+      }
+    ]
   },
   {
     "id": "node-e6c6d5f5-678",
@@ -346,8 +350,23 @@
     "type": "question",
     "name": "Create banking package with account and loan modules",
     "content": "Create package banking\nCreate modules\nImport and use functions",
-    "code": "account.py\n\ndef open_account(name):\n    print(f\"Account created for {name}\")\n\nloan.py\n\ndef apply_loan(amount):\n    print(f\"Loan approved: {amount}\")\n\nmain.py\n\nfrom banking import account, loan\n\naccount.open_account(\"Anant\")\nloan.apply_loan(50000)",
-    "language": "python"
+    "answers": [
+      {
+        "content": "**account.py**",
+        "code": "def open_account(name):\n    print(f\"Account created for {name}\")",
+        "language": "python"
+      },
+      {
+        "content": "**loan.py**",
+        "code": "def apply_loan(amount):\n    print(f\"Loan approved: {amount}\")",
+        "language": "python"
+      },
+      {
+        "content": "**main.py**",
+        "code": "from banking import account, loan\n\naccount.open_account(\"Anant\")\nloan.apply_loan(50000)",
+        "language": "python"
+      }
+    ]
   },
   {
     "id": "node-98e6fc47-5d6",
@@ -390,8 +409,18 @@
     "type": "question",
     "name": "Create personal portfolio webpage using Flask",
     "content": "Use Flask framework\nDisplay name, qualification, and skills\nUse HTML template",
-    "code": "app.py\n\nfrom flask import Flask, render_template\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef home():\n    return render_template(\"portfolio.html\")\n\nif __name__ == \"__main__\":\n    app.run(debug=True)\n\nportfolio.html\n\n<!DOCTYPE html>\n<html>\n<body>\n<h1 style=\"text-align:center;\">Anant Rai</h1>\n\n<h2>Qualification</h2>\n<ul>\n<li>BSc Computer Science</li>\n</ul>\n\n<marquee>Python | Web Development</marquee>\n\n</body>\n</html>",
-    "language": "html"
+    "answers": [
+      {
+        "content": "**app.py**",
+        "code": "from flask import Flask, render_template\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef home():\n    return render_template(\"portfolio.html\")\n\nif __name__ == \"__main__\":\n    app.run(debug=True)",
+        "language": "python"
+      },
+      {
+        "content": "**portfolio.html**",
+        "code": "<!DOCTYPE html>\n<html>\n<body>\n<h1 style=\"text-align:center;\">Anant Rai</h1>\n\n<h2>Qualification</h2>\n<ul>\n<li>BSc Computer Science</li>\n</ul>\n\n<marquee>Python | Web Development</marquee>\n\n</body>\n</html>",
+        "language": "html"
+      }
+    ]
   },
   {
     "id": "node-b85ccd2a-e80",
@@ -416,8 +445,18 @@
     "type": "question",
     "name": "Create library webpage using Flask",
     "content": "Display library name\nShow books in table\nAdd quote",
-    "code": "app.py\n\nfrom flask import Flask, render_template\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef home():\n    return render_template(\"library.html\")\n\nif __name__ == \"__main__\":\n    app.run(debug=True)\n\nlibrary.html\n\n<!DOCTYPE html>\n<html>\n<body>\n\n<h1 style=\"text-align:center;\">City Library</h1>\n\n<table border=\"1\">\n<tr><th>Title</th><th>Author</th></tr>\n<tr><td>Python</td><td>Zelle</td></tr>\n<tr><td>DBMS</td><td>Elmasri</td></tr>\n</table>\n\n<p style=\"color:blue;\"><b>Reading is to the mind what exercise is to the body.</b></p>\n\n</body>\n</html>",
-    "language": "html"
+    "answers": [
+      {
+        "content": "**app.py**",
+        "code": "from flask import Flask, render_template\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef home():\n    return render_template(\"library.html\")\n\nif __name__ == \"__main__\":\n    app.run(debug=True)",
+        "language": "python"
+      },
+      {
+        "content": "**library.html**",
+        "code": "<!DOCTYPE html>\n<html>\n<body>\n\n<h1 style=\"text-align:center;\">City Library</h1>\n\n<table border=\"1\">\n<tr><th>Title</th><th>Author</th></tr>\n<tr><td>Python</td><td>Zelle</td></tr>\n<tr><td>DBMS</td><td>Elmasri</td></tr>\n</table>\n\n<p style=\"color:blue;\"><b>Reading is to the mind what exercise is to the body.</b></p>\n\n</body>\n</html>",
+        "language": "html"
+      }
+    ]
   },
   {
     "id": "node-32ec838a-493",
@@ -451,8 +490,18 @@
     "type": "question",
     "name": "Create module with factorial, power and vowels list",
     "content": "Create module\nImport and use functions",
-    "code": "variables.py\n\ndef factorial(n):\n    f = 1\n    for i in range(1, n+1):\n        f *= i\n    return f\n\ndef power(n):\n    return n*n\n\nvowels = ['a', 'e', 'i', 'o', 'u']\n\nmain.py\n\nimport variables\n\nn = int(input(\"Enter n: \"))\n\nprint(\"Factorial:\", variables.factorial(n))\nprint(\"Power:\", variables.power(n))\nprint(\"Second vowel:\", variables.vowels[1])",
-    "language": "python"
+    "answers": [
+      {
+        "content": "**variables.py**",
+        "code": "def factorial(n):\n    f = 1\n    for i in range(1, n+1):\n        f *= i\n    return f\n\ndef power(n):\n    return n*n\n\nvowels = ['a', 'e', 'i', 'o', 'u']",
+        "language": "python"
+      },
+      {
+        "content": "**main.py**",
+        "code": "import variables\n\nn = int(input(\"Enter n: \"))\n\nprint(\"Factorial:\", variables.factorial(n))\nprint(\"Power:\", variables.power(n))\nprint(\"Second vowel:\", variables.vowels[1])",
+        "language": "python"
+      }
+    ]
   },
   {
     "id": "node-41cd400b-14f",
@@ -495,8 +544,18 @@
     "type": "question",
     "name": "Create college webpage using Flask",
     "content": "Display college name\nShow courses\nDisplay image",
-    "code": "app.py\n\nfrom flask import Flask, render_template\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef home():\n    courses = [\"BSc CS\", \"BBA\", \"BCom\"]\n    return render_template(\"college.html\", courses=courses)\n\nif __name__ == \"__main__\":\n    app.run(debug=True)\n\ncollege.html\n\n<!DOCTYPE html>\n<html>\n<body>\n\n<h1 style=\"text-align:center;\">My College</h1>\n\n<ul>\n{% for c in courses %}\n<li>{{ c }}</li>\n{% endfor %}\n</ul>\n\n<img src=\"{{ url_for('static', filename='college.jpg') }}\" width=\"300\">\n\n</body>\n</html>",
-    "language": "html"
+    "answers": [
+      {
+        "content": "**app.py**",
+        "code": "from flask import Flask, render_template\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef home():\n    courses = [\"BSc CS\", \"BBA\", \"BCom\"]\n    return render_template(\"college.html\", courses=courses)\n\nif __name__ == \"__main__\":\n    app.run(debug=True)",
+        "language": "python"
+      },
+      {
+        "content": "**college.html**",
+        "code": "<!DOCTYPE html>\n<html>\n<body>\n\n<h1 style=\"text-align:center;\">My College</h1>\n\n<ul>\n{% for c in courses %}\n<li>{{ c }}</li>\n{% endfor %}\n</ul>\n\n<img src=\"{{ url_for('static', filename='college.jpg') }}\" width=\"300\">\n\n</body>\n</html>",
+        "language": "html"
+      }
+    ]
   },
   {
     "id": "node-63a69906-0b4",
@@ -521,8 +580,23 @@
     "type": "question",
     "name": "Create finance_tools package with interest and currency modules",
     "content": "Create modules\nCalculate interest and currency conversion",
-    "code": "interest.py\n\ndef cal_interest(amount, year):\n    rate = 0.05\n    return amount * rate * year\n\ncurrency.py\n\ndef convert(amount):\n    return amount * 0.012\n\nmain.py\n\nfrom finance_tools import interest, currency\n\namt = float(input(\"Enter amount: \"))\nyear = int(input(\"Enter years: \"))\n\nprint(\"Interest:\", interest.cal_interest(amt, year))\nprint(\"USD:\", currency.convert(amt))",
-    "language": "python"
+    "answers": [
+      {
+        "content": "**interest.py**",
+        "code": "def cal_interest(amount, year):\n    rate = 0.05\n    return amount * rate * year",
+        "language": "python"
+      },
+      {
+        "content": "**currency.py**",
+        "code": "def convert(amount):\n    return amount * 0.012",
+        "language": "python"
+      },
+      {
+        "content": "**main.py**",
+        "code": "from finance_tools import interest, currency\n\namt = float(input(\"Enter amount: \"))\nyear = int(input(\"Enter years: \"))\n\nprint(\"Interest:\", interest.cal_interest(amt, year))\nprint(\"USD:\", currency.convert(amt))",
+        "language": "python"
+      }
+    ]
   },
   {
     "id": "node-09915f13-78c",
@@ -681,8 +755,18 @@
     "parentId": "node-dacb48e3-51a",
     "type": "question",
     "name": "Create module with factorial, power and vowels",
-    "code": "variables.py\n\ndef factorial(n):\n    f = 1\n    for i in range(1, n+1):\n        f *= i\n    return f\n\ndef power(n):\n    return n*n\n\nvowels = ['a','e','i','o','u']\n\nmain.py\n\nimport variables\n\nn = int(input(\"Enter n: \"))\n\nprint(\"Factorial:\", variables.factorial(n))\nprint(\"Power:\", variables.power(n))\nprint(\"Second vowel:\", variables.vowels[1])",
-    "language": "python"
+    "answers": [
+      {
+        "content": "**variables.py**",
+        "code": "def factorial(n):\n    f = 1\n    for i in range(1, n+1):\n        f *= i\n    return f\n\ndef power(n):\n    return n*n\n\nvowels = ['a','e','i','o','u']",
+        "language": "python"
+      },
+      {
+        "content": "**main.py**",
+        "code": "import variables\n\nn = int(input(\"Enter n: \"))\n\nprint(\"Factorial:\", variables.factorial(n))\nprint(\"Power:\", variables.power(n))\nprint(\"Second vowel:\", variables.vowels[1])",
+        "language": "python"
+      }
+    ]
   },
   {
     "id": "node-4517ee60-ee2",
@@ -758,8 +842,23 @@
     "parentId": "node-70d64221-9ec",
     "type": "question",
     "name": "Create vehicle package with cars and bikes modules",
-    "code": "cars.py\n\ndef available_models():\n    return [\"Swift\",\"i20\",\"Baleno\"]\n\nbikes.py\n\ndef available_models():\n    return [\"Pulsar\",\"Activa\",\"RE\"]\n\nmain.py\n\nfrom vehicle.types import cars, bikes\n\nprint(cars.available_models())\nprint(bikes.available_models())",
-    "language": "python"
+    "answers": [
+      {
+        "content": "**cars.py**",
+        "code": "def available_models():\n    return [\"Swift\",\"i20\",\"Baleno\"]",
+        "language": "python"
+      },
+      {
+        "content": "**bikes.py**",
+        "code": "def available_models():\n    return [\"Pulsar\",\"Activa\",\"RE\"]",
+        "language": "python"
+      },
+      {
+        "content": "**main.py**",
+        "code": "from vehicle.types import cars, bikes\n\nprint(cars.available_models())\nprint(bikes.available_models())",
+        "language": "python"
+      }
+    ]
   },
   {
     "id": "node-32ec2dc3-ae3",
@@ -834,8 +933,23 @@
     "parentId": "node-bf580011-49c",
     "type": "question",
     "name": "Create education package with courses",
-    "code": "science.py\n\ndef get_subjects():\n    return [\"Physics\",\"Chemistry\",\"Biology\"]\n\narts.py\n\ndef get_subjects():\n    return [\"History\",\"Geography\",\"Economics\"]\n\nmain.py\n\nfrom education.courses import science, arts\n\nprint(science.get_subjects())\nprint(arts.get_subjects())",
-    "language": "python"
+    "answers": [
+      {
+        "content": "**science.py**",
+        "code": "def get_subjects():\n    return [\"Physics\",\"Chemistry\",\"Biology\"]",
+        "language": "python"
+      },
+      {
+        "content": "**arts.py**",
+        "code": "def get_subjects():\n    return [\"History\",\"Geography\",\"Economics\"]",
+        "language": "python"
+      },
+      {
+        "content": "**main.py**",
+        "code": "from education.courses import science, arts\n\nprint(science.get_subjects())\nprint(arts.get_subjects())",
+        "language": "python"
+      }
+    ]
   },
   {
     "id": "node-ce2d96ac-292",
@@ -952,8 +1066,23 @@
     "parentId": "node-937c1797-18a",
     "type": "question",
     "name": "Create banking package with account and loan modules",
-    "code": "account.py\n\ndef open_account(name):\n    print(f\"Account created for {name}\")\n\nloan.py\n\ndef apply_loan(amount):\n    print(f\"Loan approved: {amount}\")\n\nmain.py\n\nfrom banking import account, loan\n\naccount.open_account(\"Anant\")\nloan.apply_loan(50000)",
-    "language": "python"
+    "answers": [
+      {
+        "content": "**account.py**",
+        "code": "def open_account(name):\n    print(f\"Account created for {name}\")",
+        "language": "python"
+      },
+      {
+        "content": "**loan.py**",
+        "code": "def apply_loan(amount):\n    print(f\"Loan approved: {amount}\")",
+        "language": "python"
+      },
+      {
+        "content": "**main.py**",
+        "code": "from banking import account, loan\n\naccount.open_account(\"Anant\")\nloan.apply_loan(50000)",
+        "language": "python"
+      }
+    ]
   },
   {
     "id": "node-5a557a6c-e0b",
@@ -1059,8 +1188,23 @@
     "parentId": "node-e3e218b3-59e",
     "type": "question",
     "name": "Create finance_tools package (interest + currency)",
-    "code": "interest.py\n\ndef cal_interest(amount, year):\n    rate = 0.05\n    return amount * rate * year\n\ncurrency.py\n\ndef convert(amount):\n    return amount * 0.012\n\nmain.py\n\nfrom finance_tools import interest, currency\n\namt = float(input(\"Enter amount: \"))\nyear = int(input(\"Enter years: \"))\n\nprint(\"Interest:\", interest.cal_interest(amt, year))\nprint(\"USD:\", currency.convert(amt))",
-    "language": "python"
+    "answers": [
+      {
+        "content": "**interest.py**",
+        "code": "def cal_interest(amount, year):\n    rate = 0.05\n    return amount * rate * year",
+        "language": "python"
+      },
+      {
+        "content": "**currency.py**",
+        "code": "def convert(amount):\n    return amount * 0.012",
+        "language": "python"
+      },
+      {
+        "content": "**main.py**",
+        "code": "from finance_tools import interest, currency\n\namt = float(input(\"Enter amount: \"))\nyear = int(input(\"Enter years: \"))\n\nprint(\"Interest:\", interest.cal_interest(amt, year))\nprint(\"USD:\", currency.convert(amt))",
+        "language": "python"
+      }
+    ]
   },
   {
     "id": "node-7e1cf2dc-a8d",
@@ -1097,8 +1241,23 @@
     "parentId": "node-a8a8ba88-33b",
     "type": "question",
     "name": "Create vehicle package with cars and bikes",
-    "code": "cars.py\n\ndef available_models():\n    return [\"Swift\",\"i20\",\"Baleno\"]\n\nbikes.py\n\ndef available_models():\n    return [\"Pulsar\",\"Activa\",\"RE\"]\n\nmain.py\n\nfrom vehicle.types import cars, bikes\n\nprint(cars.available_models())\nprint(bikes.available_models())",
-    "language": "python"
+    "answers": [
+      {
+        "content": "**cars.py**",
+        "code": "def available_models():\n    return [\"Swift\",\"i20\",\"Baleno\"]",
+        "language": "python"
+      },
+      {
+        "content": "**bikes.py**",
+        "code": "def available_models():\n    return [\"Pulsar\",\"Activa\",\"RE\"]",
+        "language": "python"
+      },
+      {
+        "content": "**main.py**",
+        "code": "from vehicle.types import cars, bikes\n\nprint(cars.available_models())\nprint(bikes.available_models())",
+        "language": "python"
+      }
+    ]
   },
   {
     "id": "node-10ff2357-0b4",
@@ -1173,8 +1332,23 @@
     "parentId": "node-06354a90-846",
     "type": "question",
     "name": "Create education package",
-    "code": "science.py\n\ndef get_subjects():\n    return [\"Physics\",\"Chemistry\",\"Biology\"]\n\narts.py\n\ndef get_subjects():\n    return [\"History\",\"Geography\",\"Economics\"]\n\nmain.py\n\nfrom education.courses import science, arts\n\nprint(science.get_subjects())\nprint(arts.get_subjects())",
-    "language": "python"
+    "answers": [
+      {
+        "content": "**science.py**",
+        "code": "def get_subjects():\n    return [\"Physics\",\"Chemistry\",\"Biology\"]",
+        "language": "python"
+      },
+      {
+        "content": "**arts.py**",
+        "code": "def get_subjects():\n    return [\"History\",\"Geography\",\"Economics\"]",
+        "language": "python"
+      },
+      {
+        "content": "**main.py**",
+        "code": "from education.courses import science, arts\n\nprint(science.get_subjects())\nprint(arts.get_subjects())",
+        "language": "python"
+      }
+    ]
   },
   {
     "id": "node-19bc33ad-f6e",
