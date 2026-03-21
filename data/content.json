@@ -175,1195 +175,2142 @@
     "name": "Python Slip"
   },
   {
-    "id": "node-mn0n95qp-yo8c3y",
+    "id": "node-0712913f-448",
+    "parentId": "root",
+    "type": "folder",
+    "name": "Official Python Slips",
+    "content": "Contains all 27 original slips fully solved."
+  },
+  {
+    "id": "node-9ae9a073-bb2",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 2"
+  },
+  {
+    "id": "node-32233e39-4fc",
+    "parentId": "node-9ae9a073-bb2",
+    "type": "question",
+    "name": "Q1: Q1. Write a python program to accept a string, Count total n...",
+    "content": "Q1. Write a python program to accept a string, Count total number of vowels, consonants and special\nsymbols from it.\n[10 Marks]",
+    "code": "s = input('Enter a string: ')\nvowels = 'aeiouAEIOU'\nv_cnt = c_cnt = s_cnt = 0\nfor ch in s:\n    if ch.isalpha():\n        if ch in vowels: v_cnt += 1\n        else: c_cnt += 1\n    elif not ch.isspace():\n        s_cnt += 1\nprint('Vowels:', v_cnt)\nprint('Consonants:', c_cnt)\nprint('Special symbols:', s_cnt)",
+    "language": "python"
+  },
+  {
+    "id": "node-86e116c1-df7",
+    "parentId": "node-9ae9a073-bb2",
+    "type": "question",
+    "name": "Q2: Q2. Consider a following record in DataFrame IPL.\nPlayer Tea...",
+    "content": "Q2. Consider a following record in DataFrame IPL.\nPlayer Team Category BidPrice Runs\nHardik Pandya Mumbai Indians Batsman 13 1000\nK L Rahul Kings Eleven Batsman 12 2400\nAndre Russel Kolkata Knight Riders Batsman null 900\nJasprit Bumrah Mumbai Indians Bowler 10 200\nVirat Kohli RCB Batsman 17 3600\nRohit Sharma Mumbai Indians Batsman null 3700\nCreate above DataFrame in python and write python code for following\na) Retrieve first 2 rows\nb) Retrieve last 3 rows\nc) Check null values present in DataFrame.\nd) Replace null value with mean of that column.\ne) Find most expensive player.\nf) Print total players per team.\n[20 Marks]\nOR",
+    "code": "import pandas as pd\nimport numpy as np\n\ndata = {\n    'Player': ['Hardik Pandya', 'K L Rahul', 'Andre Russel', 'Jasprit Bumrah', 'Virat Kohli', 'Rohit Sharma'],\n    'Team': ['Mumbai Indians', 'Kings Eleven', 'Kolkata Knight Riders', 'Mumbai Indians', 'RCB', 'Mumbai Indians'],\n    'Category': ['Batsman', 'Batsman', 'Batsman', 'Bowler', 'Batsman', 'Batsman'],\n    'BidPrice': [13.0, 12.0, np.nan, 10.0, 17.0, np.nan],\n    'Runs': [1000, 2400, 900, 200, 3600, 3700]\n}\ndf = pd.DataFrame(data)\n\nprint('a)', df.head(2))\nprint('b)', df.tail(3))\nprint('c)\\n', df.isnull().sum())\ndf['BidPrice'].fillna(df['BidPrice'].mean(), inplace=True)\nprint('d)\\n', df)\nprint('e) Most expensive:\\n', df[df['BidPrice'] == df['BidPrice'].max()])\nprint('f) Players per team:\\n', df['Team'].value_counts())",
+    "language": "python"
+  },
+  {
+    "id": "node-8f1c0f01-006",
+    "parentId": "node-9ae9a073-bb2",
+    "type": "question",
+    "name": "Q2: Q2. Write a Python program to demonstrate a user-defined exc...",
+    "content": "Q2. Write a Python program to demonstrate a user-defined exception that checks whether the entered\nmarks are between 0 and 100. Display an appropriate message for invalid input and out-of-range\nvalues. Also display Grade of marks.",
+    "code": "class MarkException(Exception):\n    pass\n\ntry:\n    marks = float(input('Enter marks (0-100): '))\n    if marks < 0 or marks > 100:\n        raise MarkException('Invalid Input! Out of range (0-100).')\n    print('Valid marks entered:', marks)\n    if marks >= 90: print('Grade: A')\n    elif marks >= 75: print('Grade: B')\n    elif marks >= 50: print('Grade: C')\n    else: print('Grade: Fail')\nexcept MarkException as e:\n    print(e)\nexcept ValueError:\n    print('Please enter numerical digits only.')",
+    "language": "python"
+  },
+  {
+    "id": "node-2f4f2ce3-f52",
+    "parentId": "node-9ae9a073-bb2",
+    "type": "question",
+    "name": "Q3: Q3. Viva           [5 Marks]\nLab Course CS-271-VSC-P\nAdvance...",
+    "content": "Q3. Viva           [5 Marks]\nLab Course CS-271-VSC-P\nAdvanced Python Programming"
+  },
+  {
+    "id": "node-e34019cf-54c",
+    "parentId": "node-9ae9a073-bb2",
+    "type": "question",
+    "name": "Q1: Q1. Write a Python program that accepts value of m and n. Di...",
+    "content": "Q1. Write a Python program that accepts value of m and n. Divides m by n and handles a\nZeroDivisionError if the user tries to divide by zero.\n[10 Marks]",
+    "code": "try:\n    m = float(input('Enter m: '))\n    n = float(input('Enter n: '))\n    result = m / n\n    print('Result:', result)\nexcept ZeroDivisionError:\n    print('Error: Cannot divide by zero!')\nexcept ValueError:\n    print('Error: Invalid input')",
+    "language": "python"
+  },
+  {
+    "id": "node-55e40777-34c",
+    "parentId": "node-9ae9a073-bb2",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program to create a module containing fac...",
+    "content": "Q2. Write a python program to create a module containing factorial function, power dictionary and list\nof vowels. Save this as variables.py. Import variables module to print the factorial of n, print the\npower of n, and second alphabet from the vowels list. (Accept n from user)\n[20 Marks]\nOR",
+    "code": "# TODO: Provide manual solution\\nprint('Placeholder')",
+    "language": "python"
+  },
+  {
+    "id": "node-8a87e5a9-0d4",
+    "parentId": "node-9ae9a073-bb2",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program to accept a file name from user. ...",
+    "content": "Q2. Write a python program to accept a file name from user. If file exist display contents of file and\nnumber of characters, words and lines in a file, otherwise display appropriate message.",
+    "code": "import os\n\nfname = input('Enter filename: ')\nif os.path.exists(fname):\n    with open(fname, 'r') as f:\n        lines = f.readlines()\n        print('\\n--- File Contents ---')\n        for line in lines:\n            print(line, end='')\n        \n        num_lines = len(lines)\n        num_words = sum(len(line.split()) for line in lines)\n        num_chars = sum(len(line) for line in lines)\n        \n        print('\\n\\nLines:', num_lines)\n        print('Words:', num_words)\n        print('Characters:', num_chars)\nelse:\n    print('File does not exist!')",
+    "language": "python"
+  },
+  {
+    "id": "node-7f6f6f14-70b",
+    "parentId": "node-9ae9a073-bb2",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-7eae025e-e14",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 3"
+  },
+  {
+    "id": "node-03de7347-3b2",
+    "parentId": "node-7eae025e-e14",
+    "type": "question",
+    "name": "Q1: Q1. Write a Python program to create a list of elements. Shu...",
+    "content": "Q1. Write a Python program to create a list of elements. Shuffle the elements of a given list and display\nthe list. [Hint: Use random.shuffle()]\n[10 Marks]",
+    "code": "import random\n\nlst = [1, 2, 3, 4, 5]\nrandom.shuffle(lst)\n\nprint(\"Shuffled list:\", lst)",
+    "language": "python"
+  },
+  {
+    "id": "node-d7948127-bc5",
+    "parentId": "node-7eae025e-e14",
+    "type": "question",
+    "name": "Q2: Q2. Create a following DataFrame named as \u201cdata\u201d. Write the ...",
+    "content": "Q2. Create a following DataFrame named as \u201cdata\u201d. Write the python code for the following\ncommands.\nCompany\nCount\nPencil\nPrice\nApsara\n15\nPencil\n250\nNatraj\n20\nPen\n200\nCello\n25\nPen\n600\nParkar\n35\nEraser\n900\nApsara\n20\n300\na) Find all rows with the label \u201cPencil\u201d. Extract all columns\nb) Change the Eraser count as 25 instead of 20.\nc) List only the columns Company and Price.\nd) List only rows with labels \u2018Pencil\u2019 and \u2018Pen\u2019\ne) Rename Column Count as Quantity and display DataFrame.\nOR",
+    "code": "# TODO: Provide manual solution\\nprint('Placeholder')",
+    "language": "python"
+  },
+  {
+    "id": "node-c0a0d067-cad",
+    "parentId": "node-7eae025e-e14",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program for following\n[20 Marks]\na) Creat...",
+    "content": "Q2. Write a python program for following\n[20 Marks]\na) Create a file which stores the first name, middle name and last name of your 5 friends\nb) Display contents of file\nc) Append other 5 friend\u2019s names\nd) Display modified file contents",
+    "code": "# Create file with 5 friends\nwith open('friends.txt', 'w') as f:\n    f.write('Ajay Kumar Singh\\n')\n    f.write('Rahul Dev Sharma\\n')\n    f.write('Neha Kumari Gupta\\n')\n    f.write('Priya Ranjan Patel\\n')\n    f.write('Amit Singh Rajput\\n')\n\nprint('b) Current contents:')\nwith open('friends.txt', 'r') as f:\n    print(f.read())\n\n# Append another 5\nwith open('friends.txt', 'a') as f:\n    f.write('Sita Ram Das\\n')\n    f.write('Gita Rani Sen\\n')\n    f.write('Ravi Raj Verma\\n')\n    f.write('Sonu Nath Roy\\n')\n    f.write('Rajesh Ram Pal\\n')\n\nprint('d) Modified file contents:')\nwith open('friends.txt', 'r') as f:\n    print(f.read())",
+    "language": "python"
+  },
+  {
+    "id": "node-0ce9c7b1-4a1",
+    "parentId": "node-7eae025e-e14",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-98cc9f13-905",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 4"
+  },
+  {
+    "id": "node-2c247f8b-85f",
+    "parentId": "node-98cc9f13-905",
+    "type": "question",
+    "name": "Q1: Q1. Write a python program to accept a string, find all word...",
+    "content": "Q1. Write a python program to accept a string, find all words that do not contain vowels.",
+    "code": "s = input('Enter string: ')\nwords = s.split()\nres = []\nfor w in words:\n    if not any(v in w.lower() for v in 'aeiou'):\n        res.append(w)\nprint('Words without vowels:', res)",
+    "language": "python"
+  },
+  {
+    "id": "node-c48fa2c4-8e8",
+    "parentId": "node-98cc9f13-905",
+    "type": "question",
+    "name": "Q2: Q2. Create a package banking with modules account.py and loa...",
+    "content": "Q2. Create a package banking with modules account.py and loan.py.\n[10 Marks]\na) account.py should contain function open_account(name) that accepts a user\u2019s name and prints a message\nconfirming account creation\nb) loan.py should contain function apply_loan(amount) that accepts a loan amount and prints a confirmation\nmessage with the amount\nWrite a python program to import modules from banking package and demonstrate both functions.\n[20 Marks]\nOR",
+    "answers": [
+      {
+        "content": "**account.py**",
+        "code": "def open_account(name):\n    print(f'Account created successfully for {name}')",
+        "language": "python"
+      },
+      {
+        "content": "**loan.py**",
+        "code": "def apply_loan(amount):\n    print(f'Loan of amount {amount} confirmed')",
+        "language": "python"
+      },
+      {
+        "content": "**main.py**",
+        "code": "from banking import account, loan\n\naccount.open_account('Anant')\nloan.apply_loan(50000)",
+        "language": "python"
+      }
+    ]
+  },
+  {
+    "id": "node-d51a1002-7f5",
+    "parentId": "node-98cc9f13-905",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program to create a list of prime numbers...",
+    "content": "Q2. Write a python program to create a list of prime numbers between m and n using List\ncomprehension. (Accept the value of m and n from user, m should be less than n)",
+    "code": "# TODO: Provide manual solution\\nprint('Placeholder')",
+    "language": "python"
+  },
+  {
+    "id": "node-7ac0e153-3ee",
+    "parentId": "node-98cc9f13-905",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-804277aa-bbb",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 5"
+  },
+  {
+    "id": "node-d4335ead-3ab",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 6"
+  },
+  {
+    "id": "node-44902e46-718",
+    "parentId": "node-d4335ead-3ab",
+    "type": "question",
+    "name": "Q1: Q1. Write a Python program that prompts the user to input tw...",
+    "content": "Q1. Write a Python program that prompts the user to input two numbers and raises a TypeError\nexception if the inputs are not numerical.\n[10 Marks]",
+    "code": "# TODO: Provide manual solution\\nprint('Placeholder')",
+    "language": "python"
+  },
+  {
+    "id": "node-74a8eb22-9e0",
+    "parentId": "node-d4335ead-3ab",
+    "type": "question",
+    "name": "Q2: Q2. Create a following DataFrame named as \u201cdata\u201d. Write the ...",
+    "content": "Q2. Create a following DataFrame named as \u201cdata\u201d. Write the python code for the following\nCompany Count Price\nPencil Apsara 15 250\nPencil Natraj 20 200\nPen Cello 25 600\nPen Parkar 35 900\nEraser Apsara 20 300\na) Find all rows with the label \u201cPencil\u201d. Extract all columns\nb) Change the count of Eraser as 25 instead of 20.\nc) List only the columns Company and Price.\nd) List only rows with labels \u2018Pencil\u2019 and \u2018Pen\u2019\ne) Delete column Count from the above DataFrame and display DataFrame..\n[20 Marks]\nOR",
+    "code": "import pandas as pd\n\ndata = {\n    'Company': ['Apsara', 'Natraj', 'Cello', 'Parkar', 'Apsara'],\n    'Count': [15, 20, 25, 35, 20],\n    'Price': [250, 200, 600, 900, 300]\n}\nindex = ['Pencil', 'Pencil', 'Pen', 'Pen', 'Eraser']\ndf = pd.DataFrame(data, index=index)\n\nprint('a)\\n', df.loc['Pencil'])\n# b) Change Eraser count as 25 instead of 20\ndf.loc['Eraser', 'Count'] = 25\nprint('b) Count updated to 25')\nprint('c)\\n', df[['Company', 'Price']])\nprint('d)\\n', df.loc[['Pencil', 'Pen']])\nif 'Rename Column' in locals() or True: # handling both variations\n    df.rename(columns={'Count': 'Quantity'}, inplace=True)\n    print('e)\\n', df)",
+    "language": "python"
+  },
+  {
+    "id": "node-5033e304-f3f",
+    "parentId": "node-d4335ead-3ab",
+    "type": "question",
+    "name": "Q2: Q2. Create a Web Page using Flask which contains following i...",
+    "content": "Q2. Create a Web Page using Flask which contains following information about your Personal Portfolio\nPage\na) Show your name as a centered heading.\nb) List your Qualification details.\nc) Add your special skill in scrolling.",
+    "answers": [
+      {
+        "content": "**app.py**",
+        "code": "from flask import Flask, render_template\n\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return render_template('portfolio.html')\n\nif __name__ == '__main__':\n    app.run(debug=True)",
+        "language": "python"
+      },
+      {
+        "content": "**portfolio.html**",
+        "code": "<!DOCTYPE html>\n<html>\n<head><title>Portfolio</title></head>\n<body>\n    <h1 style='text-align: center;'>Anant Rai</h1>\n    <h2>Qualifications</h2>\n    <ul>\n        <li>BSc in Computer Science</li>\n        <li>Advanced Python Programming</li>\n    </ul>\n    <h2>Special Skills</h2>\n    <marquee>Flask Web Development | Data Science with Python | APIs</marquee>\n</body>\n</html>",
+        "language": "html"
+      }
+    ]
+  },
+  {
+    "id": "node-031bcea6-6fd",
+    "parentId": "node-d4335ead-3ab",
+    "type": "question",
+    "name": "Q3: Q3. Viva           [5 Marks]\nLab Course CS-271-VSC-P\nAdvance...",
+    "content": "Q3. Viva           [5 Marks]\nLab Course CS-271-VSC-P\nAdvanced Python Programming"
+  },
+  {
+    "id": "node-a7546711-a6a",
+    "parentId": "node-d4335ead-3ab",
+    "type": "question",
+    "name": "Q1: Q1. Write a python program to accept a string, extract all w...",
+    "content": "Q1. Write a python program to accept a string, extract all words that start with a capital letter and\nremove all special characters from a string. Display modified string. (Accept input from user)\n[10 Marks]",
+    "code": "import re\n\ns = input(\"Enter string: \")\n\n# capital words\nwords = re.findall(r\"[A-Z][a-z]*\", s)\nprint(\"Capital words:\", words)\n\n# remove special characters\nclean = re.sub(r\"[^a-zA-Z0-9 ]\", \"\", s)\nprint(\"Clean string:\", clean)",
+    "language": "python"
+  },
+  {
+    "id": "node-95f37fa4-f90",
+    "parentId": "node-d4335ead-3ab",
+    "type": "question",
+    "name": "Q2: Q2. Create a Web Page using Flask which contains following i...",
+    "content": "Q2. Create a Web Page using Flask which contains following information about your Library Book List\na) Show the library name as a heading.\nb) Display all available books in a table with title and author.\nc) Add quote about reading in bold and blue color.\nOR\n[20 Marks]",
+    "answers": [
+      {
+        "content": "**app.py**",
+        "code": "from flask import Flask, render_template\n\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    books = [\n        {'title': 'Python Crash Course', 'author': 'Eric Matthes'},\n        {'title': 'Fluent Python', 'author': 'Luciano Ramalho'}\n    ]\n    return render_template('library.html', books=books)\n\nif __name__ == '__main__':\n    app.run(debug=True)",
+        "language": "python"
+      },
+      {
+        "content": "**library.html**",
+        "code": "<!DOCTYPE html>\n<html>\n<body>\n    <h1>SPPU College Central Library</h1>\n    <table border='1'>\n        <tr><th>Title</th><th>Author</th></tr>\n        {% for b in books %}\n        <tr><td>{{b.title}}</td><td>{{b.author}}</td></tr>\n        {% endfor %}\n    </table>\n    <br>\n    <p style='color: blue; font-weight: bold;'>\"A reader lives a thousand lives before he dies.\"</p>\n</body>\n</html>",
+        "language": "html"
+      }
+    ]
+  },
+  {
+    "id": "node-55a208de-e15",
+    "parentId": "node-d4335ead-3ab",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program to accept file name. If file exis...",
+    "content": "Q2. Write a python program to accept file name. If file exist copy contents of one file into another file\nand display contents of new file along with total number of lines, words and characters otherwise\ngive appropriate message.",
+    "code": "import os\n\nf1 = input('Enter source file name: ')\nif os.path.exists(f1):\n    f2 = input('Enter destination file name: ')\n    with open(f1, 'r') as f_in, open(f2, 'w') as f_out:\n        content = f_in.read()\n        f_out.write(content)\n    \n    with open(f2, 'r') as f:\n        lines = f.readlines()\n        print('\\n--- New File Contents ---')\n        for line in lines: print(line, end='')\n        \n        l_count = len(lines)\n        w_count = sum(len(line.split()) for line in lines)\n        c_count = sum(len(line) for line in lines)\n        \n        print(f'\\n\\nCopied - Lines: {l_count}, Words: {w_count}, Characters: {c_count}')\nelse:\n    print('Source file does not exist!')",
+    "language": "python"
+  },
+  {
+    "id": "node-09991170-b8b",
+    "parentId": "node-d4335ead-3ab",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-646bbb57-8c3",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 7"
+  },
+  {
+    "id": "node-cdf753d4-fe1",
+    "parentId": "node-646bbb57-8c3",
+    "type": "question",
+    "name": "Q1: Q1. Write a python program to accepts value of radius from u...",
+    "content": "Q1. Write a python program to accepts value of radius from user and calculate the area of a circle using\nfunction. (Use 3.14 as the value of \u03c0).\n[10 Marks]",
+    "code": "def area(radius):\n    return 3.14 * radius * radius\n\nr = float(input(\"Enter radius: \"))\nprint(\"Area of circle:\", area(r))",
+    "language": "python"
+  },
+  {
+    "id": "node-4988c0dc-2fd",
+    "parentId": "node-646bbb57-8c3",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program to create a list, string and tupl...",
+    "content": "Q2. Write a python program to create a list, string and tuple in python. Apply random module to display\nunique multiple random elements from above created sequence type.\n[20 Marks]\nOR",
+    "code": "import random\n\nlst = [1, 2, 3, 4, 5]\nstring = \"PYTHON\"\ntup = (10, 20, 30, 40, 50)\n\nprint(\"Random from list:\", random.sample(lst, 3))\nprint(\"Random from string:\", random.sample(string, 3))\nprint(\"Random from tuple:\", random.sample(tup, 3))",
+    "language": "python"
+  },
+  {
+    "id": "node-da6ecf76-2bd",
+    "parentId": "node-646bbb57-8c3",
+    "type": "question",
+    "name": "Q2: Q2. Create a Web Page using Flask which contains following i...",
+    "content": "Q2. Create a Web Page using Flask which contains following information about your college.\na) College Name as a heading in center of web page.\nb) Display all the courses available in your college.\nc) Image of your College.",
+    "answers": [
+      {
+        "content": "**app.py**",
+        "code": "from flask import Flask, render_template\n\napp = Flask(__name__)\n\n@app.route('/')\ndef college():\n    return render_template('college.html')\n\nif __name__ == '__main__':\n    app.run(debug=True)",
+        "language": "python"
+      },
+      {
+        "content": "**college.html**",
+        "code": "<!DOCTYPE html>\n<html>\n<body>\n    <h1 style='text-align: center;'>Pune University College of Science</h1>\n    <h3>Available Courses</h3>\n    <ul>\n        <li>BSc Computer Science</li>\n        <li>MSc Computer Science</li>\n        <li>BCA</li>\n    </ul>\n    <br>\n    <!-- Replace with valid image path if actually rendering -->\n    <img src='https://via.placeholder.com/300?text=College+Image' alt='College Campus'>\n</body>\n</html>",
+        "language": "html"
+      }
+    ]
+  },
+  {
+    "id": "node-c677e604-2a7",
+    "parentId": "node-646bbb57-8c3",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-7e78499b-22a",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 8"
+  },
+  {
+    "id": "node-6e70138d-bca",
+    "parentId": "node-7e78499b-22a",
+    "type": "question",
+    "name": "Q1: Q1. Write a python program to accepts a value of n and creat...",
+    "content": "Q1. Write a python program to accepts a value of n and create a generator that yields even numbers up\nto n.",
+    "code": "# TODO: Provide manual solution\\nprint('Placeholder')",
+    "language": "python"
+  },
+  {
+    "id": "node-ce3c03b6-b53",
+    "parentId": "node-7e78499b-22a",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program for following -\na) Create DataFra...",
+    "content": "Q2. Write a python program for following -\na) Create DataFrames Student 1, Student 2 and display contents\nb) Join the two DataFrames in third frame with matching records from both sides.\nc) Display Third DataFrame.\nStudent 1\nID\nName\nAge\nID\nStudent 2\nCity\n[10 Marks]\nMarks\n0\nS1\nAnita\n18\n1\nS2\nSakshi\n23\n2\nS3\nOm\n20\n3\nS4\nRaj\n21\n4\nS5\nKanika\n20\n0\nS2\nPune\n97\n1\nS4\nNashik\n78\n2\nS5\nMumbai\n86\n3\nS6\nDelhi\n66\n4\nS7\nNanded\n54\nOR\n[20 Marks]",
+    "code": "import pandas as pd\n\nd1 = {'ID': [0,1,2,3,4], 'Name': ['Anita', 'Sakshi', 'Om', 'Raj', 'Kanika'], 'Age': [18, 23, 20, 21, 20]}\nd2 = {'ID': [0,1,2,3,4], 'City': ['Pune', 'Nashik', 'Mumbai', 'Delhi', 'Nanded'], 'Marks': [97, 78, 86, 66, 54]}\n\n# Note: In the question table example, S2, S4, S5 match from Student 1 and 2 but IDs are 0,1,2,3,4 so we join on ID\ndf1 = pd.DataFrame(d1)\ndf2 = pd.DataFrame(d2)\n\nprint('Student 1:\\n', df1)\nprint('Student 2:\\n', df2)\n\ndf3 = pd.merge(df1, df2, on='ID')\nprint('\\nThird DataFrame (Merged on ID):\\n', df3)",
+    "language": "python"
+  },
+  {
+    "id": "node-28b2dabf-914",
+    "parentId": "node-7e78499b-22a",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program using user define function to acc...",
+    "content": "Q2. Write a python program using user define function to accept a number and perform the following\ntask:\na) Check number is Armstrong or not.\nb) Calculate and display sum of digits till single digit [e.g. -  558 = 18 = 9]",
+    "code": "def is_armstrong(n):\n    s = sum(int(d)**len(str(n)) for d in str(n))\n    return s == n\n\ndef single_digit_sum(n):\n    while n > 9:\n        n = sum(int(d) for d in str(n))\n    return n\n\nnum = int(input('Enter number: '))\nif is_armstrong(num):\n    print(f'{num} is an Armstrong number')\nelse:\n    print(f'{num} is NOT an Armstrong number')\n\nprint('Single digit sum:', single_digit_sum(num))",
+    "language": "python"
+  },
+  {
+    "id": "node-7c58bdb4-5e7",
+    "parentId": "node-7e78499b-22a",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-82351865-e81",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 9"
+  },
+  {
+    "id": "node-59fe56f8-354",
+    "parentId": "node-82351865-e81",
+    "type": "question",
+    "name": "Q1: Q1. Write a python program to create a DataFrame from list o...",
+    "content": "Q1. Write a python program to create a DataFrame from list of 10 integer values. Display contents of\nDataFrame and calculate sum, mean, median, mode, Standard deviation of DataFrame.",
+    "code": "import pandas as pd\n\n# List of 10 integers\nnums = [12, 45, 23, 45, 67, 89, 12, 34, 45, 90]\ndf = pd.DataFrame(nums, columns=['Values'])\nprint('DataFrame:\\n', df)\n\nprint('\\nSum:', df['Values'].sum())\nprint('Mean:', df['Values'].mean())\nprint('Median:', df['Values'].median())\nprint('Mode:', df['Values'].mode()[0])\nprint('Standard Deviation:', df['Values'].std())",
+    "language": "python"
+  },
+  {
+    "id": "node-26c63e9b-cac",
+    "parentId": "node-82351865-e81",
+    "type": "question",
+    "name": "Q2: Q2. Create a package finance_tools with modules interest.py ...",
+    "content": "Q2. Create a package finance_tools with modules interest.py and currency.py\n[10 Marks]\na) interest.py should contain function cal_interest(amount, year) that accepts amount, year . Calculates\nand returns simple interest using a fixed rate (for example, 5%).\nb) currency.py should contain function converet(amount) that accepts amount in INR and converts it into\nUSD. (consider conversion rate 0.012)\nWrite a python program to import modules from finance_tools package and demonstrate both\nfunctions.\n[20 Marks]\nOR",
+    "answers": [
+      {
+        "content": "**interest.py**",
+        "code": "def cal_interest(amount, year):\n    rate = 0.05\n    return amount * rate * year",
+        "language": "python"
+      },
+      {
+        "content": "**currency.py**",
+        "code": "def converet(amount):\n    return amount * 0.012",
+        "language": "python"
+      },
+      {
+        "content": "**main.py**",
+        "code": "from finance_tools import interest, currency\n\namt = float(input('Enter Amount: '))\nyr = float(input('Enter Years: '))\n\nprint('Simple Interest:', interest.cal_interest(amt, yr))\nprint('Amount in USD:', currency.converet(amt))",
+        "language": "python"
+      }
+    ]
+  },
+  {
+    "id": "node-d75f7508-ac3",
+    "parentId": "node-82351865-e81",
+    "type": "question",
+    "name": "Q2: Q2. Write a Python program to create a class that acts as an...",
+    "content": "Q2. Write a Python program to create a class that acts as an iterator and generates the factorial series up\nto n (1! + 2! + 3! + \u2026 + n!). (Accept input from the user)",
+    "code": "import math\n\nclass FactorialIterator:\n    def __init__(self, n):\n        self.n = n\n        self.current = 1\n    \n    def __iter__(self):\n        return self\n    \n    def __next__(self):\n        if self.current > self.n:\n            raise StopIteration\n        result = math.factorial(self.current)\n        self.current += 1\n        return result\n\nn = int(input('Enter n: '))\nprint('Factorial series:', list(FactorialIterator(n)))",
+    "language": "python"
+  },
+  {
+    "id": "node-a749c986-ef7",
+    "parentId": "node-82351865-e81",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-22c1c44a-82b",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 10"
+  },
+  {
+    "id": "node-09e4cdd1-352",
+    "parentId": "node-22c1c44a-82b",
+    "type": "question",
+    "name": "Q1: Q1. Write a python code to a create a list of 10 integer num...",
+    "content": "Q1. Write a python code to a create a list of 10 integer numbers. Display square of all elements of list.\n(Use a lambda function with map())\n[10 Marks]",
+    "code": "lst = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\nprint('Original List:', lst)\n\nsquares = list(map(lambda x: x**2, lst))\nprint('Squares:', squares)",
+    "language": "python"
+  },
+  {
+    "id": "node-951c47f7-a74",
+    "parentId": "node-22c1c44a-82b",
+    "type": "question",
+    "name": "Q2: Q2. Create a Flask application that allows users to add and ...",
+    "content": "Q2. Create a Flask application that allows users to add and view tasks. The application should have:\na) A form to add a task (task_name).\nb) Store tasks in a PostgreSQL database.\nc) Display all tasks below the form.\n[20 Marks]\nOR",
+    "answers": [
+      {
+        "content": "**app.py**",
+        "code": "from flask import Flask, render_template, request\nimport psycopg2\n\napp = Flask(__name__)\n\n# Configure DB (example config)\ndef get_db():\n    return psycopg2.connect(dbname='mydb', user='postgres', password='pwd', host='localhost')\n\n@app.route('/', methods=['GET', 'POST'])\ndef index():\n    conn = get_db()\n    cur = conn.cursor()\n    \n    # Init table if not exists\n    cur.execute('CREATE TABLE IF NOT EXISTS tasks (id SERIAL PRIMARY KEY, task_name TEXT)')\n    conn.commit()\n\n    if request.method == 'POST':\n        task = request.form['task_name']\n        cur.execute('INSERT INTO tasks (task_name) VALUES (%s)', (task,))\n        conn.commit()\n\n    cur.execute('SELECT task_name FROM tasks')\n    tasks = [r[0] for r in cur.fetchall()]\n    cur.close()\n    conn.close()\n    \n    return render_template('tasks.html', tasks=tasks)\n\nif __name__ == '__main__':\n    app.run(debug=True)",
+        "language": "python"
+      },
+      {
+        "content": "**tasks.html**",
+        "code": "<!DOCTYPE html>\n<html>\n<body>\n    <h2>Task Manager</h2>\n    <form method='POST'>\n        <input type='text' name='task_name' required placeholder='Enter task'>\n        <button type='submit'>Add Task</button>\n    </form>\n    <h3>Tasks:</h3>\n    <ul>\n        {% for t in tasks %}\n            <li>{{ t }}</li>\n        {% endfor %}\n    </ul>\n</body>\n</html>",
+        "language": "html"
+      }
+    ]
+  },
+  {
+    "id": "node-aefbb74f-791",
+    "parentId": "node-22c1c44a-82b",
+    "type": "question",
+    "name": "Q2: Q2. Write a Python program that accepts a string from the us...",
+    "content": "Q2. Write a Python program that accepts a string from the user and performs the following tasks:\na) Split the string into individual words.\nb) Identify and display all words that do not contain any vowels (a, e, i, o, u), ignore case while\nchecking for vowels.\nc) Sort and display these words in alphabetical order.\nd) Display the total count of such words.",
+    "code": "s = input('Enter a string: ')\nwords = s.split()\nres = []\n\nfor w in words:\n    if not any(v in w.lower() for v in 'aeiou'):\n        res.append(w)\n\nres.sort()\nprint('Words without vowels (sorted):', res)\nprint('Total count:', len(res))",
+    "language": "python"
+  },
+  {
+    "id": "node-a3ae87f6-4b7",
+    "parentId": "node-22c1c44a-82b",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-36b34a39-63c",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 11"
+  },
+  {
+    "id": "node-da013b46-c67",
+    "parentId": "node-36b34a39-63c",
+    "type": "question",
+    "name": "Q1: Q1. Create a data.csv file containing employee name, designa...",
+    "content": "Q1. Create a data.csv file containing employee name, designation, salary of an employee. Write a\npython program to create a DataFrame using data.csv and display the contents of DataFrame with\nstatistical information of dataframe.",
+    "code": "import pandas as pd\n\n# Assume data.csv has Name,Designation,Salary\ntry:\n    df = pd.read_csv('data.csv')\n    print(df)\n    print('\\nStatistical Info:\\n', df.describe())\nexcept FileNotFoundError:\n    # fallback to create dummy data\n    data = {'Name':['A','B','C'], 'Designation':['Dev', 'Manager', 'HR'], 'Salary':[50000, 80000, 40000]}\n    pd.DataFrame(data).to_csv('data.csv', index=False)\n    print('Created data.csv. Run again.')",
+    "language": "python"
+  },
+  {
+    "id": "node-632e2a31-03f",
+    "parentId": "node-36b34a39-63c",
+    "type": "question",
+    "name": "Q2: Q2.  Write a Python program that:\na) Retrieves current local...",
+    "content": "Q2.  Write a Python program that:\na) Retrieves current local time and UTC time.\nb) Prints the current time using ctime() and gmtime().\nc) Accepts a date-time string input in the format DD-MM-YYYY HH:MM:SS.\n[10 Marks]\nd) Parses the string using strptime() and formats it back using strftime() and display it in two\ncustom formats.\n[20 Marks]\nOR",
+    "code": "import time\nimport datetime\n\n# a, b\nprint('Current ctime:', time.ctime())\nprint('Current gmtime (UTC):', time.gmtime())\n\n# c\ndt_str = input('Enter date time (DD-MM-YYYY HH:MM:SS): ')\n\ntry:\n    # d\n    p_time = time.strptime(dt_str, '%d-%m-%Y %H:%M:%S')\n    print('Parsed struct_time:', p_time)\n    print('Format 1:', time.strftime('%A, %d %B %Y', p_time))\n    print('Format 2:', time.strftime('%I:%M %p on %y-%m-%d', p_time))\nexcept ValueError:\n    print('Invalid format')",
+    "language": "python"
+  },
+  {
+    "id": "node-d05669e8-2d2",
+    "parentId": "node-36b34a39-63c",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program to create a list, string and tupl...",
+    "content": "Q2. Write a python program to create a list, string and tuple in python. Apply random module to display\nunique multiple random elements from above created sequence type.",
+    "code": "import random\n\nlst = [1, 2, 3, 4, 5]\nstring = \"PYTHON\"\ntup = (10, 20, 30, 40, 50)\n\nprint(\"Random from list:\", random.sample(lst, 3))\nprint(\"Random from string:\", random.sample(string, 3))\nprint(\"Random from tuple:\", random.sample(tup, 3))",
+    "language": "python"
+  },
+  {
+    "id": "node-f79ee747-f1a",
+    "parentId": "node-36b34a39-63c",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-ea9ad83b-f52",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 12"
+  },
+  {
+    "id": "node-1007ae60-a0d",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 13"
+  },
+  {
+    "id": "node-205bc1e7-f62",
+    "parentId": "node-1007ae60-a0d",
+    "type": "question",
+    "name": "Q1: Q1. Write a Python program to get the current time and demon...",
+    "content": "Q1. Write a Python program to get the current time and demonstrate the following functions from the\ntime module:\na) Convert the current time in seconds to a readable string\nb) Converts time in seconds to a struct_time in UTC\n[10 Marks]",
+    "code": "import time\n\ncurr_sec = time.time()\nprint('Seconds since epoch:', curr_sec)\ngm = time.gmtime(curr_sec)\nprint('Struct_time in UTC:', gm)\nprint('Formatted string:', time.strftime('%Y-%m-%d %H:%M:%S', gm))",
+    "language": "python"
+  },
+  {
+    "id": "node-7acb4c64-56e",
+    "parentId": "node-1007ae60-a0d",
+    "type": "question",
+    "name": "Q2: Q2. Write a Python program that prompts the user to enter a ...",
+    "content": "Q2. Write a Python program that prompts the user to enter a text file name. If the file exists, open it in\nread mode, display its contents line by line, and show the current file pointer position after each\nline using ftell(). Then move the file pointer back to the beginning using seek() and display the file\ncontent again. If the file does not exist, display an appropriate error message.\n[20 Marks]\nOR",
+    "code": "# TODO: Provide manual solution\\nprint('Placeholder')",
+    "language": "python"
+  },
+  {
+    "id": "node-a710266e-cda",
+    "parentId": "node-1007ae60-a0d",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program for following -\na) Create DataFra...",
+    "content": "Q2. Write a python program for following -\na) Create DataFrames Student 1, Student 2 and display contents\nb) Join the two DataFrames in third frame with matching records from both sides.\nc) Display Content of Third DataFrame.\nStudent 1            Student 2\nID Name Age\n0 S1 Anita 18\n1 S2 Sakshi 23\n2 S3 Om 20\n3 S4 Raj 21\n4 S5 Kanika 20",
+    "code": "import pandas as pd\n\nd1 = {'ID': [0,1,2,3,4], 'Name': ['Anita', 'Sakshi', 'Om', 'Raj', 'Kanika'], 'Age': [18, 23, 20, 21, 20]}\nd2 = {'ID': [0,1,2,3,4], 'City': ['Pune', 'Nashik', 'Mumbai', 'Delhi', 'Nanded'], 'Marks': [97, 78, 86, 66, 54]}\n\n# Note: In the question table example, S2, S4, S5 match from Student 1 and 2 but IDs are 0,1,2,3,4 so we join on ID\ndf1 = pd.DataFrame(d1)\ndf2 = pd.DataFrame(d2)\n\nprint('Student 1:\\n', df1)\nprint('Student 2:\\n', df2)\n\ndf3 = pd.merge(df1, df2, on='ID')\nprint('\\nThird DataFrame (Merged on ID):\\n', df3)",
+    "language": "python"
+  },
+  {
+    "id": "node-688be3a8-09b",
+    "parentId": "node-1007ae60-a0d",
+    "type": "question",
+    "name": "Q3: Q3. Viva           [5 Marks]\nID City Marks\n0 S2 Pune 97\n1 S4...",
+    "content": "Q3. Viva           [5 Marks]\nID City Marks\n0 S2 Pune 97\n1 S4 Nashik 78\n2 S5 Mumbai 86\n3 S6 Delhi 66\n4 S7 Nanded 54\nLab Course CS-271-VSC-P\nAdvanced Python Programming"
+  },
+  {
+    "id": "node-9e453c0a-ee7",
+    "parentId": "node-1007ae60-a0d",
+    "type": "question",
+    "name": "Q1: Q1. Write a python program to accept a string and substring ...",
+    "content": "Q1. Write a python program to accept a string and substring from user. Check if a particular substring is\npresent at the beginning of the given string, give appropriate message. (Use RE module)\n[10 Marks]",
+    "code": "# TODO: Provide manual solution\\nprint('Placeholder')",
+    "language": "python"
+  },
+  {
+    "id": "node-6f84a566-a9d",
+    "parentId": "node-1007ae60-a0d",
+    "type": "question",
+    "name": "Q2: Q2. Write a Python program to accept a file name and a byte ...",
+    "content": "Q2. Write a Python program to accept a file name and a byte position as input. If file exist open a file in\nread mode and move the file pointer to the given byte position, prints the content of the file from\nthat position till end of file otherwise give appropriate message.\n[20 Marks]\nOR",
+    "code": "import os\n\nfname = input('Enter filename: ')\nif os.path.exists(fname):\n    pos = int(input('Enter byte position: '))\n    with open(fname, 'r') as f:\n        f.seek(pos)\n        print('Contents from position', pos, 'to end:')\n        print(f.read())\nelse:\n    print('Appropriate Message: File does not exist.')",
+    "language": "python"
+  },
+  {
+    "id": "node-fed71794-eae",
+    "parentId": "node-1007ae60-a0d",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program to create a module containing fac...",
+    "content": "Q2. Write a python program to create a module containing factorial function, power dictionary and list\nof vowels. Save this as variables.py. Import variables module to print the factorial of n, print the\npower of n, and second alphabet from the vowels list. (Accept n from user)",
+    "code": "# TODO: Provide manual solution\\nprint('Placeholder')",
+    "language": "python"
+  },
+  {
+    "id": "node-58066c10-79a",
+    "parentId": "node-1007ae60-a0d",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-d5c1439d-c61",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 14"
+  },
+  {
+    "id": "node-b554b53d-30f",
+    "parentId": "node-d5c1439d-c61",
+    "type": "question",
+    "name": "Q1: Q1. Write a Python program to get the current time and demon...",
+    "content": "Q1. Write a Python program to get the current time and demonstrate the following functions from the\ntime module:\na) Converts time in seconds to a struct_time in UTC\nb) Converts a struct_time object into a formatted string.\n[10 Marks]",
+    "code": "import time\n\ncurr_sec = time.time()\nprint('Seconds since epoch:', curr_sec)\ngm = time.gmtime(curr_sec)\nprint('Struct_time in UTC:', gm)\nprint('Formatted string:', time.strftime('%Y-%m-%d %H:%M:%S', gm))",
+    "language": "python"
+  },
+  {
+    "id": "node-0099fd7f-8e9",
+    "parentId": "node-d5c1439d-c61",
+    "type": "question",
+    "name": "Q2: Q2. Create a Web Page using Flask which contains following i...",
+    "content": "Q2. Create a Web Page using Flask which contains following information about your Library Book List\na) Show the library name as a heading.\nb) Display all available books in a table with title and author.\nc) Add quote about reading in bold and blue color.\nOR\n[20 Marks]",
+    "answers": [
+      {
+        "content": "**app.py**",
+        "code": "from flask import Flask, render_template\n\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    books = [\n        {'title': 'Python Crash Course', 'author': 'Eric Matthes'},\n        {'title': 'Fluent Python', 'author': 'Luciano Ramalho'}\n    ]\n    return render_template('library.html', books=books)\n\nif __name__ == '__main__':\n    app.run(debug=True)",
+        "language": "python"
+      },
+      {
+        "content": "**library.html**",
+        "code": "<!DOCTYPE html>\n<html>\n<body>\n    <h1>SPPU College Central Library</h1>\n    <table border='1'>\n        <tr><th>Title</th><th>Author</th></tr>\n        {% for b in books %}\n        <tr><td>{{b.title}}</td><td>{{b.author}}</td></tr>\n        {% endfor %}\n    </table>\n    <br>\n    <p style='color: blue; font-weight: bold;'>\"A reader lives a thousand lives before he dies.\"</p>\n</body>\n</html>",
+        "language": "html"
+      }
+    ]
+  },
+  {
+    "id": "node-f825463a-c7c",
+    "parentId": "node-d5c1439d-c61",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program to check weather given url is val...",
+    "content": "Q2. Write a python program to check weather given url is valid or not? (for Ex:\nhttps://www.yahoo.com)\nQ3 Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-32f3ca10-7e9",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 15"
+  },
+  {
+    "id": "node-931fc9a4-14e",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 16"
+  },
+  {
+    "id": "node-2643b527-a7d",
+    "parentId": "node-931fc9a4-14e",
+    "type": "question",
+    "name": "Q1: Q1. Write a Python program using regular expressions to vali...",
+    "content": "Q1. Write a Python program using regular expressions to validate whether a given string matches the\npattern of three-letter words such as bit, but, bat, hit, hut, hat.\n[10 Marks]",
+    "code": "import re\ns = input('Enter string: ')\n# Match three letter words with single middle vowel, bounded by words\nmatches = re.findall(r'\\b[bcchm][aeiou][td]\\b', s, re.IGNORECASE) \n# Alternatively, exactly the lists provided:\n# matches = re.findall(r'\\b(cat|cot|cut|mat|met|mud|bit|but|bat|hit|hut|hat)\\b', s, re.IGNORECASE)\nprint('Matched three-letter words:', matches)",
+    "language": "python"
+  },
+  {
+    "id": "node-5e6ac383-b4a",
+    "parentId": "node-931fc9a4-14e",
+    "type": "question",
+    "name": "Q2: Q2. Consider a following record in DataFrame IPL\nPlayer Team...",
+    "content": "Q2. Consider a following record in DataFrame IPL\nPlayer Team Category BidPrice Runs\nHardik Pandya Mumbai Indians Batsman 13 1000\nK L Rahul Kings Eleven Batsman 12 2400\nAndre Russel Kolkata Knight Riders Batsman 7 900\nJasprit Bumrah Mumbai Indians Bowler 10 200\nVirat Kohli RCB Batsman 17 3600\nRohit Sharma Mumbai Indians Batsman 15 3700\nCreate above DataFrame in python and write python code for following\na) Retrieve first 2 rows\nb) Retrieve last 3 rows\nc) Add null values in DataFrame.\nd) Find most expensive player.\ne) Print total players per team.\n[20 Marks]\nOR",
+    "code": "import pandas as pd\nimport numpy as np\n\ndata = {\n    'Player': ['Hardik Pandya', 'K L Rahul', 'Andre Russel', 'Jasprit Bumrah', 'Virat Kohli', 'Rohit Sharma'],\n    'Team': ['Mumbai Indians', 'Kings Eleven', 'Kolkata Knight Riders', 'Mumbai Indians', 'RCB', 'Mumbai Indians'],\n    'Category': ['Batsman', 'Batsman', 'Batsman', 'Bowler', 'Batsman', 'Batsman'],\n    'BidPrice': [13.0, 12.0, np.nan, 10.0, 17.0, np.nan],\n    'Runs': [1000, 2400, 900, 200, 3600, 3700]\n}\ndf = pd.DataFrame(data)\n\nprint('a)', df.head(2))\nprint('b)', df.tail(3))\nprint('c)\\n', df.isnull().sum())\ndf['BidPrice'].fillna(df['BidPrice'].mean(), inplace=True)\nprint('d)\\n', df)\nprint('e) Most expensive:\\n', df[df['BidPrice'] == df['BidPrice'].max()])\nprint('f) Players per team:\\n', df['Team'].value_counts())",
+    "language": "python"
+  },
+  {
+    "id": "node-466f9ef3-5de",
+    "parentId": "node-931fc9a4-14e",
+    "type": "question",
+    "name": "Q2: Q2. Create a package vehicle with a sub package types, sub p...",
+    "content": "Q2. Create a package vehicle with a sub package types, sub package type contains modules cars and\nbikes. Each module should have a function available_models() returning a list of models. Write a\npython program to display all available models of cars and bikes.",
+    "code": "# TODO: Provide manual solution\\nprint('Placeholder')",
+    "language": "python"
+  },
+  {
+    "id": "node-b4c4fd60-73d",
+    "parentId": "node-931fc9a4-14e",
+    "type": "question",
+    "name": "Q3: Q3. Viva           [5 Marks]\nLab Course CS-271-VSC-P\nAdvance...",
+    "content": "Q3. Viva           [5 Marks]\nLab Course CS-271-VSC-P\nAdvanced Python Programming"
+  },
+  {
+    "id": "node-5fb045a8-ff6",
+    "parentId": "node-931fc9a4-14e",
+    "type": "question",
+    "name": "Q1: Q1. Write a Python program to accept a string and replace al...",
+    "content": "Q1. Write a Python program to accept a string and replace all occurrences of a spaces with a colon and\ncomma with dot. Display modified string.\n[10 Marks]",
+    "code": "s = input(\"Enter string: \")\n\ns = s.replace(\" \", \":\")\ns = s.replace(\",\", \".\")\n\nprint(\"Modified:\", s)",
+    "language": "python"
+  },
+  {
+    "id": "node-b4555a35-fd8",
+    "parentId": "node-931fc9a4-14e",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program to create a list, string and tupl...",
+    "content": "Q2. Write a python program to create a list, string and tuple in python. Apply random module\nto display unique multiple random elements from above created sequence type.\n[20 Marks]\nOR",
+    "code": "import random\n\nlst = [1, 2, 3, 4, 5]\nstring = \"PYTHON\"\ntup = (10, 20, 30, 40, 50)\n\nprint(\"Random from list:\", random.sample(lst, 3))\nprint(\"Random from string:\", random.sample(string, 3))\nprint(\"Random from tuple:\", random.sample(tup, 3))",
+    "language": "python"
+  },
+  {
+    "id": "node-ecd1c35f-9df",
+    "parentId": "node-931fc9a4-14e",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program using user define function to acc...",
+    "content": "Q2. Write a python program using user define function to accept a number and perform the following\ntask:\na) Check number is Armstrong or not.\nb) Calculate and display sum of digits till single digit [e.g. -  558 = 18 = 9]",
+    "code": "def is_armstrong(n):\n    s = sum(int(d)**len(str(n)) for d in str(n))\n    return s == n\n\ndef single_digit_sum(n):\n    while n > 9:\n        n = sum(int(d) for d in str(n))\n    return n\n\nnum = int(input('Enter number: '))\nif is_armstrong(num):\n    print(f'{num} is an Armstrong number')\nelse:\n    print(f'{num} is NOT an Armstrong number')\n\nprint('Single digit sum:', single_digit_sum(num))",
+    "language": "python"
+  },
+  {
+    "id": "node-927b0faa-936",
+    "parentId": "node-931fc9a4-14e",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-e0b36781-a90",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 17"
+  },
+  {
+    "id": "node-34b7d1fb-eb6",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 18"
+  },
+  {
+    "id": "node-9dc39f09-e85",
+    "parentId": "node-34b7d1fb-eb6",
+    "type": "question",
+    "name": "Q1: Q1. Write a Python program to list all files and folders in ...",
+    "content": "Q1. Write a Python program to list all files and folders in the current directory using os.listdir().\n[10 Marks]",
+    "code": "import os\n\nfiles = os.listdir()\n\nprint(\"Files & Folders:\", files)",
+    "language": "python"
+  },
+  {
+    "id": "node-ffd4e7f8-49b",
+    "parentId": "node-34b7d1fb-eb6",
+    "type": "question",
+    "name": "Q2: Q2. Write a Python program to validate mobile number based o...",
+    "content": "Q2. Write a Python program to validate mobile number based on following criteria\na) The first digit should contain numbers between 6 to 9.\nb) The rest 9 digit can contain any number between 0 to 9.\nc) The mobile number can have 11 digits also by including 0 at the starting.\nd) The mobile number can be of 12 digits also by including 91 at the starting\n[20 Marks]\nOR",
+    "code": "import re\n\nnum = input('Enter mobile number: ')\n# Matches: optional 0 or 91, then a digit 6-9, then 9 digits 0-9\npattern = r'^(0|91)?[6-9][0-9]{9}$'\n\nif re.match(pattern, num):\n    print('Valid Mobile Number!')\nelse:\n    print('Invalid Mobile Number!')",
+    "language": "python"
+  },
+  {
+    "id": "node-23665a53-969",
+    "parentId": "node-34b7d1fb-eb6",
+    "type": "question",
+    "name": "Q2: Q2. Build a package education with a sub package courses, co...",
+    "content": "Q2. Build a package education with a sub package courses, containing modules science.py and\narts.py. Each module should have a function get_subjects(). Write a python program to display all\nsubjects.",
+    "code": "# TODO: Provide manual solution\\nprint('Placeholder')",
+    "language": "python"
+  },
+  {
+    "id": "node-e9816e98-8fc",
+    "parentId": "node-34b7d1fb-eb6",
+    "type": "question",
+    "name": "Q3: Q3. Viva           [5 Marks]\nLab Course CS-271-VSC-P\nAdvance...",
+    "content": "Q3. Viva           [5 Marks]\nLab Course CS-271-VSC-P\nAdvanced Python Programming"
+  },
+  {
+    "id": "node-5b3755b3-6a7",
+    "parentId": "node-34b7d1fb-eb6",
+    "type": "question",
+    "name": "Q1: Q1. Write a Python program to shuffle a deck of card. Displa...",
+    "content": "Q1. Write a Python program to shuffle a deck of card. Display the cards obtained by a user in 5\nattempts.\n[10 Marks]",
+    "code": "import random\n\ncards = [\"A\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"J\",\"Q\",\"K\"]\n\nfor i in range(5):\n    random.shuffle(cards)\n    print(\"Attempt\", i+1, \":\", cards[:5])",
+    "language": "python"
+  },
+  {
+    "id": "node-c35f288b-2cd",
+    "parentId": "node-34b7d1fb-eb6",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program to display all entries in a curre...",
+    "content": "Q2. Write a python program to display all entries in a current directory and identify each as file or\nfolder. [Use getcwd() function to retrieve current directory]\n[20 Marks]\nOR",
+    "code": "import os\n\ndir_path = os.getcwd()\nprint('Current directory:', dir_path)\n\nentries = os.listdir(dir_path)\nprint('Entries:')\nfor e in entries:\n    path = os.path.join(dir_path, e)\n    if os.path.isfile(path):\n        print(f'[FILE]: {e}')\n    elif os.path.isdir(path):\n        print(f'[DIR ]: {e}')\n    else:\n        print(f'[OTHER]: {e}')",
+    "language": "python"
+  },
+  {
+    "id": "node-0853a106-c83",
+    "parentId": "node-34b7d1fb-eb6",
+    "type": "question",
+    "name": "Q2: Q2. Consider a following record in DataFrame IPL\nPlayer\nTeam...",
+    "content": "Q2. Consider a following record in DataFrame IPL\nPlayer\nTeam\nCategory\nHardik Pandya Mumbai Indians\nBatsman\nBidPrice\nnull\nRuns\nK L Rahul\n1000\nKings Eleven\nBatsman\n12\nAndre Russel\n2400\nKolkata Knight Riders\nBatsman\n7\nJasprit Bumrah Mumbai Indians\n900\nBowler\n10\nVirat Kohli\nRCB\nBatsman\nnull\nRohit Sharma Mumbai Indians\nnull\nBatsman\n15\n3600\nCreate above DataFrame in python and write python code for following\na) Retrieve first 2 rows\n3700\nb) Retrieve last 3 rows\nc) Check null values in DataFrame.\nd) Replace null values with mean of that column.\ne) Find most expensive player.\nf) Print total players per team.",
+    "code": "import pandas as pd\nimport numpy as np\n\ndata = {\n    'Player': ['Hardik Pandya', 'K L Rahul', 'Andre Russel', 'Jasprit Bumrah', 'Virat Kohli', 'Rohit Sharma'],\n    'Team': ['Mumbai Indians', 'Kings Eleven', 'Kolkata Knight Riders', 'Mumbai Indians', 'RCB', 'Mumbai Indians'],\n    'Category': ['Batsman', 'Batsman', 'Batsman', 'Bowler', 'Batsman', 'Batsman'],\n    'BidPrice': [13.0, 12.0, np.nan, 10.0, 17.0, np.nan],\n    'Runs': [1000, 2400, 900, 200, 3600, 3700]\n}\ndf = pd.DataFrame(data)\n\nprint('a)', df.head(2))\nprint('b)', df.tail(3))\nprint('c)\\n', df.isnull().sum())\ndf['BidPrice'].fillna(df['BidPrice'].mean(), inplace=True)\nprint('d)\\n', df)\nprint('e) Most expensive:\\n', df[df['BidPrice'] == df['BidPrice'].max()])\nprint('f) Players per team:\\n', df['Team'].value_counts())",
+    "language": "python"
+  },
+  {
+    "id": "node-724f7b5e-9b8",
+    "parentId": "node-34b7d1fb-eb6",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-68b989bc-db3",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 19"
+  },
+  {
+    "id": "node-ba8c23ff-047",
+    "parentId": "node-68b989bc-db3",
+    "type": "question",
+    "name": "Q1: Q1. Write a python program to accept a string, Count total n...",
+    "content": "Q1. Write a python program to accept a string, Count total number of vowels, consonants and special\nsymbols from it.\n[10 Marks]",
+    "code": "s = input('Enter a string: ')\nvowels = 'aeiouAEIOU'\nv_cnt = c_cnt = s_cnt = 0\nfor ch in s:\n    if ch.isalpha():\n        if ch in vowels: v_cnt += 1\n        else: c_cnt += 1\n    elif not ch.isspace():\n        s_cnt += 1\nprint('Vowels:', v_cnt)\nprint('Consonants:', c_cnt)\nprint('Special symbols:', s_cnt)",
+    "language": "python"
+  },
+  {
+    "id": "node-1a6b5c34-610",
+    "parentId": "node-68b989bc-db3",
+    "type": "question",
+    "name": "Q2: Q2. Write a Python program to accept a file name and a byte ...",
+    "content": "Q2. Write a Python program to accept a file name and a byte position as input. If file exist open a file in\nread mode and move the file pointer to the given byte position, prints the content of the file from\nthat position till end of file otherwise give appropriate message.\n[20 Marks]\nOR",
+    "code": "import os\n\nfname = input('Enter filename: ')\nif os.path.exists(fname):\n    pos = int(input('Enter byte position: '))\n    with open(fname, 'r') as f:\n        f.seek(pos)\n        print('Contents from position', pos, 'to end:')\n        print(f.read())\nelse:\n    print('Appropriate Message: File does not exist.')",
+    "language": "python"
+  },
+  {
+    "id": "node-969b9486-9f3",
+    "parentId": "node-68b989bc-db3",
+    "type": "question",
+    "name": "Q2: Q2. Create a Pandas DataFrame using the following student da...",
+    "content": "Q2. Create a Pandas DataFrame using the following student data with columns and perform the\nfollowing tasks:\nschool class name date_of_birth age height weight address\nS1\nS001 Asha 15/05/2002\nS2\n12 173 35 Street1\nS002 Fransis 17/05/2002\nS3\n12 192 32 Street2\nS003 Charlie 16/02/1999\nS4\n13 186 33 Street3\nS004 David 25/09/1998\nS5\n14 167 30 Street4\nS005 Shyam 11/05/2002\nS6\n12 151 31 Street5\nS006 Eashel 15/09/1997\n16 159 32 Street6\na) Split the DataFrame into groups based on the school column using the GroupBy operation.\nb) Check and display the type of the GroupBy object created.\nc) Calculate the mean, minimum, and maximum values of the age column for each school group.\nd) Count the number of students whose weight is greater than 32.",
+    "code": "import pandas as pd\n\ndata = {\n    'school': ['S001','S002','S003','S004','S005','S006'],\n    'class': ['S1', 'S2', 'S3', 'S4', 'S5', 'S6'],\n    'name': ['Asha', 'Fransis', 'Charlie', 'David', 'Shyam', 'Eashel'],\n    'age': [12, 12, 13, 14, 12, 16],\n    'height': [173, 192, 186, 167, 151, 159],\n    'weight': [35, 32, 33, 30, 31, 32]\n}\n# Assuming S001...S006 refers to groups where e.g., first 2 are school1, etc.\n# But based on the text S001 is the school code for Asha, S002 for Fransis etc\ndf = pd.DataFrame(data)\n\n# a) GroupBy operation\nge = df.groupby('school')\n# b) Check type\nprint('Type of GroupBy object:', type(ge))\n# c) Mean min max age per school group\nprint('\\nAge stats per school:\\n', ge['age'].agg(['mean', 'min', 'max']))\n# d) Count weight > 32\ncount_weight = df[df['weight'] > 32].shape[0]\nprint('\\nStudents with weight > 32:', count_weight)",
+    "language": "python"
+  },
+  {
+    "id": "node-362e30eb-3f2",
+    "parentId": "node-68b989bc-db3",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-e3752d48-31e",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 20"
+  },
+  {
+    "id": "node-1c13e8ff-226",
+    "parentId": "node-e3752d48-31e",
+    "type": "question",
+    "name": "Q1: Q1. Create a DataFrame from a dictionary {Subject_Name : Mar...",
+    "content": "Q1. Create a DataFrame from a dictionary {Subject_Name : Marks} and display the first 5 rows and\nlast 5 rows of DataFrame.\n[10 Marks]",
+    "code": "import pandas as pd\n\ndata = {\n    \"Math\": 90,\n    \"Physics\": 85,\n    \"Chemistry\": 88,\n    \"Biology\": 92,\n    \"English\": 80,\n    \"CS\": 95\n}\n\ndf = pd.DataFrame(list(data.items()), columns=[\"Subject\", \"Marks\"])\n\nprint(\"First 5 rows:\\n\", df.head())\nprint(\"Last 5 rows:\\n\", df.tail())",
+    "language": "python"
+  },
+  {
+    "id": "node-0cd215cc-def",
+    "parentId": "node-e3752d48-31e",
+    "type": "question",
+    "name": "Q2: Q2. Write a Python program that accepts a filename from the ...",
+    "content": "Q2. Write a Python program that accepts a filename from the user, opens the file in read mode and\ndisplay the contents of files. The program should compute and display the total number of\ncharacters (including spaces), words, and lines present in the file. If file does not exist give\nappropriate message.\n[20 Marks]\nOR",
+    "code": "# TODO: Provide manual solution\\nprint('Placeholder')",
+    "language": "python"
+  },
+  {
+    "id": "node-347c1718-871",
+    "parentId": "node-e3752d48-31e",
+    "type": "question",
+    "name": "Q2: Q2. Create a package banking with modules account.py and loa...",
+    "content": "Q2. Create a package banking with modules account.py and loan.py.\na) account.py should contain function open_account(name) that accepts a user\u2019s name and prints a\nmessage confirming account creation.\nb) loan.py should contain function apply_loan(amount) that accepts a loan amount and prints a confirmation\nmessage with the amount.\nWrite a python program to import modules from banking package and demonstrate both functions.",
+    "answers": [
+      {
+        "content": "**account.py**",
+        "code": "def open_account(name):\n    print(f'Account created successfully for {name}')",
+        "language": "python"
+      },
+      {
+        "content": "**loan.py**",
+        "code": "def apply_loan(amount):\n    print(f'Loan of amount {amount} confirmed')",
+        "language": "python"
+      },
+      {
+        "content": "**main.py**",
+        "code": "from banking import account, loan\n\naccount.open_account('Anant')\nloan.apply_loan(50000)",
+        "language": "python"
+      }
+    ]
+  },
+  {
+    "id": "node-6172d24e-8bf",
+    "parentId": "node-e3752d48-31e",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-f09f9836-8f6",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 21"
+  },
+  {
+    "id": "node-4563c5fd-79a",
+    "parentId": "node-f09f9836-8f6",
+    "type": "question",
+    "name": "Q1: Q1. Write a Python program that accepts value of m and n. Di...",
+    "content": "Q1. Write a Python program that accepts value of m and n. Divides m by n and handles a\nZeroDivisionError if the user tries to divide by zero.",
+    "code": "try:\n    m = float(input('Enter m: '))\n    n = float(input('Enter n: '))\n    result = m / n\n    print('Result:', result)\nexcept ZeroDivisionError:\n    print('Error: Cannot divide by zero!')\nexcept ValueError:\n    print('Error: Invalid input')",
+    "language": "python"
+  },
+  {
+    "id": "node-82bba9b0-8fd",
+    "parentId": "node-f09f9836-8f6",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program for following -\na) Create DataFra...",
+    "content": "Q2. Write a python program for following -\na) Create DataFrames Student 1, Student 2 and display contents\nb) Merge two DataFrames in third frame .\nc) Display contents of third DataFrame.\nStudent 1\nID\nName\nAge\nID\nStudent 2\nCity\n[10 Marks]\nMarks\n0\nS1\nAnita\n18\n1\nS2\nSakshi\n23\n2\nS3\nOm\n20\n3\nS4\nRaj\n21\n4\nS5\nKanika\n20\n0\nS2\nPune\n97\n1\nS4\nNashik\n78\n2\nS5\nMumbai\n86\n3\nS6\nDelhi\n66\n4\nS7\nNanded\n54\nOR\n[20 Marks]",
+    "code": "# TODO: Provide manual solution\\nprint('Placeholder')",
+    "language": "python"
+  },
+  {
+    "id": "node-6d246f72-a4b",
+    "parentId": "node-f09f9836-8f6",
+    "type": "question",
+    "name": "Q2: Q2. Write a Python program to create a class that acts as an...",
+    "content": "Q2. Write a Python program to create a class that acts as an iterator and generates the factorial series up\nto n (1! + 2! + 3! + \u2026 + n!). (Accept input from the user)",
+    "code": "import math\n\nclass FactorialIterator:\n    def __init__(self, n):\n        self.n = n\n        self.current = 1\n    \n    def __iter__(self):\n        return self\n    \n    def __next__(self):\n        if self.current > self.n:\n            raise StopIteration\n        result = math.factorial(self.current)\n        self.current += 1\n        return result\n\nn = int(input('Enter n: '))\nprint('Factorial series:', list(FactorialIterator(n)))",
+    "language": "python"
+  },
+  {
+    "id": "node-c76b1fc6-ad2",
+    "parentId": "node-f09f9836-8f6",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-079dcdfe-94b",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 22"
+  },
+  {
+    "id": "node-66b46e95-f2d",
+    "parentId": "node-079dcdfe-94b",
+    "type": "question",
+    "name": "Q1: Q1. Write a Python program that defines a function productIn...",
+    "content": "Q1. Write a Python program that defines a function productInfo() which accepts a product name and its\nprice. The function should display the product name only if its price is less than Rs.100. If no price\nis provided, the function should assume the default price to be Rs.100.",
+    "code": "def productInfo(name, price=100):\n    if price < 100:\n        print('Product:', name)\n    else:\n        print(name, 'omitted (price >= 100)')\n\nproductInfo('Pen', 50)\nproductInfo('Bag', 500)\nproductInfo('Notebook') # Default 100",
+    "language": "python"
+  },
+  {
+    "id": "node-68247ef9-aec",
+    "parentId": "node-079dcdfe-94b",
+    "type": "question",
+    "name": "Q2: Q2. Write a Python program that:\na) Retrieves current local ...",
+    "content": "Q2. Write a Python program that:\na) Retrieves current local time and UTC time.\nb) Prints the current time using ctime() and gmtime().\nc) Accepts a date-time string input in the format DD-MM-YYYY HH:MM:SS.\n[10 Marks]\nd) Parses the string using strptime() and formats it back using strftime() and display it in two custom\nformats.\n[20 Marks]\nOR",
+    "code": "import time\nimport datetime\n\n# a, b\nprint('Current ctime:', time.ctime())\nprint('Current gmtime (UTC):', time.gmtime())\n\n# c\ndt_str = input('Enter date time (DD-MM-YYYY HH:MM:SS): ')\n\ntry:\n    # d\n    p_time = time.strptime(dt_str, '%d-%m-%Y %H:%M:%S')\n    print('Parsed struct_time:', p_time)\n    print('Format 1:', time.strftime('%A, %d %B %Y', p_time))\n    print('Format 2:', time.strftime('%I:%M %p on %y-%m-%d', p_time))\nexcept ValueError:\n    print('Invalid format')",
+    "language": "python"
+  },
+  {
+    "id": "node-dc4a5f36-e40",
+    "parentId": "node-079dcdfe-94b",
+    "type": "question",
+    "name": "Q2: Q2. Write a Python program that accepts a string from the us...",
+    "content": "Q2. Write a Python program that accepts a string from the user and performs the following tasks:\na) Split the string into individual words.\nb) Identify and display all words that do not contain any vowels (a, e, i, o, u), ignore case while\nchecking for vowels.\nc) Sort and display these words in alphabetical order.\nd) Display the total count of such words.",
+    "code": "s = input('Enter a string: ')\nwords = s.split()\nres = []\n\nfor w in words:\n    if not any(v in w.lower() for v in 'aeiou'):\n        res.append(w)\n\nres.sort()\nprint('Words without vowels (sorted):', res)\nprint('Total count:', len(res))",
+    "language": "python"
+  },
+  {
+    "id": "node-08c0fe3d-4bf",
+    "parentId": "node-079dcdfe-94b",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-c315f039-21d",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 23"
+  },
+  {
+    "id": "node-3522055e-649",
+    "parentId": "node-c315f039-21d",
+    "type": "question",
+    "name": "Q1: Q1. Write a python program to extract number from a given st...",
+    "content": "Q1. Write a python program to extract number from a given string and display extracted number.\n[10 Marks]",
+    "code": "import re\n\ns = input('Enter a string with numbers: ')\nnums = re.findall(r'\\d+', s)\nprint('Extracted numbers:', nums)",
+    "language": "python"
+  },
+  {
+    "id": "node-82d13fdf-676",
+    "parentId": "node-c315f039-21d",
+    "type": "question",
+    "name": "Q2: Q2. Write a Python program that calculates the pass or fail ...",
+    "content": "Q2. Write a Python program that calculates the pass or fail status of multiple students.\na) Define a function check_pass_fail(marks) to return \"Pass\" if marks \u2265 40, otherwise \"Fail\".\nb) Accept number of students and their marks.\nc) Display each student\u2019s result.\nd) Print the total count of students who passed and failed.\nOR\n[20 Marks]",
+    "code": "def check_pass_fail(marks):\n    if marks >= 40: return 'Pass'\n    return 'Fail'\n\nn = int(input('Enter number of students: '))\npasses = 0\nfails = 0\nfor i in range(n):\n    m = float(input(f'Enter marks for student {i+1}: '))\n    res = check_pass_fail(m)\n    print(f'Result: {res}')\n    if res == 'Pass': passes += 1\n    else: fails += 1\n\nprint('\\nTotal Passed:', passes)\nprint('Total Failed:', fails)",
+    "language": "python"
+  },
+  {
+    "id": "node-42b7d44e-7c4",
+    "parentId": "node-c315f039-21d",
+    "type": "question",
+    "name": "Q2: Q2. Create a Web Page using Flask which contains following i...",
+    "content": "Q2. Create a Web Page using Flask which contains following information about your college.\na) College Name as a heading in center of web page.\nb) Display all the courses available in your college.\nc) Image of your College.",
+    "answers": [
+      {
+        "content": "**app.py**",
+        "code": "from flask import Flask, render_template\n\napp = Flask(__name__)\n\n@app.route('/')\ndef college():\n    return render_template('college.html')\n\nif __name__ == '__main__':\n    app.run(debug=True)",
+        "language": "python"
+      },
+      {
+        "content": "**college.html**",
+        "code": "<!DOCTYPE html>\n<html>\n<body>\n    <h1 style='text-align: center;'>Pune University College of Science</h1>\n    <h3>Available Courses</h3>\n    <ul>\n        <li>BSc Computer Science</li>\n        <li>MSc Computer Science</li>\n        <li>BCA</li>\n    </ul>\n    <br>\n    <!-- Replace with valid image path if actually rendering -->\n    <img src='https://via.placeholder.com/300?text=College+Image' alt='College Campus'>\n</body>\n</html>",
+        "language": "html"
+      }
+    ]
+  },
+  {
+    "id": "node-b277c55b-fac",
+    "parentId": "node-c315f039-21d",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-3686118f-d09",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 24"
+  },
+  {
+    "id": "node-05a68041-cfc",
+    "parentId": "node-3686118f-d09",
+    "type": "question",
+    "name": "Q1: Q1. Write a Python program to shuffle a deck of card. Displa...",
+    "content": "Q1. Write a Python program to shuffle a deck of card. Display the cards obtained by a user in 5\nattempts.",
+    "code": "import random\n\ncards = [\"A\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"J\",\"Q\",\"K\"]\n\nfor i in range(5):\n    random.shuffle(cards)\n    print(\"Attempt\", i+1, \":\", cards[:5])",
+    "language": "python"
+  },
+  {
+    "id": "node-4c534aa2-340",
+    "parentId": "node-3686118f-d09",
+    "type": "question",
+    "name": "Q2: Q2. Create a package finance_tools with modules interest.py ...",
+    "content": "Q2. Create a package finance_tools with modules interest.py and currency.py\n[10 Marks]\na) interest.py should contain function cal_interest(amount, year) that accepts amount, year . Calculates\nand returns simple interest using a fixed rate (for example, 5%).\nb) currency.py should contain function converet(amount) that accepts amount in INR and converts it into\nUSD. (consider conversion rate 0.012)\nWrite a python program to import modules from finance_tools package and demonstrate both\nfunctions.\n[20 Marks]\nOR",
+    "answers": [
+      {
+        "content": "**interest.py**",
+        "code": "def cal_interest(amount, year):\n    rate = 0.05\n    return amount * rate * year",
+        "language": "python"
+      },
+      {
+        "content": "**currency.py**",
+        "code": "def converet(amount):\n    return amount * 0.012",
+        "language": "python"
+      },
+      {
+        "content": "**main.py**",
+        "code": "from finance_tools import interest, currency\n\namt = float(input('Enter Amount: '))\nyr = float(input('Enter Years: '))\n\nprint('Simple Interest:', interest.cal_interest(amt, yr))\nprint('Amount in USD:', currency.converet(amt))",
+        "language": "python"
+      }
+    ]
+  },
+  {
+    "id": "node-1da06183-f01",
+    "parentId": "node-3686118f-d09",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program to check weather given url is val...",
+    "content": "Q2. Write a python program to check weather given url is valid or not?\n(for Ex: https://www.yahoo.com)",
+    "code": "# TODO: Provide manual solution\\nprint('Placeholder')",
+    "language": "python"
+  },
+  {
+    "id": "node-6243418f-108",
+    "parentId": "node-3686118f-d09",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-78931299-a46",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 25"
+  },
+  {
+    "id": "node-04acf5fd-cb1",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 26"
+  },
+  {
+    "id": "node-daba1080-199",
+    "parentId": "node-04acf5fd-cb1",
+    "type": "question",
+    "name": "Q1: Q1. Write a python program to remove all whitespaces from a ...",
+    "content": "Q1. Write a python program to remove all whitespaces from a given string. Display modified string.\n[10 Marks]",
+    "code": "s = input('Enter original string: ')\nmodified = s.replace(' ', '').replace('\\t', '').replace('\\n', '')\nprint('Modified string:', modified)",
+    "language": "python"
+  },
+  {
+    "id": "node-f3738395-cf8",
+    "parentId": "node-04acf5fd-cb1",
+    "type": "question",
+    "name": "Q2: Q2. Create a package vehicle with a sub package types, sub p...",
+    "content": "Q2. Create a package vehicle with a sub package types, sub package type contains modules cars and\nbikes. Each module should have a function available_models() returning a list of models. Write a\npython program to display all available models of cars and bikes.\n[20 Marks]\nOR",
+    "code": "# TODO: Provide manual solution\\nprint('Placeholder')",
+    "language": "python"
+  },
+  {
+    "id": "node-ddcf15aa-838",
+    "parentId": "node-04acf5fd-cb1",
+    "type": "question",
+    "name": "Q2: Q2. Create a following DataFrame named as \u201cdata\u201d. Write the ...",
+    "content": "Q2. Create a following DataFrame named as \u201cdata\u201d. Write the python code for the following\ncommands.\nCompany Count Price\nPencil Apsara 15 250\nPencil Natraj 20 200\nPen Cello 25 600\nPen Parkar 35 900\nEraser Apsara 20 300\na) Find all rows with the label \u201cPencil\u201d. Extract all columns\nb) Change the Eraser count as 25 instead of 20.\nc) List only the columns Company and Price.\nd) List only rows with labels \u2018Pencil\u2019 and \u2018Pen\u2019\ne) Add a new column named Colour to the DataFrame and display DataFrame..",
+    "code": "import pandas as pd\n\ndata = {\n    'Company': ['Apsara', 'Natraj', 'Cello', 'Parkar', 'Apsara'],\n    'Count': [15, 20, 25, 35, 20],\n    'Price': [250, 200, 600, 900, 300]\n}\nindex = ['Pencil', 'Pencil', 'Pen', 'Pen', 'Eraser']\ndf = pd.DataFrame(data, index=index)\n\nprint('a)\\n', df.loc['Pencil'])\n# b) Change Eraser count as 25 instead of 20\ndf.loc['Eraser', 'Count'] = 25\nprint('b) Count updated to 25')\nprint('c)\\n', df[['Company', 'Price']])\nprint('d)\\n', df.loc[['Pencil', 'Pen']])\nif 'Rename Column' in locals() or True: # handling both variations\n    df.rename(columns={'Count': 'Quantity'}, inplace=True)\n    print('e)\\n', df)",
+    "language": "python"
+  },
+  {
+    "id": "node-737fa295-e90",
+    "parentId": "node-04acf5fd-cb1",
+    "type": "question",
+    "name": "Q3: Q3. Viva           [5 Marks]\nLab Course CS-271-VSC-P\nAdvance...",
+    "content": "Q3. Viva           [5 Marks]\nLab Course CS-271-VSC-P\nAdvanced Python Programming"
+  },
+  {
+    "id": "node-201c4a36-bc3",
+    "parentId": "node-04acf5fd-cb1",
+    "type": "question",
+    "name": "Q1: Q1. Write a Python program that generates a random radius an...",
+    "content": "Q1. Write a Python program that generates a random radius and computes the circumference of a circle\nusing the math module. (Use 3.14 as the value of \u03c0)\n[10 Marks]",
+    "code": "import random\nimport math\n\np = 3.14\nr = random.randint(1, 50)\nprint('Random Radius:', r)\nc = 2 * p * r\nprint(f'Circumference: {c:.2f}')",
+    "language": "python"
+  },
+  {
+    "id": "node-397a7ca8-85a",
+    "parentId": "node-04acf5fd-cb1",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program to check the validity of a passwo...",
+    "content": "Q2. Write a python program to check the validity of a password given by the user. The password should\nsatisfy the following criteria:\na) Contain at least 1 letter between a and z\nb) Contain at least 1 number between 0 and 9\nc) Contain at least 1 character from $, #, @\nd) Minimum length of password: 6\ne) Maximum length of password: 12\nOR\n[20 Marks]",
+    "code": "import re\npwd = input('Enter password: ')\n\nvalid = True\nif len(pwd) < 6 or len(pwd) > 12:\n    valid = False\nelif not re.search(r'[a-z]', pwd):\n    valid = False\nelif not re.search(r'[0-9]', pwd):\n    valid = False\nelif not re.search(r'[$#@]', pwd):\n    valid = False\n\nif valid:\n    print('Valid Password')\nelse:\n    print('Invalid Password')",
+    "language": "python"
+  },
+  {
+    "id": "node-099746fa-f86",
+    "parentId": "node-04acf5fd-cb1",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program to list all files in a current di...",
+    "content": "Q2. Write a python program to list all files in a current directory. Display total count of .py files and\ncontent of any one .py files.",
+    "code": "import os\n\nfiles = os.listdir()\n\n# Display all files\nprint(\"Files:\", files)\n\n# Count .py files\npy_files = [f for f in files if f.endswith(\".py\")]\nprint(\"Total .py files:\", len(py_files))\n\n# Display content of first .py file\nif py_files:\n    with open(py_files[0], \"r\") as f:\n        print(\"\\nContent of\", py_files[0])\n        print(f.read())",
+    "language": "python"
+  },
+  {
+    "id": "node-e4788bef-8c6",
+    "parentId": "node-04acf5fd-cb1",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-f4b684cf-5c0",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 27"
+  },
+  {
+    "id": "node-40641ad9-e76",
+    "parentId": "node-f4b684cf-5c0",
+    "type": "question",
+    "name": "Q1: Q1. Write a Python program using regular expressions to vali...",
+    "content": "Q1. Write a Python program using regular expressions to validate whether a given string matches the\npattern of three-letter words such as cat, cot, cut, mat, met, mud.\n[10 Marks]",
+    "code": "import re\ns = input('Enter string: ')\n# Match three letter words with single middle vowel, bounded by words\nmatches = re.findall(r'\\b[bcchm][aeiou][td]\\b', s, re.IGNORECASE) \n# Alternatively, exactly the lists provided:\n# matches = re.findall(r'\\b(cat|cot|cut|mat|met|mud|bit|but|bat|hit|hut|hat)\\b', s, re.IGNORECASE)\nprint('Matched three-letter words:', matches)",
+    "language": "python"
+  },
+  {
+    "id": "node-09c37148-e67",
+    "parentId": "node-f4b684cf-5c0",
+    "type": "question",
+    "name": "Q2: Q2. Build a package education with a sub package courses, co...",
+    "content": "Q2. Build a package education with a sub package courses, containing modules science.py and\narts.py. Each module should have a function get_subjects(). Write a python program to display all\nsubjects.\n[20 Marks]\nOR",
+    "code": "# TODO: Provide manual solution\\nprint('Placeholder')",
+    "language": "python",
+    "answers": [
+      {
+        "content": "**science.py**",
+        "code": "def get_subjects():\\n    return ['Physics', 'Chemistry', 'Biology']",
+        "language": "python"
+      },
+      {
+        "content": "**arts.py**",
+        "code": "def get_subjects():\\n    return ['History', 'Geography', 'Economics']",
+        "language": "python"
+      },
+      {
+        "content": "**main.py**",
+        "code": "from education.courses import science, arts\\nprint('Science Subjects:', science.get_subjects())\\nprint('Arts Subjects:', arts.get_subjects())",
+        "language": "python"
+      }
+    ]
+  },
+  {
+    "id": "node-92bfcf51-0a7",
+    "parentId": "node-f4b684cf-5c0",
+    "type": "question",
+    "name": "Q2: Q2. Write a python program to display all entries in a curre...",
+    "content": "Q2. Write a python program to display all entries in a current directory and identify each as file or\nfolder. [Use getcwd() function to retrieve current directory]",
+    "code": "import os\n\ndir_path = os.getcwd()\nprint('Current directory:', dir_path)\n\nentries = os.listdir(dir_path)\nprint('Entries:')\nfor e in entries:\n    path = os.path.join(dir_path, e)\n    if os.path.isfile(path):\n        print(f'[FILE]: {e}')\n    elif os.path.isdir(path):\n        print(f'[DIR ]: {e}')\n    else:\n        print(f'[OTHER]: {e}')",
+    "language": "python"
+  },
+  {
+    "id": "node-d3ac2dbd-b0f",
+    "parentId": "node-f4b684cf-5c0",
+    "type": "question",
+    "name": "Q3: Q3. Viva\n[5 Marks]\n",
+    "content": "Q3. Viva\n[5 Marks]"
+  },
+  {
+    "id": "node-9a469d20-c2a",
+    "parentId": "node-0712913f-448",
+    "type": "folder",
+    "name": "Slip 28"
+  },
+  {
+    "id": "node-a25b900a-b52b46",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 1"
   },
   {
-    "id": "node-mn0n9901-avbfut",
+    "id": "node-62758db1-65c984",
+    "parentId": "node-a25b900a-b52b46",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write Python code to create a dictionary containing mobile names and their prices. Create DataFrame from this dictionary. Display the contents of DataFrame.",
+    "code": "import pandas as pd\n\ndata = {\"Samsung\":20000, \"iPhone\":80000, \"Redmi\":15000}\n\ndf = pd.DataFrame(list(data.items()), columns=[\"Mobile\",\"Price\"])\nprint(df)",
+    "language": "python"
+  },
+  {
+    "id": "node-7581c5df-98cab1",
+    "parentId": "node-a25b900a-b52b46",
+    "type": "question",
+    "name": "Q2 (OPTION 1)",
+    "content": "Create a package vehicle with a sub package types, sub package type contains modules cars and bikes. Each module should have a function available_models() returning a list of models. Write a python program to display all available models of cars and bikes.",
+    "code": "# cars.py\ndef available_models():\n    return [\"Swift\",\"i20\",\"BMW\"]\n\n# bikes.py\ndef available_models():\n    return [\"Splendor\",\"Pulsar\",\"R15\"]\nfrom vehicle.types import cars, bikes\n\nprint(\"Cars:\", cars.available_models())\nprint(\"Bikes:\", bikes.available_models())",
+    "language": "python"
+  },
+  {
+    "id": "node-e0c8a1b5-4cff74",
+    "parentId": "node-a25b900a-b52b46",
+    "type": "question",
+    "name": "Q2 (OPTION 2)",
+    "content": "Write a python program to list all files in a current directory. Display total count of .py files and content of any one .py files.",
+    "code": "import os\n\nfiles = os.listdir()\n\npy_files = [f for f in files if f.endswith(\".py\")]\n\nprint(\"Total .py files:\", len(py_files))\n\nif py_files:\n    with open(py_files[0], \"r\") as f:\n        print(f.read())",
+    "language": "python"
+  },
+  {
+    "id": "node-4f5b8c81-e0737e",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 2"
   },
   {
-    "id": "node-mn0n9csn-mertih",
+    "id": "node-52799447-1f2197",
+    "parentId": "node-4f5b8c81-e0737e",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a python program to accept a string, Count total number of vowels, consonants and special symbols from it.",
+    "code": "s = input(\"Enter string: \")\n\nv=c=sp=0\n\nfor ch in s:\n    if ch.isalpha():\n        if ch.lower() in \"aeiou\":\n            v+=1\n        else:\n            c+=1\n    else:\n        sp+=1\n\nprint(\"Vowels:\",v)\nprint(\"Consonants:\",c)\nprint(\"Special:\",sp)",
+    "language": "python"
+  },
+  {
+    "id": "node-9b18ff34-77898a",
+    "parentId": "node-4f5b8c81-e0737e",
+    "type": "question",
+    "name": "Q2 (OPTION 1)",
+    "content": "Consider a following record in DataFrame IPL. Create above DataFrame in python and write python code for following:\na) Retrieve first 2 rows\nb) Retrieve last 3 rows\nc) Check null values present in DataFrame\nd) Replace null value with mean of that column\ne) Find most expensive player\nf) Print total players per team",
+    "code": "import pandas as pd\nimport numpy as np\n\ndata = {\n    \"Player\":[\"Hardik\",\"Rahul\",\"Russel\",\"Bumrah\",\"Kohli\",\"Rohit\"],\n    \"Team\":[\"MI\",\"KXIP\",\"KKR\",\"MI\",\"RCB\",\"MI\"],\n    \"BidPrice\":[13,12,np.nan,10,17,np.nan],\n    \"Runs\":[1000,2400,900,200,3600,3700]\n}\n\ndf = pd.DataFrame(data)\n\nprint(df.head(2))\nprint(df.tail(3))\n\nprint(df.isnull())\n\ndf[\"BidPrice\"].fillna(df[\"BidPrice\"].mean(), inplace=True)\n\nprint(df.loc[df[\"BidPrice\"].idxmax()])\nprint(df[\"Team\"].value_counts())",
+    "language": "python"
+  },
+  {
+    "id": "node-6e2ee4e6-661272",
+    "parentId": "node-4f5b8c81-e0737e",
+    "type": "question",
+    "name": "Q2 (OPTION 2)",
+    "content": "Write a Python program to demonstrate a user-defined exception that checks whether the entered marks are between 0 and 100. Display an appropriate message for invalid input and out-of-range values. Also display Grade of marks.",
+    "code": "class InvalidMarks(Exception):\n    pass\n\ntry:\n    marks = int(input(\"Enter marks: \"))\n\n    if marks < 0 or marks > 100:\n        raise InvalidMarks\n\n    if marks >= 75:\n        print(\"Distinction\")\n    elif marks >= 50:\n        print(\"Pass\")\n    else:\n        print(\"Fail\")\n\nexcept InvalidMarks:\n    print(\"Marks should be between 0 and 100\")",
+    "language": "python"
+  },
+  {
+    "id": "node-95fdb7e8-155e9b",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 3"
   },
   {
-    "id": "node-mn0n9fik-7bhe44",
+    "id": "node-d0641f54-62185b",
+    "parentId": "node-95fdb7e8-155e9b",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a Python program that accepts value of m and n. Divides m by n and handles a ZeroDivisionError if the user tries to divide by zero.",
+    "code": "try:\n    m = int(input(\"Enter m: \"))\n    n = int(input(\"Enter n: \"))\n    print(\"Result:\", m/n)\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero\")",
+    "language": "python"
+  },
+  {
+    "id": "node-1a75928d-9659f7",
+    "parentId": "node-95fdb7e8-155e9b",
+    "type": "question",
+    "name": "Q2 (OPTION 1)",
+    "content": "Write a python program to create a module containing factorial function, power dictionary and list of vowels. Save this as variables.py. Import variables module to print the factorial of n, print the power of n, and second alphabet from the vowels list. (Accept n from user)",
+    "code": "# variables.py\ndef factorial(n):\n    f=1\n    for i in range(1,n+1):\n        f*=i\n    return f\n\npower = {2:4, 3:9}\nvowels = ['a','e','i','o','u']\nimport variables\n\nn = int(input(\"Enter n: \"))\n\nprint(\"Factorial:\", variables.factorial(n))\nprint(\"Power:\", variables.power.get(n))\nprint(\"Second vowel:\", variables.vowels[1])",
+    "language": "python"
+  },
+  {
+    "id": "node-f4394c9b-5b5dff",
+    "parentId": "node-95fdb7e8-155e9b",
+    "type": "question",
+    "name": "Q2 (OPTION 2)",
+    "content": "Write a python program to accept a file name from user. If file exist display contents of file and number of characters, words and lines in a file, otherwise display appropriate message.",
+    "code": "import os\n\nfile = input(\"Enter filename: \")\n\nif os.path.exists(file):\n    with open(file,\"r\") as f:\n        data = f.read()\n        print(data)\n\n        print(\"Characters:\", len(data))\n        print(\"Words:\", len(data.split()))\n        print(\"Lines:\", len(data.split(\"\\n\")))\nelse:\n    print(\"File not found\")",
+    "language": "python"
+  },
+  {
+    "id": "node-54256ee4-467597",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 4"
   },
   {
-    "id": "node-mn0n9oc6-731xwx",
+    "id": "node-1db08744-0659af",
+    "parentId": "node-54256ee4-467597",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a Python program to create a list of elements. Shuffle the elements of a given list and display the list.",
+    "code": "import random\n\nlst = [1,2,3,4,5]\nrandom.shuffle(lst)\n\nprint(\"Shuffled List:\", lst)",
+    "language": "python"
+  },
+  {
+    "id": "node-c888de2d-5c2160",
+    "parentId": "node-54256ee4-467597",
+    "type": "question",
+    "name": "Q2 (OPTION 1)",
+    "content": "Create a following DataFrame named as \u201cdata\u201d. Write the python code for the following commands:\na) Find all rows with the label \u201cPencil\u201d. Extract all columns\nb) Change the Eraser count as 25 instead of 20\nc) List only the columns Company and Price\nd) List only rows with labels \u2018Pencil\u2019 and \u2018Pen\u2019\ne) Rename column Count to Quantity",
+    "code": "import pandas as pd\n\ndata = {\n    \"Type\":[\"Pencil\",\"Pencil\",\"Pen\",\"Pen\",\"Eraser\"],\n    \"Company\":[\"Apsara\",\"Natraj\",\"Cello\",\"Parkar\",\"Apsara\"],\n    \"Count\":[15,20,25,35,20],\n    \"Price\":[250,200,600,900,300]\n}\n\ndf = pd.DataFrame(data)\n\nprint(df[df[\"Type\"]==\"Pencil\"])\n\ndf.loc[df[\"Type\"]==\"Eraser\",\"Count\"] = 25\n\nprint(df[[\"Company\",\"Price\"]])\n\nprint(df[df[\"Type\"].isin([\"Pencil\",\"Pen\"])])\n\ndf.rename(columns={\"Count\":\"Quantity\"}, inplace=True)\nprint(df)",
+    "language": "python"
+  },
+  {
+    "id": "node-0e362320-b9c548",
+    "parentId": "node-54256ee4-467597",
+    "type": "question",
+    "name": "Q2 (OPTION 2)",
+    "content": "Write a python program to create a file which stores the first name, middle name and last name of your 5 friends. Display contents of file. Append names of two more friends and display updated contents.",
+    "code": "# create file\nwith open(\"friends.txt\",\"w\") as f:\n    f.write(\"A B C\\nD E F\\nG H I\\nJ K L\\nM N O\\n\")\n\n# display\nwith open(\"friends.txt\",\"r\") as f:\n    print(f.read())\n\n# append\nwith open(\"friends.txt\",\"a\") as f:\n    f.write(\"P Q R\\nS T U\\n\")\n\n# display again\nwith open(\"friends.txt\",\"r\") as f:\n    print(f.read())",
+    "language": "python"
+  },
+  {
+    "id": "node-cdd2a5e6-100232",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 5"
   },
   {
-    "id": "node-mn0n9tbj-ajun3q",
+    "id": "node-13ad634b-801709",
+    "parentId": "node-cdd2a5e6-100232",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a python program to accept a string and display all words which do not contain any vowels.",
+    "code": "s = input(\"Enter string: \")\n\nwords = s.split()\n\nresult = [w for w in words if not any(v in w.lower() for v in \"aeiou\")]\n\nprint(\"Words:\", result)",
+    "language": "python"
+  },
+  {
+    "id": "node-f1474937-a4ef6f",
+    "parentId": "node-cdd2a5e6-100232",
+    "type": "question",
+    "name": "Q2 (OPTION 1)",
+    "content": "Create a package banking with modules account.py and loan.py.\na) account.py \u2192 open_account(name)\nb) loan.py \u2192 apply_loan(amount)\nWrite a python program to import and demonstrate both functions.",
+    "code": "# account.py\ndef open_account(name):\n    print(\"Account created for\", name)\n\n# loan.py\ndef apply_loan(amount):\n    print(\"Loan approved:\", amount)\nfrom banking import account, loan\n\naccount.open_account(\"Anant\")\nloan.apply_loan(50000)",
+    "language": "python"
+  },
+  {
+    "id": "node-4151d852-7782e0",
+    "parentId": "node-cdd2a5e6-100232",
+    "type": "question",
+    "name": "Q2 (OPTION 2)",
+    "content": "Write a python program to generate list of prime numbers between m and n using list comprehension.",
+    "code": "m = int(input())\nn = int(input())\n\nprimes = [x for x in range(m,n+1) if x>1 and all(x%i!=0 for i in range(2,x))]\n\nprint(primes)",
+    "language": "python"
+  },
+  {
+    "id": "node-cc78b72d-e38016",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 6"
   },
   {
-    "id": "node-mn0nc7tf-3pdju4",
+    "id": "node-dfe55253-8a0375",
+    "parentId": "node-cc78b72d-e38016",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a python program that accepts two inputs from user and checks if both inputs are numerical values. If not, raise and handle TypeError.",
+    "code": "try:\n    a = input()\n    b = input()\n\n    if not a.isdigit() or not b.isdigit():\n        raise TypeError\n\n    print(int(a) + int(b))\n\nexcept TypeError:\n    print(\"Invalid input\")",
+    "language": "python"
+  },
+  {
+    "id": "node-de845844-733571",
+    "parentId": "node-cc78b72d-e38016",
+    "type": "question",
+    "name": "Q2 (OPTION 1)",
+    "content": "Create DataFrame and delete column Count.",
+    "code": "import pandas as pd\n\ndata = {\n    \"Type\":[\"Pencil\",\"Pencil\",\"Pen\",\"Pen\",\"Eraser\"],\n    \"Company\":[\"Apsara\",\"Natraj\",\"Cello\",\"Parkar\",\"Apsara\"],\n    \"Count\":[15,20,25,35,20],\n    \"Price\":[250,200,600,900,300]\n}\n\ndf = pd.DataFrame(data)\n\ndf.drop(\"Count\", axis=1, inplace=True)\n\nprint(df)",
+    "language": "python"
+  },
+  {
+    "id": "node-961c4940-c246e6",
+    "parentId": "node-cc78b72d-e38016",
+    "type": "question",
+    "name": "Q2 (OPTION 2)",
+    "content": "Create a personal portfolio web page using Flask.",
+    "code": "from flask import Flask\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef home():\n    return \"\"\"\n    <h1 align='center'>Your Name</h1>\n    <p>Qualification: BSc CS</p>\n    <marquee>Special Skills</marquee>\n    \"\"\"\n\napp.run()",
+    "language": "python"
+  },
+  {
+    "id": "node-9c9d5c2f-8dd223",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 7"
   },
   {
-    "id": "node-mn0nddcz-ntwwtr",
+    "id": "node-92db578c-f40f1e",
+    "parentId": "node-9c9d5c2f-8dd223",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a python program using regular expression to extract capital words and remove special characters.",
+    "code": "import re\n\ns = input()\n\nwords = re.findall(r'\\b[A-Z][a-z]*\\b', s)\n\nclean = re.sub(r'[^a-zA-Z ]','', s)\n\nprint(\"Capital words:\", words)\nprint(\"Clean:\", clean)",
+    "language": "python"
+  },
+  {
+    "id": "node-ffbadab6-2ceddb",
+    "parentId": "node-9c9d5c2f-8dd223",
+    "type": "question",
+    "name": "Q2 (OPTION 1)",
+    "content": "Create a Flask web page for library:\na) Library name\nb) Table of books\nc) Quote in blue and bold",
+    "code": "from flask import Flask\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef home():\n    return \"\"\"\n    <h1>Library</h1>\n    <table border=1>\n    <tr><th>Title</th><th>Author</th></tr>\n    <tr><td>Python</td><td>ABC</td></tr>\n    </table>\n    <b style='color:blue'>Reading is knowledge</b>\n    \"\"\"\n\napp.run()",
+    "language": "python"
+  },
+  {
+    "id": "node-71a6ccbc-db21ca",
+    "parentId": "node-9c9d5c2f-8dd223",
+    "type": "question",
+    "name": "Q2 (OPTION 2)",
+    "content": "Copy contents of one file to another and display number of lines, words, characters.",
+    "code": "import os\n\nf1 = input(\"Enter file1: \")\nf2 = input(\"Enter file2: \")\n\nif os.path.exists(f1):\n    with open(f1) as a, open(f2,\"w\") as b:\n        data = a.read()\n        b.write(data)\n\n    print(\"Lines:\", len(data.split(\"\\n\")))\n    print(\"Words:\", len(data.split()))\n    print(\"Chars:\", len(data))\nelse:\n    print(\"File not found\")",
+    "language": "python"
+  },
+  {
+    "id": "node-198cc87c-d230f0",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 8"
   },
   {
-    "id": "node-mn0ndhzf-tddbl7",
+    "id": "node-0a04818d-c9c09b",
+    "parentId": "node-198cc87c-d230f0",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a python program to accept radius and calculate area of circle using function (\u03c0 = 3.14).",
+    "code": "def area(r):\n    return 3.14*r*r\n\nr = float(input(\"Enter radius: \"))\nprint(\"Area:\", area(r))",
+    "language": "python"
+  },
+  {
+    "id": "node-eb83b522-3f1c33",
+    "parentId": "node-198cc87c-d230f0",
+    "type": "question",
+    "name": "Q2 (OPTION 1)",
+    "content": "Create list, string and tuple. Display unique random elements using random module.",
+    "code": "import random\n\nlst = [1,2,3,4,5]\ns = \"HELLO\"\nt = (10,20,30,40)\n\nprint(random.sample(lst,2))\nprint(random.sample(s,2))\nprint(random.sample(t,2))",
+    "language": "python"
+  },
+  {
+    "id": "node-0bfc8e8e-fe1c7e",
+    "parentId": "node-198cc87c-d230f0",
+    "type": "question",
+    "name": "Q2 (OPTION 2)",
+    "content": "Create Flask web page showing college name, courses and image.",
+    "code": "from flask import Flask\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef home():\n    return \"\"\"\n    <h1 align='center'>My College</h1>\n    <ul>\n    <li>BSc CS</li>\n    <li>BBA</li>\n    </ul>\n    <img src='college.jpg' width=200>\n    \"\"\"\n\napp.run()",
+    "language": "python"
+  },
+  {
+    "id": "node-8098d5b8-edcb34",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 9"
   },
   {
-    "id": "node-mn0ndlbx-ynm28d",
+    "id": "node-08171d19-58cfcb",
+    "parentId": "node-8098d5b8-edcb34",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a python program to accept a value of n and create a generator that yields even numbers up to n.",
+    "code": "def even_gen(n):\n    for i in range(0, n+1):\n        if i % 2 == 0:\n            yield i\n\nn = int(input(\"Enter n: \"))\n\nfor i in even_gen(n):\n    print(i)",
+    "language": "python"
+  },
+  {
+    "id": "node-67b54897-f6eb6e",
+    "parentId": "node-8098d5b8-edcb34",
+    "type": "question",
+    "name": "Q2 (OPTION 1)",
+    "content": "Create DataFrames Student1 and Student2 and perform:\na) Display contents\nb) Join both DataFrames\nc) Display third DataFrame",
+    "code": "import pandas as pd\n\ndf1 = pd.DataFrame({\n    \"ID\":[\"S1\",\"S2\",\"S3\",\"S4\",\"S5\"],\n    \"Name\":[\"Anita\",\"Sakshi\",\"Om\",\"Raj\",\"Kanika\"],\n    \"Age\":[18,23,20,21,20]\n})\n\ndf2 = pd.DataFrame({\n    \"ID\":[\"S2\",\"S4\",\"S5\",\"S6\",\"S7\"],\n    \"City\":[\"Pune\",\"Nashik\",\"Mumbai\",\"Delhi\",\"Nanded\"],\n    \"Marks\":[97,78,86,66,54]\n})\n\nprint(df1)\nprint(df2)\n\ndf3 = pd.merge(df1, df2, on=\"ID\")\n\nprint(df3)",
+    "language": "python"
+  },
+  {
+    "id": "node-1ab54e81-615386",
+    "parentId": "node-8098d5b8-edcb34",
+    "type": "question",
+    "name": "Q2 (OPTION 2)",
+    "content": "Write a python program using user defined function:\na) Check number is Armstrong or not\nb) Find sum of digits till single digit",
+    "code": "def armstrong(n):\n    return sum(int(d)**len(str(n)) for d in str(n)) == n\n\ndef single_digit(n):\n    while n > 9:\n        n = sum(int(d) for d in str(n))\n    return n\n\nnum = int(input(\"Enter number: \"))\n\nprint(\"Armstrong:\", armstrong(num))\nprint(\"Single digit:\", single_digit(num))",
+    "language": "python"
+  },
+  {
+    "id": "node-607ddf84-d95e54",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 10"
   },
   {
-    "id": "node-f6f2cedb-b18",
-    "parentId": "node-mn0n95qp-yo8c3y",
+    "id": "node-2084acd4-dca30b",
+    "parentId": "node-607ddf84-d95e54",
     "type": "question",
-    "name": "Create a dictionary of mobile names and prices, convert into DataFrame and display contents",
-    "content": "First, create a dictionary where keys are mobile names and values are prices.\nThen convert this dictionary into a DataFrame using pandas.\nFinally, display the DataFrame.",
-    "code": "import pandas as pd\n\n# Dictionary\nmobiles = {\n    \"Samsung\": 20000,\n    \"iPhone\": 80000,\n    \"Redmi\": 15000,\n    \"OnePlus\": 30000\n}\n\n# Create DataFrame\ndf = pd.DataFrame(list(mobiles.items()), columns=[\"Mobile\", \"Price\"])\n\n# Display\nprint(df)",
+    "name": "Q1",
+    "content": "Write a python program to create a DataFrame from list of 10 integer values. Display contents and calculate sum, mean, median, mode and standard deviation.",
+    "code": "import pandas as pd\n\ndata = [10,20,30,40,50,60,70,80,90,100]\n\ndf = pd.DataFrame(data, columns=[\"Values\"])\n\nprint(df)\n\nprint(\"Sum:\", df.sum())\nprint(\"Mean:\", df.mean())\nprint(\"Median:\", df.median())\nprint(\"Mode:\", df.mode())\nprint(\"Std:\", df.std())",
     "language": "python"
   },
   {
-    "id": "node-f6d6da54-303",
-    "parentId": "node-mn0n95qp-yo8c3y",
+    "id": "node-f93ac1a7-e81740",
+    "parentId": "node-607ddf84-d95e54",
     "type": "question",
-    "name": "Create package vehicle with subpackages and display available models",
-    "answers": [
-      {
-        "content": "Create a package vehicle\nInside it, create subpackage types\nInside types, create modules cars.py and bikes.py\nEach module has a function available_models() returning list\nImport and display models",
-        "code": "\"\"\"\ud83d\udcc1 Structure:\n\nvehicle/\n \u2514\u2500\u2500 types/\n      \u251c\u2500\u2500 cars.py\n      \u2514\u2500\u2500 bikes.py\n\"\"\"\n#cars.py\n\ndef available_models():\n    return [\"Swift\", \"i20\", \"Baleno\"]\n\n#bikes.py\n\ndef available_models():\n    return [\"Pulsar\", \"Activa\", \"Royal Enfield\"]\n\n#main.py\n\nfrom vehicle.types import cars, bikes\n\nprint(\"Car Models:\", cars.available_models())\nprint(\"Bike Models:\", bikes.available_models())",
-        "language": "python"
-      }
-    ]
-  },
-  {
-    "id": "node-e6c6d5f5-678",
-    "parentId": "node-mn0n95qp-yo8c3y",
-    "type": "question",
-    "name": "List all files in directory, count .py files and display content of one file",
-    "content": "Use os module to list files\nCount .py files\nOpen and display content of one .py file",
-    "code": "import os\n\nfiles = os.listdir()\n\n# Display all files\nprint(\"Files:\", files)\n\n# Count .py files\npy_files = [f for f in files if f.endswith(\".py\")]\nprint(\"Total .py files:\", len(py_files))\n\n# Display content of first .py file\nif py_files:\n    with open(py_files[0], \"r\") as f:\n        print(\"\\nContent of\", py_files[0])\n        print(f.read())",
+    "name": "Q2 (OPTION 1)",
+    "content": "Create package finance_tools with modules interest.py and currency.py and demonstrate both functions.",
+    "code": "# interest.py\ndef cal_interest(amount, year):\n    return amount * 0.05 * year\n\n# currency.py\ndef convert(amount):\n    return amount * 0.012\nfrom finance_tools import interest, currency\n\namt = float(input(\"Enter amount: \"))\nyear = int(input(\"Enter years: \"))\n\nprint(\"Interest:\", interest.cal_interest(amt, year))\nprint(\"USD:\", currency.convert(amt))",
     "language": "python"
   },
   {
-    "id": "node-00e3b7f0-d28",
-    "parentId": "node-mn0n9901-avbfut",
+    "id": "node-0f20bb29-5e12f1",
+    "parentId": "node-607ddf84-d95e54",
     "type": "question",
-    "name": "Count vowels, consonants, and special symbols from a string",
-    "content": "Take input string from user\nLoop through each character\nCheck:\nVowels \u2192 a, e, i, o, u\nConsonants \u2192 alphabets except vowels\nSpecial symbols \u2192 others",
-    "code": "s = input(\"Enter string: \")\n\nvowels = consonants = special = 0\n\nfor ch in s:\n    if ch.isalpha():\n        if ch.lower() in \"aeiou\":\n            vowels += 1\n        else:\n            consonants += 1\n    else:\n        special += 1\n\nprint(\"Vowels:\", vowels)\nprint(\"Consonants:\", consonants)\nprint(\"Special symbols:\", special)",
+    "name": "Q2 (OPTION 2)",
+    "content": "Write a Python program to create a class that acts as an iterator and generates factorial series up to n.",
+    "code": "class Factorial:\n    def __init__(self, n):\n        self.n = n\n        self.i = 1\n        self.fact = 1\n\n    def __iter__(self):\n        return self\n\n    def __next__(self):\n        if self.i > self.n:\n            raise StopIteration\n        self.fact *= self.i\n        self.i += 1\n        return self.fact\n\nn = int(input(\"Enter n: \"))\n\nfor i in Factorial(n):\n    print(i)",
     "language": "python"
   },
   {
-    "id": "node-6d7fe594-bc1",
-    "parentId": "node-mn0n9901-avbfut",
+    "id": "node-acd5d3f0-1d7278",
+    "parentId": "node-mn0n8wdh-hyhbnn",
+    "type": "folder",
+    "name": "Slip 11"
+  },
+  {
+    "id": "node-73b6d1d0-8d2a7c",
+    "parentId": "node-acd5d3f0-1d7278",
     "type": "question",
-    "name": "Perform operations on IPL DataFrame",
-    "content": "Create DataFrame\nPerform operations: head, tail, null check, replace null, etc",
-    "code": "import pandas as pd\nimport numpy as np\n\ndata = {\n    \"Player\": [\"Hardik\", \"Rahul\", \"Russel\", \"Bumrah\", \"Kohli\", \"Rohit\"],\n    \"Team\": [\"MI\", \"KXIP\", \"KKR\", \"MI\", \"RCB\", \"MI\"],\n    \"Category\": [\"Batsman\", \"Batsman\", \"Batsman\", \"Bowler\", \"Batsman\", \"Batsman\"],\n    \"BidPrice\": [13, 12, np.nan, 10, 17, np.nan],\n    \"Runs\": [1000, 2400, 900, 200, 3600, 3700]\n}\n\ndf = pd.DataFrame(data)\n\n# a\nprint(df.head(2))\n\n# b\nprint(df.tail(3))\n\n# c\nprint(df.isnull())\n\n# d\ndf[\"BidPrice\"].fillna(df[\"BidPrice\"].mean(), inplace=True)\n\n# e\nprint(df.loc[df[\"BidPrice\"].idxmax()])\n\n# f\nprint(df[\"Team\"].value_counts())",
+    "name": "Q1",
+    "content": "Write a python program to generate even numbers using generator.",
+    "code": "def gen(n):\n    for i in range(2, n+1, 2):\n        yield i\n\nfor i in gen(int(input())):\n    print(i)",
     "language": "python"
   },
   {
-    "id": "node-eb477ba8-294",
-    "parentId": "node-mn0n9901-avbfut",
+    "id": "node-cfd35d7b-948afd",
+    "parentId": "node-acd5d3f0-1d7278",
     "type": "question",
-    "name": "User-defined exception for marks validation with grade",
-    "content": "Check marks range (0\u2013100)\nRaise exception if invalid\nAssign grade",
-    "code": "def check_marks(m):\n    if m < 0 or m > 100:\n        raise Exception(\"Invalid Marks\")\n\ntry:\n    marks = int(input(\"Enter marks: \"))\n    check_marks(marks)\n\n    if marks >= 75:\n        print(\"Grade A\")\n    elif marks >= 60:\n        print(\"Grade B\")\n    elif marks >= 40:\n        print(\"Grade C\")\n    else:\n        print(\"Fail\")\n\nexcept Exception as e:\n    print(e)",
+    "name": "Q2 (OPTION 1)",
+    "content": "Merge two DataFrames using common column ID.",
+    "code": "import pandas as pd\n\ndf1 = pd.DataFrame({\"ID\":[\"S1\",\"S2\"], \"Name\":[\"A\",\"B\"]})\ndf2 = pd.DataFrame({\"ID\":[\"S2\",\"S3\"], \"Marks\":[90,80]})\n\nprint(pd.merge(df1, df2, on=\"ID\"))",
     "language": "python"
   },
   {
-    "id": "node-bf6b3730-244",
-    "parentId": "node-mn0n9901-avbfut",
+    "id": "node-c20ea37d-e358f1",
+    "parentId": "node-acd5d3f0-1d7278",
     "type": "question",
-    "name": "Viva Questions \u2013 Slip 2",
-    "content": "What is NaN? \u2192 Missing value\nWhat is fillna()? \u2192 Replace null values\nWhat is value_counts()? \u2192 Count occurrences\nWhat is exception? \u2192 Error handling mechanism",
-    "language": "plaintext"
-  },
-  {
-    "id": "node-da1cd5a7-6ae",
-    "parentId": "node-mn0n9csn-mertih",
-    "type": "question",
-    "name": "Shuffle elements of a list",
-    "content": "Create list\nUse random.shuffle() to shuffle",
-    "code": "import random\n\nlst = [1, 2, 3, 4, 5]\nrandom.shuffle(lst)\n\nprint(\"Shuffled list:\", lst)",
+    "name": "Q2 (OPTION 2)",
+    "content": "Check Armstrong number and reduce to single digit.",
+    "code": "def armstrong(n):\n    return sum(int(d)**len(str(n)) for d in str(n)) == n\n\ndef single_digit(n):\n    while n > 9:\n        n = sum(int(d) for d in str(n))\n    return n\n\nnum = int(input(\"Enter number: \"))\n\nprint(\"Armstrong:\", armstrong(num))\nprint(\"Single digit:\", single_digit(num))",
     "language": "python"
   },
   {
-    "id": "node-0f6444af-e76",
-    "parentId": "node-mn0n9csn-mertih",
-    "type": "question",
-    "name": "Perform operations on product DataFrame",
-    "content": "Filter rows\nModify values\nSelect columns",
-    "code": "import pandas as pd\n\ndata = {\n    \"Company\": [\"Apsara\", \"Natraj\", \"Cello\", \"Parkar\", \"Apsara\"],\n    \"Type\": [\"Pencil\", \"Pencil\", \"Pen\", \"Eraser\", \"Pen\"],\n    \"Count\": [15, 20, 25, 20, 20],\n    \"Price\": [250, 200, 600, 900, 300]\n}\n\ndf = pd.DataFrame(data)\n\n# a\nprint(df[df[\"Type\"] == \"Pencil\"])\n\n# b\ndf.loc[df[\"Type\"] == \"Eraser\", \"Count\"] = 25\n\n# c\nprint(df[[\"Company\", \"Price\"]])\n\n# d\nprint(df[df[\"Type\"].isin([\"Pencil\", \"Pen\"])])\n\n# e\ndf.rename(columns={\"Count\": \"Quantity\"}, inplace=True)\nprint(df)",
-    "language": "python"
-  },
-  {
-    "id": "node-1ad14e1e-ea2",
-    "parentId": "node-mn0n9csn-mertih",
-    "type": "question",
-    "name": "Create file, display, append and show updated content",
-    "content": "Write names to file\nRead file\nAppend new data",
-    "code": "# create file\nwith open(\"friends.txt\", \"w\") as f:\n    f.write(\"A B C\\nD E F\\n\")\n\n# read\nwith open(\"friends.txt\", \"r\") as f:\n    print(f.read())\n\n# append\nwith open(\"friends.txt\", \"a\") as f:\n    f.write(\"G H I\\n\")\n\n# display again\nwith open(\"friends.txt\", \"r\") as f:\n    print(f.read())",
-    "language": "python"
-  },
-  {
-    "id": "node-76f08211-d20",
-    "parentId": "node-mn0n9csn-mertih",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 3",
-    "content": "What is shuffle()? \u2192 Random reorder\nWhat is file mode 'w'? \u2192 Write mode\nWhat is append mode? \u2192 Add data without deleting",
-    "language": "python"
-  },
-  {
-    "id": "node-8f4a7724-953",
-    "parentId": "node-mn0n9fik-7bhe44",
-    "type": "question",
-    "name": "Find words without vowels",
-    "content": "Split string into words\nCheck if word has no vowels",
-    "code": "s = input(\"Enter string: \")\n\nwords = s.split()\n\nresult = [w for w in words if not any(v in w.lower() for v in \"aeiou\")]\n\nprint(\"Words without vowels:\", result)",
-    "language": "python"
-  },
-  {
-    "id": "node-b87c95fe-c59",
-    "parentId": "node-mn0n9fik-7bhe44",
-    "type": "question",
-    "name": "Create banking package with account and loan modules",
-    "content": "Create package banking\nCreate modules\nImport and use functions",
-    "answers": [
-      {
-        "content": "**account.py**",
-        "code": "def open_account(name):\n    print(f\"Account created for {name}\")",
-        "language": "python"
-      },
-      {
-        "content": "**loan.py**",
-        "code": "def apply_loan(amount):\n    print(f\"Loan approved: {amount}\")",
-        "language": "python"
-      },
-      {
-        "content": "**main.py**",
-        "code": "from banking import account, loan\n\naccount.open_account(\"Anant\")\nloan.apply_loan(50000)",
-        "language": "python"
-      }
-    ]
-  },
-  {
-    "id": "node-98e6fc47-5d6",
-    "parentId": "node-mn0n9fik-7bhe44",
-    "type": "question",
-    "name": "Generate prime numbers using list comprehension",
-    "content": "Accept range m, n\nUse list comprehension",
-    "code": "m = int(input(\"Enter m: \"))\nn = int(input(\"Enter n: \"))\n\nprimes = [x for x in range(m, n+1) if x > 1 and all(x % i != 0 for i in range(2, x))]\n\nprint(\"Primes:\", primes)",
-    "language": "python"
-  },
-  {
-    "id": "node-5e4b4822-05f",
-    "parentId": "node-mn0n9fik-7bhe44",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 4",
-    "content": "What is package? \u2192 Collection of modules\nWhat is list comprehension? \u2192 Compact list creation\nWhat is prime number? \u2192 Divisible by 1 and itself",
-    "language": "python"
-  },
-  {
-    "id": "node-364021fc-ee7",
-    "parentId": "node-mn0n9oc6-731xwx",
-    "type": "question",
-    "name": "Handle TypeError if inputs are not numerical",
-    "content": "Take two inputs from user\nConvert to numbers\nCheck type using function\nRaise TypeError if invalid",
-    "code": "def check_numbers(a, b):\n    if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):\n        raise TypeError(\"Inputs must be numerical\")\n\ntry:\n    num1 = input(\"Enter first number: \")\n    num2 = input(\"Enter second number: \")\n\n    num1 = float(num1)\n    num2 = float(num2)\n\n    check_numbers(num1, num2)\n\n    print(\"Valid numbers:\", num1, num2)\n\nexcept ValueError:\n    print(\"Error: Invalid input! Enter numbers only.\")\nexcept TypeError as e:\n    print(e)",
-    "language": "python"
-  },
-  {
-    "id": "node-96f9ac52-a4e",
-    "parentId": "node-mn0n9oc6-731xwx",
-    "type": "question",
-    "name": "Perform operations on DataFrame (delete column)",
-    "content": "Create DataFrame\nFilter rows\nModify values\nDelete column",
-    "code": "import pandas as pd\n\ndata = {\n    \"Type\": [\"Pencil\", \"Pencil\", \"Pen\", \"Pen\", \"Eraser\"],\n    \"Company\": [\"Apsara\", \"Natraj\", \"Cello\", \"Parkar\", \"Apsara\"],\n    \"Count\": [15, 20, 25, 35, 20],\n    \"Price\": [250, 200, 600, 900, 300]\n}\n\ndf = pd.DataFrame(data)\n\n# a\nprint(df[df[\"Type\"] == \"Pencil\"])\n\n# b\ndf.loc[df[\"Type\"] == \"Eraser\", \"Count\"] = 25\n\n# c\nprint(df[[\"Company\", \"Price\"]])\n\n# d\nprint(df[df[\"Type\"].isin([\"Pencil\", \"Pen\"])])\n\n# e\ndf.drop(\"Count\", axis=1, inplace=True)\nprint(df)",
-    "language": "python"
-  },
-  {
-    "id": "node-4425d663-849",
-    "parentId": "node-mn0n9oc6-731xwx",
-    "type": "question",
-    "name": "Create personal portfolio webpage using Flask",
-    "content": "Use Flask framework\nDisplay name, qualification, and skills\nUse HTML template",
-    "answers": [
-      {
-        "content": "**app.py**",
-        "code": "from flask import Flask, render_template\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef home():\n    return render_template(\"portfolio.html\")\n\nif __name__ == \"__main__\":\n    app.run(debug=True)",
-        "language": "python"
-      },
-      {
-        "content": "**portfolio.html**",
-        "code": "<!DOCTYPE html>\n<html>\n<body>\n<h1 style=\"text-align:center;\">Anant Rai</h1>\n\n<h2>Qualification</h2>\n<ul>\n<li>BSc Computer Science</li>\n</ul>\n\n<marquee>Python | Web Development</marquee>\n\n</body>\n</html>",
-        "language": "html"
-      }
-    ]
-  },
-  {
-    "id": "node-b85ccd2a-e80",
-    "parentId": "node-mn0n9oc6-731xwx",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 5",
-    "content": "What is Flask? \u2192 Python web framework\nWhat is TypeError? \u2192 Wrong data type error\nWhat is DataFrame? \u2192 Table-like structure",
-    "language": "python"
-  },
-  {
-    "id": "node-d74550cc-f2c",
-    "parentId": "node-mn0n9tbj-ajun3q",
-    "type": "question",
-    "name": "Extract capital words and remove special characters",
-    "content": "Extract words starting with capital letter\nRemove special characters",
-    "code": "import re\n\ns = input(\"Enter string: \")\n\n# capital words\nwords = re.findall(r\"[A-Z][a-z]*\", s)\nprint(\"Capital words:\", words)\n\n# remove special characters\nclean = re.sub(r\"[^a-zA-Z0-9 ]\", \"\", s)\nprint(\"Clean string:\", clean)",
-    "language": "python"
-  },
-  {
-    "id": "node-908a6fd0-124",
-    "parentId": "node-mn0n9tbj-ajun3q",
-    "type": "question",
-    "name": "Create library webpage using Flask",
-    "content": "Display library name\nShow books in table\nAdd quote",
-    "answers": [
-      {
-        "content": "**app.py**",
-        "code": "from flask import Flask, render_template\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef home():\n    return render_template(\"library.html\")\n\nif __name__ == \"__main__\":\n    app.run(debug=True)",
-        "language": "python"
-      },
-      {
-        "content": "**library.html**",
-        "code": "<!DOCTYPE html>\n<html>\n<body>\n\n<h1 style=\"text-align:center;\">City Library</h1>\n\n<table border=\"1\">\n<tr><th>Title</th><th>Author</th></tr>\n<tr><td>Python</td><td>Zelle</td></tr>\n<tr><td>DBMS</td><td>Elmasri</td></tr>\n</table>\n\n<p style=\"color:blue;\"><b>Reading is to the mind what exercise is to the body.</b></p>\n\n</body>\n</html>",
-        "language": "html"
-      }
-    ]
-  },
-  {
-    "id": "node-32ec838a-493",
-    "parentId": "node-mn0n9tbj-ajun3q",
-    "type": "question",
-    "name": "Copy file content and count lines, words, characters",
-    "content": "Check file existence\nCopy content\nCount stats",
-    "code": "import os\n\nfile = input(\"Enter file name: \")\n\nif os.path.exists(file):\n    with open(file, \"r\") as f:\n        content = f.read()\n\n    with open(\"newfile.txt\", \"w\") as f2:\n        f2.write(content)\n\n    print(content)\n\n    print(\"Lines:\", content.count(\"\\n\") + 1)\n    print(\"Words:\", len(content.split()))\n    print(\"Characters:\", len(content))\nelse:\n    print(\"File not found\")",
-    "language": "python"
-  },
-  {
-    "id": "node-eacb096b-6dc",
-    "parentId": "node-mn0n9tbj-ajun3q",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 6",
-    "content": "What is regex? \u2192 Pattern matching\nWhat is re module? \u2192 Regex module\nWhat is Flask? \u2192 Web framework",
-    "language": "python"
-  },
-  {
-    "id": "node-6c119354-46d",
-    "parentId": "node-mn0nc7tf-3pdju4",
-    "type": "question",
-    "name": "Accept m and n and handle ZeroDivisionError",
-    "content": "Accept values\nDivide m/n\nHandle division by zero",
-    "code": "try:\n    m = int(input(\"Enter m: \"))\n    n = int(input(\"Enter n: \"))\n\n    result = m / n\n    print(\"Result:\", result)\n\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero\")",
-    "language": "python"
-  },
-  {
-    "id": "node-2ef3b4c1-d52",
-    "parentId": "node-mn0nc7tf-3pdju4",
-    "type": "question",
-    "name": "Create module with factorial, power and vowels list",
-    "content": "Create module\nImport and use functions",
-    "answers": [
-      {
-        "content": "**variables.py**",
-        "code": "def factorial(n):\n    f = 1\n    for i in range(1, n+1):\n        f *= i\n    return f\n\ndef power(n):\n    return n*n\n\nvowels = ['a', 'e', 'i', 'o', 'u']",
-        "language": "python"
-      },
-      {
-        "content": "**main.py**",
-        "code": "import variables\n\nn = int(input(\"Enter n: \"))\n\nprint(\"Factorial:\", variables.factorial(n))\nprint(\"Power:\", variables.power(n))\nprint(\"Second vowel:\", variables.vowels[1])",
-        "language": "python"
-      }
-    ]
-  },
-  {
-    "id": "node-41cd400b-14f",
-    "parentId": "node-mn0nc7tf-3pdju4",
-    "type": "question",
-    "name": "Display file content with lines, words, characters",
-    "content": "Open file\nCount content",
-    "code": "import os\n\nfile = input(\"Enter file name: \")\n\nif os.path.exists(file):\n    with open(file, \"r\") as f:\n        content = f.read()\n\n    print(content)\n    print(\"Lines:\", content.count(\"\\n\") + 1)\n    print(\"Words:\", len(content.split()))\n    print(\"Characters:\", len(content))\nelse:\n    print(\"File not found\")",
-    "language": "python"
-  },
-  {
-    "id": "node-baec69b2-b26",
-    "parentId": "node-mn0nc7tf-3pdju4",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 7",
-    "content": "What is ZeroDivisionError? \u2192 Division by zero\nWhat is module? \u2192 Python file with functions\nWhat is import? \u2192 Use external code",
-    "language": "python"
-  },
-  {
-    "id": "node-9b3b7690-9b8",
-    "parentId": "node-mn0nddcz-ntwwtr",
-    "type": "question",
-    "name": "Calculate area of circle using function",
-    "content": "Accept radius from user\nCreate function to calculate area\nUse formula: \u03c0r\u00b2 (\u03c0 = 3.14)",
-    "code": "def area(radius):\n    return 3.14 * radius * radius\n\nr = float(input(\"Enter radius: \"))\nprint(\"Area of circle:\", area(r))",
-    "language": "python"
-  },
-  {
-    "id": "node-4e152589-e85",
-    "parentId": "node-mn0nddcz-ntwwtr",
-    "type": "question",
-    "name": "Apply random module on list, string and tuple",
-    "content": "Create list, string, tuple\nUse random.sample() for unique elements",
-    "code": "import random\n\nlst = [1, 2, 3, 4, 5]\nstring = \"PYTHON\"\ntup = (10, 20, 30, 40, 50)\n\nprint(\"Random from list:\", random.sample(lst, 3))\nprint(\"Random from string:\", random.sample(string, 3))\nprint(\"Random from tuple:\", random.sample(tup, 3))",
-    "language": "python"
-  },
-  {
-    "id": "node-2bd7f74f-baf",
-    "parentId": "node-mn0nddcz-ntwwtr",
-    "type": "question",
-    "name": "Create college webpage using Flask",
-    "content": "Display college name\nShow courses\nDisplay image",
-    "answers": [
-      {
-        "content": "**app.py**",
-        "code": "from flask import Flask, render_template\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef home():\n    courses = [\"BSc CS\", \"BBA\", \"BCom\"]\n    return render_template(\"college.html\", courses=courses)\n\nif __name__ == \"__main__\":\n    app.run(debug=True)",
-        "language": "python"
-      },
-      {
-        "content": "**college.html**",
-        "code": "<!DOCTYPE html>\n<html>\n<body>\n\n<h1 style=\"text-align:center;\">My College</h1>\n\n<ul>\n{% for c in courses %}\n<li>{{ c }}</li>\n{% endfor %}\n</ul>\n\n<img src=\"{{ url_for('static', filename='college.jpg') }}\" width=\"300\">\n\n</body>\n</html>",
-        "language": "html"
-      }
-    ]
-  },
-  {
-    "id": "node-63a69906-0b4",
-    "parentId": "node-mn0nddcz-ntwwtr",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 8",
-    "content": "What is function? \u2192 Block of reusable code\nWhat is random.sample()? \u2192 Select unique elements\nWhat is Flask? \u2192 Web framework",
-    "language": "python"
-  },
-  {
-    "id": "node-53f664fd-99e",
-    "parentId": "node-mn0ndhzf-tddbl7",
-    "type": "question",
-    "name": "DataFrame statistics (sum, mean, median, mode, std)",
-    "content": "Create DataFrame from list\nApply statistical functions",
-    "code": "import pandas as pd\n\ndata = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]\ndf = pd.DataFrame(data, columns=[\"Numbers\"])\n\nprint(df)\n\nprint(\"Sum:\", df.sum())\nprint(\"Mean:\", df.mean())\nprint(\"Median:\", df.median())\nprint(\"Mode:\", df.mode())\nprint(\"Std Dev:\", df.std())",
-    "language": "python"
-  },
-  {
-    "id": "node-2f82358a-b73",
-    "parentId": "node-mn0ndhzf-tddbl7",
-    "type": "question",
-    "name": "Create finance_tools package with interest and currency modules",
-    "content": "Create modules\nCalculate interest and currency conversion",
-    "answers": [
-      {
-        "content": "**interest.py**",
-        "code": "def cal_interest(amount, year):\n    rate = 0.05\n    return amount * rate * year",
-        "language": "python"
-      },
-      {
-        "content": "**currency.py**",
-        "code": "def convert(amount):\n    return amount * 0.012",
-        "language": "python"
-      },
-      {
-        "content": "**main.py**",
-        "code": "from finance_tools import interest, currency\n\namt = float(input(\"Enter amount: \"))\nyear = int(input(\"Enter years: \"))\n\nprint(\"Interest:\", interest.cal_interest(amt, year))\nprint(\"USD:\", currency.convert(amt))",
-        "language": "python"
-      }
-    ]
-  },
-  {
-    "id": "node-09915f13-78c",
-    "parentId": "node-mn0ndhzf-tddbl7",
-    "type": "question",
-    "name": "Create iterator class for factorial series",
-    "content": "Create class with iter and next\nGenerate factorial series",
-    "code": "class Factorial:\n    def __init__(self, n):\n        self.n = n\n        self.i = 1\n        self.fact = 1\n\n    def __iter__(self):\n        return self\n\n    def __next__(self):\n        if self.i > self.n:\n            raise StopIteration\n        self.fact *= self.i\n        self.i += 1\n        return self.fact\n\nn = int(input(\"Enter n: \"))\nfor f in Factorial(n):\n    print(f)",
-    "language": "python"
-  },
-  {
-    "id": "node-0f3dceaf-971",
-    "parentId": "node-mn0ndhzf-tddbl7",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 9",
-    "content": "What is mean? \u2192 Average\nWhat is mode? \u2192 Most frequent value\nWhat is iterator? \u2192 Object that can be iterated",
-    "language": "python"
-  },
-  {
-    "id": "node-2eb23d7f-3e0",
-    "parentId": "node-mn0ndlbx-ynm28d",
-    "type": "question",
-    "name": "Create DataFrame from CSV and display statistics",
-    "content": "Read CSV using pandas\nDisplay statistical info",
-    "code": "import pandas as pd\n\ndf = pd.read_csv(\"data.csv\")\n\nprint(df)\nprint(df.describe())",
-    "language": "python"
-  },
-  {
-    "id": "node-858fd7e5-8ed",
-    "parentId": "node-mn0ndlbx-ynm28d",
-    "type": "question",
-    "name": "Perform operations using time module",
-    "content": "Get local and UTC time\nUse ctime(), gmtime()\nParse and format date",
-    "code": "import time\n\n# current time\nprint(\"Local:\", time.ctime())\nprint(\"UTC:\", time.gmtime())\n\n# input datetime\ndt = input(\"Enter date (DD-MM-YYYY HH:MM:SS): \")\n\nparsed = time.strptime(dt, \"%d-%m-%Y %H:%M:%S\")\n\nprint(time.strftime(\"%Y/%m/%d\", parsed))\nprint(time.strftime(\"%H:%M:%S\", parsed))",
-    "language": "python"
-  },
-  {
-    "id": "node-d7975f16-01e",
-    "parentId": "node-mn0ndlbx-ynm28d",
-    "type": "question",
-    "name": "Random selection from list, string and tuple",
-    "content": "Use random.sample()",
-    "code": "import random\n\nlst = [1,2,3,4]\nstring = \"ABCDEF\"\ntup = (10,20,30,40)\n\nprint(random.sample(lst,2))\nprint(random.sample(string,2))\nprint(random.sample(tup,2))",
-    "language": "python"
-  },
-  {
-    "id": "node-4f776072-81b",
-    "parentId": "node-mn0ndlbx-ynm28d",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 10",
-    "content": "What is CSV? \u2192 Comma separated file\nWhat is describe()? \u2192 Statistical summary\nWhat is strptime()? \u2192 Parse date",
-    "language": "python"
-  },
-  {
-    "id": "node-9a3a37d5-5be",
+    "id": "node-85a21c3c-e196d3",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 12"
   },
   {
-    "id": "node-a91d94bb-956",
-    "parentId": "node-9a3a37d5-5be",
+    "id": "node-e1084ada-c6fa8e",
+    "parentId": "node-85a21c3c-e196d3",
     "type": "question",
-    "name": "Create CSV, DataFrame and display statistical information",
-    "content": "Create data.csv file with employee data\nRead using pandas\nDisplay DataFrame\nUse describe() for statistics",
-    "code": "import pandas as pd\n\n# Read CSV\ndf = pd.read_csv(\"data.csv\")\n\nprint(\"DataFrame:\")\nprint(df)\n\nprint(\"\\nStatistical Info:\")\nprint(df.describe())",
+    "name": "Q1",
+    "content": "Create CSV file and display DataFrame with statistical info.",
+    "code": "import pandas as pd\n\ndf = pd.read_csv(\"data.csv\")\n\nprint(df)\nprint(df.describe())",
     "language": "python"
   },
   {
-    "id": "node-ab2726d2-306",
-    "parentId": "node-9a3a37d5-5be",
+    "id": "node-e5c85b14-b9bb4c",
+    "parentId": "node-85a21c3c-e196d3",
     "type": "question",
-    "name": "Perform time operations using time module",
-    "content": "Get local and UTC time\nUse ctime() and gmtime()\nParse and format date",
-    "code": "import time\n\n# a & b\nprint(\"Local Time:\", time.ctime())\nprint(\"UTC Time:\", time.gmtime())\n\n# c\ndt = input(\"Enter date (DD-MM-YYYY HH:MM:SS): \")\n\n# d\nparsed = time.strptime(dt, \"%d-%m-%Y %H:%M:%S\")\n\nprint(\"Format 1:\", time.strftime(\"%d/%m/%Y\", parsed))\nprint(\"Format 2:\", time.strftime(\"%H:%M:%S\", parsed))",
+    "name": "Q2 (OPTION 1)",
+    "content": "Perform time module operations: ctime(), gmtime(), strptime(), strftime()",
+    "code": "import time\n\nprint(time.ctime())\nprint(time.gmtime())\n\ndt = input(\"Enter date (DD-MM-YYYY HH:MM:SS): \")\n\nparsed = time.strptime(dt, \"%d-%m-%Y %H:%M:%S\")\n\nprint(time.strftime(\"%d/%m/%Y\", parsed))\nprint(time.strftime(\"%H:%M:%S\", parsed))",
     "language": "python"
   },
   {
-    "id": "node-c2ae33fd-efa",
-    "parentId": "node-9a3a37d5-5be",
+    "id": "node-24e09e3f-6dc00a",
+    "parentId": "node-85a21c3c-e196d3",
     "type": "question",
-    "name": "Random elements from list, string and tuple",
-    "code": "import random\n\nlst = [1,2,3,4,5]\nstring = \"PYTHON\"\ntup = (10,20,30,40,50)\n\nprint(random.sample(lst,3))\nprint(random.sample(string,3))\nprint(random.sample(tup,3))",
+    "name": "Q2 (OPTION 2)",
+    "content": "Display random elements from list, string and tuple.",
+    "code": "import random\n\nprint(random.sample([1,2,3,4],2))\nprint(random.sample(\"HELLO\",2))\nprint(random.sample((10,20,30),2))",
     "language": "python"
   },
   {
-    "id": "node-571092c5-3b9",
-    "parentId": "node-9a3a37d5-5be",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 12",
-    "content": "describe() \u2192 statistical summary\nctime() \u2192 readable time\nstrptime() \u2192 parse date",
-    "language": "python"
-  },
-  {
-    "id": "node-70f0e80f-2c2",
+    "id": "node-fb876ac9-ff082e",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 13"
   },
   {
-    "id": "node-cb308e36-4db",
-    "parentId": "node-70f0e80f-2c2",
+    "id": "node-b11e2890-3b2f81",
+    "parentId": "node-fb876ac9-ff082e",
     "type": "question",
-    "name": "Convert time to readable format and UTC struct_time",
-    "code": "import time\n\nseconds = time.time()\n\nprint(\"Readable:\", time.ctime(seconds))\nprint(\"UTC:\", time.gmtime(seconds))",
+    "name": "Q1",
+    "content": "Convert current time into readable format and UTC struct_time.",
+    "code": "import time\n\nsec = time.time()\n\nprint(time.ctime(sec))\nprint(time.gmtime(sec))",
     "language": "python"
   },
   {
-    "id": "node-8ed3acd4-1fc",
-    "parentId": "node-70f0e80f-2c2",
+    "id": "node-305b1d73-87945d",
+    "parentId": "node-fb876ac9-ff082e",
     "type": "question",
-    "name": "File read using tell() and seek()",
-    "code": "import os\n\nfile = input(\"Enter file name: \")\n\nif os.path.exists(file):\n    with open(file, \"r\") as f:\n        for line in f:\n            print(line.strip())\n            print(\"Pointer:\", f.tell())\n\n        f.seek(0)\n        print(\"\\nFile again:\\n\")\n        print(f.read())\nelse:\n    print(\"File not found\")",
+    "name": "Q2 (OPTION 1)",
+    "content": "Read file, display contents and pointer position using tell() and seek().",
+    "code": "import os\n\nfile = input()\n\nif os.path.exists(file):\n    with open(file) as f:\n        for line in f:\n            print(line.strip())\n            print(\"Pointer:\", f.tell())\n\n        f.seek(0)\n        print(f.read())\nelse:\n    print(\"File not found\")",
     "language": "python"
   },
   {
-    "id": "node-9537c072-721",
-    "parentId": "node-70f0e80f-2c2",
+    "id": "node-156d11cf-2de9f5",
+    "parentId": "node-fb876ac9-ff082e",
     "type": "question",
-    "name": "Join Student DataFrames",
-    "code": "import pandas as pd\n\ndf1 = pd.DataFrame({\n    \"ID\": [\"S1\",\"S2\",\"S3\",\"S4\",\"S5\"],\n    \"Name\": [\"Anita\",\"Sakshi\",\"Om\",\"Raj\",\"Kanika\"],\n    \"Age\": [18,23,20,21,20]\n})\n\ndf2 = pd.DataFrame({\n    \"ID\": [\"S2\",\"S4\",\"S5\",\"S6\",\"S7\"],\n    \"City\": [\"Pune\",\"Nashik\",\"Mumbai\",\"Delhi\",\"Nanded\"],\n    \"Marks\": [97,78,86,66,54]\n})\n\ndf3 = pd.merge(df1, df2, on=\"ID\")\n\nprint(df3)",
+    "name": "Q2 (OPTION 2)",
+    "content": "Join two DataFrames and display result.",
+    "code": "import pandas as pd\n\ndf1 = pd.DataFrame({\"ID\":[\"S1\",\"S2\"], \"Name\":[\"A\",\"B\"]})\ndf2 = pd.DataFrame({\"ID\":[\"S2\",\"S3\"], \"Marks\":[90,80]})\n\nprint(pd.merge(df1, df2, on=\"ID\"))",
     "language": "python"
   },
   {
-    "id": "node-05aa0fbc-1b4",
-    "parentId": "node-70f0e80f-2c2",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 13",
-    "content": "tell() \u2192 pointer position\nseek() \u2192 move pointer\nmerge() \u2192 join DataFrames",
-    "language": "python"
-  },
-  {
-    "id": "node-dacb48e3-51a",
+    "id": "node-efccbe12-44c0ff",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 14"
   },
   {
-    "id": "node-54391148-499",
-    "parentId": "node-dacb48e3-51a",
+    "id": "node-fe71012f-d357d2",
+    "parentId": "node-efccbe12-44c0ff",
     "type": "question",
-    "name": "Check substring at beginning using regex",
+    "name": "Q1",
+    "content": "Write a python program to accept a string and substring from user. Check if a particular substring is present at the beginning of the given string using RE module.",
     "code": "import re\n\ns = input(\"Enter string: \")\nsub = input(\"Enter substring: \")\n\nif re.match(sub, s):\n    print(\"Substring present at beginning\")\nelse:\n    print(\"Not present\")",
     "language": "python"
   },
   {
-    "id": "node-9d64cb86-1fd",
-    "parentId": "node-dacb48e3-51a",
+    "id": "node-4e2cb513-143c22",
+    "parentId": "node-efccbe12-44c0ff",
     "type": "question",
-    "name": "Move file pointer to given byte position",
+    "name": "Q2 (OPTION 1)",
+    "content": "Write a Python program to accept a file name and a byte position as input. If file exists open it in read mode, move the file pointer to given position and display content till end, otherwise display appropriate message.",
     "code": "import os\n\nfile = input(\"Enter file name: \")\npos = int(input(\"Enter position: \"))\n\nif os.path.exists(file):\n    with open(file, \"r\") as f:\n        f.seek(pos)\n        print(f.read())\nelse:\n    print(\"File not found\")",
     "language": "python"
   },
   {
-    "id": "node-be34581a-167",
-    "parentId": "node-dacb48e3-51a",
+    "id": "node-b8a5875f-30fe4d",
+    "parentId": "node-efccbe12-44c0ff",
     "type": "question",
-    "name": "Create module with factorial, power and vowels",
-    "answers": [
-      {
-        "content": "**variables.py**",
-        "code": "def factorial(n):\n    f = 1\n    for i in range(1, n+1):\n        f *= i\n    return f\n\ndef power(n):\n    return n*n\n\nvowels = ['a','e','i','o','u']",
-        "language": "python"
-      },
-      {
-        "content": "**main.py**",
-        "code": "import variables\n\nn = int(input(\"Enter n: \"))\n\nprint(\"Factorial:\", variables.factorial(n))\nprint(\"Power:\", variables.power(n))\nprint(\"Second vowel:\", variables.vowels[1])",
-        "language": "python"
-      }
-    ]
-  },
-  {
-    "id": "node-4517ee60-ee2",
-    "parentId": "node-dacb48e3-51a",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 14",
-    "content": "re.match() \u2192 match at beginning\nmodule \u2192 python file\nseek() \u2192 move pointer",
+    "name": "Q2 (OPTION 2)",
+    "content": "Create module variables.py containing factorial function, power dictionary and vowels list. Import and display factorial, power and second vowel.",
+    "code": "# variables.py\ndef factorial(n):\n    f=1\n    for i in range(1,n+1):\n        f*=i\n    return f\n\npower = {2:4,3:9}\nvowels = ['a','e','i','o','u']\nimport variables\n\nn = int(input())\n\nprint(variables.factorial(n))\nprint(variables.power.get(n))\nprint(variables.vowels[1])",
     "language": "python"
   },
   {
-    "id": "node-22a275b5-888",
+    "id": "node-053efadf-bcb6a9",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 15"
   },
   {
-    "id": "node-98f5df8f-7b0",
-    "parentId": "node-22a275b5-888",
+    "id": "node-38b02c6a-cb2964",
+    "parentId": "node-053efadf-bcb6a9",
     "type": "question",
-    "name": "Convert time and format string",
-    "code": "import time\n\nseconds = time.time()\n\nutc = time.gmtime(seconds)\nprint(\"UTC:\", utc)\n\nformatted = time.strftime(\"%Y-%m-%d %H:%M:%S\", utc)\nprint(\"Formatted:\", formatted)",
+    "name": "Q1",
+    "content": "Write a Python program to get current time and:\na) Convert seconds to struct_time (UTC)\nb) Convert struct_time to formatted string",
+    "code": "import time\n\nsec = time.time()\n\nutc = time.gmtime(sec)\nprint(\"UTC:\", utc)\n\nformatted = time.strftime(\"%Y-%m-%d %H:%M:%S\", utc)\nprint(\"Formatted:\", formatted)",
     "language": "python"
   },
   {
-    "id": "node-4108b0d6-c4d",
-    "parentId": "node-22a275b5-888",
+    "id": "node-5d95f906-e5d22f",
+    "parentId": "node-053efadf-bcb6a9",
     "type": "question",
-    "name": "Create library webpage using Flask",
-    "code": "from flask import Flask, render_template\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef home():\n    return render_template(\"library.html\")\n\napp.run(debug=True)\n<!DOCTYPE html>\n<html>\n<body>\n\n<h1 style=\"text-align:center;\">City Library</h1>\n\n<table border=\"1\">\n<tr><th>Title</th><th>Author</th></tr>\n<tr><td>Python</td><td>Zelle</td></tr>\n<tr><td>DBMS</td><td>Elmasri</td></tr>\n</table>\n\n<p style=\"color:blue;\"><b>Reading is to the mind what exercise is to the body.</b></p>\n\n</body>\n</html>",
+    "name": "Q2 (OPTION 1)",
+    "content": "Create a Flask web page for library:\na) Show library name\nb) Display books in table\nc) Show quote in blue bold",
+    "code": "from flask import Flask\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef home():\n    return \"\"\"\n    <h1>Library</h1>\n    <table border=1>\n    <tr><th>Title</th><th>Author</th></tr>\n    <tr><td>Python</td><td>ABC</td></tr>\n    </table>\n    <b style='color:blue'>Reading is knowledge</b>\n    \"\"\"\n\napp.run()",
     "language": "python"
   },
   {
-    "id": "node-9b796313-fab",
-    "parentId": "node-22a275b5-888",
+    "id": "node-f6ffb04d-676c30",
+    "parentId": "node-053efadf-bcb6a9",
     "type": "question",
-    "name": "Validate URL using regex",
+    "name": "Q2 (OPTION 2)",
+    "content": "Write a python program to check whether given URL is valid or not using regex.",
     "code": "import re\n\nurl = input(\"Enter URL: \")\n\nif re.match(r\"https://www\\.\\w+\\.com\", url):\n    print(\"Valid URL\")\nelse:\n    print(\"Invalid URL\")",
     "language": "python"
   },
   {
-    "id": "node-af794c1b-bf3",
-    "parentId": "node-22a275b5-888",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 15",
-    "content": "gmtime() \u2192 UTC time\nstrftime() \u2192 format time\nregex \u2192 pattern matching",
-    "language": "python"
-  },
-  {
-    "id": "node-70d64221-9ec",
+    "id": "node-8f300f4a-c58e36",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 16"
   },
   {
-    "id": "node-908c1a98-ca5",
-    "parentId": "node-70d64221-9ec",
+    "id": "node-4b263476-f68b18",
+    "parentId": "node-8f300f4a-c58e36",
     "type": "question",
-    "name": "Validate three-letter words using regex",
-    "content": "Use regex pattern to match words like bit, bat, hut, etc.\nUse re.match()",
-    "code": "import re\n\ns = input(\"Enter word: \")\n\npattern = \"^[bh]it$|^[bh]ut$|^[bh]at$\"\n\nif re.match(pattern, s):\n    print(\"Valid word\")\nelse:\n    print(\"Invalid word\")",
+    "name": "Q1",
+    "content": "Write a python program using regular expressions to validate three-letter words like cat, cot, cut, mat, met, mud.",
+    "code": "import re\n\ns = input(\"Enter word: \")\n\npattern = r\"^(c[ao u]t|m[aeu]t)$\"\n\nif re.match(pattern, s):\n    print(\"Valid\")\nelse:\n    print(\"Invalid\")",
     "language": "python"
   },
   {
-    "id": "node-e52399d6-50b",
-    "parentId": "node-70d64221-9ec",
+    "id": "node-e1eb5718-c83b1a",
+    "parentId": "node-8f300f4a-c58e36",
     "type": "question",
-    "name": "Perform operations on IPL DataFrame",
-    "code": "import pandas as pd\nimport numpy as np\n\ndata = {\n    \"Player\": [\"Hardik\",\"Rahul\",\"Russel\",\"Bumrah\",\"Kohli\",\"Rohit\"],\n    \"Team\": [\"MI\",\"KXIP\",\"KKR\",\"MI\",\"RCB\",\"MI\"],\n    \"Category\": [\"Batsman\",\"Batsman\",\"Batsman\",\"Bowler\",\"Batsman\",\"Batsman\"],\n    \"BidPrice\": [13,12,7,10,17,15],\n    \"Runs\": [1000,2400,900,200,3600,3700]\n}\n\ndf = pd.DataFrame(data)\n\n# a\nprint(df.head(2))\n\n# b\nprint(df.tail(3))\n\n# c (add null)\ndf.loc[0, \"BidPrice\"] = None\n\n# d\nprint(df.loc[df[\"BidPrice\"].idxmax()])\n\n# e\nprint(df[\"Team\"].value_counts())",
+    "name": "Q2 (OPTION 1)",
+    "content": "Create IPL DataFrame and perform operations (head, tail, null, max player, count team).",
+    "code": "import pandas as pd\nimport numpy as np\n\ndata = {\n    \"Player\":[\"Hardik\",\"Rahul\",\"Russel\",\"Bumrah\",\"Kohli\",\"Rohit\"],\n    \"Team\":[\"MI\",\"KXIP\",\"KKR\",\"MI\",\"RCB\",\"MI\"],\n    \"BidPrice\":[13,12,np.nan,10,17,np.nan],\n    \"Runs\":[1000,2400,900,200,3600,3700]\n}\n\ndf = pd.DataFrame(data)\n\nprint(df.head(2))\nprint(df.tail(3))\n\nprint(df.isnull())\n\ndf[\"BidPrice\"].fillna(df[\"BidPrice\"].mean(), inplace=True)\n\nprint(df.loc[df[\"BidPrice\"].idxmax()])\nprint(df[\"Team\"].value_counts())",
     "language": "python"
   },
   {
-    "id": "node-c90c7833-f3e",
-    "parentId": "node-70d64221-9ec",
+    "id": "node-37d1c2c8-542d3e",
+    "parentId": "node-8f300f4a-c58e36",
     "type": "question",
-    "name": "Create vehicle package with cars and bikes modules",
-    "answers": [
-      {
-        "content": "**cars.py**",
-        "code": "def available_models():\n    return [\"Swift\",\"i20\",\"Baleno\"]",
-        "language": "python"
-      },
-      {
-        "content": "**bikes.py**",
-        "code": "def available_models():\n    return [\"Pulsar\",\"Activa\",\"RE\"]",
-        "language": "python"
-      },
-      {
-        "content": "**main.py**",
-        "code": "from vehicle.types import cars, bikes\n\nprint(cars.available_models())\nprint(bikes.available_models())",
-        "language": "python"
-      }
-    ]
-  },
-  {
-    "id": "node-32ec2dc3-ae3",
-    "parentId": "node-70d64221-9ec",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 16",
-    "content": "regex \u2192 pattern matching\nvalue_counts() \u2192 frequency count\npackage \u2192 collection of modules",
+    "name": "Q2 (OPTION 2)",
+    "content": "Create package vehicle with cars and bikes modules and display models.",
+    "code": "# cars.py\ndef available_models():\n    return [\"Swift\",\"i20\",\"BMW\"]\n\n# bikes.py\ndef available_models():\n    return [\"Pulsar\",\"Activa\",\"RE\"]\nfrom vehicle.types import cars, bikes\n\nprint(cars.available_models())\nprint(bikes.available_models())",
     "language": "python"
   },
   {
-    "id": "node-6a601136-24f",
+    "id": "node-60efb981-8a7a06",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 17"
   },
   {
-    "id": "node-082a05a8-059",
-    "parentId": "node-6a601136-24f",
+    "id": "node-f5839327-dc7993",
+    "parentId": "node-60efb981-8a7a06",
     "type": "question",
-    "name": "Replace spaces with colon and comma with dot",
-    "code": "s = input(\"Enter string: \")\n\ns = s.replace(\" \", \":\")\ns = s.replace(\",\", \".\")\n\nprint(\"Modified:\", s)",
+    "name": "Q1",
+    "content": "Write a python program to replace spaces with colon and comma with dot in a string.",
+    "code": "s = input()\n\ns = s.replace(\" \", \":\")\ns = s.replace(\",\", \".\")\n\nprint(s)",
     "language": "python"
   },
   {
-    "id": "node-cbf460ae-2dd",
-    "parentId": "node-6a601136-24f",
+    "id": "node-48f022b2-c1573a",
+    "parentId": "node-60efb981-8a7a06",
     "type": "question",
-    "name": "Random elements from list, string, tuple",
-    "code": "import random\n\nlst = [1,2,3,4,5]\nstring = \"HELLO\"\ntup = (10,20,30,40)\n\nprint(random.sample(lst,2))\nprint(random.sample(string,2))\nprint(random.sample(tup,2))",
+    "name": "Q2 (OPTION 1)",
+    "content": "Display random elements from list, string and tuple.",
+    "code": "import random\n\nprint(random.sample([1,2,3,4],2))\nprint(random.sample(\"HELLO\",2))\nprint(random.sample((10,20,30),2))",
     "language": "python"
   },
   {
-    "id": "node-7c1287aa-835",
-    "parentId": "node-6a601136-24f",
+    "id": "node-128ae454-61cd3d",
+    "parentId": "node-60efb981-8a7a06",
     "type": "question",
-    "name": "Check Armstrong and reduce to single digit",
-    "code": "def armstrong(n):\n    return sum(int(d)**len(str(n)) for d in str(n)) == n\n\ndef single_digit(n):\n    while n > 9:\n        n = sum(int(d) for d in str(n))\n    return n\n\nnum = int(input(\"Enter number: \"))\n\nprint(\"Armstrong:\", armstrong(num))\nprint(\"Single digit:\", single_digit(num))",
+    "name": "Q2 (OPTION 2)",
+    "content": "Check Armstrong number and reduce to single digit.",
+    "code": "def armstrong(n):\n    return sum(int(d)**len(str(n)) for d in str(n)) == n\n\ndef single(n):\n    while n > 9:\n        n = sum(int(d) for d in str(n))\n    return n\n\nnum = int(input())\n\nprint(armstrong(num))\nprint(single(num))",
     "language": "python"
   },
   {
-    "id": "node-b3b8e4a8-ac0",
-    "parentId": "node-6a601136-24f",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 17",
-    "content": "replace() \u2192 replace characters\nArmstrong \u2192 special number\nrandom.sample() \u2192 unique selection",
-    "language": "python"
-  },
-  {
-    "id": "node-bf580011-49c",
+    "id": "node-fbf39b93-067d79",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 18"
   },
   {
-    "id": "node-703338ea-b95",
-    "parentId": "node-bf580011-49c",
+    "id": "node-149c2d46-5516e4",
+    "parentId": "node-fbf39b93-067d79",
     "type": "question",
-    "name": "List files and folders using os.listdir()",
-    "code": "import os\n\nfiles = os.listdir()\n\nprint(\"Files & Folders:\", files)",
+    "name": "Q1",
+    "content": "Write a python program to list all files and folders in current directory using os module.",
+    "code": "import os\n\nfiles = os.listdir()\n\nprint(files)",
     "language": "python"
   },
   {
-    "id": "node-55622683-985",
-    "parentId": "node-bf580011-49c",
+    "id": "node-1b762ece-ee4258",
+    "parentId": "node-fbf39b93-067d79",
     "type": "question",
-    "name": "Validate mobile number using regex",
-    "code": "import re\n\nnum = input(\"Enter mobile number: \")\n\npattern = r\"^(0|91)?[6-9][0-9]{9}$\"\n\nif re.match(pattern, num):\n    print(\"Valid mobile number\")\nelse:\n    print(\"Invalid mobile number\")",
+    "name": "Q2 (OPTION 1)",
+    "content": "Validate mobile number using regex.",
+    "code": "import re\n\nnum = input()\n\nif re.match(r\"^(0|91)?[6-9][0-9]{9}$\", num):\n    print(\"Valid\")\nelse:\n    print(\"Invalid\")",
     "language": "python"
   },
   {
-    "id": "node-4a6171d6-fdc",
-    "parentId": "node-bf580011-49c",
+    "id": "node-8551c9ff-4762c0",
+    "parentId": "node-fbf39b93-067d79",
     "type": "question",
-    "name": "Create education package with courses",
-    "answers": [
-      {
-        "content": "**science.py**",
-        "code": "def get_subjects():\n    return [\"Physics\",\"Chemistry\",\"Biology\"]",
-        "language": "python"
-      },
-      {
-        "content": "**arts.py**",
-        "code": "def get_subjects():\n    return [\"History\",\"Geography\",\"Economics\"]",
-        "language": "python"
-      },
-      {
-        "content": "**main.py**",
-        "code": "from education.courses import science, arts\n\nprint(science.get_subjects())\nprint(arts.get_subjects())",
-        "language": "python"
-      }
-    ]
-  },
-  {
-    "id": "node-ce2d96ac-292",
-    "parentId": "node-bf580011-49c",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 18",
-    "content": "os.listdir() \u2192 list directory\nregex \u2192 validation\nmodule \u2192 python file",
+    "name": "Q2 (OPTION 2)",
+    "content": "Create education package with science and arts modules and display subjects.",
+    "code": "# science.py\ndef get_subjects():\n    return [\"Physics\",\"Chemistry\",\"Biology\"]\n\n# arts.py\ndef get_subjects():\n    return [\"History\",\"Geography\",\"Economics\"]\nfrom education.courses import science, arts\n\nprint(science.get_subjects())\nprint(arts.get_subjects())",
     "language": "python"
   },
   {
-    "id": "node-d2d4393a-dae",
+    "id": "node-7dcaae1c-cf4dbd",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 19"
   },
   {
-    "id": "node-d0341cec-864",
-    "parentId": "node-d2d4393a-dae",
+    "id": "node-88716a80-96cbcc",
+    "parentId": "node-7dcaae1c-cf4dbd",
     "type": "question",
-    "name": "Count vowels, consonants and special symbols",
-    "content": "Loop through string\nCheck using isalpha() and vowels",
-    "code": "s = input(\"Enter string: \")\n\nv = c = sp = 0\n\nfor ch in s:\n    if ch.isalpha():\n        if ch.lower() in \"aeiou\":\n            v += 1\n        else:\n            c += 1\n    else:\n        sp += 1\n\nprint(\"Vowels:\", v)\nprint(\"Consonants:\", c)\nprint(\"Special:\", sp)",
+    "name": "Q1",
+    "content": "Write a python program to accept a string and count number of vowels, consonants and special symbols.",
+    "code": "s = input()\n\nv=c=sp=0\n\nfor ch in s:\n    if ch.isalpha():\n        if ch.lower() in \"aeiou\":\n            v+=1\n        else:\n            c+=1\n    else:\n        sp+=1\n\nprint(v,c,sp)",
     "language": "python"
   },
   {
-    "id": "node-da450fb6-0fb",
-    "parentId": "node-d2d4393a-dae",
+    "id": "node-332f3eb0-24df7e",
+    "parentId": "node-7dcaae1c-cf4dbd",
     "type": "question",
-    "name": "Move file pointer and display content",
-    "code": "import os\n\nfile = input(\"Enter file name: \")\npos = int(input(\"Enter position: \"))\n\nif os.path.exists(file):\n    with open(file, \"r\") as f:\n        f.seek(pos)\n        print(f.read())\nelse:\n    print(\"File not found\")",
+    "name": "Q2 (OPTION 1)",
+    "content": "Write a Python program to accept a file name and a byte position. Move file pointer and display content from that position.",
+    "code": "import os\n\nf = input()\npos = int(input())\n\nif os.path.exists(f):\n    with open(f) as file:\n        file.seek(pos)\n        print(file.read())\nelse:\n    print(\"File not found\")",
     "language": "python"
   },
   {
-    "id": "node-c50b8a8a-0f4",
-    "parentId": "node-d2d4393a-dae",
+    "id": "node-e54b5ed2-447a8c",
+    "parentId": "node-7dcaae1c-cf4dbd",
     "type": "question",
-    "name": "Perform GroupBy operations on student DataFrame",
-    "code": "import pandas as pd\n\ndata = {\n    \"school\": [\"S1\",\"S2\",\"S3\",\"S4\",\"S5\",\"S6\"],\n    \"age\": [12,12,13,14,12,16],\n    \"weight\": [35,32,33,30,31,32]\n}\n\ndf = pd.DataFrame(data)\n\ngroup = df.groupby(\"school\")\n\nprint(\"Group Type:\", type(group))\n\nprint(\"Mean:\\n\", group[\"age\"].mean())\nprint(\"Min:\\n\", group[\"age\"].min())\nprint(\"Max:\\n\", group[\"age\"].max())\n\nprint(\"Weight >32:\", len(df[df[\"weight\"] > 32]))",
+    "name": "Q2 (OPTION 2)",
+    "content": "Perform groupby operations on DataFrame.",
+    "code": "import pandas as pd\n\ndata = {\n    \"school\":[\"S1\",\"S2\",\"S3\",\"S4\"],\n    \"age\":[12,13,12,14],\n    \"weight\":[35,32,30,40]\n}\n\ndf = pd.DataFrame(data)\n\ngrp = df.groupby(\"school\")\n\nprint(grp.mean())\nprint(grp.min())\nprint(grp.max())",
     "language": "python"
   },
   {
-    "id": "node-badc3496-e2e",
-    "parentId": "node-d2d4393a-dae",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 19",
-    "content": "groupby() \u2192 grouping data\nseek() \u2192 pointer move\nisalpha() \u2192 check alphabet",
-    "language": "python"
-  },
-  {
-    "id": "node-a50a615a-adc",
+    "id": "node-c78c0198-142686",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 20"
   },
   {
-    "id": "node-94c7de4d-299",
-    "parentId": "node-a50a615a-adc",
+    "id": "node-04d0e6a0-307c6a",
+    "parentId": "node-c78c0198-142686",
     "type": "question",
-    "name": "Shuffle deck of cards and display 5 attempts",
-    "content": "Create deck\nShuffle using random\nDisplay 5 cards",
-    "code": "import random\n\ncards = [\"A\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"J\",\"Q\",\"K\"]\n\nfor i in range(5):\n    random.shuffle(cards)\n    print(\"Attempt\", i+1, \":\", cards[:5])",
+    "name": "Q1",
+    "content": "Write a python program to shuffle deck of cards and display 5 attempts.",
+    "code": "import random\n\ncards = [\"A\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"J\",\"Q\",\"K\"]\n\nfor i in range(5):\n    random.shuffle(cards)\n    print(cards[:5])",
     "language": "python"
   },
   {
-    "id": "node-b175c7e8-7df",
-    "parentId": "node-a50a615a-adc",
+    "id": "node-8d59ae52-41e7a3",
+    "parentId": "node-c78c0198-142686",
     "type": "question",
-    "name": "Identify files and folders in current directory",
-    "code": "import os\n\npath = os.getcwd()\n\nfor item in os.listdir(path):\n    if os.path.isfile(item):\n        print(item, \"- File\")\n    else:\n        print(item, \"- Folder\")",
+    "name": "Q2 (OPTION 1)",
+    "content": "Identify files and folders in current directory.",
+    "code": "import os\n\nfor item in os.listdir():\n    if os.path.isfile(item):\n        print(item,\"File\")\n    else:\n        print(item,\"Folder\")",
     "language": "python"
   },
   {
-    "id": "node-098aeab2-020",
-    "parentId": "node-a50a615a-adc",
+    "id": "node-46aa16cc-1d82c2",
+    "parentId": "node-c78c0198-142686",
     "type": "question",
-    "name": "IPL DataFrame operations with null values",
-    "code": "import pandas as pd\nimport numpy as np\n\ndata = {\n    \"Player\": [\"Hardik\",\"Rahul\",\"Russel\",\"Bumrah\",\"Kohli\",\"Rohit\"],\n    \"Team\": [\"MI\",\"KXIP\",\"KKR\",\"MI\",\"RCB\",\"MI\"],\n    \"BidPrice\": [None,12,7,10,None,None],\n    \"Runs\": [1000,2400,900,200,3600,3700]\n}\n\ndf = pd.DataFrame(data)\n\n# a\nprint(df.head(2))\n\n# b\nprint(df.tail(3))\n\n# c\nprint(df.isnull())\n\n# d\ndf[\"BidPrice\"].fillna(df[\"BidPrice\"].mean(), inplace=True)\n\n# e\nprint(df.loc[df[\"BidPrice\"].idxmax()])\n\n# f\nprint(df[\"Team\"].value_counts())",
+    "name": "Q2 (OPTION 2)",
+    "content": "IPL DataFrame operations with null handling.",
+    "code": "import pandas as pd\nimport numpy as np\n\ndata = {\n    \"Player\":[\"A\",\"B\",\"C\"],\n    \"BidPrice\":[None,10,20]\n}\n\ndf = pd.DataFrame(data)\n\ndf[\"BidPrice\"].fillna(df[\"BidPrice\"].mean(), inplace=True)\n\nprint(df)",
     "language": "python"
   },
   {
-    "id": "node-e96aa540-05e",
-    "parentId": "node-a50a615a-adc",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 20",
-    "content": "shuffle() \u2192 random order\nisfile() \u2192 check file\nfillna() \u2192 replace null",
-    "language": "python"
-  },
-  {
-    "id": "node-937c1797-18a",
+    "id": "node-081ecfe3-c7f3b2",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 21"
   },
   {
-    "id": "node-ee27405f-124",
-    "parentId": "node-937c1797-18a",
+    "id": "node-86b36ca7-4cd5b4",
+    "parentId": "node-081ecfe3-c7f3b2",
     "type": "question",
-    "name": "Create DataFrame from dictionary and display first & last 5 rows",
-    "content": "Create dictionary {Subject: Marks}\nConvert to DataFrame\nUse head() and tail()",
-    "code": "import pandas as pd\n\ndata = {\n    \"Math\": 90,\n    \"Physics\": 85,\n    \"Chemistry\": 88,\n    \"Biology\": 92,\n    \"English\": 80,\n    \"CS\": 95\n}\n\ndf = pd.DataFrame(list(data.items()), columns=[\"Subject\", \"Marks\"])\n\nprint(\"First 5 rows:\\n\", df.head())\nprint(\"Last 5 rows:\\n\", df.tail())",
+    "name": "Q1",
+    "content": "Create DataFrame from dictionary and display first 5 and last 5 rows.",
+    "code": "import pandas as pd\n\ndata = {\"Math\":90,\"Sci\":80,\"Eng\":70,\"CS\":95,\"Bio\":85,\"Chem\":88}\n\ndf = pd.DataFrame(list(data.items()), columns=[\"Subject\",\"Marks\"])\n\nprint(df.head())\nprint(df.tail())",
     "language": "python"
   },
   {
-    "id": "node-034d061a-dcf",
-    "parentId": "node-937c1797-18a",
+    "id": "node-f79f9e23-bbb8e5",
+    "parentId": "node-081ecfe3-c7f3b2",
     "type": "question",
-    "name": "Read file and count characters, words, lines",
-    "content": "Check file existence\nRead file\nCount characters, words, lines",
-    "code": "import os\n\nfile = input(\"Enter file name: \")\n\nif os.path.exists(file):\n    with open(file, \"r\") as f:\n        content = f.read()\n\n    print(content)\n\n    print(\"Characters:\", len(content))\n    print(\"Words:\", len(content.split()))\n    print(\"Lines:\", content.count(\"\\n\") + 1)\nelse:\n    print(\"File not found\")",
+    "name": "Q2 (OPTION 1)",
+    "content": "Read file and count characters, words, lines.",
+    "code": "import os\n\nf = input()\n\nif os.path.exists(f):\n    with open(f) as file:\n        data = file.read()\n        print(len(data))\n        print(len(data.split()))\n        print(len(data.split(\"\\n\")))\nelse:\n    print(\"Not found\")",
     "language": "python"
   },
   {
-    "id": "node-e7d0933d-d10",
-    "parentId": "node-937c1797-18a",
+    "id": "node-cb61567d-6ea7fe",
+    "parentId": "node-081ecfe3-c7f3b2",
     "type": "question",
-    "name": "Create banking package with account and loan modules",
-    "answers": [
-      {
-        "content": "**account.py**",
-        "code": "def open_account(name):\n    print(f\"Account created for {name}\")",
-        "language": "python"
-      },
-      {
-        "content": "**loan.py**",
-        "code": "def apply_loan(amount):\n    print(f\"Loan approved: {amount}\")",
-        "language": "python"
-      },
-      {
-        "content": "**main.py**",
-        "code": "from banking import account, loan\n\naccount.open_account(\"Anant\")\nloan.apply_loan(50000)",
-        "language": "python"
-      }
-    ]
-  },
-  {
-    "id": "node-5a557a6c-e0b",
-    "parentId": "node-937c1797-18a",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 21",
-    "content": "head() \u2192 first rows\ntail() \u2192 last rows\nlen() \u2192 count",
+    "name": "Q2 (OPTION 2)",
+    "content": "Create banking package and demonstrate functions.",
+    "code": "# account.py\ndef open_account(name):\n    print(name)\n\n# loan.py\ndef apply_loan(amount):\n    print(amount)\nfrom banking import account, loan\n\naccount.open_account(\"Anant\")\nloan.apply_loan(1000)",
     "language": "python"
   },
   {
-    "id": "node-115567f2-2e6",
+    "id": "node-7acb3495-1a4b73",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 22"
   },
   {
-    "id": "node-a0b2b6c7-a52",
-    "parentId": "node-115567f2-2e6",
+    "id": "node-8a8c9231-5efdd2",
+    "parentId": "node-7acb3495-1a4b73",
     "type": "question",
-    "name": "Handle ZeroDivisionError",
-    "code": "try:\n    m = int(input(\"Enter m: \"))\n    n = int(input(\"Enter n: \"))\n\n    print(\"Result:\", m / n)\n\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero\")",
+    "name": "Q1",
+    "content": "Accept m and n and handle ZeroDivisionError.",
+    "code": "try:\n    m=int(input())\n    n=int(input())\n    print(m/n)\nexcept ZeroDivisionError:\n    print(\"Error\")",
     "language": "python"
   },
   {
-    "id": "node-f526387f-402",
-    "parentId": "node-115567f2-2e6",
+    "id": "node-fadd9986-4e2888",
+    "parentId": "node-7acb3495-1a4b73",
     "type": "question",
-    "name": "Merge Student DataFrames",
-    "code": "import pandas as pd\n\ndf1 = pd.DataFrame({\n    \"ID\": [\"S1\",\"S2\",\"S3\",\"S4\",\"S5\"],\n    \"Name\": [\"Anita\",\"Sakshi\",\"Om\",\"Raj\",\"Kanika\"],\n    \"Age\": [18,23,20,21,20]\n})\n\ndf2 = pd.DataFrame({\n    \"ID\": [\"S2\",\"S4\",\"S5\",\"S6\",\"S7\"],\n    \"City\": [\"Pune\",\"Nashik\",\"Mumbai\",\"Delhi\",\"Nanded\"],\n    \"Marks\": [97,78,86,66,54]\n})\n\ndf3 = pd.merge(df1, df2, on=\"ID\")\n\nprint(df3)",
+    "name": "Q2 (OPTION 1)",
+    "content": "Merge two DataFrames.",
+    "code": "import pandas as pd\n\ndf1 = pd.DataFrame({\"ID\":[\"S1\",\"S2\"],\"Age\":[20,21]})\ndf2 = pd.DataFrame({\"ID\":[\"S2\",\"S3\"],\"Marks\":[90,80]})\n\nprint(pd.merge(df1,df2,on=\"ID\"))",
     "language": "python"
   },
   {
-    "id": "node-d7486521-4d5",
-    "parentId": "node-115567f2-2e6",
+    "id": "node-f6aa4c16-8fccc0",
+    "parentId": "node-7acb3495-1a4b73",
     "type": "question",
-    "name": "Iterator class for factorial series",
-    "code": "class Fact:\n    def __init__(self, n):\n        self.n = n\n        self.i = 1\n        self.fact = 1\n\n    def __iter__(self):\n        return self\n\n    def __next__(self):\n        if self.i > self.n:\n            raise StopIteration\n        self.fact *= self.i\n        self.i += 1\n        return self.fact\n\nn = int(input(\"Enter n: \"))\nfor i in Fact(n):\n    print(i)",
+    "name": "Q2 (OPTION 2)",
+    "content": "Create iterator class for factorial series.",
+    "code": "class Fact:\n    def __init__(self,n):\n        self.n=n\n        self.i=1\n        self.f=1\n\n    def __iter__(self):\n        return self\n\n    def __next__(self):\n        if self.i>self.n:\n            raise StopIteration\n        self.f*=self.i\n        self.i+=1\n        return self.f\n\nfor i in Fact(int(input())):\n    print(i)",
     "language": "python"
   },
   {
-    "id": "node-18532d69-a28",
-    "parentId": "node-115567f2-2e6",
-    "type": "question",
-    "name": "Viva Questions \u2013 Slip 22",
-    "content": "try-except \u2192 error handling\nmerge() \u2192 combine data\niterator \u2192 iterable object",
-    "language": "python"
-  },
-  {
-    "id": "node-8ecfb360-290",
+    "id": "node-96f5fa79-b69713",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 23"
   },
   {
-    "id": "node-dd2a7e75-301",
-    "parentId": "node-8ecfb360-290",
+    "id": "node-9eb6efbb-0c70d5",
+    "parentId": "node-96f5fa79-b69713",
     "type": "question",
-    "name": "Function with default parameter (productInfo)",
-    "content": "Accept product name and price\nDefault price = 100\nDisplay only if price < 100",
-    "code": "def productInfo(name, price=100):\n    if price < 100:\n        print(\"Product:\", name)\n\nproductInfo(\"Pen\", 50)\nproductInfo(\"Book\")",
+    "name": "Q1",
+    "content": "Function with default price and display product if price < 100.",
+    "code": "def productInfo(name,price=100):\n    if price<100:\n        print(name)\n\nproductInfo(\"Pen\",50)\nproductInfo(\"Book\")",
     "language": "python"
   },
   {
-    "id": "node-f222a164-ead",
-    "parentId": "node-8ecfb360-290",
+    "id": "node-07868e25-07d8ba",
+    "parentId": "node-96f5fa79-b69713",
     "type": "question",
-    "name": "Perform full time operations",
-    "code": "import time\n\nprint(\"Local:\", time.ctime())\nprint(\"UTC:\", time.gmtime())\n\ndt = input(\"Enter date (DD-MM-YYYY HH:MM:SS): \")\n\nparsed = time.strptime(dt, \"%d-%m-%Y %H:%M:%S\")\n\nprint(time.strftime(\"%d/%m/%Y\", parsed))\nprint(time.strftime(\"%H:%M:%S\", parsed))",
+    "name": "Q2 (OPTION 1)",
+    "content": "Time module operations.",
+    "code": "import time\n\nprint(time.ctime())\nprint(time.gmtime())\n\ndt=input()\n\np=time.strptime(dt,\"%d-%m-%Y %H:%M:%S\")\n\nprint(time.strftime(\"%d/%m/%Y\",p))",
     "language": "python"
   },
   {
-    "id": "node-456eba24-2f3",
-    "parentId": "node-8ecfb360-290",
+    "id": "node-9dd39570-341e5d",
+    "parentId": "node-96f5fa79-b69713",
     "type": "question",
-    "name": "Find words without vowels and sort them",
-    "code": "s = input(\"Enter string: \")\n\nwords = s.split()\n\nresult = [w for w in words if not any(v in w.lower() for v in \"aeiou\")]\n\nresult.sort()\n\nprint(\"Words:\", result)\nprint(\"Count:\", len(result))",
+    "name": "Q2 (OPTION 2)",
+    "content": "Find words without vowels and count.",
+    "code": "s=input()\n\nw=s.split()\n\nr=[i for i in w if not any(v in i.lower() for v in \"aeiou\")]\n\nprint(r,len(r))",
     "language": "python"
   },
   {
-    "id": "node-0403dc45-e6b",
-    "parentId": "node-8ecfb360-290",
+    "id": "node-041605bc-b7c2fd",
+    "parentId": "node-mn0n8wdh-hyhbnn",
+    "type": "folder",
+    "name": "Slip 24"
+  },
+  {
+    "id": "node-f9ad09fa-768fdf",
+    "parentId": "node-041605bc-b7c2fd",
     "type": "question",
-    "name": "Viva Questions \u2013 Slip 23",
-    "content": "default parameter \u2192 preset value\nsplit() \u2192 break string\nsort() \u2192 arrange",
+    "name": "Q1",
+    "content": "Write a Python program to shuffle a deck of cards. Display the cards obtained by a user in 5 attempts.",
+    "code": "import random\n\ncards = [\"A\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"J\",\"Q\",\"K\"]\n\nfor i in range(5):\n    random.shuffle(cards)\n    print(\"Attempt\", i+1, \":\", cards[:5])",
     "language": "python"
   },
   {
-    "id": "node-e3e218b3-59e",
+    "id": "node-f9e2c98c-3a9cc0",
+    "parentId": "node-041605bc-b7c2fd",
+    "type": "question",
+    "name": "Q2 (OPTION 1)",
+    "content": "Create a package finance_tools with modules interest.py and currency.py.\na) interest.py \u2192 cal_interest(amount, year) using 5%\nb) currency.py \u2192 convert(amount) INR to USD (0.012)\nWrite program to demonstrate both.",
+    "code": "# interest.py\ndef cal_interest(amount, year):\n    return amount * 0.05 * year\n\n# currency.py\ndef convert(amount):\n    return amount * 0.012\nfrom finance_tools import interest, currency\n\namt = float(input(\"Enter amount: \"))\nyear = int(input(\"Enter years: \"))\n\nprint(\"Interest:\", interest.cal_interest(amt, year))\nprint(\"USD:\", currency.convert(amt))",
+    "language": "python"
+  },
+  {
+    "id": "node-c521504f-43d7cf",
+    "parentId": "node-041605bc-b7c2fd",
+    "type": "question",
+    "name": "Q2 (OPTION 2)",
+    "content": "Write a python program to check whether given URL is valid or not using regular expression.",
+    "code": "import re\n\nurl = input(\"Enter URL: \")\n\nif re.match(r\"https://www\\.\\w+\\.com\", url):\n    print(\"Valid URL\")\nelse:\n    print(\"Invalid URL\")",
+    "language": "python"
+  },
+  {
+    "id": "node-b6e2687c-3403ad",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 25"
   },
   {
-    "id": "node-dde53b10-8b6",
-    "parentId": "node-e3e218b3-59e",
+    "id": "node-f4c97afa-023ee9",
+    "parentId": "node-b6e2687c-3403ad",
     "type": "question",
-    "name": "Shuffle deck of cards and display 5 attempts",
-    "code": "import random\n\ncards = [\"A\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"J\",\"Q\",\"K\"]\n\nfor i in range(5):\n    random.shuffle(cards)\n    print(\"Attempt\", i+1, \":\", cards[:5])",
+    "name": "Q1",
+    "content": "Write a python program to remove all whitespaces from a given string and display modified string.",
+    "code": "s = input(\"Enter string: \")\n\nresult = s.replace(\" \", \"\")\n\nprint(\"Modified string:\", result)",
     "language": "python"
   },
   {
-    "id": "node-a1a77769-fbf",
-    "parentId": "node-e3e218b3-59e",
+    "id": "node-5d3d5d0b-0b809a",
+    "parentId": "node-b6e2687c-3403ad",
     "type": "question",
-    "name": "Create finance_tools package (interest + currency)",
-    "answers": [
-      {
-        "content": "**interest.py**",
-        "code": "def cal_interest(amount, year):\n    rate = 0.05\n    return amount * rate * year",
-        "language": "python"
-      },
-      {
-        "content": "**currency.py**",
-        "code": "def convert(amount):\n    return amount * 0.012",
-        "language": "python"
-      },
-      {
-        "content": "**main.py**",
-        "code": "from finance_tools import interest, currency\n\namt = float(input(\"Enter amount: \"))\nyear = int(input(\"Enter years: \"))\n\nprint(\"Interest:\", interest.cal_interest(amt, year))\nprint(\"USD:\", currency.convert(amt))",
-        "language": "python"
-      }
-    ]
-  },
-  {
-    "id": "node-7e1cf2dc-a8d",
-    "parentId": "node-e3e218b3-59e",
-    "type": "question",
-    "name": "Validate URL using regex",
-    "code": "import re\n\nurl = input(\"Enter URL: \")\n\nif re.match(r\"https://www\\.\\w+\\.com\", url):\n    print(\"Valid URL\")\nelse:\n    print(\"Invalid URL\")",
+    "name": "Q2 (OPTION 1)",
+    "content": "Create a package vehicle with subpackage types containing modules cars and bikes. Each module should have function available_models(). Display all models.",
+    "code": "# cars.py\ndef available_models():\n    return [\"Swift\",\"i20\",\"Baleno\"]\n\n# bikes.py\ndef available_models():\n    return [\"Pulsar\",\"Activa\",\"RE\"]\nfrom vehicle.types import cars, bikes\n\nprint(\"Cars:\", cars.available_models())\nprint(\"Bikes:\", bikes.available_models())",
     "language": "python"
   },
   {
-    "id": "node-2d1a1d7e-615",
-    "parentId": "node-e3e218b3-59e",
+    "id": "node-ee4a5c79-263dfc",
+    "parentId": "node-b6e2687c-3403ad",
     "type": "question",
-    "name": "Q3 (Viva)",
-    "content": "shuffle() \u2192 random order\nregex \u2192 validation\npackage \u2192 collection of modules",
+    "name": "Q2 (OPTION 2)",
+    "content": "Create DataFrame \u201cdata\u201d and perform:\na) rows with Pencil\nb) update Eraser count\nc) show Company & Price\nd) rows Pencil & Pen\ne) add new column Colour",
+    "code": "import pandas as pd\n\ndata = {\n    \"Type\":[\"Pencil\",\"Pencil\",\"Pen\",\"Pen\",\"Eraser\"],\n    \"Company\":[\"Apsara\",\"Natraj\",\"Cello\",\"Parkar\",\"Apsara\"],\n    \"Count\":[15,20,25,35,20],\n    \"Price\":[250,200,600,900,300]\n}\n\ndf = pd.DataFrame(data)\n\nprint(df[df[\"Type\"]==\"Pencil\"])\n\ndf.loc[df[\"Type\"]==\"Eraser\",\"Count\"] = 25\n\nprint(df[[\"Company\",\"Price\"]])\n\nprint(df[df[\"Type\"].isin([\"Pencil\",\"Pen\"])])\n\ndf[\"Colour\"] = [\"Red\",\"Blue\",\"Black\",\"Green\",\"White\"]\n\nprint(df)",
     "language": "python"
   },
   {
-    "id": "node-a8a8ba88-33b",
+    "id": "node-7903825f-f41563",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 26"
   },
   {
-    "id": "node-f827d360-7f2",
-    "parentId": "node-a8a8ba88-33b",
+    "id": "node-ff7cff7a-3a14dc",
+    "parentId": "node-7903825f-f41563",
     "type": "question",
-    "name": "Remove all whitespaces from string",
-    "code": "s = input(\"Enter string: \")\n\nresult = s.replace(\" \", \"\")\n\nprint(\"Modified:\", result)",
+    "name": "Q1",
+    "content": "Write a Python program that generates a random radius and computes the circumference of a circle using math module. (Use 3.14 as \u03c0)",
+    "code": "import random\n\nr = random.randint(1, 10)\n\ncircumference = 2 * 3.14 * r\n\nprint(\"Radius:\", r)\nprint(\"Circumference:\", circumference)",
     "language": "python"
   },
   {
-    "id": "node-2d845342-abc",
-    "parentId": "node-a8a8ba88-33b",
+    "id": "node-060a6d1d-ab46ce",
+    "parentId": "node-7903825f-f41563",
     "type": "question",
-    "name": "Create vehicle package with cars and bikes",
-    "answers": [
-      {
-        "content": "**cars.py**",
-        "code": "def available_models():\n    return [\"Swift\",\"i20\",\"Baleno\"]",
-        "language": "python"
-      },
-      {
-        "content": "**bikes.py**",
-        "code": "def available_models():\n    return [\"Pulsar\",\"Activa\",\"RE\"]",
-        "language": "python"
-      },
-      {
-        "content": "**main.py**",
-        "code": "from vehicle.types import cars, bikes\n\nprint(cars.available_models())\nprint(bikes.available_models())",
-        "language": "python"
-      }
-    ]
-  },
-  {
-    "id": "node-10ff2357-0b4",
-    "parentId": "node-a8a8ba88-33b",
-    "type": "question",
-    "name": "Perform operations on DataFrame",
-    "code": "import pandas as pd\n\ndata = {\n    \"Type\": [\"Pencil\",\"Pencil\",\"Pen\",\"Pen\",\"Eraser\"],\n    \"Company\": [\"Apsara\",\"Natraj\",\"Cello\",\"Parkar\",\"Apsara\"],\n    \"Count\": [15,20,25,35,20],\n    \"Price\": [250,200,600,900,300]\n}\n\ndf = pd.DataFrame(data)\n\n# a\nprint(df[df[\"Type\"] == \"Pencil\"])\n\n# b\ndf.loc[df[\"Type\"] == \"Eraser\", \"Count\"] = 25\n\n# c\nprint(df[[\"Company\",\"Price\"]])\n\n# d\nprint(df[df[\"Type\"].isin([\"Pencil\",\"Pen\"])])\n\n# e\ndf[\"Colour\"] = [\"Red\",\"Blue\",\"Black\",\"Green\",\"White\"]\nprint(df)",
+    "name": "Q2 (OPTION 1)",
+    "content": "Write a python program to validate password with conditions:\n\nat least 1 lowercase\nat least 1 number\nat least 1 special ($,#,@)\nlength 6\u201312",
+    "code": "import re\n\np = input(\"Enter password: \")\n\npattern = r\"^(?=.*[a-z])(?=.*[0-9])(?=.*[$#@]).{6,12}$\"\n\nif re.match(pattern, p):\n    print(\"Valid Password\")\nelse:\n    print(\"Invalid Password\")",
     "language": "python"
   },
   {
-    "id": "node-c6434310-8c7",
-    "parentId": "node-a8a8ba88-33b",
+    "id": "node-5a4289ad-c50883",
+    "parentId": "node-7903825f-f41563",
     "type": "question",
-    "name": "Q3 (Viva)",
-    "content": "replace() \u2192 remove spaces\nDataFrame \u2192 table\nisin() \u2192 filter",
+    "name": "Q2 (OPTION 2)",
+    "content": "List all files in current directory. Display total .py files and content of any one .py file.",
+    "code": "import os\n\nfiles = os.listdir()\n\npy_files = [f for f in files if f.endswith(\".py\")]\n\nprint(\"Total .py files:\", len(py_files))\n\nif py_files:\n    with open(py_files[0], \"r\") as f:\n        print(f.read())",
     "language": "python"
   },
   {
-    "id": "node-ffdd55be-7f8",
+    "id": "node-a62a1423-3a0aa0",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 27"
   },
   {
-    "id": "node-3acfd7cf-308",
-    "parentId": "node-ffdd55be-7f8",
+    "id": "node-f8145896-3ab210",
+    "parentId": "node-a62a1423-3a0aa0",
     "type": "question",
-    "name": "Generate random radius and compute circumference",
-    "code": "import random\n\nr = random.randint(1, 10)\n\ncircumference = 2 * 3.14 * r\n\nprint(\"Radius:\", r)\nprint(\"Circumference:\", circumference)",
+    "name": "Q1",
+    "content": "Write a Python program using regex to validate words like cat, cot, cut, mat, met, mud.",
+    "code": "import re\n\ns = input(\"Enter word: \")\n\npattern = r\"^(c|m)[aeou]t$\"\n\nif re.match(pattern, s):\n    print(\"Valid\")\nelse:\n    print(\"Invalid\")",
     "language": "python"
   },
   {
-    "id": "node-eaaf1ec7-201",
-    "parentId": "node-ffdd55be-7f8",
+    "id": "node-7b8e304f-305cfc",
+    "parentId": "node-a62a1423-3a0aa0",
     "type": "question",
-    "name": "Validate password using regex",
-    "code": "import re\n\np = input(\"Enter password: \")\n\npattern = r\"^(?=.*[a-z])(?=.*[0-9])(?=.*[$#@]).{6,12}$\"\n\nif re.match(pattern, p):\n    print(\"Valid Password\")\nelse:\n    print(\"Invalid Password\")",
+    "name": "Q2 (OPTION 1)",
+    "content": "Create package education with subpackage courses and modules science.py and arts.py. Each module returns subjects. Display all subjects.",
+    "code": "# science.py\ndef get_subjects():\n    return [\"Physics\",\"Chemistry\",\"Biology\"]\n\n# arts.py\ndef get_subjects():\n    return [\"History\",\"Geography\",\"Economics\"]\nfrom education.courses import science, arts\n\nprint(science.get_subjects())\nprint(arts.get_subjects())",
     "language": "python"
   },
   {
-    "id": "node-3afc6a44-641",
-    "parentId": "node-ffdd55be-7f8",
+    "id": "node-6ec76c34-d55bc9",
+    "parentId": "node-a62a1423-3a0aa0",
     "type": "question",
-    "name": "List .py files and display one file content",
-    "code": "import os\n\nfiles = os.listdir()\n\npy_files = [f for f in files if f.endswith(\".py\")]\n\nprint(\"Total .py files:\", len(py_files))\n\nif py_files:\n    with open(py_files[0], \"r\") as f:\n        print(f.read())",
+    "name": "Q2 (OPTION 2)",
+    "content": "Display all entries in current directory and identify each as file or folder using getcwd().",
+    "code": "import os\n\npath = os.getcwd()\n\nfor item in os.listdir(path):\n    if os.path.isfile(item):\n        print(item, \"- File\")\n    else:\n        print(item, \"- Folder\")",
     "language": "python"
   },
   {
-    "id": "node-98a1441d-e7f",
-    "parentId": "node-ffdd55be-7f8",
-    "type": "question",
-    "name": "Q3 (Viva)",
-    "content": "random \u2192 random values\nregex \u2192 pattern\nos.listdir() \u2192 list files",
-    "language": "python"
-  },
-  {
-    "id": "node-06354a90-846",
+    "id": "node-2bcccbbf-52f388",
     "parentId": "node-mn0n8wdh-hyhbnn",
     "type": "folder",
     "name": "Slip 28"
   },
   {
-    "id": "node-e193c2b8-580",
-    "parentId": "node-06354a90-846",
+    "id": "node-b155083c-9266ac",
+    "parentId": "node-2bcccbbf-52f388",
     "type": "question",
-    "name": "Validate 3-letter words (cat, cot, etc.)",
-    "code": "import re\n\ns = input(\"Enter word: \")\n\npattern = \"^[cm]at$|^[cm]ot$|^[cm]ut$\"\n\nif re.match(pattern, s):\n    print(\"Valid\")\nelse:\n    print(\"Invalid\")",
+    "name": "Q1",
+    "content": "Write a python program to validate three-letter words using regex (cat, cot, cut, mat, met, mud).",
+    "code": "import re\n\ns = input(\"Enter word: \")\n\npattern = r\"^(c|m)[aeou]t$\"\n\nif re.match(pattern, s):\n    print(\"Valid\")\nelse:\n    print(\"Invalid\")",
     "language": "python"
   },
   {
-    "id": "node-4911ba21-60c",
-    "parentId": "node-06354a90-846",
+    "id": "node-81055f51-c1104d",
+    "parentId": "node-2bcccbbf-52f388",
     "type": "question",
-    "name": "Create education package",
-    "answers": [
-      {
-        "content": "**science.py**",
-        "code": "def get_subjects():\n    return [\"Physics\",\"Chemistry\",\"Biology\"]",
-        "language": "python"
-      },
-      {
-        "content": "**arts.py**",
-        "code": "def get_subjects():\n    return [\"History\",\"Geography\",\"Economics\"]",
-        "language": "python"
-      },
-      {
-        "content": "**main.py**",
-        "code": "from education.courses import science, arts\n\nprint(science.get_subjects())\nprint(arts.get_subjects())",
-        "language": "python"
-      }
-    ]
-  },
-  {
-    "id": "node-19bc33ad-f6e",
-    "parentId": "node-06354a90-846",
-    "type": "question",
-    "name": "Identify files and folders",
-    "code": "import os\n\npath = os.getcwd()\n\nfor item in os.listdir(path):\n    if os.path.isfile(item):\n        print(item, \"- File\")\n    else:\n        print(item, \"- Folder\")",
+    "name": "Q2 (OPTION 1)",
+    "content": "Create package education and display subjects (same as above).",
+    "code": "(same as Slip 27 Option 1)",
     "language": "python"
   },
   {
-    "id": "node-9a804a6e-d1d",
-    "parentId": "node-06354a90-846",
+    "id": "node-77872a26-5b5ee1",
+    "parentId": "node-2bcccbbf-52f388",
     "type": "question",
-    "name": "Q3 (Viva)",
-    "content": "getcwd() \u2192 current directory\nisfile() \u2192 check file\npackage \u2192 module collection",
+    "name": "Q2 (OPTION 2)",
+    "content": "Display all files and folders in current directory.",
+    "code": "import os\n\nfor item in os.listdir():\n    print(item)",
     "language": "python"
   }
 ]
