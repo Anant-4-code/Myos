@@ -16,7 +16,9 @@
     "parentId": "dsa-arrays",
     "type": "question",
     "name": "Two Sum Problem",
-    "tags": ["Easy"],
+    "tags": [
+      "Easy"
+    ],
     "answers": [
       {
         "content": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\n\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.\n\nApproach: Use a hash map to store complement values. For each element, check if its complement (target - current) exists in the map. This gives us O(n) time complexity instead of the brute-force O(n²).",
@@ -63,7 +65,9 @@
     "parentId": "dsa-stack",
     "type": "question",
     "name": "Valid Parentheses",
-    "tags": ["Easy"],
+    "tags": [
+      "Easy"
+    ],
     "content": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.\n\nAn input string is valid if:\n- Open brackets are closed by the same type of brackets.\n- Open brackets are closed in the correct order.\n\nApproach: Use a stack. Push opening brackets, pop and match for closing brackets.",
     "code": "def is_valid(s):\n    stack = []\n    mapping = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in mapping:\n            top = stack.pop() if stack else '#'\n            if mapping[char] != top:\n                return False\n        else:\n            stack.append(char)\n    \n    return len(stack) == 0\n\n# Examples\nprint(is_valid(\"()[]{}\"))  # True\nprint(is_valid(\"(]\"))      # False",
     "language": "python"
@@ -163,5 +167,71 @@
     "content": "Promises represent the eventual completion or failure of an asynchronous operation.\n\nA Promise can be in one of three states:\n- Pending: Initial state\n- Fulfilled: Operation completed successfully\n- Rejected: Operation failed\n\nasync/await is syntactic sugar over Promises that makes asynchronous code look synchronous.\n\nKey rules:\n- await can only be used inside async functions\n- async functions always return a Promise\n- Use try/catch for error handling with async/await",
     "code": "// Promise\nfunction fetchData(url) {\n    return new Promise((resolve, reject) => {\n        setTimeout(() => {\n            if (url) resolve({ data: 'Success!' });\n            else reject(new Error('No URL'));\n        }, 1000);\n    });\n}\n\n// Using .then()\nfetchData('/api')\n    .then(result => console.log(result))\n    .catch(err => console.error(err));\n\n// Using async/await\nasync function getData() {\n    try {\n        const result = await fetchData('/api');\n        console.log(result);\n    } catch (err) {\n        console.error(err);\n    }\n}\n\ngetData();",
     "language": "javascript"
+  },
+  {
+    "id": "node-mn0n8wdh-hyhbnn",
+    "parentId": null,
+    "type": "folder",
+    "name": "Python Slip"
+  },
+  {
+    "id": "node-mn0n95qp-yo8c3y",
+    "parentId": "node-mn0n8wdh-hyhbnn",
+    "type": "folder",
+    "name": "Slip 1"
+  },
+  {
+    "id": "node-mn0n9901-avbfut",
+    "parentId": "node-mn0n8wdh-hyhbnn",
+    "type": "folder",
+    "name": "Slip 2"
+  },
+  {
+    "id": "node-mn0n9csn-mertih",
+    "parentId": "node-mn0n8wdh-hyhbnn",
+    "type": "folder",
+    "name": "Slip 3"
+  },
+  {
+    "id": "node-mn0n9fik-7bhe44",
+    "parentId": "node-mn0n8wdh-hyhbnn",
+    "type": "folder",
+    "name": "Slip 4"
+  },
+  {
+    "id": "node-mn0n9oc6-731xwx",
+    "parentId": "node-mn0n8wdh-hyhbnn",
+    "type": "folder",
+    "name": "Slip 5"
+  },
+  {
+    "id": "node-mn0n9tbj-ajun3q",
+    "parentId": "node-mn0n8wdh-hyhbnn",
+    "type": "folder",
+    "name": "Slip 6"
+  },
+  {
+    "id": "node-mn0nc7tf-3pdju4",
+    "parentId": "node-mn0n8wdh-hyhbnn",
+    "type": "folder",
+    "name": "Slip 7"
+  },
+  {
+    "id": "node-mn0nddcz-ntwwtr",
+    "parentId": "node-mn0n8wdh-hyhbnn",
+    "type": "folder",
+    "name": "Slip 8"
+  },
+  {
+    "id": "node-mn0ndhzf-tddbl7",
+    "parentId": "node-mn0n8wdh-hyhbnn",
+    "type": "folder",
+    "name": "Slip 9"
+  },
+  {
+    "id": "node-mn0ndlbx-ynm28d",
+    "parentId": "node-mn0n8wdh-hyhbnn",
+    "type": "folder",
+    "name": "Slip 10"
   }
 ]

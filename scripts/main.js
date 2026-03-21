@@ -1,6 +1,6 @@
 // ===== APP ENTRY POINT =====
 import { setState, getState, toggleFocusMode } from './state.js';
-import { getUsername, getContentData, setContentData, getExpandedNodes, getBookmarks } from '../utils/storage.js';
+import { getUsername, fetchContentFromServer, getContentData, setContentData, getExpandedNodes, getBookmarks } from '../utils/storage.js';
 import { initTree } from './modules/tree.js';
 import { initContent, showWelcome } from './modules/content.js';
 import { createPromptHTML } from './modules/terminal.js';
@@ -18,8 +18,15 @@ async function init() {
     return;
   }
 
-  // Load content data
-  let nodes = getContentData();
+  // Load content data from backend
+  let nodes;
+  try {
+    nodes = await fetchContentFromServer();
+  } catch (err) {
+    console.warn('Backend unavailable, using cached data');
+    nodes = getContentData();
+  }
+
   if (!nodes) {
     try {
       const response = await fetch('data/content.json');

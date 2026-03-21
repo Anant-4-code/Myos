@@ -1,6 +1,6 @@
 // ===== ADMIN MODULE =====
 import { getState, setState, setActiveNode } from '../state.js';
-import { getContentData, setContentData, isAdminAuthenticated, setAdminAuthenticated } from '../../utils/storage.js';
+import { fetchContentFromServer, saveContentToServer, getContentData, setContentData, isAdminAuthenticated, setAdminAuthenticated, loginAdmin } from '../../utils/storage.js';
 import { generateId, getDescendants, escapeHtml, getChildren } from '../../utils/helpers.js';
 import { initTree, renderFullTree } from './tree.js';
 import { showToast } from '../../utils/clipboard.js';
@@ -39,11 +39,11 @@ function setupGate(gateEl, dashboardEl) {
   if (input) setTimeout(() => input.focus(), 300);
 
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const pwd = input.value.trim();
-      if (pwd === ADMIN_PASSWORD) {
-        setAdminAuthenticated(true);
+      const success = await loginAdmin(pwd);
+      if (success) {
         showDashboard(gateEl, dashboardEl);
       } else {
         error.textContent = '> Access denied. Invalid password.';
@@ -72,7 +72,8 @@ function showDashboard(gateEl, dashboardEl) {
   initTree(treeContainer, {
     admin: true,
     onEdit: handleEdit,
-    onDelete: handleDelete
+    onDelete: handleDelete,
+    onDuplicate: handleDuplicate
   });
 
   // Setup toolbar buttons
@@ -177,11 +178,14 @@ function applyFilters() {
 /**
  * Render the Analytics Dashboard
  */
-function renderAnalytics() {
+async function renderAnalytics() {
   const container = document.getElementById('view-analytics');
-  const metrics = getOverviewMetrics();
-  const users = getUserTableData();
-  const topContent = getTopContent();
+  container.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--text-muted);">Loading analytics...</div>';
+  const [metrics, users, topContent] = await Promise.all([
+    getOverviewMetrics(),
+    getUserTableData(),
+    getTopContent()
+  ]);
   const { nodes } = getState();
 
   let html = `
@@ -270,19 +274,20 @@ function formatTime(timestamp) {
 /**
  * Load content data
  */
-function loadData() {
-  let data = getContentData();
-  if (!data) {
-    // Load from default
-    fetch('../data/content.json')
-      .then(r => r.json())
-      .then(d => {
-        setContentData(d);
-        setState({ nodes: d });
-      })
-      .catch(() => setState({ nodes: [] }));
-  } else {
-    setState({ nodes: data });
+async function loadData() {
+  try {
+    const nodes = await fetchContentFromServer();
+    if (nodes && nodes.length > 0) {
+      setState({ nodes });
+    } else {
+      // Fallback to localStorage cache
+      const cached = getContentData();
+      setState({ nodes: cached || [] });
+    }
+  } catch (err) {
+    console.error('Failed to load data:', err);
+    const cached = getContentData();
+    setState({ nodes: cached || [] });
   }
 }
 
@@ -397,7 +402,7 @@ function showAddForm(type) {
     const { nodes } = getState();
     const updated = [...nodes, newNode];
     setState({ nodes: updated });
-    setContentData(updated);
+    saveContentToServer(updated);
     showToast(`${type === 'folder' ? 'Folder' : 'Question'} created!`, '✓');
     showEditorWelcome();
   });
@@ -508,7 +513,7 @@ function handleEdit(node) {
       return modified;
     });
     setState({ nodes: updated });
-    setContentData(updated);
+    saveContentToServer(updated);
     showToast('Changes saved!', '✓');
     showEditorWelcome();
   });
@@ -551,11 +556,57 @@ function handleDelete(node) {
     const idsToRemove = new Set([node.id, ...descendants.map(d => d.id)]);
     const updated = nodes.filter(n => !idsToRemove.has(n.id));
     setState({ nodes: updated, activeNodeId: null });
-    setContentData(updated);
+    saveContentToServer(updated);
     overlay.remove();
     showToast('Deleted successfully', '✓');
     showEditorWelcome();
   });
+}
+
+/**
+ * Handle duplicating a node (with all descendants)
+ */
+function handleDuplicate(node) {
+  const { nodes } = getState();
+
+  // Build a map of old ID -> new ID
+  const idMap = new Map();
+  const allIds = [node.id];
+
+  // Collect all descendants
+  function collectDescendants(parentId) {
+    nodes.filter(n => n.parentId === parentId).forEach(child => {
+      allIds.push(child.id);
+      collectDescendants(child.id);
+    });
+  }
+  collectDescendants(node.id);
+
+  // Generate new IDs for all
+  allIds.forEach(oldId => {
+    idMap.set(oldId, generateId());
+  });
+
+  // Clone all nodes, remapping IDs and parentIds
+  const cloned = allIds.map(oldId => {
+    const original = nodes.find(n => n.id === oldId);
+    const clone = JSON.parse(JSON.stringify(original));
+    clone.id = idMap.get(oldId);
+
+    if (oldId === node.id) {
+      // Root clone keeps same parent, rename with "(Copy)"
+      clone.name = clone.name + ' (Copy)';
+    } else {
+      // Remap parentId
+      clone.parentId = idMap.get(clone.parentId) || clone.parentId;
+    }
+    return clone;
+  });
+
+  const updated = [...nodes, ...cloned];
+  setState({ nodes: updated });
+  saveContentToServer(updated);
+  showToast(`Duplicated "${node.name}" with ${cloned.length} item(s)`, '✓');
 }
 
 /**

@@ -1,6 +1,6 @@
 // ===== ANANT_OS PORTFOLIO LANDING LOGIC =====
 import { setUsername } from '../utils/storage.js';
-import { logUserVisit } from './modules/analytics.js';
+import { logUserLogin } from './modules/analytics.js';
 
 const bootOverlay = document.getElementById('boot-overlay');
 const termOutput = document.getElementById('term-output');
@@ -124,9 +124,9 @@ async function processUsername(username) {
   try {
      const res = await fetch('https://api.ipify.org?format=json');
      const data = await res.json();
-     logUserVisit(username, data.ip);
+     logUserLogin(username);
   } catch (err) {
-     logUserVisit(username, 'Unknown IP');
+     logUserLogin(username);
   }
 
   appendOutput(`Welcome aboard, ${username}. Establishing session...`, 'success');

@@ -7,6 +7,7 @@ let treeContainer = null;
 let isAdminMode = false;
 let onAdminEdit = null;
 let onAdminDelete = null;
+let onAdminDuplicate = null;
 
 /**
  * Initialize tree module
@@ -16,6 +17,7 @@ export function initTree(containerEl, options = {}) {
   isAdminMode = options.admin || false;
   onAdminEdit = options.onEdit || null;
   onAdminDelete = options.onDelete || null;
+  onAdminDuplicate = options.onDuplicate || null;
 
   subscribe('expandedSet', () => {
     renderFullTree();
@@ -136,6 +138,15 @@ function createNodeElement(node, depth, filterFunc = null) {
       if (onAdminEdit) onAdminEdit(node);
     });
 
+    const dupBtn = document.createElement('button');
+    dupBtn.className = 'admin-node-btn duplicate';
+    dupBtn.textContent = '⧉';
+    dupBtn.title = 'Duplicate';
+    dupBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (onAdminDuplicate) onAdminDuplicate(node);
+    });
+
     const deleteBtn = document.createElement('button');
     deleteBtn.className = 'admin-node-btn delete';
     deleteBtn.textContent = '✕';
@@ -146,6 +157,7 @@ function createNodeElement(node, depth, filterFunc = null) {
     });
 
     actions.appendChild(editBtn);
+    actions.appendChild(dupBtn);
     actions.appendChild(deleteBtn);
     row.appendChild(actions);
   }
