@@ -2312,5 +2312,869 @@
     "content": "Display all files and folders in current directory.",
     "code": "import os\n\nfor item in os.listdir():\n    print(item)",
     "language": "python"
+  },
+  {
+    "id": "node-a00e728c-d593b8",
+    "parentId": null,
+    "type": "folder",
+    "name": "DS and DBMS Slips"
+  },
+  {
+    "id": "node-aba17ffa-5462f5",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 1"
+  },
+  {
+    "id": "node-079df51c-370b16",
+    "parentId": "node-aba17ffa-5462f5",
+    "type": "question",
+    "name": "Q1",
+    "content": "Implement a Binary search tree (BST) library (btree.h) with operations \u2013 create, search, insert, inorder, preorder and postorder. Write a menu driven program that performs the above operations.",
+    "code": "\ud83d\udccc btree.h\n#include<stdio.h>\n#include<stdlib.h>\n\ntypedef struct node\n{\n    int data;\n    struct node *left, *right;\n}BST;\n\nBST* create(BST* root, int key)\n{\n    if(root==NULL)\n    {\n        root=(BST*)malloc(sizeof(BST));\n        root->data=key;\n        root->left=root->right=NULL;\n    }\n    else if(key < root->data)\n        root->left=create(root->left,key);\n    else\n        root->right=create(root->right,key);\n\n    return root;\n}\n\nBST* search(BST* root,int key)\n{\n    if(root==NULL || root->data==key)\n        return root;\n    else if(key < root->data)\n        return search(root->left,key);\n    else\n        return search(root->right,key);\n}\n\nvoid inorder(BST* root)\n{\n    if(root!=NULL)\n    {\n        inorder(root->left);\n        printf(\"%d \",root->data);\n        inorder(root->right);\n    }\n}\n\nvoid preorder(BST* root)\n{\n    if(root!=NULL)\n    {\n        printf(\"%d \",root->data);\n        preorder(root->left);\n        preorder(root->right);\n    }\n}\n\nvoid postorder(BST* root)\n{\n    if(root!=NULL)\n    {\n        postorder(root->left);\n        postorder(root->right);\n        printf(\"%d \",root->data);\n    }\n}\n\ud83d\udccc main.c\n#include<stdio.h>\n#include<stdlib.h>\n#include \"btree.h\"\n\nint main()\n{\n    BST *root=NULL,*temp;\n    int ch,key;\n\n    while(1)\n    {\n        printf(\"\\n1.Create\\n2.Search\\n3.Inorder\\n4.Preorder\\n5.Postorder\\n6.Exit\\n\");\n        scanf(\"%d\",&ch);\n\n        switch(ch)\n        {\n            case 1:\n                printf(\"Enter values (0 to stop):\\n\");\n                while(1)\n                {\n                    scanf(\"%d\",&key);\n                    if(key==0) break;\n                    root=create(root,key);\n                }\n                break;\n\n            case 2:\n                printf(\"Enter key:\");\n                scanf(\"%d\",&key);\n                temp=search(root,key);\n                if(temp) printf(\"Found\\n\");\n                else printf(\"Not Found\\n\");\n                break;\n\n            case 3:\n                inorder(root);\n                break;\n\n            case 4:\n                preorder(root);\n                break;\n\n            case 5:\n                postorder(root);\n                break;\n\n            case 6:\n                exit(0);\n        }\n    }\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-b2d4c980-d970e8",
+    "parentId": "node-aba17ffa-5462f5",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "Write a stored function to accept eno as input parameter and count number of projects on which that employee is working.",
+    "code": "\ud83d\udccc PostgreSQL Function\nCREATE OR REPLACE FUNCTION count_projects(eid INT)\nRETURNS INT AS $$\nDECLARE\n    total INT;\nBEGIN\n    SELECT COUNT(*) INTO total\n    FROM project_employee\n    WHERE eno = eid;\n\n    RETURN total;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-445006d0-0929cd",
+    "parentId": "node-aba17ffa-5462f5",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "Write a procedure to accept three numbers from user and display addition, subtraction and multiplication of three numbers.",
+    "code": "CREATE OR REPLACE PROCEDURE calc_three(a INT,b INT,c INT)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    RAISE NOTICE 'Addition: %', a+b+c;\n    RAISE NOTICE 'Subtraction: %', a-b-c;\n    RAISE NOTICE 'Multiplication: %', a*b*c;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-2f772189-e15228",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 2"
+  },
+  {
+    "id": "node-d3e2cc65-237e24",
+    "parentId": "node-2f772189-e15228",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program that accepts the vertices and edges of a graph. Create and display adjacency list also print indegree, outdegree and total degree of all vertex of graph.",
+    "code": "#include<stdio.h>\n#include<stdlib.h>\n\nstruct node\n{\n    int vertex;\n    struct node* next;\n};\n\nstruct node* adj[10];\n\nvoid addEdge(int u,int v)\n{\n    struct node* newnode=(struct node*)malloc(sizeof(struct node));\n    newnode->vertex=v;\n    newnode->next=adj[u];\n    adj[u]=newnode;\n}\n\nvoid display(int n)\n{\n    for(int i=1;i<=n;i++)\n    {\n        struct node* temp=adj[i];\n        printf(\"%d -> \",i);\n        while(temp)\n        {\n            printf(\"%d \",temp->vertex);\n            temp=temp->next;\n        }\n        printf(\"\\n\");\n    }\n}\n\nvoid indegree(int n)\n{\n    for(int i=1;i<=n;i++)\n    {\n        int count=0;\n        for(int j=1;j<=n;j++)\n        {\n            struct node* temp=adj[j];\n            while(temp)\n            {\n                if(temp->vertex==i) count++;\n                temp=temp->next;\n            }\n        }\n        printf(\"Indegree(%d)=%d\\n\",i,count);\n    }\n}\n\nvoid outdegree(int n)\n{\n    for(int i=1;i<=n;i++)\n    {\n        int count=0;\n        struct node* temp=adj[i];\n        while(temp)\n        {\n            count++;\n            temp=temp->next;\n        }\n        printf(\"Outdegree(%d)=%d\\n\",i,count);\n    }\n}\n\nint main()\n{\n    int n,e,u,v;\n    printf(\"Enter vertices:\");\n    scanf(\"%d\",&n);\n\n    for(int i=1;i<=n;i++)\n        adj[i]=NULL;\n\n    printf(\"Enter edges:\");\n    scanf(\"%d\",&e);\n\n    for(int i=0;i<e;i++)\n    {\n        scanf(\"%d%d\",&u,&v);\n        addEdge(u,v);\n    }\n\n    display(n);\n    indegree(n);\n    outdegree(n);\n\n    return 0;\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-bc8b31ee-4abf1a",
+    "parentId": "node-2f772189-e15228",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "Write a stored function to print total number of persons of a particular area.",
+    "code": "CREATE OR REPLACE FUNCTION count_persons(area_name VARCHAR)\nRETURNS INT AS $$\nDECLARE\n    total INT;\nBEGIN\n    SELECT COUNT(*) INTO total\n    FROM person p JOIN area a ON p.area_id=a.id\n    WHERE a.aname=area_name;\n\n    RETURN total;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-655c61e1-1140d4",
+    "parentId": "node-2f772189-e15228",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "Procedure for division with error handling",
+    "code": "CREATE OR REPLACE PROCEDURE divide(a INT,b INT)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    IF b=0 THEN\n        RAISE EXCEPTION 'Division by zero';\n    ELSE\n        RAISE NOTICE 'Result: %', a/b;\n    END IF;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-72954b56-ab8d56",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 3"
+  },
+  {
+    "id": "node-f2468d50-7d2d03",
+    "parentId": "node-72954b56-ab8d56",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program that accepts the vertices and edges of a graph and store it as an adjacency matrix. Implement function to traverse the graph using Breadth First Search (BFS) traversal.",
+    "code": "#include<stdio.h>\n\nint adj[10][10], visited[10], queue[10];\nint n;\n\nvoid BFS(int start)\n{\n    int front=0,rear=0;\n    queue[rear++]=start;\n    visited[start]=1;\n\n    while(front<rear)\n    {\n        int v=queue[front++];\n        printf(\"%d \",v);\n\n        for(int i=1;i<=n;i++)\n        {\n            if(adj[v][i]==1 && visited[i]==0)\n            {\n                queue[rear++]=i;\n                visited[i]=1;\n            }\n        }\n    }\n}\n\nint main()\n{\n    int start;\n    printf(\"Enter number of vertices:\");\n    scanf(\"%d\",&n);\n\n    for(int i=1;i<=n;i++)\n    {\n        visited[i]=0;\n        for(int j=1;j<=n;j++)\n        {\n            scanf(\"%d\",&adj[i][j]);\n        }\n    }\n\n    printf(\"Enter starting vertex:\");\n    scanf(\"%d\",&start);\n\n    BFS(start);\n    return 0;\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-87864c74-e1106b",
+    "parentId": "node-72954b56-ab8d56",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "Write a cursor which will accept student number from the user and display student name along with teacher name who taught \u2018RDBMS\u2019 subject.",
+    "code": "CREATE OR REPLACE FUNCTION student_teacher(sid INT)\nRETURNS VOID AS $$\nDECLARE\n    sname VARCHAR;\n    tname VARCHAR;\n    cur CURSOR FOR\n        SELECT s.s_name, t.t_name\n        FROM student s\n        JOIN st_teach st ON s.s_no=st.s_no\n        JOIN teacher t ON st.t_no=t.t_no\n        WHERE st.subject='RDBMS' AND s.s_no=sid;\nBEGIN\n    OPEN cur;\n    LOOP\n        FETCH cur INTO sname,tname;\n        EXIT WHEN NOT FOUND;\n        RAISE NOTICE 'Student: %, Teacher: %', sname,tname;\n    END LOOP;\n    CLOSE cur;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-436eff75-535ca4",
+    "parentId": "node-72954b56-ab8d56",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "Procedure to find min and max of two numbers",
+    "code": "CREATE OR REPLACE PROCEDURE minmax(a INT,b INT)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    IF a>b THEN\n        RAISE NOTICE 'Max=% Min=%',a,b;\n    ELSE\n        RAISE NOTICE 'Max=% Min=%',b,a;\n    END IF;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-84f9c6e0-d32b04",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 4"
+  },
+  {
+    "id": "node-7161946c-b36ce9",
+    "parentId": "node-84f9c6e0-d32b04",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program that accepts the vertices and edges of a graph and store it as an adjacency list. Implement function to traverse the graph using Depth First Search (DFS) traversal.",
+    "code": "#include<stdio.h>\n#include<stdlib.h>\n\nstruct node\n{\n    int vertex;\n    struct node* next;\n};\n\nstruct node* adj[10];\nint visited[10],n;\n\nvoid addEdge(int u,int v)\n{\n    struct node* newnode=(struct node*)malloc(sizeof(struct node));\n    newnode->vertex=v;\n    newnode->next=adj[u];\n    adj[u]=newnode;\n}\n\nvoid DFS(int v)\n{\n    printf(\"%d \",v);\n    visited[v]=1;\n\n    struct node* temp=adj[v];\n    while(temp)\n    {\n        if(!visited[temp->vertex])\n            DFS(temp->vertex);\n        temp=temp->next;\n    }\n}\n\nint main()\n{\n    int e,u,v;\n    scanf(\"%d\",&n);\n\n    for(int i=1;i<=n;i++)\n    {\n        adj[i]=NULL;\n        visited[i]=0;\n    }\n\n    scanf(\"%d\",&e);\n\n    for(int i=0;i<e;i++)\n    {\n        scanf(\"%d%d\",&u,&v);\n        addEdge(u,v);\n    }\n\n    DFS(1);\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-c79d7b40-e5b48d",
+    "parentId": "node-84f9c6e0-d32b04",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "Write a trigger before inserting into movie table to check budget should be minimum 50 lakh.",
+    "code": "CREATE OR REPLACE FUNCTION check_budget()\nRETURNS TRIGGER AS $$\nBEGIN\n    IF NEW.budget < 5000000 THEN\n        RAISE EXCEPTION 'Budget too low';\n    END IF;\n    RETURN NEW;\nEND;\n$$ LANGUAGE plpgsql;\n\nCREATE TRIGGER trg_budget\nBEFORE INSERT ON movies\nFOR EACH ROW\nEXECUTE FUNCTION check_budget();",
+    "language": "sql"
+  },
+  {
+    "id": "node-cbaf7f4e-10eb5a",
+    "parentId": "node-84f9c6e0-d32b04",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "Procedure to check number type",
+    "code": "CREATE OR REPLACE PROCEDURE check_num(n INT)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    IF n>0 THEN\n        RAISE NOTICE 'Positive';\n    ELSIF n<0 THEN\n        RAISE NOTICE 'Negative';\n    ELSE\n        RAISE NOTICE 'Zero';\n    END IF;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-96b23816-0bfa76",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 5"
+  },
+  {
+    "id": "node-02f8629c-ba6c39",
+    "parentId": "node-96b23816-0bfa76",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program for the Implementation of Prim\u2019s Minimum spanning tree algorithm.",
+    "code": "#include<stdio.h>\n\nint main()\n{\n    int n,adj[10][10],visited[10]={0};\n    int i,j,min,a,b,cost=0,edges=1;\n\n    scanf(\"%d\",&n);\n\n    for(i=1;i<=n;i++)\n        for(j=1;j<=n;j++)\n            scanf(\"%d\",&adj[i][j]);\n\n    visited[1]=1;\n\n    while(edges<n)\n    {\n        min=999;\n\n        for(i=1;i<=n;i++)\n        {\n            for(j=1;j<=n;j++)\n            {\n                if(adj[i][j]<min && visited[i])\n                {\n                    min=adj[i][j];\n                    a=i; b=j;\n                }\n            }\n        }\n\n        if(!visited[b])\n        {\n            printf(\"%d -> %d = %d\\n\",a,b,min);\n            cost+=min;\n            edges++;\n        }\n\n        visited[b]=1;\n        adj[a][b]=adj[b][a]=999;\n    }\n\n    printf(\"Cost=%d\",cost);\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-fac7d554-4594f8",
+    "parentId": "node-96b23816-0bfa76",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "Write a function using cursor to accept year and class to display student name, competition name and rank.",
+    "code": "CREATE OR REPLACE FUNCTION student_comp(y INT, cls VARCHAR)\nRETURNS VOID AS $$\nDECLARE\n    sname VARCHAR;\n    cname VARCHAR;\n    r INT;\n\n    cur CURSOR FOR\n    SELECT s.s_name,c.c_name,sc.rank\n    FROM student s,competition c,stud_comp sc\n    WHERE sc.year=y AND s.class=cls;\n\nBEGIN\n    OPEN cur;\n    LOOP\n        FETCH cur INTO sname,cname,r;\n        EXIT WHEN NOT FOUND;\n        RAISE NOTICE '% % %',sname,cname,r;\n    END LOOP;\n    CLOSE cur;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-95bfa659-52dac5",
+    "parentId": "node-96b23816-0bfa76",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "Procedure to find max & min of 3 numbers",
+    "code": "CREATE OR REPLACE PROCEDURE maxmin(a INT,b INT,c INT)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    RAISE NOTICE 'Max=%', GREATEST(a,b,c);\n    RAISE NOTICE 'Min=%', LEAST(a,b,c);\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-55e4796a-26e933",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 6"
+  },
+  {
+    "id": "node-464aaccf-846264",
+    "parentId": "node-55e4796a-26e933",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program for the Implementation of Kruskal\u2019s Minimum spanning tree algorithm.",
+    "code": "#include<stdio.h>\n\nint parent[10];\n\nint find(int i)\n{\n    while(parent[i])\n        i=parent[i];\n    return i;\n}\n\nint uni(int i,int j)\n{\n    if(i!=j)\n    {\n        parent[j]=i;\n        return 1;\n    }\n    return 0;\n}\n\nint main()\n{\n    int n,cost[10][10],i,j,min,a,b,u,v,ne=1,mincost=0;\n\n    printf(\"Enter vertices:\");\n    scanf(\"%d\",&n);\n\n    for(i=1;i<=n;i++)\n    {\n        for(j=1;j<=n;j++)\n        {\n            scanf(\"%d\",&cost[i][j]);\n            if(cost[i][j]==0)\n                cost[i][j]=999;\n        }\n    }\n\n    while(ne<n)\n    {\n        min=999;\n        for(i=1;i<=n;i++)\n        {\n            for(j=1;j<=n;j++)\n            {\n                if(cost[i][j]<min)\n                {\n                    min=cost[i][j];\n                    a=u=i;\n                    b=v=j;\n                }\n            }\n        }\n\n        u=find(u);\n        v=find(v);\n\n        if(uni(u,v))\n        {\n            printf(\"%d edge (%d,%d)=%d\\n\",ne++,a,b,min);\n            mincost+=min;\n        }\n\n        cost[a][b]=cost[b][a]=999;\n    }\n\n    printf(\"Minimum cost=%d\",mincost);\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-f5d7973c-27eb67",
+    "parentId": "node-55e4796a-26e933",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "Write a stored function to accept the bus number and print driver name allotted to that bus.",
+    "code": "CREATE OR REPLACE FUNCTION driver_bus(bno INT)\nRETURNS VOID AS $$\nDECLARE\n    dname VARCHAR;\n    cur CURSOR FOR\n    SELECT driver_name FROM driver d\n    JOIN bus_driver bd ON d.driver_no=bd.driver_no\n    WHERE bd.bus_no=bno;\nBEGIN\n    OPEN cur;\n    LOOP\n        FETCH cur INTO dname;\n        EXIT WHEN NOT FOUND;\n        RAISE NOTICE 'Driver: %', dname;\n    END LOOP;\n    CLOSE cur;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-77aee50a-b1e415",
+    "parentId": "node-55e4796a-26e933",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "Procedure to check even or odd",
+    "code": "CREATE OR REPLACE PROCEDURE evenodd(n INT)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    IF n%2=0 THEN\n        RAISE NOTICE 'Even';\n    ELSE\n        RAISE NOTICE 'Odd';\n    END IF;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-d76161e9-602551",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 7"
+  },
+  {
+    "id": "node-c168f331-174841",
+    "parentId": "node-d76161e9-602551",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program for the implementation of Topological sorting.",
+    "code": "#include<stdio.h>\n\nint adj[10][10],n,indeg[10];\n\nvoid topo()\n{\n    int count=0;\n\n    while(count<n)\n    {\n        for(int i=1;i<=n;i++)\n        {\n            if(indeg[i]==0)\n            {\n                printf(\"%d \",i);\n                indeg[i]=-1;\n\n                for(int j=1;j<=n;j++)\n                {\n                    if(adj[i][j]==1)\n                        indeg[j]--;\n                }\n                count++;\n            }\n        }\n    }\n}\n\nint main()\n{\n    printf(\"Enter vertices:\");\n    scanf(\"%d\",&n);\n\n    for(int i=1;i<=n;i++)\n    {\n        indeg[i]=0;\n        for(int j=1;j<=n;j++)\n        {\n            scanf(\"%d\",&adj[i][j]);\n            if(adj[i][j]==1)\n                indeg[j]++;\n        }\n    }\n\n    topo();\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-dd87946b-bb88dd",
+    "parentId": "node-d76161e9-602551",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "Write a stored function using cursor to count the number of customers of particular branch.",
+    "code": "CREATE OR REPLACE FUNCTION count_customer(bname VARCHAR)\nRETURNS INT AS $$\nDECLARE\n    total INT:=0;\n    rec RECORD;\n    cur CURSOR FOR\n    SELECT * FROM customer c\n    JOIN branch b ON c.br_id=b.br_id\n    WHERE b.br_name=bname;\nBEGIN\n    OPEN cur;\n    LOOP\n        FETCH cur INTO rec;\n        EXIT WHEN NOT FOUND;\n        total:=total+1;\n    END LOOP;\n    CLOSE cur;\n    RETURN total;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-00999a26-940952",
+    "parentId": "node-d76161e9-602551",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "Procedure to find sum of first n numbers",
+    "code": "CREATE OR REPLACE PROCEDURE sum_n(n INT)\nLANGUAGE plpgsql\nAS $$\nDECLARE\n    s INT:=0;\nBEGIN\n    FOR i IN 1..n LOOP\n        s:=s+i;\n    END LOOP;\n\n    RAISE NOTICE 'Sum=%',s;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-f72dc012-d2d01b",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 8"
+  },
+  {
+    "id": "node-ae25204b-4c437f",
+    "parentId": "node-f72dc012-d2d01b",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a program to sort n randomly generated elements using Heapsort method.",
+    "code": "#include<stdio.h>\n#include<stdlib.h>\n\nvoid swap(int *a,int *b)\n{\n    int t=*a; *a=*b; *b=t;\n}\n\nvoid heapify(int arr[],int n,int i)\n{\n    int largest=i;\n    int l=2*i+1;\n    int r=2*i+2;\n\n    if(l<n && arr[l]>arr[largest])\n        largest=l;\n    if(r<n && arr[r]>arr[largest])\n        largest=r;\n\n    if(largest!=i)\n    {\n        swap(&arr[i],&arr[largest]);\n        heapify(arr,n,largest);\n    }\n}\n\nvoid heapSort(int arr[],int n)\n{\n    for(int i=n/2-1;i>=0;i--)\n        heapify(arr,n,i);\n\n    for(int i=n-1;i>=0;i--)\n    {\n        swap(&arr[0],&arr[i]);\n        heapify(arr,i,0);\n    }\n}\n\nint main()\n{\n    int arr[20],n;\n\n    scanf(\"%d\",&n);\n\n    for(int i=0;i<n;i++)\n        arr[i]=rand()%100;\n\n    heapSort(arr,n);\n\n    for(int i=0;i<n;i++)\n        printf(\"%d \",arr[i]);\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-e14a9c6d-7d6521",
+    "parentId": "node-f72dc012-d2d01b",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "Write a stored function to display ticket details of a train.",
+    "code": "CREATE OR REPLACE FUNCTION ticket_details(tname VARCHAR)\nRETURNS VOID AS $$\nDECLARE\n    rec RECORD;\nBEGIN\n    FOR rec IN\n        SELECT * FROM ticket t\n        JOIN train tr ON t.train_no=tr.train_no\n        WHERE tr.train_name=tname\n    LOOP\n        RAISE NOTICE '% % %', rec.ticket_no,rec.bogie_no,rec.ticket_amt;\n    END LOOP;\n\n    IF NOT FOUND THEN\n        RAISE EXCEPTION 'Invalid train name';\n    END IF;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-4b578d51-2ee469",
+    "parentId": "node-f72dc012-d2d01b",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE calc(a INT,b INT)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    RAISE NOTICE 'Add=%',a+b;\n    RAISE NOTICE 'Sub=%',a-b;\n    RAISE NOTICE 'Mul=%',a*b;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-07878eed-3f35dc",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 9"
+  },
+  {
+    "id": "node-30a172e3-e7660f",
+    "parentId": "node-07878eed-3f35dc",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program to implement a hash table using separate chaining with linked lists. Perform insert, search and display.",
+    "code": "#include<stdio.h>\n#include<stdlib.h>\n\nstruct node\n{\n    int data;\n    struct node* next;\n};\n\nstruct node* table[10];\n\nint hash(int key)\n{\n    return key%10;\n}\n\nvoid insert(int key)\n{\n    int h=hash(key);\n    struct node* newnode=(struct node*)malloc(sizeof(struct node));\n    newnode->data=key;\n    newnode->next=table[h];\n    table[h]=newnode;\n}\n\nvoid display()\n{\n    for(int i=0;i<10;i++)\n    {\n        struct node* temp=table[i];\n        printf(\"%d: \",i);\n        while(temp)\n        {\n            printf(\"%d \",temp->data);\n            temp=temp->next;\n        }\n        printf(\"\\n\");\n    }\n}\n\nint main()\n{\n    int n,x;\n    scanf(\"%d\",&n);\n\n    for(int i=0;i<n;i++)\n    {\n        scanf(\"%d\",&x);\n        insert(x);\n    }\n\n    display();\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-19d6b53c-d9ab51",
+    "parentId": "node-07878eed-3f35dc",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "Write a function using cursor to return total prizes won by student in 2020.",
+    "code": "CREATE OR REPLACE FUNCTION prize_count(sname VARCHAR)\nRETURNS INT AS $$\nDECLARE\n    total INT:=0;\n    rec RECORD;\nBEGIN\n    FOR rec IN\n        SELECT prize FROM student_comp\n        WHERE name=sname AND year=2020\n    LOOP\n        total:=total+rec.prize;\n    END LOOP;\n\n    RETURN total;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-b627797f-c6a805",
+    "parentId": "node-07878eed-3f35dc",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE divide(a INT,b INT)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    IF b=0 THEN\n        RAISE EXCEPTION 'Divide by zero';\n    ELSE\n        RAISE NOTICE '%',a/b;\n    END IF;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-ec18f8bd-99dfb4",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 10"
+  },
+  {
+    "id": "node-c10ee4b3-9edde2",
+    "parentId": "node-ec18f8bd-99dfb4",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program for the implementation of Floyd Warshall\u2019s algorithm for finding all pairs shortest path.",
+    "code": "#include<stdio.h>\n\n#define INF 999\n\nint main()\n{\n    int n=4;\n    int a[4][4]={{0,3,INF,5},\n                 {2,0,INF,4},\n                 {INF,1,0,INF},\n                 {INF,INF,2,0}};\n\n    for(int k=0;k<n;k++)\n    {\n        for(int i=0;i<n;i++)\n        {\n            for(int j=0;j<n;j++)\n            {\n                if(a[i][k]+a[k][j]<a[i][j])\n                    a[i][j]=a[i][k]+a[k][j];\n            }\n        }\n    }\n\n    for(int i=0;i<n;i++)\n    {\n        for(int j=0;j<n;j++)\n            printf(\"%d \",a[i][j]);\n        printf(\"\\n\");\n    }\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-a3670859-da7719",
+    "parentId": "node-ec18f8bd-99dfb4",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "",
+    "code": "CREATE OR REPLACE FUNCTION book_author(aname VARCHAR)\nRETURNS VOID AS $$\nDECLARE\n    rec RECORD;\nBEGIN\n    FOR rec IN\n        SELECT * FROM book b\n        JOIN author a ON b.a_no=a.a_no\n        WHERE a.a_name=aname\n    LOOP\n        RAISE NOTICE '% %',rec.b_name,rec.b_price;\n    END LOOP;\n\n    IF NOT FOUND THEN\n        RAISE EXCEPTION 'Invalid author';\n    END IF;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-3f40ea50-23b944",
+    "parentId": "node-ec18f8bd-99dfb4",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE even50()\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    FOR i IN 1..50 LOOP\n        IF i%2=0 THEN\n            RAISE NOTICE '%',i;\n        END IF;\n    END LOOP;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-adc7a47d-771a20",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 11"
+  },
+  {
+    "id": "node-58a9b723-41dddf",
+    "parentId": "node-adc7a47d-771a20",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a program which uses binary search tree library and counts the total nodes and total leaf nodes in the tree.\nint count(T) \u2013 returns total number of nodes\nint countLeaf(T) \u2013 returns total number of leaf nodes",
+    "code": "\ud83d\udd38 btree.h\n#include<stdio.h>\n#include<stdlib.h>\n\ntypedef struct node\n{\n    int data;\n    struct node *left,*right;\n}BST;\n\nBST* create(BST* root,int key)\n{\n    if(root==NULL)\n    {\n        root=(BST*)malloc(sizeof(BST));\n        root->data=key;\n        root->left=root->right=NULL;\n    }\n    else if(key<root->data)\n        root->left=create(root->left,key);\n    else\n        root->right=create(root->right,key);\n\n    return root;\n}\n\nint count(BST* root)\n{\n    if(root==NULL)\n        return 0;\n    return 1 + count(root->left) + count(root->right);\n}\n\nint countLeaf(BST* root)\n{\n    if(root==NULL)\n        return 0;\n\n    if(root->left==NULL && root->right==NULL)\n        return 1;\n\n    return countLeaf(root->left) + countLeaf(root->right);\n}\n\ud83d\udd38 main.c\n#include<stdio.h>\n#include<stdlib.h>\n#include \"btree.h\"\n\nint main()\n{\n    BST *root=NULL;\n    int x;\n\n    printf(\"Enter values (0 to stop):\\n\");\n    while(1)\n    {\n        scanf(\"%d\",&x);\n        if(x==0) break;\n        root=create(root,x);\n    }\n\n    printf(\"Total Nodes=%d\\n\",count(root));\n    printf(\"Leaf Nodes=%d\\n\",countLeaf(root));\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-687f24f8-6b0b8d",
+    "parentId": "node-adc7a47d-771a20",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "Write a stored function using cursor to calculate total marks of each student and display it.",
+    "code": "CREATE OR REPLACE FUNCTION total_marks()\nRETURNS VOID AS $$\nDECLARE\n    rec RECORD;\nBEGIN\n    FOR rec IN\n        SELECT rollno, SUM(marks) AS total\n        FROM student_subject\n        GROUP BY rollno\n    LOOP\n        RAISE NOTICE 'Roll: %, Total: %', rec.rollno, rec.total;\n    END LOOP;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-4723a121-d5a091",
+    "parentId": "node-adc7a47d-771a20",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "Procedure to find sum and average of first n numbers",
+    "code": "CREATE OR REPLACE PROCEDURE sum_avg(n INT)\nLANGUAGE plpgsql\nAS $$\nDECLARE\n    s INT:=0;\nBEGIN\n    FOR i IN 1..n LOOP\n        s:=s+i;\n    END LOOP;\n\n    RAISE NOTICE 'Sum=%',s;\n    RAISE NOTICE 'Average=%',s/n;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-f24eee03-fd6f6e",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 12"
+  },
+  {
+    "id": "node-2443575b-f573fb",
+    "parentId": "node-f24eee03-fd6f6e",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a program to implement various types of hash functions:\na) Division Method\nb) Mid Square Method\nc) Digit Folding Method\nDisplay collision messages",
+    "code": "#include<stdio.h>\n\nint division(int key)\n{\n    return key%10;\n}\n\nint midsquare(int key)\n{\n    int sq=key*key;\n    return (sq/10)%10;\n}\n\nint folding(int key)\n{\n    int sum=0;\n    while(key>0)\n    {\n        sum+=key%10;\n        key/=10;\n    }\n    return sum%10;\n}\n\nint main()\n{\n    int n,key,table[10]={-1};\n\n    scanf(\"%d\",&n);\n\n    for(int i=0;i<n;i++)\n    {\n        scanf(\"%d\",&key);\n\n        int h=division(key);\n\n        if(table[h]!=-1)\n            printf(\"Collision at %d\\n\",h);\n        else\n            table[h]=key;\n    }\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-967a79ce-8354e5",
+    "parentId": "node-f24eee03-fd6f6e",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "Write a trigger before inserting into project table to check duration > 0",
+    "code": "CREATE OR REPLACE FUNCTION check_duration()\nRETURNS TRIGGER AS $$\nBEGIN\n    IF NEW.duration<=0 THEN\n        RAISE EXCEPTION 'Invalid duration';\n    END IF;\n    RETURN NEW;\nEND;\n$$ LANGUAGE plpgsql;\n\nCREATE TRIGGER trg_duration\nBEFORE INSERT ON project\nFOR EACH ROW\nEXECUTE FUNCTION check_duration();",
+    "language": "sql"
+  },
+  {
+    "id": "node-709568c3-6bbd25",
+    "parentId": "node-f24eee03-fd6f6e",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE count_odd(m INT,n INT)\nLANGUAGE plpgsql\nAS $$\nDECLARE\n    c INT:=0;\nBEGIN\n    FOR i IN m..n LOOP\n        IF i%2=1 THEN\n            c:=c+1;\n        END IF;\n    END LOOP;\n\n    RAISE NOTICE 'Odd count=%',c;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-b16138e5-e028ee",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 13"
+  },
+  {
+    "id": "node-ad724cd8-9efb3a",
+    "parentId": "node-b16138e5-e028ee",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program that accepts vertices and edges, create adjacency list and print indegree, outdegree and total degree.",
+    "code": "#include<stdio.h>\n#include<stdlib.h>\n\nstruct node\n{\n    int v;\n    struct node* next;\n};\n\nstruct node* adj[10];\n\nvoid add(int u,int v)\n{\n    struct node* n=(struct node*)malloc(sizeof(struct node));\n    n->v=v;\n    n->next=adj[u];\n    adj[u]=n;\n}\n\nint main()\n{\n    int n,e,u,v;\n\n    scanf(\"%d%d\",&n,&e);\n\n    for(int i=1;i<=n;i++)\n        adj[i]=NULL;\n\n    for(int i=0;i<e;i++)\n    {\n        scanf(\"%d%d\",&u,&v);\n        add(u,v);\n    }\n\n    for(int i=1;i<=n;i++)\n    {\n        int out=0,in=0;\n        struct node* t=adj[i];\n\n        while(t){ out++; t=t->next; }\n\n        for(int j=1;j<=n;j++)\n        {\n            t=adj[j];\n            while(t)\n            {\n                if(t->v==i) in++;\n                t=t->next;\n            }\n        }\n\n        printf(\"V=%d In=%d Out=%d Total=%d\\n\",i,in,out,in+out);\n    }\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-6db8100b-66d661",
+    "parentId": "node-b16138e5-e028ee",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "",
+    "code": "CREATE OR REPLACE FUNCTION drivers(busno INT,d DATE)\nRETURNS VOID AS $$\nDECLARE\n    rec RECORD;\nBEGIN\n    FOR rec IN\n        SELECT driver_name FROM driver d1\n        JOIN bus_driver bd ON d1.driver_no=bd.driver_no\n        WHERE bd.bus_no=busno\n    LOOP\n        RAISE NOTICE '%',rec.driver_name;\n    END LOOP;\n\n    IF NOT FOUND THEN\n        RAISE EXCEPTION 'Invalid bus';\n    END IF;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-062bb46d-bdbcfd",
+    "parentId": "node-b16138e5-e028ee",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE odd_n(n INT)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    FOR i IN 1..n LOOP\n        IF i%2=1 THEN\n            RAISE NOTICE '%',i;\n        END IF;\n    END LOOP;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-abadc5c5-4adccc",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 14"
+  },
+  {
+    "id": "node-7b7c0181-b604de",
+    "parentId": "node-abadc5c5-4adccc",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program to maintain a phonebook using BST (name + phone)",
+    "code": "#include<stdio.h>\n#include<stdlib.h>\n#include<string.h>\n\nstruct node\n{\n    char name[20];\n    int phone;\n    struct node *left,*right;\n};\n\nstruct node* create(struct node* root,char name[],int phone)\n{\n    if(root==NULL)\n    {\n        root=(struct node*)malloc(sizeof(struct node));\n        strcpy(root->name,name);\n        root->phone=phone;\n        root->left=root->right=NULL;\n    }\n    else if(strcmp(name,root->name)<0)\n        root->left=create(root->left,name,phone);\n    else\n        root->right=create(root->right,name,phone);\n\n    return root;\n}\n\nvoid inorder(struct node* root)\n{\n    if(root)\n    {\n        inorder(root->left);\n        printf(\"%s %d\\n\",root->name,root->phone);\n        inorder(root->right);\n    }\n}\n\nint main()\n{\n    struct node* root=NULL;\n    char name[20];\n    int phone;\n\n    for(int i=0;i<3;i++)\n    {\n        scanf(\"%s%d\",name,&phone);\n        root=create(root,name,phone);\n    }\n\n    inorder(root);\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-fab6ff8e-6bfd04",
+    "parentId": "node-abadc5c5-4adccc",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "",
+    "code": "CREATE OR REPLACE FUNCTION project_emp(pname VARCHAR)\nRETURNS VOID AS $$\nDECLARE\n    rec RECORD;\nBEGIN\n    FOR rec IN\n        SELECT e_name FROM employee e\n        JOIN proj_emp pe ON e.eno=pe.eno\n        JOIN project p ON p.pno=pe.pno\n        WHERE p.p_name=pname\n    LOOP\n        RAISE NOTICE '%',rec.e_name;\n    END LOOP;\n\n    IF NOT FOUND THEN\n        RAISE EXCEPTION 'Invalid project';\n    END IF;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-9eb384f0-b4ec21",
+    "parentId": "node-abadc5c5-4adccc",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE insert_proj(pno INT,name VARCHAR)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    INSERT INTO project VALUES(pno,name);\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-d8756273-38f45f",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 15"
+  },
+  {
+    "id": "node-bea6cdee-2049fc",
+    "parentId": "node-d8756273-38f45f",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program to implement hash table using quadratic probing",
+    "code": "#include<stdio.h>\n\nint table[10];\n\nvoid insert(int key)\n{\n    int h=key%10,i=1;\n\n    while(table[h]!=0)\n    {\n        h=(h+i*i)%10;\n        i++;\n    }\n\n    table[h]=key;\n}\n\nvoid display()\n{\n    for(int i=0;i<10;i++)\n        printf(\"%d \",table[i]);\n}\n\nint main()\n{\n    int n,x;\n\n    scanf(\"%d\",&n);\n\n    for(int i=0;i<n;i++)\n    {\n        scanf(\"%d\",&x);\n        insert(x);\n    }\n\n    display();\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-8181d2bd-cd4b3d",
+    "parentId": "node-d8756273-38f45f",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "",
+    "code": "CREATE OR REPLACE FUNCTION update_income()\nRETURNS VOID AS $$\nBEGIN\n    UPDATE person\n    SET income=income*1.10\n    WHERE area_type='urban';\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-cd3a55b3-9b7e92",
+    "parentId": "node-d8756273-38f45f",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE odd100()\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    FOR i IN 1..100 LOOP\n        IF i%2=1 THEN\n            RAISE NOTICE '%',i;\n        END IF;\n    END LOOP;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-c35cb6cf-ca8ef5",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 16"
+  },
+  {
+    "id": "node-80d50418-79a81d",
+    "parentId": "node-c35cb6cf-ca8ef5",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program for the implementation of Dijkstra\u2019s shortest path algorithm for finding shortest path from a given source vertex using adjacency cost matrix.",
+    "code": "#include<stdio.h>\n\n#define INF 999\n\nint main()\n{\n    int n, cost[10][10], dist[10], visited[10]={0};\n    int i,j,min,u,source;\n\n    scanf(\"%d\",&n);\n\n    for(i=1;i<=n;i++)\n    {\n        for(j=1;j<=n;j++)\n        {\n            scanf(\"%d\",&cost[i][j]);\n            if(cost[i][j]==0)\n                cost[i][j]=INF;\n        }\n    }\n\n    printf(\"Enter source:\");\n    scanf(\"%d\",&source);\n\n    for(i=1;i<=n;i++)\n    {\n        dist[i]=cost[source][i];\n        visited[i]=0;\n    }\n\n    visited[source]=1;\n\n    for(int count=1;count<n;count++)\n    {\n        min=INF;\n\n        for(i=1;i<=n;i++)\n        {\n            if(!visited[i] && dist[i]<min)\n            {\n                min=dist[i];\n                u=i;\n            }\n        }\n\n        visited[u]=1;\n\n        for(j=1;j<=n;j++)\n        {\n            if(!visited[j] && dist[u]+cost[u][j]<dist[j])\n                dist[j]=dist[u]+cost[u][j];\n        }\n    }\n\n    for(i=1;i<=n;i++)\n        printf(\"Dist to %d = %d\\n\",i,dist[i]);\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-5a0e48b4-91c6d3",
+    "parentId": "node-c35cb6cf-ca8ef5",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "Write a stored function using cursors to calculate total marks of each student and display it.",
+    "code": "CREATE OR REPLACE FUNCTION total_marks()\nRETURNS VOID AS $$\nDECLARE\n    rec RECORD;\nBEGIN\n    FOR rec IN\n        SELECT rollno, SUM(marks_scored) AS total\n        FROM student_subject\n        GROUP BY rollno\n    LOOP\n        RAISE NOTICE 'Roll: %, Total: %', rec.rollno, rec.total;\n    END LOOP;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-9c77b8fd-b27101",
+    "parentId": "node-c35cb6cf-ca8ef5",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "Procedure to check number is positive, negative or zero",
+    "code": "CREATE OR REPLACE PROCEDURE check_num(n INT)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    IF n>0 THEN\n        RAISE NOTICE 'Positive';\n    ELSIF n<0 THEN\n        RAISE NOTICE 'Negative';\n    ELSE\n        RAISE NOTICE 'Zero';\n    END IF;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-3847b360-916d05",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 17"
+  },
+  {
+    "id": "node-da64cf13-6fdc59",
+    "parentId": "node-3847b360-916d05",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program that accepts vertices and edges. Create adjacency list and print indegree, outdegree and total degree of all vertices.",
+    "code": "#include<stdio.h>\n#include<stdlib.h>\n\nstruct node\n{\n    int v;\n    struct node* next;\n};\n\nstruct node* adj[10];\n\nvoid add(int u,int v)\n{\n    struct node* n=(struct node*)malloc(sizeof(struct node));\n    n->v=v;\n    n->next=adj[u];\n    adj[u]=n;\n}\n\nint main()\n{\n    int n,e,u,v;\n    scanf(\"%d%d\",&n,&e);\n\n    for(int i=1;i<=n;i++)\n        adj[i]=NULL;\n\n    for(int i=0;i<e;i++)\n    {\n        scanf(\"%d%d\",&u,&v);\n        add(u,v);\n    }\n\n    for(int i=1;i<=n;i++)\n    {\n        int in=0,out=0;\n        struct node* t=adj[i];\n\n        while(t){ out++; t=t->next; }\n\n        for(int j=1;j<=n;j++)\n        {\n            t=adj[j];\n            while(t)\n            {\n                if(t->v==i) in++;\n                t=t->next;\n            }\n        }\n\n        printf(\"V=%d In=%d Out=%d Total=%d\\n\",i,in,out,in+out);\n    }\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-4fed092a-160bff",
+    "parentId": "node-3847b360-916d05",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "",
+    "code": "CREATE OR REPLACE FUNCTION prize_count(sname VARCHAR)\nRETURNS INT AS $$\nDECLARE\n    total INT:=0;\nBEGIN\n    SELECT SUM(prize) INTO total\n    FROM student_comp\n    WHERE name=sname AND year=2020;\n\n    RETURN total;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-213401e4-fdf266",
+    "parentId": "node-3847b360-916d05",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE sum50()\nLANGUAGE plpgsql\nAS $$\nDECLARE\n    s INT:=0;\nBEGIN\n    FOR i IN 1..50 LOOP\n        s:=s+i;\n    END LOOP;\n\n    RAISE NOTICE 'Sum=%',s;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-7fd5753c-d8b06e",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 18"
+  },
+  {
+    "id": "node-ea6150d7-6d8075",
+    "parentId": "node-7fd5753c-d8b06e",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program that accepts vertices and edges and stores it as adjacency matrix. Display adjacency matrix.",
+    "code": "#include<stdio.h>\n\nint main()\n{\n    int n,adj[10][10];\n\n    scanf(\"%d\",&n);\n\n    for(int i=1;i<=n;i++)\n    {\n        for(int j=1;j<=n;j++)\n        {\n            scanf(\"%d\",&adj[i][j]);\n        }\n    }\n\n    printf(\"Matrix:\\n\");\n\n    for(int i=1;i<=n;i++)\n    {\n        for(int j=1;j<=n;j++)\n            printf(\"%d \",adj[i][j]);\n        printf(\"\\n\");\n    }\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-a98e09af-bf7153",
+    "parentId": "node-7fd5753c-d8b06e",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "",
+    "code": "CREATE OR REPLACE FUNCTION items_rate()\nRETURNS VOID AS $$\nDECLARE\n    rec RECORD;\nBEGIN\n    FOR rec IN\n        SELECT itemname FROM item_supplier\n        WHERE rate>500\n    LOOP\n        RAISE NOTICE '%',rec.itemname;\n    END LOOP;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-f2fa4bc5-080b98",
+    "parentId": "node-7fd5753c-d8b06e",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE max3(a INT,b INT,c INT)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    RAISE NOTICE 'Max=%',GREATEST(a,b,c);\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-15dd708b-468bb3",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 19"
+  },
+  {
+    "id": "node-8cd9142d-5c254b",
+    "parentId": "node-15dd708b-468bb3",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program to maintain phonebook using BST (name + phone).\n\n\ud83d\udc49 (Same as Slip 14 \u2013 reuse code in exam)\n\n\ud83d\udd39 Section II: DBMS-II",
+    "code": "",
+    "language": "python"
+  },
+  {
+    "id": "node-12e5ca67-b177b3",
+    "parentId": "node-15dd708b-468bb3",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "",
+    "code": "CREATE OR REPLACE FUNCTION count_proj(eid INT)\nRETURNS INT AS $$\nDECLARE\n    total INT;\nBEGIN\n    SELECT COUNT(*) INTO total\n    FROM project_employee\n    WHERE eno=eid;\n\n    RETURN total;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-bdf6c094-14973d",
+    "parentId": "node-15dd708b-468bb3",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE minmax(a INT,b INT)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    RAISE NOTICE 'Max=%',GREATEST(a,b);\n    RAISE NOTICE 'Min=%',LEAST(a,b);\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-8903a148-615497",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 20"
+  },
+  {
+    "id": "node-64ca95dc-2464f0",
+    "parentId": "node-8903a148-615497",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program that accepts vertices and edges, create adjacency list and perform DFS traversal.",
+    "code": "#include<stdio.h>\n#include<stdlib.h>\n\nstruct node\n{\n    int v;\n    struct node* next;\n};\n\nstruct node* adj[10];\nint visited[10];\n\nvoid add(int u,int v)\n{\n    struct node* n=(struct node*)malloc(sizeof(struct node));\n    n->v=v;\n    n->next=adj[u];\n    adj[u]=n;\n}\n\nvoid dfs(int v)\n{\n    printf(\"%d \",v);\n    visited[v]=1;\n\n    struct node* t=adj[v];\n\n    while(t)\n    {\n        if(!visited[t->v])\n            dfs(t->v);\n        t=t->next;\n    }\n}\n\nint main()\n{\n    int n,e,u,v;\n\n    scanf(\"%d%d\",&n,&e);\n\n    for(int i=1;i<=n;i++)\n    {\n        adj[i]=NULL;\n        visited[i]=0;\n    }\n\n    for(int i=0;i<e;i++)\n    {\n        scanf(\"%d%d\",&u,&v);\n        add(u,v);\n    }\n\n    dfs(1);\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-ab677fa7-78755f",
+    "parentId": "node-8903a148-615497",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "",
+    "code": "CREATE OR REPLACE FUNCTION max_salary(dname VARCHAR)\nRETURNS INT AS $$\nDECLARE\n    maxsal INT;\nBEGIN\n    SELECT MAX(salary) INTO maxsal\n    FROM employee e\n    JOIN department d ON e.dno=d.dno\n    WHERE d.dname=dname;\n\n    RETURN maxsal;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-4c7eb2e3-d23f2c",
+    "parentId": "node-8903a148-615497",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE table_n(n INT)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    FOR i IN 1..10 LOOP\n        RAISE NOTICE '% x % = %',n,i,n*i;\n    END LOOP;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-0593165c-a32fa4",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 21"
+  },
+  {
+    "id": "node-a2623a21-37a081",
+    "parentId": "node-0593165c-a32fa4",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program for the implementation of Topological sorting.",
+    "code": "#include<stdio.h>\n\nint adj[10][10], indeg[10], n;\n\nvoid topo()\n{\n    int count=0;\n\n    while(count<n)\n    {\n        for(int i=1;i<=n;i++)\n        {\n            if(indeg[i]==0)\n            {\n                printf(\"%d \",i);\n                indeg[i]=-1;\n\n                for(int j=1;j<=n;j++)\n                {\n                    if(adj[i][j]==1)\n                        indeg[j]--;\n                }\n                count++;\n            }\n        }\n    }\n}\n\nint main()\n{\n    scanf(\"%d\",&n);\n\n    for(int i=1;i<=n;i++)\n    {\n        indeg[i]=0;\n        for(int j=1;j<=n;j++)\n        {\n            scanf(\"%d\",&adj[i][j]);\n            if(adj[i][j]==1)\n                indeg[j]++;\n        }\n    }\n\n    topo();\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-00265980-cc9727",
+    "parentId": "node-0593165c-a32fa4",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "Write a function which accepts hospital name and calculates average charges of doctors.",
+    "code": "CREATE OR REPLACE FUNCTION avg_charge(hname VARCHAR)\nRETURNS NUMERIC AS $$\nDECLARE\n    avgc NUMERIC;\nBEGIN\n    SELECT AVG(charges) INTO avgc\n    FROM doctor d JOIN hospital h ON d.h_no=h.h_no\n    WHERE h.h_name=hname;\n\n    RETURN avgc;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-e5d263b5-47ba26",
+    "parentId": "node-0593165c-a32fa4",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE insert_doctor(dno INT,name VARCHAR)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    INSERT INTO doctor VALUES(dno,name);\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-f2920fdc-2027a3",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 22"
+  },
+  {
+    "id": "node-73f7b812-a7f605",
+    "parentId": "node-f2920fdc-2027a3",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program to implement hash table using quadratic probing (insert, search, display).",
+    "code": "#include<stdio.h>\n\nint table[10];\n\nvoid insert(int key)\n{\n    int h=key%10,i=1;\n\n    while(table[h]!=0)\n    {\n        h=(h+i*i)%10;\n        i++;\n    }\n\n    table[h]=key;\n}\n\nint search(int key)\n{\n    int h=key%10,i=1;\n\n    while(table[h]!=0)\n    {\n        if(table[h]==key)\n            return 1;\n        h=(h+i*i)%10;\n        i++;\n    }\n    return 0;\n}\n\nvoid display()\n{\n    for(int i=0;i<10;i++)\n        printf(\"%d \",table[i]);\n}\n\nint main()\n{\n    int n,x;\n\n    scanf(\"%d\",&n);\n\n    for(int i=0;i<n;i++)\n    {\n        scanf(\"%d\",&x);\n        insert(x);\n    }\n\n    display();\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-0022dafe-536094",
+    "parentId": "node-f2920fdc-2027a3",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "",
+    "code": "CREATE OR REPLACE FUNCTION emp_project(eid INT)\nRETURNS INT AS $$\nDECLARE\n    total INT;\nBEGIN\n    SELECT COUNT(*) INTO total\n    FROM project_employee\n    WHERE eno=eid;\n\n    RETURN total;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-6757caa3-a59bce",
+    "parentId": "node-f2920fdc-2027a3",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE odd20()\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    FOR i IN 1..40 LOOP\n        IF i%2=1 THEN\n            RAISE NOTICE '%',i;\n        END IF;\n    END LOOP;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-5310d0d3-12ac21",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 23"
+  },
+  {
+    "id": "node-c83d8155-581039",
+    "parentId": "node-5310d0d3-12ac21",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program to find height of tree and check whether tree is balanced or not.",
+    "code": "#include<stdio.h>\n#include<stdlib.h>\n\nstruct node\n{\n    int data;\n    struct node *left,*right;\n};\n\nint height(struct node* root)\n{\n    if(root==NULL) return 0;\n\n    int l=height(root->left);\n    int r=height(root->right);\n\n    return (l>r?l:r)+1;\n}\n\nint main()\n{\n    struct node* root=NULL;\n\n    // assume tree created\n\n    int hl=height(root->left);\n    int hr=height(root->right);\n\n    if(abs(hl-hr)<2)\n        printf(\"Balanced\");\n    else\n        printf(\"Not Balanced\");\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-7c13d804-3d0262",
+    "parentId": "node-5310d0d3-12ac21",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "",
+    "code": "CREATE OR REPLACE FUNCTION car_driver(dname VARCHAR)\nRETURNS VOID AS $$\nDECLARE\n    rec RECORD;\nBEGIN\n    FOR rec IN\n        SELECT * FROM car_driver\n        WHERE driver_name=dname\n    LOOP\n        RAISE NOTICE '%',rec.model;\n    END LOOP;\n\n    IF NOT FOUND THEN\n        RAISE NOTICE 'Invalid driver';\n    END IF;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-ee159d75-7aa577",
+    "parentId": "node-5310d0d3-12ac21",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE sum100()\nLANGUAGE plpgsql\nAS $$\nDECLARE\n    s INT:=0;\nBEGIN\n    FOR i IN 1..100 LOOP\n        s:=s+i;\n    END LOOP;\n\n    RAISE NOTICE 'Sum=%',s;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-e6ae7fd5-178ea4",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 24"
+  },
+  {
+    "id": "node-25d405d7-c0864a",
+    "parentId": "node-e6ae7fd5-178ea4",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program for the implementation of Floyd Warshall algorithm.",
+    "code": "#include<stdio.h>\n#define INF 999\n\nint main()\n{\n    int a[4][4]={{0,3,INF,5},\n                 {2,0,INF,4},\n                 {INF,1,0,INF},\n                 {INF,INF,2,0}};\n\n    for(int k=0;k<4;k++)\n    {\n        for(int i=0;i<4;i++)\n        {\n            for(int j=0;j<4;j++)\n            {\n                if(a[i][k]+a[k][j]<a[i][j])\n                    a[i][j]=a[i][k]+a[k][j];\n            }\n        }\n    }\n\n    for(int i=0;i<4;i++)\n    {\n        for(int j=0;j<4;j++)\n            printf(\"%d \",a[i][j]);\n        printf(\"\\n\");\n    }\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-577b7e02-828a5b",
+    "parentId": "node-e6ae7fd5-178ea4",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "",
+    "code": "CREATE OR REPLACE FUNCTION emp_dept(dname VARCHAR)\nRETURNS VOID AS $$\nDECLARE\n    rec RECORD;\nBEGIN\n    FOR rec IN\n        SELECT ename,salary FROM employee e\n        JOIN department d ON e.dno=d.dno\n        WHERE d.dname=dname\n    LOOP\n        RAISE NOTICE '% %',rec.ename,rec.salary;\n    END LOOP;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-b68a5d41-27ce7a",
+    "parentId": "node-e6ae7fd5-178ea4",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE even_n(n INT)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    FOR i IN 1..n LOOP\n        IF i%2=0 THEN\n            RAISE NOTICE '%',i;\n        END IF;\n    END LOOP;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-4b125239-983255",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 25"
+  },
+  {
+    "id": "node-d8728a03-1226aa",
+    "parentId": "node-4b125239-983255",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program for Dijkstra\u2019s algorithm.\n\n\ud83d\udc49 (Same as Slip 16 \u2014 reuse in exam)\n\n\ud83d\udd39 Section II: DBMS-II",
+    "code": "",
+    "language": "python"
+  },
+  {
+    "id": "node-9c068a4e-be5832",
+    "parentId": "node-4b125239-983255",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "",
+    "code": "CREATE OR REPLACE FUNCTION customer_city(cityname VARCHAR)\nRETURNS VOID AS $$\nDECLARE\n    rec RECORD;\nBEGIN\n    FOR rec IN\n        SELECT * FROM customer WHERE city=cityname\n    LOOP\n        RAISE NOTICE '%',rec.cname;\n    END LOOP;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-ec113e1e-43eaa8",
+    "parentId": "node-4b125239-983255",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE pune_customers()\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    FOR rec IN SELECT * FROM customer WHERE city='Pune'\n    LOOP\n        RAISE NOTICE '%',rec.cname;\n    END LOOP;\nEND;\n$$;",
+    "language": "sql"
+  },
+  {
+    "id": "node-7c6516be-66479e",
+    "parentId": "node-a00e728c-d593b8",
+    "type": "folder",
+    "name": "Slip 26"
+  },
+  {
+    "id": "node-1bd70eed-6d971d",
+    "parentId": "node-7c6516be-66479e",
+    "type": "question",
+    "name": "Q1",
+    "content": "Write a C program to store graph as adjacency matrix and perform DFS traversal.",
+    "code": "#include<stdio.h>\n\nint adj[10][10],visited[10],n;\n\nvoid dfs(int v)\n{\n    printf(\"%d \",v);\n    visited[v]=1;\n\n    for(int i=1;i<=n;i++)\n    {\n        if(adj[v][i]==1 && !visited[i])\n            dfs(i);\n    }\n}\n\nint main()\n{\n    scanf(\"%d\",&n);\n\n    for(int i=1;i<=n;i++)\n    {\n        visited[i]=0;\n        for(int j=1;j<=n;j++)\n            scanf(\"%d\",&adj[i][j]);\n    }\n\n    dfs(1);\n}\n\ud83d\udd39 Section II: DBMS-II",
+    "language": "c"
+  },
+  {
+    "id": "node-86462337-97ae77",
+    "parentId": "node-7c6516be-66479e",
+    "type": "question",
+    "name": "Q2 (1",
+    "content": "",
+    "code": "CREATE OR REPLACE FUNCTION item_rate(iname VARCHAR)\nRETURNS VOID AS $$\nDECLARE\n    rec RECORD;\nBEGIN\n    FOR rec IN\n        SELECT rate,supplier_name FROM item_supplier\n        WHERE itemname=iname\n    LOOP\n        RAISE NOTICE '% %',rec.rate,rec.supplier_name;\n    END LOOP;\nEND;\n$$ LANGUAGE plpgsql;",
+    "language": "sql"
+  },
+  {
+    "id": "node-d3265c80-4b659f",
+    "parentId": "node-7c6516be-66479e",
+    "type": "question",
+    "name": "Q2 (2",
+    "content": "",
+    "code": "CREATE OR REPLACE PROCEDURE calc_all(a INT,b INT)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    RAISE NOTICE 'Add=%',a+b;\n    RAISE NOTICE 'Sub=%',a-b;\n    RAISE NOTICE 'Mul=%',a*b;\n    RAISE NOTICE 'Div=%',a/b;\nEND;\n$$;",
+    "language": "sql"
   }
 ]
