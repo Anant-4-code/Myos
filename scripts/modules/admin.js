@@ -6,7 +6,7 @@ import { initTree, renderFullTree } from './tree.js';
 import { showToast } from '../../utils/clipboard.js';
 import { getOverviewMetrics, getUserTableData, getTopContent } from './analytics.js';
 
-const ADMIN_PASSWORD = 'admin123';
+const ADMIN_PASSWORD = 'admin862';
 
 let editorPanel = null;
 let treeContainer = null;
@@ -379,36 +379,40 @@ function showAddForm(type) {
   // Focus name input
   setTimeout(() => document.getElementById('add-name')?.focus(), 100);
 
-  // Handle submit
-  document.getElementById('add-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const newNode = {
-      id: generateId(),
-      parentId: document.getElementById('add-parent').value || null,
-      type: type,
-      name: document.getElementById('add-name').value.trim()
-    };
-
-    if (type === 'question') {
-      newNode.answers = Array.from(document.querySelectorAll('.answer-block')).map(block => ({
-        content: block.querySelector('.answer-content').value,
-        code: block.querySelector('.answer-code').value,
-        language: block.querySelector('.answer-language').value
-      }));
-    }
-
-    if (!newNode.name) return;
-
-    const { nodes } = getState();
-    const updated = [...nodes, newNode];
-    setState({ nodes: updated });
-    saveContentToServer(updated);
-    showToast(`${type === 'folder' ? 'Folder' : 'Question'} created!`, '✓');
-    showEditorWelcome();
-  });
-
-  document.getElementById('add-cancel')?.addEventListener('click', showEditorWelcome);
-}
+    // Handle submit
+    document.getElementById('add-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const newNode = {
+        id: generateId(),
+        parentId: document.getElementById('add-parent').value || null,
+        type: type,
+        name: document.getElementById('add-name').value.trim()
+      };
+  
+      if (type === 'question') {
+        newNode.answers = Array.from(document.querySelectorAll('.answer-block')).map(block => ({
+          question: block.querySelector('.answer-question').value.trim(),
+          content: block.querySelector('.answer-content').value,
+          snippets: Array.from(block.querySelectorAll('.snippet-block')).map(sBlock => ({
+            code: sBlock.querySelector('.answer-code').value,
+            label: sBlock.querySelector('.answer-code-label').value.trim() || 'Code',
+            language: sBlock.querySelector('.answer-language').value
+          }))
+        }));
+      }
+  
+      if (!newNode.name) return;
+  
+      const { nodes } = getState();
+      const updated = [...nodes, newNode];
+      setState({ nodes: updated });
+      saveContentToServer(updated);
+      showToast(`${type === 'folder' ? 'Folder' : 'Question'} created!`, '✓');
+      showEditorWelcome();
+    });
+  
+    document.getElementById('add-cancel')?.addEventListener('click', showEditorWelcome);
+  }
 
 /**
  * Handle editing a node
@@ -440,7 +444,7 @@ function handleEdit(node) {
   `;
 
   if (node.type === 'question') {
-    const answers = node.answers || (node.content || node.code ? [{ content: node.content, code: node.code, language: node.language }] : [{ content: '', code: '', language: 'plaintext' }]);
+    const answers = node.answers || (node.content || node.code ? [{ content: node.content, code: node.code, language: node.language, codeLabel: node.codeLabel, snippets: node.snippets }] : [{ content: '', code: '', language: 'plaintext' }]);
     
     html += `
         <div class="form-group" style="padding: 10px; background: rgba(0, 150, 255, 0.1); border: 1px dashed var(--primary-color); border-radius: 6px; margin-bottom: 15px; text-align: center;">
@@ -454,7 +458,7 @@ function handleEdit(node) {
             <button type="button" class="btn btn-sm btn-secondary" id="edit-answer-btn">+ Add Answer</button>
           </div>
           <div id="answers-container">
-            ${answers.map((ans, i) => getAnswerBlockHTML(i, ans.content, ans.code, ans.language)).join('')}
+            ${answers.map((ans, i) => getAnswerBlockHTML(i, ans.content, ans.code, ans.language, ans.codeLabel, ans.question, ans.snippets)).join('')}
           </div>
         </div>
     `;
@@ -490,33 +494,38 @@ function handleEdit(node) {
     });
   }
 
-  document.getElementById('edit-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const { nodes } = getState();
-    const updated = nodes.map(n => {
-      if (n.id !== node.id) return n;
-      const modified = {
-        ...n,
-        parentId: document.getElementById('edit-parent').value || null,
-        name: document.getElementById('edit-name').value.trim()
-      };
-      if (n.type === 'question') {
-        modified.answers = Array.from(document.querySelectorAll('.answer-block')).map(block => ({
-          content: block.querySelector('.answer-content').value,
-          code: block.querySelector('.answer-code').value,
-          language: block.querySelector('.answer-language').value
-        }));
-        delete modified.content;
-        delete modified.code;
-        delete modified.language;
-      }
-      return modified;
+    document.getElementById('edit-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const { nodes } = getState();
+      const updated = nodes.map(n => {
+        if (n.id !== node.id) return n;
+        const modified = {
+          ...n,
+          parentId: document.getElementById('edit-parent').value || null,
+          name: document.getElementById('edit-name').value.trim()
+        };
+        if (n.type === 'question') {
+          modified.answers = Array.from(document.querySelectorAll('.answer-block')).map(block => ({
+            question: block.querySelector('.answer-question').value.trim(),
+            content: block.querySelector('.answer-content').value,
+            snippets: Array.from(block.querySelectorAll('.snippet-block')).map(sBlock => ({
+              code: sBlock.querySelector('.answer-code').value,
+              label: sBlock.querySelector('.answer-code-label').value.trim() || 'Code',
+              language: sBlock.querySelector('.answer-language').value
+            }))
+          }));
+          delete modified.content;
+          delete modified.code;
+          delete modified.language;
+          delete modified.codeLabel;
+        }
+        return modified;
+      });
+      setState({ nodes: updated });
+      saveContentToServer(updated);
+      showToast('Changes saved!', '✓');
+      showEditorWelcome();
     });
-    setState({ nodes: updated });
-    saveContentToServer(updated);
-    showToast('Changes saved!', '✓');
-    showEditorWelcome();
-  });
 
   document.getElementById('edit-cancel')?.addEventListener('click', showEditorWelcome);
 }
@@ -612,26 +621,80 @@ function handleDuplicate(node) {
 /**
  * Helper to generate HTML for a single answer block
  */
-function getAnswerBlockHTML(index, content = '', code = '', language = 'plaintext') {
+function getAnswerBlockHTML(index, content = '', code = '', language = 'plaintext', codeLabel = 'Code', question = '', snippets = []) {
+  // Migration for legacy single snippets
+  const finalSnippets = (snippets && snippets.length > 0) ? snippets : (code ? [{ code, language, label: codeLabel }] : []);
+
   return `
-    <div class="answer-block" data-index="${index}" style="border: 1px solid var(--border-color); padding: 10px; margin-bottom: 10px; border-radius: 4px; position: relative;">
+    <div class="answer-block" data-index="${index}" style="border: 2px solid var(--border-color); padding: 15px; margin-bottom: 20px; border-radius: 8px; position: relative; background: rgba(0,0,0,0.1);">
       <button type="button" class="btn-remove-answer" title="Remove answer" style="position: absolute; right: 10px; top: 10px; background: none; border: none; color: var(--danger-color); cursor: pointer; font-size: 1.2rem; padding: 2px;">✕</button>
+      
       <div class="form-group">
-        <label class="form-label">Content / Answer</label>
+        <label class="form-label" style="color: var(--accent-yellow);">Section Sub-title (Optional)</label>
+        <textarea class="form-input form-textarea answer-question" placeholder="Sub-question title..." style="min-height: 40px;">${escapeHtml(question || '')}</textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Description / Explanation</label>
         <textarea class="form-input form-textarea answer-content" placeholder="Explanation...">${escapeHtml(content || '')}</textarea>
       </div>
-      <div class="form-group">
-        <label class="form-label">Code (optional)</label>
-        <textarea class="form-input form-textarea answer-code" placeholder="Code snippet..." style="font-family: 'Fira Code', monospace; font-size: 0.8rem;">${escapeHtml(code || '')}</textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Language</label>
-        <select class="form-input form-select answer-language">
-          ${['javascript','python','java','cpp','c','sql','html','css','typescript','go','rust','bash','plaintext']
-            .map(l => `<option value="${l}" ${l === (language || 'plaintext') ? 'selected' : ''}>${l}</option>`)
-            .join('')}
-        </select>
+
+      <div class="form-group" style="margin-top: 15px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <label class="form-label" style="margin: 0; color: var(--accent-pink);">Code Snippets</label>
+          <button type="button" class="btn btn-sm btn-secondary add-snippet-btn" data-index="${index}">+ Add Snippet</button>
+        </div>
+        <div class="snippets-container" id="snippets-container-${index}">
+          ${finalSnippets.map((s, i) => getSnippetBlockHTML(i, s.code, s.language, s.label)).join('')}
+        </div>
       </div>
     </div>
   `;
 }
+
+/**
+ * Helper to generate HTML for a single code snippet inside an answer
+ */
+function getSnippetBlockHTML(index, code = '', language = 'javascript', label = 'Code') {
+  return `
+    <div class="snippet-block" data-index="${index}" style="border: 1px dashed var(--border-color); padding: 12px; margin-bottom: 10px; border-radius: 6px; background: rgba(255,255,255,0.03); position: relative;">
+      <button type="button" class="btn-remove-snippet" title="Remove snippet" style="position: absolute; right: 8px; top: 8px; background: none; border: none; color: var(--danger-color); cursor: pointer; font-size: 1rem; opacity: 0.6;">✕</button>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px;">
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label" style="font-size: 0.75rem;">Heading (e.g. Solution, Optimized...)</label>
+          <input class="form-input answer-code-label" value="${escapeHtml(label || 'Code')}" placeholder="Heading..." />
+        </div>
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label" style="font-size: 0.75rem;">Language</label>
+          <select class="form-input form-select answer-language">
+            ${['javascript','python','java','cpp','c','sql','html','css','typescript','go','rust','bash','plaintext']
+              .map(l => `<option value="${l}" ${l === (language || 'javascript') ? 'selected' : ''}>${l}</option>`)
+              .join('')}
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin: 0;">
+        <textarea class="form-input form-textarea answer-code" placeholder="Code here..." style="font-family: 'Fira Code', monospace; font-size: 0.8rem; min-height: 80px;">${escapeHtml(code || '')}</textarea>
+      </div>
+    </div>
+  `;
+}
+
+// Add event delegation for "Add Snippet" and "Remove Snippet" buttons in the editor
+document.addEventListener('click', (e) => {
+  // Add snippet
+  if (e.target.classList.contains('add-snippet-btn')) {
+    const ansIndex = e.target.getAttribute('data-index');
+    const container = document.getElementById(`snippets-container-${ansIndex}`);
+    if (container) {
+      const snippetIndex = container.querySelectorAll('.snippet-block').length;
+      container.insertAdjacentHTML('beforeend', getSnippetBlockHTML(snippetIndex));
+    }
+  }
+  
+  // Remove snippet
+  if (e.target.classList.contains('btn-remove-snippet')) {
+    e.target.closest('.snippet-block').remove();
+  }
+});
