@@ -11,11 +11,11 @@ import { initCommands } from './modules/commands.js';
  * Main app initialization
  */
 async function init() {
-  // Check authentication
-  const username = getUsername();
+  // Check authentication (Bypassed for guest access)
+  let username = getUsername();
   if (!username) {
-    window.location.href = 'index.html';
-    return;
+    username = 'Guest';
+    console.log('No username found, continuing as Guest');
   }
 
   // Load content data from backend

@@ -21,9 +21,14 @@ app.use('/api/auth', authRoutes);
 // Serve static files (HTML, CSS, JS, etc.)
 app.use(express.static(path.join(__dirname)));
 
-// Fallback: serve index.html for unknown routes
+// Direct bypass to app.html (Landing page index.html is still available at /index.html)
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'app.html'));
+});
+
+// Fallback: serve app.html for unknown routes instead of index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'app.html'));
 });
 
 app.listen(PORT, () => {
