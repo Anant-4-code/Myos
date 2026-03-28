@@ -1,0 +1,2233 @@
+🔴 SLIP 1
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Implement a Binary search tree (BST) library (btree.h) with operations – create, search, insert, inorder, preorder and postorder. Write a menu driven program that performs the above operations.
+
+📌 btree.h
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct node
+{
+    int data;
+    struct node *left, *right;
+}BST;
+
+BST* create(BST* root, int key)
+{
+    if(root==NULL)
+    {
+        root=(BST*)malloc(sizeof(BST));
+        root->data=key;
+        root->left=root->right=NULL;
+    }
+    else if(key < root->data)
+        root->left=create(root->left,key);
+    else
+        root->right=create(root->right,key);
+
+    return root;
+}
+
+BST* search(BST* root,int key)
+{
+    if(root==NULL || root->data==key)
+        return root;
+    else if(key < root->data)
+        return search(root->left,key);
+    else
+        return search(root->right,key);
+}
+
+void inorder(BST* root)
+{
+    if(root!=NULL)
+    {
+        inorder(root->left);
+        printf("%d ",root->data);
+        inorder(root->right);
+    }
+}
+
+void preorder(BST* root)
+{
+    if(root!=NULL)
+    {
+        printf("%d ",root->data);
+        preorder(root->left);
+        preorder(root->right);
+    }
+}
+
+void postorder(BST* root)
+{
+    if(root!=NULL)
+    {
+        postorder(root->left);
+        postorder(root->right);
+        printf("%d ",root->data);
+    }
+}
+📌 main.c
+#include<stdio.h>
+#include<stdlib.h>
+#include "btree.h"
+
+int main()
+{
+    BST *root=NULL,*temp;
+    int ch,key;
+
+    while(1)
+    {
+        printf("\n1.Create\n2.Search\n3.Inorder\n4.Preorder\n5.Postorder\n6.Exit\n");
+        scanf("%d",&ch);
+
+        switch(ch)
+        {
+            case 1:
+                printf("Enter values (0 to stop):\n");
+                while(1)
+                {
+                    scanf("%d",&key);
+                    if(key==0) break;
+                    root=create(root,key);
+                }
+                break;
+
+            case 2:
+                printf("Enter key:");
+                scanf("%d",&key);
+                temp=search(root,key);
+                if(temp) printf("Found\n");
+                else printf("Not Found\n");
+                break;
+
+            case 3:
+                inorder(root);
+                break;
+
+            case 4:
+                preorder(root);
+                break;
+
+            case 5:
+                postorder(root);
+                break;
+
+            case 6:
+                exit(0);
+        }
+    }
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1) FULL QUESTION:
+
+Write a stored function to accept eno as input parameter and count number of projects on which that employee is working.
+
+📌 PostgreSQL Function
+CREATE OR REPLACE FUNCTION count_projects(eid INT)
+RETURNS INT AS $$
+DECLARE
+    total INT;
+BEGIN
+    SELECT COUNT(*) INTO total
+    FROM project_employee
+    WHERE eno = eid;
+
+    RETURN total;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2) FULL QUESTION:
+
+Write a procedure to accept three numbers from user and display addition, subtraction and multiplication of three numbers.
+
+CREATE OR REPLACE PROCEDURE calc_three(a INT,b INT,c INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RAISE NOTICE 'Addition: %', a+b+c;
+    RAISE NOTICE 'Subtraction: %', a-b-c;
+    RAISE NOTICE 'Multiplication: %', a*b*c;
+END;
+$$;
+🔴 SLIP 2
+🔹 Section I: Data Structures-II
+✅ Q1 FULL QUESTION:
+
+Write a C program that accepts the vertices and edges of a graph. Create and display adjacency list also print indegree, outdegree and total degree of all vertex of graph.
+
+📌 CODE (Correct & Clean)
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int vertex;
+    struct node* next;
+};
+
+struct node* adj[10];
+
+void addEdge(int u,int v)
+{
+    struct node* newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->vertex=v;
+    newnode->next=adj[u];
+    adj[u]=newnode;
+}
+
+void display(int n)
+{
+    for(int i=1;i<=n;i++)
+    {
+        struct node* temp=adj[i];
+        printf("%d -> ",i);
+        while(temp)
+        {
+            printf("%d ",temp->vertex);
+            temp=temp->next;
+        }
+        printf("\n");
+    }
+}
+
+void indegree(int n)
+{
+    for(int i=1;i<=n;i++)
+    {
+        int count=0;
+        for(int j=1;j<=n;j++)
+        {
+            struct node* temp=adj[j];
+            while(temp)
+            {
+                if(temp->vertex==i) count++;
+                temp=temp->next;
+            }
+        }
+        printf("Indegree(%d)=%d\n",i,count);
+    }
+}
+
+void outdegree(int n)
+{
+    for(int i=1;i<=n;i++)
+    {
+        int count=0;
+        struct node* temp=adj[i];
+        while(temp)
+        {
+            count++;
+            temp=temp->next;
+        }
+        printf("Outdegree(%d)=%d\n",i,count);
+    }
+}
+
+int main()
+{
+    int n,e,u,v;
+    printf("Enter vertices:");
+    scanf("%d",&n);
+
+    for(int i=1;i<=n;i++)
+        adj[i]=NULL;
+
+    printf("Enter edges:");
+    scanf("%d",&e);
+
+    for(int i=0;i<e;i++)
+    {
+        scanf("%d%d",&u,&v);
+        addEdge(u,v);
+    }
+
+    display(n);
+    indegree(n);
+    outdegree(n);
+
+    return 0;
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1) FULL QUESTION:
+
+Write a stored function to print total number of persons of a particular area.
+
+CREATE OR REPLACE FUNCTION count_persons(area_name VARCHAR)
+RETURNS INT AS $$
+DECLARE
+    total INT;
+BEGIN
+    SELECT COUNT(*) INTO total
+    FROM person p JOIN area a ON p.area_id=a.id
+    WHERE a.aname=area_name;
+
+    RETURN total;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2):
+
+Procedure for division with error handling
+
+CREATE OR REPLACE PROCEDURE divide(a INT,b INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    IF b=0 THEN
+        RAISE EXCEPTION 'Division by zero';
+    ELSE
+        RAISE NOTICE 'Result: %', a/b;
+    END IF;
+END;
+$$;
+🔴 SLIP 3
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program that accepts the vertices and edges of a graph and store it as an adjacency matrix. Implement function to traverse the graph using Breadth First Search (BFS) traversal.
+
+📌 CODE:
+#include<stdio.h>
+
+int adj[10][10], visited[10], queue[10];
+int n;
+
+void BFS(int start)
+{
+    int front=0,rear=0;
+    queue[rear++]=start;
+    visited[start]=1;
+
+    while(front<rear)
+    {
+        int v=queue[front++];
+        printf("%d ",v);
+
+        for(int i=1;i<=n;i++)
+        {
+            if(adj[v][i]==1 && visited[i]==0)
+            {
+                queue[rear++]=i;
+                visited[i]=1;
+            }
+        }
+    }
+}
+
+int main()
+{
+    int start;
+    printf("Enter number of vertices:");
+    scanf("%d",&n);
+
+    for(int i=1;i<=n;i++)
+    {
+        visited[i]=0;
+        for(int j=1;j<=n;j++)
+        {
+            scanf("%d",&adj[i][j]);
+        }
+    }
+
+    printf("Enter starting vertex:");
+    scanf("%d",&start);
+
+    BFS(start);
+    return 0;
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1) FULL QUESTION:
+
+Write a cursor which will accept student number from the user and display student name along with teacher name who taught ‘RDBMS’ subject.
+
+📌 SQL:
+CREATE OR REPLACE FUNCTION student_teacher(sid INT)
+RETURNS VOID AS $$
+DECLARE
+    sname VARCHAR;
+    tname VARCHAR;
+    cur CURSOR FOR
+        SELECT s.s_name, t.t_name
+        FROM student s
+        JOIN st_teach st ON s.s_no=st.s_no
+        JOIN teacher t ON st.t_no=t.t_no
+        WHERE st.subject='RDBMS' AND s.s_no=sid;
+BEGIN
+    OPEN cur;
+    LOOP
+        FETCH cur INTO sname,tname;
+        EXIT WHEN NOT FOUND;
+        RAISE NOTICE 'Student: %, Teacher: %', sname,tname;
+    END LOOP;
+    CLOSE cur;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2):
+
+Procedure to find min and max of two numbers
+
+CREATE OR REPLACE PROCEDURE minmax(a INT,b INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    IF a>b THEN
+        RAISE NOTICE 'Max=% Min=%',a,b;
+    ELSE
+        RAISE NOTICE 'Max=% Min=%',b,a;
+    END IF;
+END;
+$$;
+🔴 SLIP 4
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program that accepts the vertices and edges of a graph and store it as an adjacency list. Implement function to traverse the graph using Depth First Search (DFS) traversal.
+
+📌 CODE:
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int vertex;
+    struct node* next;
+};
+
+struct node* adj[10];
+int visited[10],n;
+
+void addEdge(int u,int v)
+{
+    struct node* newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->vertex=v;
+    newnode->next=adj[u];
+    adj[u]=newnode;
+}
+
+void DFS(int v)
+{
+    printf("%d ",v);
+    visited[v]=1;
+
+    struct node* temp=adj[v];
+    while(temp)
+    {
+        if(!visited[temp->vertex])
+            DFS(temp->vertex);
+        temp=temp->next;
+    }
+}
+
+int main()
+{
+    int e,u,v;
+    scanf("%d",&n);
+
+    for(int i=1;i<=n;i++)
+    {
+        adj[i]=NULL;
+        visited[i]=0;
+    }
+
+    scanf("%d",&e);
+
+    for(int i=0;i<e;i++)
+    {
+        scanf("%d%d",&u,&v);
+        addEdge(u,v);
+    }
+
+    DFS(1);
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1) FULL QUESTION:
+
+Write a trigger before inserting into movie table to check budget should be minimum 50 lakh.
+
+📌 SQL:
+CREATE OR REPLACE FUNCTION check_budget()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.budget < 5000000 THEN
+        RAISE EXCEPTION 'Budget too low';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_budget
+BEFORE INSERT ON movies
+FOR EACH ROW
+EXECUTE FUNCTION check_budget();
+✅ Q2 (2):
+
+Procedure to check number type
+
+CREATE OR REPLACE PROCEDURE check_num(n INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    IF n>0 THEN
+        RAISE NOTICE 'Positive';
+    ELSIF n<0 THEN
+        RAISE NOTICE 'Negative';
+    ELSE
+        RAISE NOTICE 'Zero';
+    END IF;
+END;
+$$;
+🔴 SLIP 5
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program for the Implementation of Prim’s Minimum spanning tree algorithm.
+
+📌 CODE:
+#include<stdio.h>
+
+int main()
+{
+    int n,adj[10][10],visited[10]={0};
+    int i,j,min,a,b,cost=0,edges=1;
+
+    scanf("%d",&n);
+
+    for(i=1;i<=n;i++)
+        for(j=1;j<=n;j++)
+            scanf("%d",&adj[i][j]);
+
+    visited[1]=1;
+
+    while(edges<n)
+    {
+        min=999;
+
+        for(i=1;i<=n;i++)
+        {
+            for(j=1;j<=n;j++)
+            {
+                if(adj[i][j]<min && visited[i])
+                {
+                    min=adj[i][j];
+                    a=i; b=j;
+                }
+            }
+        }
+
+        if(!visited[b])
+        {
+            printf("%d -> %d = %d\n",a,b,min);
+            cost+=min;
+            edges++;
+        }
+
+        visited[b]=1;
+        adj[a][b]=adj[b][a]=999;
+    }
+
+    printf("Cost=%d",cost);
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1) FULL QUESTION:
+
+Write a function using cursor to accept year and class to display student name, competition name and rank.
+
+📌 SQL:
+CREATE OR REPLACE FUNCTION student_comp(y INT, cls VARCHAR)
+RETURNS VOID AS $$
+DECLARE
+    sname VARCHAR;
+    cname VARCHAR;
+    r INT;
+
+    cur CURSOR FOR
+    SELECT s.s_name,c.c_name,sc.rank
+    FROM student s,competition c,stud_comp sc
+    WHERE sc.year=y AND s.class=cls;
+
+BEGIN
+    OPEN cur;
+    LOOP
+        FETCH cur INTO sname,cname,r;
+        EXIT WHEN NOT FOUND;
+        RAISE NOTICE '% % %',sname,cname,r;
+    END LOOP;
+    CLOSE cur;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2):
+
+Procedure to find max & min of 3 numbers
+
+CREATE OR REPLACE PROCEDURE maxmin(a INT,b INT,c INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RAISE NOTICE 'Max=%', GREATEST(a,b,c);
+    RAISE NOTICE 'Min=%', LEAST(a,b,c);
+END;
+$$;
+🔴 SLIP 6
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program for the Implementation of Kruskal’s Minimum spanning tree algorithm.
+
+📌 CODE:
+#include<stdio.h>
+
+int parent[10];
+
+int find(int i)
+{
+    while(parent[i])
+        i=parent[i];
+    return i;
+}
+
+int uni(int i,int j)
+{
+    if(i!=j)
+    {
+        parent[j]=i;
+        return 1;
+    }
+    return 0;
+}
+
+int main()
+{
+    int n,cost[10][10],i,j,min,a,b,u,v,ne=1,mincost=0;
+
+    printf("Enter vertices:");
+    scanf("%d",&n);
+
+    for(i=1;i<=n;i++)
+    {
+        for(j=1;j<=n;j++)
+        {
+            scanf("%d",&cost[i][j]);
+            if(cost[i][j]==0)
+                cost[i][j]=999;
+        }
+    }
+
+    while(ne<n)
+    {
+        min=999;
+        for(i=1;i<=n;i++)
+        {
+            for(j=1;j<=n;j++)
+            {
+                if(cost[i][j]<min)
+                {
+                    min=cost[i][j];
+                    a=u=i;
+                    b=v=j;
+                }
+            }
+        }
+
+        u=find(u);
+        v=find(v);
+
+        if(uni(u,v))
+        {
+            printf("%d edge (%d,%d)=%d\n",ne++,a,b,min);
+            mincost+=min;
+        }
+
+        cost[a][b]=cost[b][a]=999;
+    }
+
+    printf("Minimum cost=%d",mincost);
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1) FULL QUESTION:
+
+Write a stored function to accept the bus number and print driver name allotted to that bus.
+
+CREATE OR REPLACE FUNCTION driver_bus(bno INT)
+RETURNS VOID AS $$
+DECLARE
+    dname VARCHAR;
+    cur CURSOR FOR
+    SELECT driver_name FROM driver d
+    JOIN bus_driver bd ON d.driver_no=bd.driver_no
+    WHERE bd.bus_no=bno;
+BEGIN
+    OPEN cur;
+    LOOP
+        FETCH cur INTO dname;
+        EXIT WHEN NOT FOUND;
+        RAISE NOTICE 'Driver: %', dname;
+    END LOOP;
+    CLOSE cur;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2):
+
+Procedure to check even or odd
+
+CREATE OR REPLACE PROCEDURE evenodd(n INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    IF n%2=0 THEN
+        RAISE NOTICE 'Even';
+    ELSE
+        RAISE NOTICE 'Odd';
+    END IF;
+END;
+$$;
+🔴 SLIP 7
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program for the implementation of Topological sorting.
+
+📌 CODE:
+#include<stdio.h>
+
+int adj[10][10],n,indeg[10];
+
+void topo()
+{
+    int count=0;
+
+    while(count<n)
+    {
+        for(int i=1;i<=n;i++)
+        {
+            if(indeg[i]==0)
+            {
+                printf("%d ",i);
+                indeg[i]=-1;
+
+                for(int j=1;j<=n;j++)
+                {
+                    if(adj[i][j]==1)
+                        indeg[j]--;
+                }
+                count++;
+            }
+        }
+    }
+}
+
+int main()
+{
+    printf("Enter vertices:");
+    scanf("%d",&n);
+
+    for(int i=1;i<=n;i++)
+    {
+        indeg[i]=0;
+        for(int j=1;j<=n;j++)
+        {
+            scanf("%d",&adj[i][j]);
+            if(adj[i][j]==1)
+                indeg[j]++;
+        }
+    }
+
+    topo();
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1) FULL QUESTION:
+
+Write a stored function using cursor to count the number of customers of particular branch.
+
+CREATE OR REPLACE FUNCTION count_customer(bname VARCHAR)
+RETURNS INT AS $$
+DECLARE
+    total INT:=0;
+    rec RECORD;
+    cur CURSOR FOR
+    SELECT * FROM customer c
+    JOIN branch b ON c.br_id=b.br_id
+    WHERE b.br_name=bname;
+BEGIN
+    OPEN cur;
+    LOOP
+        FETCH cur INTO rec;
+        EXIT WHEN NOT FOUND;
+        total:=total+1;
+    END LOOP;
+    CLOSE cur;
+    RETURN total;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2):
+
+Procedure to find sum of first n numbers
+
+CREATE OR REPLACE PROCEDURE sum_n(n INT)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    s INT:=0;
+BEGIN
+    FOR i IN 1..n LOOP
+        s:=s+i;
+    END LOOP;
+
+    RAISE NOTICE 'Sum=%',s;
+END;
+$$;
+🔴 SLIP 8
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a program to sort n randomly generated elements using Heapsort method.
+
+📌 CODE:
+#include<stdio.h>
+#include<stdlib.h>
+
+void swap(int *a,int *b)
+{
+    int t=*a; *a=*b; *b=t;
+}
+
+void heapify(int arr[],int n,int i)
+{
+    int largest=i;
+    int l=2*i+1;
+    int r=2*i+2;
+
+    if(l<n && arr[l]>arr[largest])
+        largest=l;
+    if(r<n && arr[r]>arr[largest])
+        largest=r;
+
+    if(largest!=i)
+    {
+        swap(&arr[i],&arr[largest]);
+        heapify(arr,n,largest);
+    }
+}
+
+void heapSort(int arr[],int n)
+{
+    for(int i=n/2-1;i>=0;i--)
+        heapify(arr,n,i);
+
+    for(int i=n-1;i>=0;i--)
+    {
+        swap(&arr[0],&arr[i]);
+        heapify(arr,i,0);
+    }
+}
+
+int main()
+{
+    int arr[20],n;
+
+    scanf("%d",&n);
+
+    for(int i=0;i<n;i++)
+        arr[i]=rand()%100;
+
+    heapSort(arr,n);
+
+    for(int i=0;i<n;i++)
+        printf("%d ",arr[i]);
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1) FULL QUESTION:
+
+Write a stored function to display ticket details of a train.
+
+CREATE OR REPLACE FUNCTION ticket_details(tname VARCHAR)
+RETURNS VOID AS $$
+DECLARE
+    rec RECORD;
+BEGIN
+    FOR rec IN
+        SELECT * FROM ticket t
+        JOIN train tr ON t.train_no=tr.train_no
+        WHERE tr.train_name=tname
+    LOOP
+        RAISE NOTICE '% % %', rec.ticket_no,rec.bogie_no,rec.ticket_amt;
+    END LOOP;
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Invalid train name';
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2):
+CREATE OR REPLACE PROCEDURE calc(a INT,b INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RAISE NOTICE 'Add=%',a+b;
+    RAISE NOTICE 'Sub=%',a-b;
+    RAISE NOTICE 'Mul=%',a*b;
+END;
+$$;
+🔴 SLIP 9
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program to implement a hash table using separate chaining with linked lists. Perform insert, search and display.
+
+📌 CODE:
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node* next;
+};
+
+struct node* table[10];
+
+int hash(int key)
+{
+    return key%10;
+}
+
+void insert(int key)
+{
+    int h=hash(key);
+    struct node* newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=key;
+    newnode->next=table[h];
+    table[h]=newnode;
+}
+
+void display()
+{
+    for(int i=0;i<10;i++)
+    {
+        struct node* temp=table[i];
+        printf("%d: ",i);
+        while(temp)
+        {
+            printf("%d ",temp->data);
+            temp=temp->next;
+        }
+        printf("\n");
+    }
+}
+
+int main()
+{
+    int n,x;
+    scanf("%d",&n);
+
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        insert(x);
+    }
+
+    display();
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1) FULL QUESTION:
+
+Write a function using cursor to return total prizes won by student in 2020.
+
+CREATE OR REPLACE FUNCTION prize_count(sname VARCHAR)
+RETURNS INT AS $$
+DECLARE
+    total INT:=0;
+    rec RECORD;
+BEGIN
+    FOR rec IN
+        SELECT prize FROM student_comp
+        WHERE name=sname AND year=2020
+    LOOP
+        total:=total+rec.prize;
+    END LOOP;
+
+    RETURN total;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2):
+CREATE OR REPLACE PROCEDURE divide(a INT,b INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    IF b=0 THEN
+        RAISE EXCEPTION 'Divide by zero';
+    ELSE
+        RAISE NOTICE '%',a/b;
+    END IF;
+END;
+$$;
+🔴 SLIP 10
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program for the implementation of Floyd Warshall’s algorithm for finding all pairs shortest path.
+
+📌 CODE:
+#include<stdio.h>
+
+#define INF 999
+
+int main()
+{
+    int n=4;
+    int a[4][4]={{0,3,INF,5},
+                 {2,0,INF,4},
+                 {INF,1,0,INF},
+                 {INF,INF,2,0}};
+
+    for(int k=0;k<n;k++)
+    {
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(a[i][k]+a[k][j]<a[i][j])
+                    a[i][j]=a[i][k]+a[k][j];
+            }
+        }
+    }
+
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+            printf("%d ",a[i][j]);
+        printf("\n");
+    }
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1):
+CREATE OR REPLACE FUNCTION book_author(aname VARCHAR)
+RETURNS VOID AS $$
+DECLARE
+    rec RECORD;
+BEGIN
+    FOR rec IN
+        SELECT * FROM book b
+        JOIN author a ON b.a_no=a.a_no
+        WHERE a.a_name=aname
+    LOOP
+        RAISE NOTICE '% %',rec.b_name,rec.b_price;
+    END LOOP;
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Invalid author';
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2):
+CREATE OR REPLACE PROCEDURE even50()
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    FOR i IN 1..50 LOOP
+        IF i%2=0 THEN
+            RAISE NOTICE '%',i;
+        END IF;
+    END LOOP;
+END;
+$$;
+🔴 SLIP 11
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a program which uses binary search tree library and counts the total nodes and total leaf nodes in the tree.
+int count(T) – returns total number of nodes
+int countLeaf(T) – returns total number of leaf nodes
+
+📌 CODE:
+🔸 btree.h
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct node
+{
+    int data;
+    struct node *left,*right;
+}BST;
+
+BST* create(BST* root,int key)
+{
+    if(root==NULL)
+    {
+        root=(BST*)malloc(sizeof(BST));
+        root->data=key;
+        root->left=root->right=NULL;
+    }
+    else if(key<root->data)
+        root->left=create(root->left,key);
+    else
+        root->right=create(root->right,key);
+
+    return root;
+}
+
+int count(BST* root)
+{
+    if(root==NULL)
+        return 0;
+    return 1 + count(root->left) + count(root->right);
+}
+
+int countLeaf(BST* root)
+{
+    if(root==NULL)
+        return 0;
+
+    if(root->left==NULL && root->right==NULL)
+        return 1;
+
+    return countLeaf(root->left) + countLeaf(root->right);
+}
+🔸 main.c
+#include<stdio.h>
+#include<stdlib.h>
+#include "btree.h"
+
+int main()
+{
+    BST *root=NULL;
+    int x;
+
+    printf("Enter values (0 to stop):\n");
+    while(1)
+    {
+        scanf("%d",&x);
+        if(x==0) break;
+        root=create(root,x);
+    }
+
+    printf("Total Nodes=%d\n",count(root));
+    printf("Leaf Nodes=%d\n",countLeaf(root));
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1) FULL QUESTION:
+
+Write a stored function using cursor to calculate total marks of each student and display it.
+
+CREATE OR REPLACE FUNCTION total_marks()
+RETURNS VOID AS $$
+DECLARE
+    rec RECORD;
+BEGIN
+    FOR rec IN
+        SELECT rollno, SUM(marks) AS total
+        FROM student_subject
+        GROUP BY rollno
+    LOOP
+        RAISE NOTICE 'Roll: %, Total: %', rec.rollno, rec.total;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2)
+
+Procedure to find sum and average of first n numbers
+
+CREATE OR REPLACE PROCEDURE sum_avg(n INT)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    s INT:=0;
+BEGIN
+    FOR i IN 1..n LOOP
+        s:=s+i;
+    END LOOP;
+
+    RAISE NOTICE 'Sum=%',s;
+    RAISE NOTICE 'Average=%',s/n;
+END;
+$$;
+🔴 SLIP 12
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a program to implement various types of hash functions:
+a) Division Method
+b) Mid Square Method
+c) Digit Folding Method
+Display collision messages
+
+📌 CODE:
+#include<stdio.h>
+
+int division(int key)
+{
+    return key%10;
+}
+
+int midsquare(int key)
+{
+    int sq=key*key;
+    return (sq/10)%10;
+}
+
+int folding(int key)
+{
+    int sum=0;
+    while(key>0)
+    {
+        sum+=key%10;
+        key/=10;
+    }
+    return sum%10;
+}
+
+int main()
+{
+    int n,key,table[10]={-1};
+
+    scanf("%d",&n);
+
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&key);
+
+        int h=division(key);
+
+        if(table[h]!=-1)
+            printf("Collision at %d\n",h);
+        else
+            table[h]=key;
+    }
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1) FULL QUESTION:
+
+Write a trigger before inserting into project table to check duration > 0
+
+CREATE OR REPLACE FUNCTION check_duration()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.duration<=0 THEN
+        RAISE EXCEPTION 'Invalid duration';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_duration
+BEFORE INSERT ON project
+FOR EACH ROW
+EXECUTE FUNCTION check_duration();
+✅ Q2 (2)
+CREATE OR REPLACE PROCEDURE count_odd(m INT,n INT)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    c INT:=0;
+BEGIN
+    FOR i IN m..n LOOP
+        IF i%2=1 THEN
+            c:=c+1;
+        END IF;
+    END LOOP;
+
+    RAISE NOTICE 'Odd count=%',c;
+END;
+$$;
+🔴 SLIP 13
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program that accepts vertices and edges, create adjacency list and print indegree, outdegree and total degree.
+
+📌 CODE:
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int v;
+    struct node* next;
+};
+
+struct node* adj[10];
+
+void add(int u,int v)
+{
+    struct node* n=(struct node*)malloc(sizeof(struct node));
+    n->v=v;
+    n->next=adj[u];
+    adj[u]=n;
+}
+
+int main()
+{
+    int n,e,u,v;
+
+    scanf("%d%d",&n,&e);
+
+    for(int i=1;i<=n;i++)
+        adj[i]=NULL;
+
+    for(int i=0;i<e;i++)
+    {
+        scanf("%d%d",&u,&v);
+        add(u,v);
+    }
+
+    for(int i=1;i<=n;i++)
+    {
+        int out=0,in=0;
+        struct node* t=adj[i];
+
+        while(t){ out++; t=t->next; }
+
+        for(int j=1;j<=n;j++)
+        {
+            t=adj[j];
+            while(t)
+            {
+                if(t->v==i) in++;
+                t=t->next;
+            }
+        }
+
+        printf("V=%d In=%d Out=%d Total=%d\n",i,in,out,in+out);
+    }
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1)
+CREATE OR REPLACE FUNCTION drivers(busno INT,d DATE)
+RETURNS VOID AS $$
+DECLARE
+    rec RECORD;
+BEGIN
+    FOR rec IN
+        SELECT driver_name FROM driver d1
+        JOIN bus_driver bd ON d1.driver_no=bd.driver_no
+        WHERE bd.bus_no=busno
+    LOOP
+        RAISE NOTICE '%',rec.driver_name;
+    END LOOP;
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Invalid bus';
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2)
+CREATE OR REPLACE PROCEDURE odd_n(n INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    FOR i IN 1..n LOOP
+        IF i%2=1 THEN
+            RAISE NOTICE '%',i;
+        END IF;
+    END LOOP;
+END;
+$$;
+🔴 SLIP 14
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program to maintain a phonebook using BST (name + phone)
+
+📌 CODE:
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+struct node
+{
+    char name[20];
+    int phone;
+    struct node *left,*right;
+};
+
+struct node* create(struct node* root,char name[],int phone)
+{
+    if(root==NULL)
+    {
+        root=(struct node*)malloc(sizeof(struct node));
+        strcpy(root->name,name);
+        root->phone=phone;
+        root->left=root->right=NULL;
+    }
+    else if(strcmp(name,root->name)<0)
+        root->left=create(root->left,name,phone);
+    else
+        root->right=create(root->right,name,phone);
+
+    return root;
+}
+
+void inorder(struct node* root)
+{
+    if(root)
+    {
+        inorder(root->left);
+        printf("%s %d\n",root->name,root->phone);
+        inorder(root->right);
+    }
+}
+
+int main()
+{
+    struct node* root=NULL;
+    char name[20];
+    int phone;
+
+    for(int i=0;i<3;i++)
+    {
+        scanf("%s%d",name,&phone);
+        root=create(root,name,phone);
+    }
+
+    inorder(root);
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1)
+CREATE OR REPLACE FUNCTION project_emp(pname VARCHAR)
+RETURNS VOID AS $$
+DECLARE
+    rec RECORD;
+BEGIN
+    FOR rec IN
+        SELECT e_name FROM employee e
+        JOIN proj_emp pe ON e.eno=pe.eno
+        JOIN project p ON p.pno=pe.pno
+        WHERE p.p_name=pname
+    LOOP
+        RAISE NOTICE '%',rec.e_name;
+    END LOOP;
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Invalid project';
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2)
+CREATE OR REPLACE PROCEDURE insert_proj(pno INT,name VARCHAR)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO project VALUES(pno,name);
+END;
+$$;
+🔴 SLIP 15
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program to implement hash table using quadratic probing
+
+📌 CODE:
+#include<stdio.h>
+
+int table[10];
+
+void insert(int key)
+{
+    int h=key%10,i=1;
+
+    while(table[h]!=0)
+    {
+        h=(h+i*i)%10;
+        i++;
+    }
+
+    table[h]=key;
+}
+
+void display()
+{
+    for(int i=0;i<10;i++)
+        printf("%d ",table[i]);
+}
+
+int main()
+{
+    int n,x;
+
+    scanf("%d",&n);
+
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        insert(x);
+    }
+
+    display();
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1)
+CREATE OR REPLACE FUNCTION update_income()
+RETURNS VOID AS $$
+BEGIN
+    UPDATE person
+    SET income=income*1.10
+    WHERE area_type='urban';
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2)
+CREATE OR REPLACE PROCEDURE odd100()
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    FOR i IN 1..100 LOOP
+        IF i%2=1 THEN
+            RAISE NOTICE '%',i;
+        END IF;
+    END LOOP;
+END;
+$$;
+🔴 SLIP 16
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program for the implementation of Dijkstra’s shortest path algorithm for finding shortest path from a given source vertex using adjacency cost matrix.
+
+📌 CODE:
+#include<stdio.h>
+
+#define INF 999
+
+int main()
+{
+    int n, cost[10][10], dist[10], visited[10]={0};
+    int i,j,min,u,source;
+
+    scanf("%d",&n);
+
+    for(i=1;i<=n;i++)
+    {
+        for(j=1;j<=n;j++)
+        {
+            scanf("%d",&cost[i][j]);
+            if(cost[i][j]==0)
+                cost[i][j]=INF;
+        }
+    }
+
+    printf("Enter source:");
+    scanf("%d",&source);
+
+    for(i=1;i<=n;i++)
+    {
+        dist[i]=cost[source][i];
+        visited[i]=0;
+    }
+
+    visited[source]=1;
+
+    for(int count=1;count<n;count++)
+    {
+        min=INF;
+
+        for(i=1;i<=n;i++)
+        {
+            if(!visited[i] && dist[i]<min)
+            {
+                min=dist[i];
+                u=i;
+            }
+        }
+
+        visited[u]=1;
+
+        for(j=1;j<=n;j++)
+        {
+            if(!visited[j] && dist[u]+cost[u][j]<dist[j])
+                dist[j]=dist[u]+cost[u][j];
+        }
+    }
+
+    for(i=1;i<=n;i++)
+        printf("Dist to %d = %d\n",i,dist[i]);
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1) FULL QUESTION:
+
+Write a stored function using cursors to calculate total marks of each student and display it.
+
+CREATE OR REPLACE FUNCTION total_marks()
+RETURNS VOID AS $$
+DECLARE
+    rec RECORD;
+BEGIN
+    FOR rec IN
+        SELECT rollno, SUM(marks_scored) AS total
+        FROM student_subject
+        GROUP BY rollno
+    LOOP
+        RAISE NOTICE 'Roll: %, Total: %', rec.rollno, rec.total;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2)
+
+Procedure to check number is positive, negative or zero
+
+CREATE OR REPLACE PROCEDURE check_num(n INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    IF n>0 THEN
+        RAISE NOTICE 'Positive';
+    ELSIF n<0 THEN
+        RAISE NOTICE 'Negative';
+    ELSE
+        RAISE NOTICE 'Zero';
+    END IF;
+END;
+$$;
+🔴 SLIP 17
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program that accepts vertices and edges. Create adjacency list and print indegree, outdegree and total degree of all vertices.
+
+📌 CODE:
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int v;
+    struct node* next;
+};
+
+struct node* adj[10];
+
+void add(int u,int v)
+{
+    struct node* n=(struct node*)malloc(sizeof(struct node));
+    n->v=v;
+    n->next=adj[u];
+    adj[u]=n;
+}
+
+int main()
+{
+    int n,e,u,v;
+    scanf("%d%d",&n,&e);
+
+    for(int i=1;i<=n;i++)
+        adj[i]=NULL;
+
+    for(int i=0;i<e;i++)
+    {
+        scanf("%d%d",&u,&v);
+        add(u,v);
+    }
+
+    for(int i=1;i<=n;i++)
+    {
+        int in=0,out=0;
+        struct node* t=adj[i];
+
+        while(t){ out++; t=t->next; }
+
+        for(int j=1;j<=n;j++)
+        {
+            t=adj[j];
+            while(t)
+            {
+                if(t->v==i) in++;
+                t=t->next;
+            }
+        }
+
+        printf("V=%d In=%d Out=%d Total=%d\n",i,in,out,in+out);
+    }
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1)
+CREATE OR REPLACE FUNCTION prize_count(sname VARCHAR)
+RETURNS INT AS $$
+DECLARE
+    total INT:=0;
+BEGIN
+    SELECT SUM(prize) INTO total
+    FROM student_comp
+    WHERE name=sname AND year=2020;
+
+    RETURN total;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2)
+CREATE OR REPLACE PROCEDURE sum50()
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    s INT:=0;
+BEGIN
+    FOR i IN 1..50 LOOP
+        s:=s+i;
+    END LOOP;
+
+    RAISE NOTICE 'Sum=%',s;
+END;
+$$;
+🔴 SLIP 18
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program that accepts vertices and edges and stores it as adjacency matrix. Display adjacency matrix.
+
+📌 CODE:
+#include<stdio.h>
+
+int main()
+{
+    int n,adj[10][10];
+
+    scanf("%d",&n);
+
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=n;j++)
+        {
+            scanf("%d",&adj[i][j]);
+        }
+    }
+
+    printf("Matrix:\n");
+
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=n;j++)
+            printf("%d ",adj[i][j]);
+        printf("\n");
+    }
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1)
+CREATE OR REPLACE FUNCTION items_rate()
+RETURNS VOID AS $$
+DECLARE
+    rec RECORD;
+BEGIN
+    FOR rec IN
+        SELECT itemname FROM item_supplier
+        WHERE rate>500
+    LOOP
+        RAISE NOTICE '%',rec.itemname;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2)
+CREATE OR REPLACE PROCEDURE max3(a INT,b INT,c INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RAISE NOTICE 'Max=%',GREATEST(a,b,c);
+END;
+$$;
+🔴 SLIP 19
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program to maintain phonebook using BST (name + phone).
+
+👉 (Same as Slip 14 – reuse code in exam)
+
+🔹 Section II: DBMS-II
+✅ Q2 (1)
+CREATE OR REPLACE FUNCTION count_proj(eid INT)
+RETURNS INT AS $$
+DECLARE
+    total INT;
+BEGIN
+    SELECT COUNT(*) INTO total
+    FROM project_employee
+    WHERE eno=eid;
+
+    RETURN total;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2)
+CREATE OR REPLACE PROCEDURE minmax(a INT,b INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RAISE NOTICE 'Max=%',GREATEST(a,b);
+    RAISE NOTICE 'Min=%',LEAST(a,b);
+END;
+$$;
+🔴 SLIP 20
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program that accepts vertices and edges, create adjacency list and perform DFS traversal.
+
+📌 CODE:
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int v;
+    struct node* next;
+};
+
+struct node* adj[10];
+int visited[10];
+
+void add(int u,int v)
+{
+    struct node* n=(struct node*)malloc(sizeof(struct node));
+    n->v=v;
+    n->next=adj[u];
+    adj[u]=n;
+}
+
+void dfs(int v)
+{
+    printf("%d ",v);
+    visited[v]=1;
+
+    struct node* t=adj[v];
+
+    while(t)
+    {
+        if(!visited[t->v])
+            dfs(t->v);
+        t=t->next;
+    }
+}
+
+int main()
+{
+    int n,e,u,v;
+
+    scanf("%d%d",&n,&e);
+
+    for(int i=1;i<=n;i++)
+    {
+        adj[i]=NULL;
+        visited[i]=0;
+    }
+
+    for(int i=0;i<e;i++)
+    {
+        scanf("%d%d",&u,&v);
+        add(u,v);
+    }
+
+    dfs(1);
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1)
+CREATE OR REPLACE FUNCTION max_salary(dname VARCHAR)
+RETURNS INT AS $$
+DECLARE
+    maxsal INT;
+BEGIN
+    SELECT MAX(salary) INTO maxsal
+    FROM employee e
+    JOIN department d ON e.dno=d.dno
+    WHERE d.dname=dname;
+
+    RETURN maxsal;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2)
+CREATE OR REPLACE PROCEDURE table_n(n INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    FOR i IN 1..10 LOOP
+        RAISE NOTICE '% x % = %',n,i,n*i;
+    END LOOP;
+END;
+$$;
+🔴 SLIP 21
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program for the implementation of Topological sorting.
+
+📌 CODE:
+#include<stdio.h>
+
+int adj[10][10], indeg[10], n;
+
+void topo()
+{
+    int count=0;
+
+    while(count<n)
+    {
+        for(int i=1;i<=n;i++)
+        {
+            if(indeg[i]==0)
+            {
+                printf("%d ",i);
+                indeg[i]=-1;
+
+                for(int j=1;j<=n;j++)
+                {
+                    if(adj[i][j]==1)
+                        indeg[j]--;
+                }
+                count++;
+            }
+        }
+    }
+}
+
+int main()
+{
+    scanf("%d",&n);
+
+    for(int i=1;i<=n;i++)
+    {
+        indeg[i]=0;
+        for(int j=1;j<=n;j++)
+        {
+            scanf("%d",&adj[i][j]);
+            if(adj[i][j]==1)
+                indeg[j]++;
+        }
+    }
+
+    topo();
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1) FULL QUESTION:
+
+Write a function which accepts hospital name and calculates average charges of doctors.
+
+CREATE OR REPLACE FUNCTION avg_charge(hname VARCHAR)
+RETURNS NUMERIC AS $$
+DECLARE
+    avgc NUMERIC;
+BEGIN
+    SELECT AVG(charges) INTO avgc
+    FROM doctor d JOIN hospital h ON d.h_no=h.h_no
+    WHERE h.h_name=hname;
+
+    RETURN avgc;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2)
+CREATE OR REPLACE PROCEDURE insert_doctor(dno INT,name VARCHAR)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO doctor VALUES(dno,name);
+END;
+$$;
+🔴 SLIP 22
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program to implement hash table using quadratic probing (insert, search, display).
+
+📌 CODE:
+#include<stdio.h>
+
+int table[10];
+
+void insert(int key)
+{
+    int h=key%10,i=1;
+
+    while(table[h]!=0)
+    {
+        h=(h+i*i)%10;
+        i++;
+    }
+
+    table[h]=key;
+}
+
+int search(int key)
+{
+    int h=key%10,i=1;
+
+    while(table[h]!=0)
+    {
+        if(table[h]==key)
+            return 1;
+        h=(h+i*i)%10;
+        i++;
+    }
+    return 0;
+}
+
+void display()
+{
+    for(int i=0;i<10;i++)
+        printf("%d ",table[i]);
+}
+
+int main()
+{
+    int n,x;
+
+    scanf("%d",&n);
+
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        insert(x);
+    }
+
+    display();
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1)
+CREATE OR REPLACE FUNCTION emp_project(eid INT)
+RETURNS INT AS $$
+DECLARE
+    total INT;
+BEGIN
+    SELECT COUNT(*) INTO total
+    FROM project_employee
+    WHERE eno=eid;
+
+    RETURN total;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2)
+CREATE OR REPLACE PROCEDURE odd20()
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    FOR i IN 1..40 LOOP
+        IF i%2=1 THEN
+            RAISE NOTICE '%',i;
+        END IF;
+    END LOOP;
+END;
+$$;
+🔴 SLIP 23
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program to find height of tree and check whether tree is balanced or not.
+
+📌 CODE:
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *left,*right;
+};
+
+int height(struct node* root)
+{
+    if(root==NULL) return 0;
+
+    int l=height(root->left);
+    int r=height(root->right);
+
+    return (l>r?l:r)+1;
+}
+
+int main()
+{
+    struct node* root=NULL;
+
+    // assume tree created
+
+    int hl=height(root->left);
+    int hr=height(root->right);
+
+    if(abs(hl-hr)<2)
+        printf("Balanced");
+    else
+        printf("Not Balanced");
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1)
+CREATE OR REPLACE FUNCTION car_driver(dname VARCHAR)
+RETURNS VOID AS $$
+DECLARE
+    rec RECORD;
+BEGIN
+    FOR rec IN
+        SELECT * FROM car_driver
+        WHERE driver_name=dname
+    LOOP
+        RAISE NOTICE '%',rec.model;
+    END LOOP;
+
+    IF NOT FOUND THEN
+        RAISE NOTICE 'Invalid driver';
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2)
+CREATE OR REPLACE PROCEDURE sum100()
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    s INT:=0;
+BEGIN
+    FOR i IN 1..100 LOOP
+        s:=s+i;
+    END LOOP;
+
+    RAISE NOTICE 'Sum=%',s;
+END;
+$$;
+🔴 SLIP 24
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program for the implementation of Floyd Warshall algorithm.
+
+📌 CODE:
+#include<stdio.h>
+#define INF 999
+
+int main()
+{
+    int a[4][4]={{0,3,INF,5},
+                 {2,0,INF,4},
+                 {INF,1,0,INF},
+                 {INF,INF,2,0}};
+
+    for(int k=0;k<4;k++)
+    {
+        for(int i=0;i<4;i++)
+        {
+            for(int j=0;j<4;j++)
+            {
+                if(a[i][k]+a[k][j]<a[i][j])
+                    a[i][j]=a[i][k]+a[k][j];
+            }
+        }
+    }
+
+    for(int i=0;i<4;i++)
+    {
+        for(int j=0;j<4;j++)
+            printf("%d ",a[i][j]);
+        printf("\n");
+    }
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1)
+CREATE OR REPLACE FUNCTION emp_dept(dname VARCHAR)
+RETURNS VOID AS $$
+DECLARE
+    rec RECORD;
+BEGIN
+    FOR rec IN
+        SELECT ename,salary FROM employee e
+        JOIN department d ON e.dno=d.dno
+        WHERE d.dname=dname
+    LOOP
+        RAISE NOTICE '% %',rec.ename,rec.salary;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2)
+CREATE OR REPLACE PROCEDURE even_n(n INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    FOR i IN 1..n LOOP
+        IF i%2=0 THEN
+            RAISE NOTICE '%',i;
+        END IF;
+    END LOOP;
+END;
+$$;
+🔴 SLIP 25
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program for Dijkstra’s algorithm.
+
+👉 (Same as Slip 16 — reuse in exam)
+
+🔹 Section II: DBMS-II
+✅ Q2 (1)
+CREATE OR REPLACE FUNCTION customer_city(cityname VARCHAR)
+RETURNS VOID AS $$
+DECLARE
+    rec RECORD;
+BEGIN
+    FOR rec IN
+        SELECT * FROM customer WHERE city=cityname
+    LOOP
+        RAISE NOTICE '%',rec.cname;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2)
+CREATE OR REPLACE PROCEDURE pune_customers()
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    FOR rec IN SELECT * FROM customer WHERE city='Pune'
+    LOOP
+        RAISE NOTICE '%',rec.cname;
+    END LOOP;
+END;
+$$;
+🔴 SLIP 26
+🔹 Section I: Data Structures-II
+✅ Q1) FULL QUESTION:
+
+Write a C program to store graph as adjacency matrix and perform DFS traversal.
+
+📌 CODE:
+#include<stdio.h>
+
+int adj[10][10],visited[10],n;
+
+void dfs(int v)
+{
+    printf("%d ",v);
+    visited[v]=1;
+
+    for(int i=1;i<=n;i++)
+    {
+        if(adj[v][i]==1 && !visited[i])
+            dfs(i);
+    }
+}
+
+int main()
+{
+    scanf("%d",&n);
+
+    for(int i=1;i<=n;i++)
+    {
+        visited[i]=0;
+        for(int j=1;j<=n;j++)
+            scanf("%d",&adj[i][j]);
+    }
+
+    dfs(1);
+}
+🔹 Section II: DBMS-II
+✅ Q2 (1)
+CREATE OR REPLACE FUNCTION item_rate(iname VARCHAR)
+RETURNS VOID AS $$
+DECLARE
+    rec RECORD;
+BEGIN
+    FOR rec IN
+        SELECT rate,supplier_name FROM item_supplier
+        WHERE itemname=iname
+    LOOP
+        RAISE NOTICE '% %',rec.rate,rec.supplier_name;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+✅ Q2 (2)
+CREATE OR REPLACE PROCEDURE calc_all(a INT,b INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RAISE NOTICE 'Add=%',a+b;
+    RAISE NOTICE 'Sub=%',a-b;
+    RAISE NOTICE 'Mul=%',a*b;
+    RAISE NOTICE 'Div=%',a/b;
+END;
+$$;

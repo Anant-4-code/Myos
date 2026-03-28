@@ -187,6 +187,19 @@
   white-space: pre-wrap;
 }
 
+.clickable-content-item {
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--text-primary);
+  display: inline-block;
+}
+
+.clickable-content-item:hover {
+  color: var(--accent-green);
+  text-decoration: underline;
+  text-shadow: var(--glow-subtle);
+}
+
 /* ===== CODE BLOCK ===== */
 .code-block-wrapper {
   position: relative;

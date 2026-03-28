@@ -1,0 +1,1559 @@
+✅ Slip 1
+🔹 Q1
+
+QUESTION:
+Write Python code to create a dictionary containing mobile names and their prices. Create DataFrame from this dictionary. Display the contents of DataFrame.
+
+CODE:
+
+import pandas as pd
+
+data = {"Samsung":20000, "iPhone":80000, "Redmi":15000}
+
+df = pd.DataFrame(list(data.items()), columns=["Mobile","Price"])
+print(df)
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Create a package vehicle with a sub package types, sub package type contains modules cars and bikes. Each module should have a function available_models() returning a list of models. Write a python program to display all available models of cars and bikes.
+
+CODE:
+
+# cars.py
+def available_models():
+    return ["Swift","i20","BMW"]
+
+# bikes.py
+def available_models():
+    return ["Splendor","Pulsar","R15"]
+from vehicle.types import cars, bikes
+
+print("Cars:", cars.available_models())
+print("Bikes:", bikes.available_models())
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Write a python program to list all files in a current directory. Display total count of .py files and content of any one .py files.
+
+CODE:
+
+import os
+
+files = os.listdir()
+
+py_files = [f for f in files if f.endswith(".py")]
+
+print("Total .py files:", len(py_files))
+
+if py_files:
+    with open(py_files[0], "r") as f:
+        print(f.read())
+✅ Slip 2
+🔹 Q1
+
+QUESTION:
+Write a python program to accept a string, Count total number of vowels, consonants and special symbols from it.
+
+CODE:
+
+s = input("Enter string: ")
+
+v=c=sp=0
+
+for ch in s:
+    if ch.isalpha():
+        if ch.lower() in "aeiou":
+            v+=1
+        else:
+            c+=1
+    else:
+        sp+=1
+
+print("Vowels:",v)
+print("Consonants:",c)
+print("Special:",sp)
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Consider a following record in DataFrame IPL. Create above DataFrame in python and write python code for following:
+a) Retrieve first 2 rows
+b) Retrieve last 3 rows
+c) Check null values present in DataFrame
+d) Replace null value with mean of that column
+e) Find most expensive player
+f) Print total players per team
+
+CODE:
+
+import pandas as pd
+import numpy as np
+
+data = {
+    "Player":["Hardik","Rahul","Russel","Bumrah","Kohli","Rohit"],
+    "Team":["MI","KXIP","KKR","MI","RCB","MI"],
+    "BidPrice":[13,12,np.nan,10,17,np.nan],
+    "Runs":[1000,2400,900,200,3600,3700]
+}
+
+df = pd.DataFrame(data)
+
+print(df.head(2))
+print(df.tail(3))
+
+print(df.isnull())
+
+df["BidPrice"].fillna(df["BidPrice"].mean(), inplace=True)
+
+print(df.loc[df["BidPrice"].idxmax()])
+print(df["Team"].value_counts())
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Write a Python program to demonstrate a user-defined exception that checks whether the entered marks are between 0 and 100. Display an appropriate message for invalid input and out-of-range values. Also display Grade of marks.
+
+CODE:
+
+class InvalidMarks(Exception):
+    pass
+
+try:
+    marks = int(input("Enter marks: "))
+
+    if marks < 0 or marks > 100:
+        raise InvalidMarks
+
+    if marks >= 75:
+        print("Distinction")
+    elif marks >= 50:
+        print("Pass")
+    else:
+        print("Fail")
+
+except InvalidMarks:
+    print("Marks should be between 0 and 100")
+✅ Slip 3
+🔹 Q1
+
+QUESTION:
+Write a Python program that accepts value of m and n. Divides m by n and handles a ZeroDivisionError if the user tries to divide by zero.
+
+CODE:
+
+try:
+    m = int(input("Enter m: "))
+    n = int(input("Enter n: "))
+    print("Result:", m/n)
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Write a python program to create a module containing factorial function, power dictionary and list of vowels. Save this as variables.py. Import variables module to print the factorial of n, print the power of n, and second alphabet from the vowels list. (Accept n from user)
+
+CODE:
+
+# variables.py
+def factorial(n):
+    f=1
+    for i in range(1,n+1):
+        f*=i
+    return f
+
+power = {2:4, 3:9}
+vowels = ['a','e','i','o','u']
+import variables
+
+n = int(input("Enter n: "))
+
+print("Factorial:", variables.factorial(n))
+print("Power:", variables.power.get(n))
+print("Second vowel:", variables.vowels[1])
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Write a python program to accept a file name from user. If file exist display contents of file and number of characters, words and lines in a file, otherwise display appropriate message.
+
+CODE:
+
+import os
+
+file = input("Enter filename: ")
+
+if os.path.exists(file):
+    with open(file,"r") as f:
+        data = f.read()
+        print(data)
+
+        print("Characters:", len(data))
+        print("Words:", len(data.split()))
+        print("Lines:", len(data.split("\n")))
+else:
+    print("File not found")
+✅ Slip 4
+🔹 Q1
+
+QUESTION:
+Write a Python program to create a list of elements. Shuffle the elements of a given list and display the list.
+
+CODE:
+
+import random
+
+lst = [1,2,3,4,5]
+random.shuffle(lst)
+
+print("Shuffled List:", lst)
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Create a following DataFrame named as “data”. Write the python code for the following commands:
+a) Find all rows with the label “Pencil”. Extract all columns
+b) Change the Eraser count as 25 instead of 20
+c) List only the columns Company and Price
+d) List only rows with labels ‘Pencil’ and ‘Pen’
+e) Rename column Count to Quantity
+
+CODE:
+
+import pandas as pd
+
+data = {
+    "Type":["Pencil","Pencil","Pen","Pen","Eraser"],
+    "Company":["Apsara","Natraj","Cello","Parkar","Apsara"],
+    "Count":[15,20,25,35,20],
+    "Price":[250,200,600,900,300]
+}
+
+df = pd.DataFrame(data)
+
+print(df[df["Type"]=="Pencil"])
+
+df.loc[df["Type"]=="Eraser","Count"] = 25
+
+print(df[["Company","Price"]])
+
+print(df[df["Type"].isin(["Pencil","Pen"])])
+
+df.rename(columns={"Count":"Quantity"}, inplace=True)
+print(df)
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Write a python program to create a file which stores the first name, middle name and last name of your 5 friends. Display contents of file. Append names of two more friends and display updated contents.
+
+CODE:
+
+# create file
+with open("friends.txt","w") as f:
+    f.write("A B C\nD E F\nG H I\nJ K L\nM N O\n")
+
+# display
+with open("friends.txt","r") as f:
+    print(f.read())
+
+# append
+with open("friends.txt","a") as f:
+    f.write("P Q R\nS T U\n")
+
+# display again
+with open("friends.txt","r") as f:
+    print(f.read())
+✅ Slip 5
+🔹 Q1
+
+QUESTION:
+Write a python program to accept a string and display all words which do not contain any vowels.
+
+CODE:
+
+s = input("Enter string: ")
+
+words = s.split()
+
+result = [w for w in words if not any(v in w.lower() for v in "aeiou")]
+
+print("Words:", result)
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Create a package banking with modules account.py and loan.py.
+a) account.py → open_account(name)
+b) loan.py → apply_loan(amount)
+Write a python program to import and demonstrate both functions.
+
+CODE:
+
+# account.py
+def open_account(name):
+    print("Account created for", name)
+
+# loan.py
+def apply_loan(amount):
+    print("Loan approved:", amount)
+from banking import account, loan
+
+account.open_account("Anant")
+loan.apply_loan(50000)
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Write a python program to generate list of prime numbers between m and n using list comprehension.
+
+CODE:
+
+m = int(input())
+n = int(input())
+
+primes = [x for x in range(m,n+1) if x>1 and all(x%i!=0 for i in range(2,x))]
+
+print(primes)
+✅ Slip 6
+🔹 Q1
+
+QUESTION:
+Write a python program that accepts two inputs from user and checks if both inputs are numerical values. If not, raise and handle TypeError.
+
+CODE:
+
+try:
+    a = input()
+    b = input()
+
+    if not a.isdigit() or not b.isdigit():
+        raise TypeError
+
+    print(int(a) + int(b))
+
+except TypeError:
+    print("Invalid input")
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Create DataFrame and delete column Count.
+
+CODE:
+
+import pandas as pd
+
+data = {
+    "Type":["Pencil","Pencil","Pen","Pen","Eraser"],
+    "Company":["Apsara","Natraj","Cello","Parkar","Apsara"],
+    "Count":[15,20,25,35,20],
+    "Price":[250,200,600,900,300]
+}
+
+df = pd.DataFrame(data)
+
+df.drop("Count", axis=1, inplace=True)
+
+print(df)
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Create a personal portfolio web page using Flask.
+
+CODE:
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return """
+    <h1 align='center'>Your Name</h1>
+    <p>Qualification: BSc CS</p>
+    <marquee>Special Skills</marquee>
+    """
+
+app.run()
+✅ Slip 7
+🔹 Q1
+
+QUESTION:
+Write a python program using regular expression to extract capital words and remove special characters.
+
+CODE:
+
+import re
+
+s = input()
+
+words = re.findall(r'\b[A-Z][a-z]*\b', s)
+
+clean = re.sub(r'[^a-zA-Z ]','', s)
+
+print("Capital words:", words)
+print("Clean:", clean)
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Create a Flask web page for library:
+a) Library name
+b) Table of books
+c) Quote in blue and bold
+
+CODE:
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return """
+    <h1>Library</h1>
+    <table border=1>
+    <tr><th>Title</th><th>Author</th></tr>
+    <tr><td>Python</td><td>ABC</td></tr>
+    </table>
+    <b style='color:blue'>Reading is knowledge</b>
+    """
+
+app.run()
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Copy contents of one file to another and display number of lines, words, characters.
+
+CODE:
+
+import os
+
+f1 = input("Enter file1: ")
+f2 = input("Enter file2: ")
+
+if os.path.exists(f1):
+    with open(f1) as a, open(f2,"w") as b:
+        data = a.read()
+        b.write(data)
+
+    print("Lines:", len(data.split("\n")))
+    print("Words:", len(data.split()))
+    print("Chars:", len(data))
+else:
+    print("File not found")
+✅ Slip 8
+🔹 Q1
+
+QUESTION:
+Write a python program to accept radius and calculate area of circle using function (π = 3.14).
+
+CODE:
+
+def area(r):
+    return 3.14*r*r
+
+r = float(input("Enter radius: "))
+print("Area:", area(r))
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Create list, string and tuple. Display unique random elements using random module.
+
+CODE:
+
+import random
+
+lst = [1,2,3,4,5]
+s = "HELLO"
+t = (10,20,30,40)
+
+print(random.sample(lst,2))
+print(random.sample(s,2))
+print(random.sample(t,2))
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Create Flask web page showing college name, courses and image.
+
+CODE:
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return """
+    <h1 align='center'>My College</h1>
+    <ul>
+    <li>BSc CS</li>
+    <li>BBA</li>
+    </ul>
+    <img src='college.jpg' width=200>
+    """
+
+app.run()
+✅ Slip 9
+🔹 Q1
+
+QUESTION:
+Write a python program to accept a value of n and create a generator that yields even numbers up to n.
+
+CODE:
+
+def even_gen(n):
+    for i in range(0, n+1):
+        if i % 2 == 0:
+            yield i
+
+n = int(input("Enter n: "))
+
+for i in even_gen(n):
+    print(i)
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Create DataFrames Student1 and Student2 and perform:
+a) Display contents
+b) Join both DataFrames
+c) Display third DataFrame
+
+CODE:
+
+import pandas as pd
+
+df1 = pd.DataFrame({
+    "ID":["S1","S2","S3","S4","S5"],
+    "Name":["Anita","Sakshi","Om","Raj","Kanika"],
+    "Age":[18,23,20,21,20]
+})
+
+df2 = pd.DataFrame({
+    "ID":["S2","S4","S5","S6","S7"],
+    "City":["Pune","Nashik","Mumbai","Delhi","Nanded"],
+    "Marks":[97,78,86,66,54]
+})
+
+print(df1)
+print(df2)
+
+df3 = pd.merge(df1, df2, on="ID")
+
+print(df3)
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Write a python program using user defined function:
+a) Check number is Armstrong or not
+b) Find sum of digits till single digit
+
+CODE:
+
+def armstrong(n):
+    return sum(int(d)**len(str(n)) for d in str(n)) == n
+
+def single_digit(n):
+    while n > 9:
+        n = sum(int(d) for d in str(n))
+    return n
+
+num = int(input("Enter number: "))
+
+print("Armstrong:", armstrong(num))
+print("Single digit:", single_digit(num))
+✅ Slip 10
+🔹 Q1
+
+QUESTION:
+Write a python program to create a DataFrame from list of 10 integer values. Display contents and calculate sum, mean, median, mode and standard deviation.
+
+CODE:
+
+import pandas as pd
+
+data = [10,20,30,40,50,60,70,80,90,100]
+
+df = pd.DataFrame(data, columns=["Values"])
+
+print(df)
+
+print("Sum:", df.sum())
+print("Mean:", df.mean())
+print("Median:", df.median())
+print("Mode:", df.mode())
+print("Std:", df.std())
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Create package finance_tools with modules interest.py and currency.py and demonstrate both functions.
+
+CODE:
+
+# interest.py
+def cal_interest(amount, year):
+    return amount * 0.05 * year
+
+# currency.py
+def convert(amount):
+    return amount * 0.012
+from finance_tools import interest, currency
+
+amt = float(input("Enter amount: "))
+year = int(input("Enter years: "))
+
+print("Interest:", interest.cal_interest(amt, year))
+print("USD:", currency.convert(amt))
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Write a Python program to create a class that acts as an iterator and generates factorial series up to n.
+
+CODE:
+
+class Factorial:
+    def __init__(self, n):
+        self.n = n
+        self.i = 1
+        self.fact = 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.i > self.n:
+            raise StopIteration
+        self.fact *= self.i
+        self.i += 1
+        return self.fact
+
+n = int(input("Enter n: "))
+
+for i in Factorial(n):
+    print(i)
+✅ Slip 11
+🔹 Q1
+
+QUESTION:
+Write a python program to generate even numbers using generator.
+
+CODE:
+
+def gen(n):
+    for i in range(2, n+1, 2):
+        yield i
+
+for i in gen(int(input())):
+    print(i)
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Merge two DataFrames using common column ID.
+
+CODE:
+
+import pandas as pd
+
+df1 = pd.DataFrame({"ID":["S1","S2"], "Name":["A","B"]})
+df2 = pd.DataFrame({"ID":["S2","S3"], "Marks":[90,80]})
+
+print(pd.merge(df1, df2, on="ID"))
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Check Armstrong number and reduce to single digit.
+
+CODE:
+
+def armstrong(n):
+    return sum(int(d)**len(str(n)) for d in str(n)) == n
+
+def single_digit(n):
+    while n > 9:
+        n = sum(int(d) for d in str(n))
+    return n
+
+num = int(input("Enter number: "))
+
+print("Armstrong:", armstrong(num))
+print("Single digit:", single_digit(num))
+✅ Slip 12
+🔹 Q1
+
+QUESTION:
+Create CSV file and display DataFrame with statistical info.
+
+CODE:
+
+import pandas as pd
+
+df = pd.read_csv("data.csv")
+
+print(df)
+print(df.describe())
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Perform time module operations: ctime(), gmtime(), strptime(), strftime()
+
+CODE:
+
+import time
+
+print(time.ctime())
+print(time.gmtime())
+
+dt = input("Enter date (DD-MM-YYYY HH:MM:SS): ")
+
+parsed = time.strptime(dt, "%d-%m-%Y %H:%M:%S")
+
+print(time.strftime("%d/%m/%Y", parsed))
+print(time.strftime("%H:%M:%S", parsed))
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Display random elements from list, string and tuple.
+
+CODE:
+
+import random
+
+print(random.sample([1,2,3,4],2))
+print(random.sample("HELLO",2))
+print(random.sample((10,20,30),2))
+✅ Slip 13
+🔹 Q1
+
+QUESTION:
+Convert current time into readable format and UTC struct_time.
+
+CODE:
+
+import time
+
+sec = time.time()
+
+print(time.ctime(sec))
+print(time.gmtime(sec))
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Read file, display contents and pointer position using tell() and seek().
+
+CODE:
+
+import os
+
+file = input()
+
+if os.path.exists(file):
+    with open(file) as f:
+        for line in f:
+            print(line.strip())
+            print("Pointer:", f.tell())
+
+        f.seek(0)
+        print(f.read())
+else:
+    print("File not found")
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Join two DataFrames and display result.
+
+CODE:
+
+import pandas as pd
+
+df1 = pd.DataFrame({"ID":["S1","S2"], "Name":["A","B"]})
+df2 = pd.DataFrame({"ID":["S2","S3"], "Marks":[90,80]})
+
+print(pd.merge(df1, df2, on="ID"))
+✅ Slip 14
+🔹 Q1
+
+QUESTION:
+Write a python program to accept a string and substring from user. Check if a particular substring is present at the beginning of the given string using RE module.
+
+CODE:
+
+import re
+
+s = input("Enter string: ")
+sub = input("Enter substring: ")
+
+if re.match(sub, s):
+    print("Substring present at beginning")
+else:
+    print("Not present")
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Write a Python program to accept a file name and a byte position as input. If file exists open it in read mode, move the file pointer to given position and display content till end, otherwise display appropriate message.
+
+CODE:
+
+import os
+
+file = input("Enter file name: ")
+pos = int(input("Enter position: "))
+
+if os.path.exists(file):
+    with open(file, "r") as f:
+        f.seek(pos)
+        print(f.read())
+else:
+    print("File not found")
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Create module variables.py containing factorial function, power dictionary and vowels list. Import and display factorial, power and second vowel.
+
+CODE:
+
+# variables.py
+def factorial(n):
+    f=1
+    for i in range(1,n+1):
+        f*=i
+    return f
+
+power = {2:4,3:9}
+vowels = ['a','e','i','o','u']
+import variables
+
+n = int(input())
+
+print(variables.factorial(n))
+print(variables.power.get(n))
+print(variables.vowels[1])
+✅ Slip 15
+🔹 Q1
+
+QUESTION:
+Write a Python program to get current time and:
+a) Convert seconds to struct_time (UTC)
+b) Convert struct_time to formatted string
+
+CODE:
+
+import time
+
+sec = time.time()
+
+utc = time.gmtime(sec)
+print("UTC:", utc)
+
+formatted = time.strftime("%Y-%m-%d %H:%M:%S", utc)
+print("Formatted:", formatted)
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Create a Flask web page for library:
+a) Show library name
+b) Display books in table
+c) Show quote in blue bold
+
+CODE:
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return """
+    <h1>Library</h1>
+    <table border=1>
+    <tr><th>Title</th><th>Author</th></tr>
+    <tr><td>Python</td><td>ABC</td></tr>
+    </table>
+    <b style='color:blue'>Reading is knowledge</b>
+    """
+
+app.run()
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Write a python program to check whether given URL is valid or not using regex.
+
+CODE:
+
+import re
+
+url = input("Enter URL: ")
+
+if re.match(r"https://www\.\w+\.com", url):
+    print("Valid URL")
+else:
+    print("Invalid URL")
+✅ Slip 16
+🔹 Q1
+
+QUESTION:
+Write a python program using regular expressions to validate three-letter words like cat, cot, cut, mat, met, mud.
+
+CODE:
+
+import re
+
+s = input("Enter word: ")
+
+pattern = r"^(c[ao u]t|m[aeu]t)$"
+
+if re.match(pattern, s):
+    print("Valid")
+else:
+    print("Invalid")
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Create IPL DataFrame and perform operations (head, tail, null, max player, count team).
+
+CODE:
+
+import pandas as pd
+import numpy as np
+
+data = {
+    "Player":["Hardik","Rahul","Russel","Bumrah","Kohli","Rohit"],
+    "Team":["MI","KXIP","KKR","MI","RCB","MI"],
+    "BidPrice":[13,12,np.nan,10,17,np.nan],
+    "Runs":[1000,2400,900,200,3600,3700]
+}
+
+df = pd.DataFrame(data)
+
+print(df.head(2))
+print(df.tail(3))
+
+print(df.isnull())
+
+df["BidPrice"].fillna(df["BidPrice"].mean(), inplace=True)
+
+print(df.loc[df["BidPrice"].idxmax()])
+print(df["Team"].value_counts())
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Create package vehicle with cars and bikes modules and display models.
+
+CODE:
+
+# cars.py
+def available_models():
+    return ["Swift","i20","BMW"]
+
+# bikes.py
+def available_models():
+    return ["Pulsar","Activa","RE"]
+from vehicle.types import cars, bikes
+
+print(cars.available_models())
+print(bikes.available_models())
+✅ Slip 17
+🔹 Q1
+
+QUESTION:
+Write a python program to replace spaces with colon and comma with dot in a string.
+
+CODE:
+
+s = input()
+
+s = s.replace(" ", ":")
+s = s.replace(",", ".")
+
+print(s)
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Display random elements from list, string and tuple.
+
+CODE:
+
+import random
+
+print(random.sample([1,2,3,4],2))
+print(random.sample("HELLO",2))
+print(random.sample((10,20,30),2))
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Check Armstrong number and reduce to single digit.
+
+CODE:
+
+def armstrong(n):
+    return sum(int(d)**len(str(n)) for d in str(n)) == n
+
+def single(n):
+    while n > 9:
+        n = sum(int(d) for d in str(n))
+    return n
+
+num = int(input())
+
+print(armstrong(num))
+print(single(num))
+✅ Slip 18
+🔹 Q1
+
+QUESTION:
+Write a python program to list all files and folders in current directory using os module.
+
+CODE:
+
+import os
+
+files = os.listdir()
+
+print(files)
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Validate mobile number using regex.
+
+CODE:
+
+import re
+
+num = input()
+
+if re.match(r"^(0|91)?[6-9][0-9]{9}$", num):
+    print("Valid")
+else:
+    print("Invalid")
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Create education package with science and arts modules and display subjects.
+
+CODE:
+
+# science.py
+def get_subjects():
+    return ["Physics","Chemistry","Biology"]
+
+# arts.py
+def get_subjects():
+    return ["History","Geography","Economics"]
+from education.courses import science, arts
+
+print(science.get_subjects())
+print(arts.get_subjects()) 
+✅ Slip 19
+🔹 Q1
+
+QUESTION:
+Write a python program to accept a string and count number of vowels, consonants and special symbols.
+
+CODE:
+
+s = input()
+
+v=c=sp=0
+
+for ch in s:
+    if ch.isalpha():
+        if ch.lower() in "aeiou":
+            v+=1
+        else:
+            c+=1
+    else:
+        sp+=1
+
+print(v,c,sp)
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Write a Python program to accept a file name and a byte position. Move file pointer and display content from that position.
+
+CODE:
+
+import os
+
+f = input()
+pos = int(input())
+
+if os.path.exists(f):
+    with open(f) as file:
+        file.seek(pos)
+        print(file.read())
+else:
+    print("File not found")
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Perform groupby operations on DataFrame.
+
+CODE:
+
+import pandas as pd
+
+data = {
+    "school":["S1","S2","S3","S4"],
+    "age":[12,13,12,14],
+    "weight":[35,32,30,40]
+}
+
+df = pd.DataFrame(data)
+
+grp = df.groupby("school")
+
+print(grp.mean())
+print(grp.min())
+print(grp.max())
+✅ Slip 20
+🔹 Q1
+
+QUESTION:
+Write a python program to shuffle deck of cards and display 5 attempts.
+
+CODE:
+
+import random
+
+cards = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"]
+
+for i in range(5):
+    random.shuffle(cards)
+    print(cards[:5])
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Identify files and folders in current directory.
+
+CODE:
+
+import os
+
+for item in os.listdir():
+    if os.path.isfile(item):
+        print(item,"File")
+    else:
+        print(item,"Folder")
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+IPL DataFrame operations with null handling.
+
+CODE:
+
+import pandas as pd
+import numpy as np
+
+data = {
+    "Player":["A","B","C"],
+    "BidPrice":[None,10,20]
+}
+
+df = pd.DataFrame(data)
+
+df["BidPrice"].fillna(df["BidPrice"].mean(), inplace=True)
+
+print(df)
+✅ Slip 21
+🔹 Q1
+
+QUESTION:
+Create DataFrame from dictionary and display first 5 and last 5 rows.
+
+CODE:
+
+import pandas as pd
+
+data = {"Math":90,"Sci":80,"Eng":70,"CS":95,"Bio":85,"Chem":88}
+
+df = pd.DataFrame(list(data.items()), columns=["Subject","Marks"])
+
+print(df.head())
+print(df.tail())
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Read file and count characters, words, lines.
+
+CODE:
+
+import os
+
+f = input()
+
+if os.path.exists(f):
+    with open(f) as file:
+        data = file.read()
+        print(len(data))
+        print(len(data.split()))
+        print(len(data.split("\n")))
+else:
+    print("Not found")
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Create banking package and demonstrate functions.
+
+CODE:
+
+# account.py
+def open_account(name):
+    print(name)
+
+# loan.py
+def apply_loan(amount):
+    print(amount)
+from banking import account, loan
+
+account.open_account("Anant")
+loan.apply_loan(1000)
+✅ Slip 22
+🔹 Q1
+
+QUESTION:
+Accept m and n and handle ZeroDivisionError.
+
+CODE:
+
+try:
+    m=int(input())
+    n=int(input())
+    print(m/n)
+except ZeroDivisionError:
+    print("Error")
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Merge two DataFrames.
+
+CODE:
+
+import pandas as pd
+
+df1 = pd.DataFrame({"ID":["S1","S2"],"Age":[20,21]})
+df2 = pd.DataFrame({"ID":["S2","S3"],"Marks":[90,80]})
+
+print(pd.merge(df1,df2,on="ID"))
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Create iterator class for factorial series.
+
+CODE:
+
+class Fact:
+    def __init__(self,n):
+        self.n=n
+        self.i=1
+        self.f=1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.i>self.n:
+            raise StopIteration
+        self.f*=self.i
+        self.i+=1
+        return self.f
+
+for i in Fact(int(input())):
+    print(i)
+✅ Slip 23
+🔹 Q1
+
+QUESTION:
+Function with default price and display product if price < 100.
+
+CODE:
+
+def productInfo(name,price=100):
+    if price<100:
+        print(name)
+
+productInfo("Pen",50)
+productInfo("Book")
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Time module operations.
+
+CODE:
+
+import time
+
+print(time.ctime())
+print(time.gmtime())
+
+dt=input()
+
+p=time.strptime(dt,"%d-%m-%Y %H:%M:%S")
+
+print(time.strftime("%d/%m/%Y",p))
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Find words without vowels and count.
+
+CODE:
+
+s=input()
+
+w=s.split()
+
+r=[i for i in w if not any(v in i.lower() for v in "aeiou")]
+
+print(r,len(r))
+✅ Slip 24
+🔹 Q1
+
+QUESTION:
+Write a Python program to shuffle a deck of cards. Display the cards obtained by a user in 5 attempts.
+
+CODE:
+
+import random
+
+cards = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"]
+
+for i in range(5):
+    random.shuffle(cards)
+    print("Attempt", i+1, ":", cards[:5])
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Create a package finance_tools with modules interest.py and currency.py.
+a) interest.py → cal_interest(amount, year) using 5%
+b) currency.py → convert(amount) INR to USD (0.012)
+Write program to demonstrate both.
+
+CODE:
+
+# interest.py
+def cal_interest(amount, year):
+    return amount * 0.05 * year
+
+# currency.py
+def convert(amount):
+    return amount * 0.012
+from finance_tools import interest, currency
+
+amt = float(input("Enter amount: "))
+year = int(input("Enter years: "))
+
+print("Interest:", interest.cal_interest(amt, year))
+print("USD:", currency.convert(amt))
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Write a python program to check whether given URL is valid or not using regular expression.
+
+CODE:
+
+import re
+
+url = input("Enter URL: ")
+
+if re.match(r"https://www\.\w+\.com", url):
+    print("Valid URL")
+else:
+    print("Invalid URL")
+✅ Slip 25
+🔹 Q1
+
+QUESTION:
+Write a python program to remove all whitespaces from a given string and display modified string.
+
+CODE:
+
+s = input("Enter string: ")
+
+result = s.replace(" ", "")
+
+print("Modified string:", result)
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Create a package vehicle with subpackage types containing modules cars and bikes. Each module should have function available_models(). Display all models.
+
+CODE:
+
+# cars.py
+def available_models():
+    return ["Swift","i20","Baleno"]
+
+# bikes.py
+def available_models():
+    return ["Pulsar","Activa","RE"]
+from vehicle.types import cars, bikes
+
+print("Cars:", cars.available_models())
+print("Bikes:", bikes.available_models())
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Create DataFrame “data” and perform:
+a) rows with Pencil
+b) update Eraser count
+c) show Company & Price
+d) rows Pencil & Pen
+e) add new column Colour
+
+CODE:
+
+import pandas as pd
+
+data = {
+    "Type":["Pencil","Pencil","Pen","Pen","Eraser"],
+    "Company":["Apsara","Natraj","Cello","Parkar","Apsara"],
+    "Count":[15,20,25,35,20],
+    "Price":[250,200,600,900,300]
+}
+
+df = pd.DataFrame(data)
+
+print(df[df["Type"]=="Pencil"])
+
+df.loc[df["Type"]=="Eraser","Count"] = 25
+
+print(df[["Company","Price"]])
+
+print(df[df["Type"].isin(["Pencil","Pen"])])
+
+df["Colour"] = ["Red","Blue","Black","Green","White"]
+
+print(df)
+✅ Slip 26
+🔹 Q1
+
+QUESTION:
+Write a Python program that generates a random radius and computes the circumference of a circle using math module. (Use 3.14 as π)
+
+CODE:
+
+import random
+
+r = random.randint(1, 10)
+
+circumference = 2 * 3.14 * r
+
+print("Radius:", r)
+print("Circumference:", circumference)
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Write a python program to validate password with conditions:
+
+at least 1 lowercase
+at least 1 number
+at least 1 special ($,#,@)
+length 6–12
+
+CODE:
+
+import re
+
+p = input("Enter password: ")
+
+pattern = r"^(?=.*[a-z])(?=.*[0-9])(?=.*[$#@]).{6,12}$"
+
+if re.match(pattern, p):
+    print("Valid Password")
+else:
+    print("Invalid Password")
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+List all files in current directory. Display total .py files and content of any one .py file.
+
+CODE:
+
+import os
+
+files = os.listdir()
+
+py_files = [f for f in files if f.endswith(".py")]
+
+print("Total .py files:", len(py_files))
+
+if py_files:
+    with open(py_files[0], "r") as f:
+        print(f.read())
+✅ Slip 27
+🔹 Q1
+
+QUESTION:
+Write a Python program using regex to validate words like cat, cot, cut, mat, met, mud.
+
+CODE:
+
+import re
+
+s = input("Enter word: ")
+
+pattern = r"^(c|m)[aeou]t$"
+
+if re.match(pattern, s):
+    print("Valid")
+else:
+    print("Invalid")
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Create package education with subpackage courses and modules science.py and arts.py. Each module returns subjects. Display all subjects.
+
+CODE:
+
+# science.py
+def get_subjects():
+    return ["Physics","Chemistry","Biology"]
+
+# arts.py
+def get_subjects():
+    return ["History","Geography","Economics"]
+from education.courses import science, arts
+
+print(science.get_subjects())
+print(arts.get_subjects())
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Display all entries in current directory and identify each as file or folder using getcwd().
+
+CODE:
+
+import os
+
+path = os.getcwd()
+
+for item in os.listdir(path):
+    if os.path.isfile(item):
+        print(item, "- File")
+    else:
+        print(item, "- Folder")
+✅ Slip 28
+🔹 Q1
+
+QUESTION:
+Write a python program to validate three-letter words using regex (cat, cot, cut, mat, met, mud).
+
+CODE:
+
+import re
+
+s = input("Enter word: ")
+
+pattern = r"^(c|m)[aeou]t$"
+
+if re.match(pattern, s):
+    print("Valid")
+else:
+    print("Invalid")
+🔹 Q2 (OPTION 1)
+
+QUESTION:
+Create package education and display subjects (same as above).
+
+CODE: (same as Slip 27 Option 1)
+
+🔹 Q2 (OPTION 2)
+
+QUESTION:
+Display all files and folders in current directory.
+
+CODE:
+
+import os
+
+for item in os.listdir():
+    print(item)

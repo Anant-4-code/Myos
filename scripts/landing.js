@@ -10,15 +10,15 @@ const portfolioContainer = document.querySelector('.portfolio-container');
 let isAwaitingUsername = false;
 
 // Boot Sequence timings
-const BOOT_DELAY = 1000;
+const BOOT_DELAY = 100;
 const BOOT_STEPS = [
-  { id: 'boot-1', delay: 400 },
-  { id: 'boot-2', delay: 800 },
-  { id: 'boot-3', delay: 1400 },
-  { id: 'boot-4', delay: 1800 },
-  { id: 'boot-5', delay: 2000 },
-  { id: 'boot-6', delay: 2600 },
-  { id: 'boot-7', delay: 3400, action: hideBootOverlay }
+  { id: 'boot-1', delay: 50 },
+  { id: 'boot-2', delay: 150 },
+  { id: 'boot-3', delay: 300 },
+  { id: 'boot-4', delay: 400 },
+  { id: 'boot-5', delay: 500 },
+  { id: 'boot-6', delay: 600 },
+  { id: 'boot-7', delay: 800, action: hideBootOverlay }
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -84,27 +84,20 @@ function hideBootOverlay() {
       termInput.focus();
       printInitialMessage();
       
-      // Auto-redirect to app as Guest after 1.5 seconds
+      // Auto-redirect to app as Guest after 0.2 seconds
       setTimeout(() => {
         executeCommand('launch app');
         setTimeout(() => {
           processUsername('Guest');
-        }, 800);
-      }, 1500);
-    }, 800);
+        }, 300);
+      }, 200);
+    }, 300);
   }
 }
 
 function printInitialMessage() {
   appendOutput("> Welcome to DevTerm.", 'info');
-  appendOutput("> A terminal-themed developer knowledge system by Anant Rai.", 'info', 400);
-  setTimeout(() => {
-    const hint = document.createElement('div');
-    hint.className = 'term-output-line info';
-    hint.innerHTML = '<br>Type <button class="action-link" data-cmd="help">help</button> to see available commands or <button class="action-link" data-cmd="launch app">launch app</button> to enter the system.';
-    termOutput.appendChild(hint);
-    scrollToBottom();
-  }, 1000);
+  appendOutput("> A terminal-themed developer knowledge system by Anant Rai.", 'info', 100);
 }
 
 function handleCommand(e) {
@@ -129,21 +122,19 @@ async function processUsername(username) {
   appendOutput('Authenticating...', 'info');
   setUsername(username);
   
-  try {
-     const res = await fetch('https://api.ipify.org?format=json');
-     const data = await res.json();
-     logUserLogin(username);
-  } catch (err) {
-     logUserLogin(username);
-  }
+  // Non-blocking analytics
+  fetch('https://api.ipify.org?format=json')
+    .then(res => res.json())
+    .then(data => logUserLogin(username))
+    .catch(() => logUserLogin(username));
 
   appendOutput(`Welcome aboard, ${username}. Establishing session...`, 'success');
   setTimeout(() => {
     document.body.style.opacity = '0';
     setTimeout(() => {
       window.location.href = 'app.html';
-    }, 500);
-  }, 800);
+    }, 200);
+  }, 400);
 }
 
 function executeCommand(cmd) {

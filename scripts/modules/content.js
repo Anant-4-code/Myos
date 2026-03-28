@@ -25,7 +25,30 @@ export function initContent(bodyEl, breadcrumb, promptPath) {
   breadcrumbEl = breadcrumb;
   promptPathEl = promptPath;
 
+  // Configure marked for line breaks and GFM support
+  if (window.marked) {
+    window.marked.setOptions({
+      breaks: true,
+      gfm: true,
+      headerIds: false,
+      mangle: false
+    });
+  }
+
   subscribe('activeNodeId', () => renderContent());
+
+  // Click delegation for items in folder view
+  contentBody.addEventListener('click', (e) => {
+    const clickable = e.target.closest('.clickable-content-item');
+    if (clickable) {
+      const nodeId = clickable.getAttribute('data-id');
+      const { nodes } = getState();
+      if (nodeId) {
+        expandPathTo(nodeId, nodes);
+        setActiveNode(nodeId);
+      }
+    }
+  });
   
   showWelcome();
 }
@@ -105,45 +128,58 @@ function renderQuestion(node) {
   `;
 
   // Render answers dynamically
-  const answers = node.answers || (node.content || node.code ? [{ content: node.content, code: node.code, language: node.language }] : []);
+  const answers = node.answers || (node.content || node.code ? [{ content: node.content, code: node.code, language: node.language, codeLabel: 'Code' }] : []);
 
   answers.forEach((ans, index) => {
     html += `<div class="answer-block-rendered" style="${index < answers.length - 1 ? 'margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;' : ''}">`;
     
+    // Inner Question
+    if (ans.question) {
+      html += `<div class="inner-question-title markdown-content" style="color: var(--accent-yellow); font-size: 1.1rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-yellow); padding-left: 15px; background: rgba(242, 204, 96, 0.05); border-radius: 0 4px 4px 0;">
+                ${window.marked ? window.marked.parse(escapeHtml(ans.question)) : escapeHtml(ans.question)}
+              </div>`;
+    }
+
     // Description section
     if (ans.content) {
       html += `
-        <div class="content-section">
-          <div class="content-section-header">
-            <span class="section-icon">📝</span> Description ${answers.length > 1 ? `(${index + 1})` : ''}
+          <div class="content-section">
+            <div class="content-section-header">
+              <span class="section-icon">📝</span> Description ${answers.length > 1 ? `(${index + 1})` : ''}
+            </div>
+            <div class="content-description markdown-content">
+              ${window.marked ? window.marked.parse(escapeHtml(ans.content)) : escapeHtml(ans.content)}
+            </div>
           </div>
-          <div class="content-description">${escapeHtml(ans.content)}</div>
-        </div>
       `;
     }
     
-    // Code section
-    if (ans.code) {
-      const lang = ans.language || 'plaintext';
+    // Render snippets (handles both new array format and legacy single format)
+    const snippets = ans.snippets || (ans.code ? [{ code: ans.code, language: ans.language, label: ans.codeLabel || 'Code' }] : []);
+
+    snippets.forEach((snippet, snippetIndex) => {
+      const lang = snippet.language || 'plaintext';
       html += `
         <div class="content-section">
           <div class="content-section-header">
-            <span class="section-icon">💻</span> Code
+            <span class="section-icon">💻</span> ${escapeHtml(snippet.label || 'Code')}
           </div>
           <div class="code-block-wrapper">
             <div class="code-block-header">
               <span class="code-block-lang">${escapeHtml(lang)}</span>
-              <button class="code-block-copy" data-answer-index="${index}">
+              <button class="code-block-copy" 
+                      data-answer-index="${index}" 
+                      data-snippet-index="${snippetIndex}">
                 <span>⎘</span> Copy
               </button>
             </div>
             <div class="code-block-body">
-              <pre><code class="language-${lang}">${escapeHtml(ans.code)}</code></pre>
+              <pre><code class="language-${lang}">${escapeHtml(snippet.code)}</code></pre>
             </div>
           </div>
         </div>
       `;
-    }
+    });
     html += `</div>`;
   });
 
@@ -157,50 +193,64 @@ function renderQuestion(node) {
     html += `<h2 style="margin-bottom: 1.5rem; color: var(--text-color); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;">📄 Sub-questions</h2>`;
     
     subQuestions.forEach(child => {
-      html += `<details class="sub-question-block" style="margin-bottom: 1rem; padding: 1rem; border: 1px solid var(--border-color); border-radius: 6px; background: rgba(0,0,0,0.2);">`;
+      html += `<details class="sub-question-block" open style="margin-bottom: 1rem; padding: 1rem; border: 1px solid var(--border-color); border-radius: 6px; background: rgba(0,0,0,0.2);">`;
       html += `<summary style="color: var(--primary-color); font-size: 1.1rem; font-weight: bold; cursor: pointer; outline: none; transition: color 0.2s;">
                  ${escapeHtml(child.name)}
                </summary>`;
                
       html += `<div class="sub-question-content" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05);">`;
       
-      const childAnswers = child.answers || (child.content || child.code ? [{ content: child.content, code: child.code, language: child.language }] : []);
+      const childAnswers = child.answers || (child.content || child.code ? [{ content: child.content, code: child.code, language: child.language, codeLabel: 'Code' }] : []);
 
       childAnswers.forEach((ans, index) => {
         html += `<div class="answer-block-rendered" style="${index < childAnswers.length - 1 ? 'margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;' : ''}">`;
         
+        if (ans.question) {
+          html += `<div class="inner-question-title markdown-content" style="color: var(--accent-yellow); font-size: 1rem; margin-bottom: 0.8rem; border-left: 3px solid var(--accent-yellow); padding-left: 12px; background: rgba(242, 204, 96, 0.03);">
+                    ${window.marked ? window.marked.parse(escapeHtml(ans.question)) : escapeHtml(ans.question)}
+                  </div>`;
+        }
+
         if (ans.content) {
           html += `
             <div class="content-section">
               <div class="content-section-header" style="font-size: 0.85rem; padding: 4px 0;">
                 <span class="section-icon">📝</span> Description ${childAnswers.length > 1 ? `(${index + 1})` : ''}
               </div>
-              <div class="content-description" style="font-size: 0.95rem;">${escapeHtml(ans.content)}</div>
+              <div class="content-description markdown-content" style="font-size: 0.95rem;">
+                ${window.marked ? window.marked.parse(escapeHtml(ans.content)) : escapeHtml(ans.content)}
+              </div>
             </div>
           `;
         }
         
-        if (ans.code) {
-          const lang = ans.language || 'plaintext';
+        // Render snippets (handles both new array format and legacy single format)
+        const snippets = ans.snippets || (ans.code ? [{ code: ans.code, language: ans.language, label: ans.codeLabel || 'Code' }] : []);
+
+        snippets.forEach((snippet, snippetIndex) => {
+          const lang = snippet.language || 'plaintext';
           html += `
             <div class="content-section">
               <div class="content-section-header" style="font-size: 0.85rem; padding: 4px 0;">
-                <span class="section-icon">💻</span> Code
+                <span class="section-icon">💻</span> ${escapeHtml(snippet.label || 'Code')}
               </div>
               <div class="code-block-wrapper">
                 <div class="code-block-header">
                   <span class="code-block-lang">${escapeHtml(lang)}</span>
-                  <button class="code-block-copy" data-child-id="${child.id}" data-child-answer-index="${index}">
+                  <button class="code-block-copy" 
+                          data-child-id="${child.id}" 
+                          data-child-answer-index="${index}"
+                          data-child-snippet-index="${snippetIndex}">
                     <span>⎘</span> Copy
                   </button>
                 </div>
                 <div class="code-block-body">
-                  <pre><code class="language-${lang}">${escapeHtml(ans.code)}</code></pre>
+                  <pre><code class="language-${lang}">${escapeHtml(snippet.code)}</code></pre>
                 </div>
               </div>
             </div>
           `;
-        }
+        });
         html += `</div>`;
       });
       
@@ -219,12 +269,17 @@ function renderQuestion(node) {
   copyBtns.forEach(copyBtn => {
     copyBtn.addEventListener('click', async () => {
       // Primary answers code copy
-      const indexAttr = copyBtn.getAttribute('data-answer-index');
-      if (indexAttr !== null) {
-        const ans = answers[indexAttr];
-        if (!ans || !ans.code) return;
+      const ansIndex = copyBtn.getAttribute('data-answer-index');
+      const snippetIndex = copyBtn.getAttribute('data-snippet-index');
+      
+      if (ansIndex !== null && snippetIndex !== null) {
+        const ans = answers[ansIndex];
+        const snippets = ans.snippets || (ans.code ? [{ code: ans.code, language: ans.language, label: ans.codeLabel || 'Code' }] : []);
+        const snippet = snippets[snippetIndex];
         
-        const success = await copyToClipboard(ans.code);
+        if (!snippet || !snippet.code) return;
+        
+        const success = await copyToClipboard(snippet.code);
         if (success) {
           copyBtn.innerHTML = '<span>✓</span> Copied!';
           copyBtn.classList.add('copied');
@@ -238,17 +293,21 @@ function renderQuestion(node) {
       
       // Sub-question code copy
       const childId = copyBtn.getAttribute('data-child-id');
-      const childIndex = copyBtn.getAttribute('data-child-answer-index');
-      if (childId !== null && childIndex !== null) {
+      const childAnsIndex = copyBtn.getAttribute('data-child-answer-index');
+      const childSnippetIndex = copyBtn.getAttribute('data-child-snippet-index');
+      
+      if (childId !== null && childAnsIndex !== null && childSnippetIndex !== null) {
         const targetNode = nodes.find(n => n.id === childId);
         if (!targetNode) return;
         
-        const cAnswers = targetNode.answers || (targetNode.content || targetNode.code ? [{ content: targetNode.content, code: targetNode.code, language: targetNode.language }] : []);
-        const ans = cAnswers[childIndex];
+        const cAnswers = targetNode.answers || (targetNode.content || targetNode.code ? [{ content: targetNode.content, code: targetNode.code, language: targetNode.language, codeLabel: 'Code' }] : []);
+        const ans = cAnswers[childAnsIndex];
+        const snippets = ans.snippets || (ans.code ? [{ code: ans.code, language: ans.language, label: ans.codeLabel || 'Code' }] : []);
+        const snippet = snippets[childSnippetIndex];
         
-        if (!ans || !ans.code) return;
+        if (!snippet || !snippet.code) return;
         
-        const success = await copyToClipboard(ans.code);
+        const success = await copyToClipboard(snippet.code);
         if (success) {
           copyBtn.innerHTML = '<span>✓</span> Copied!';
           copyBtn.classList.add('copied');
@@ -304,7 +363,7 @@ function renderFolder(node) {
   if (folders.length > 0) {
     html += `📂 Subfolders (${folders.length}):\n`;
     folders.forEach(f => {
-      html += `  └─ ${escapeHtml(f.name)}\n`;
+      html += `  └─ <span class="clickable-content-item" data-id="${f.id}">${escapeHtml(f.name)}</span>\n`;
     });
     html += '\n';
   }
@@ -312,7 +371,7 @@ function renderFolder(node) {
   if (questions.length > 0) {
     html += `📄 Questions (${questions.length}):\n`;
     questions.forEach(q => {
-      html += `  └─ ${escapeHtml(q.name)}\n`;
+      html += `  └─ <span class="clickable-content-item" data-id="${q.id}">${escapeHtml(q.name)}</span>\n`;
     });
   }
 

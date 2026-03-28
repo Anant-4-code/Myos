@@ -100,3 +100,79 @@ img {
   outline: 1px solid var(--accent-blue);
   outline-offset: 2px;
 }
+
+/* ===== MARKDOWN & TABLE STYLES ===== */
+.markdown-content {
+  word-wrap: break-word;
+}
+
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  border: 1px solid var(--border-color);
+  background: rgba(0, 0, 0, 0.2);
+  overflow-x: auto;
+  display: block;
+}
+
+.markdown-content th {
+  background: rgba(0, 255, 136, 0.1);
+  color: var(--accent-green);
+  font-weight: 700;
+  text-align: left;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.markdown-content td {
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.markdown-content tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.markdown-content tr:hover {
+  background: rgba(0, 150, 255, 0.05);
+}
+
+.markdown-content ul, .markdown-content ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+
+.markdown-content ul {
+  list-style: disc !important;
+}
+
+.markdown-content ol {
+  list-style: decimal !important;
+}
+
+.markdown-content li {
+  margin-bottom: 0.6rem;
+  line-height: 1.6;
+  display: list-item !important; /* Force list display */
+  padding-left: 4px;
+}
+
+.markdown-content strong {
+  color: var(--accent-pink);
+  font-weight: 700;
+}
+
+.markdown-content em {
+  color: var(--accent-blue);
+  font-style: italic;
+}
+
+.markdown-content p {
+  margin-bottom: 1rem;
+}
