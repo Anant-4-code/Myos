@@ -28,6 +28,7 @@ export function initTree(containerEl, options = {}) {
     renderFullTree();
     setBookmarks(getState().bookmarks);
   });
+  subscribe('nodes', () => renderFullTree());
 
   renderFullTree();
 }
