@@ -83,6 +83,14 @@ function hideBootOverlay() {
       bootOverlay.style.display = 'none';
       termInput.focus();
       printInitialMessage();
+      
+      // Auto-redirect to app as Guest after 1.5 seconds
+      setTimeout(() => {
+        executeCommand('launch app');
+        setTimeout(() => {
+          processUsername('Guest');
+        }, 800);
+      }, 1500);
     }, 800);
   }
 }
