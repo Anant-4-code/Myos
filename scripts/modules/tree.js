@@ -169,6 +169,11 @@ function createNodeElement(node, depth, filterFunc = null) {
       toggleExpanded(node.id);
     }
     setActiveNode(node.id);
+    
+    // In Admin Mode, also trigger the edit panel
+    if (isAdminMode && onAdminEdit) {
+      onAdminEdit(node);
+    }
   });
 
   el.appendChild(row);
