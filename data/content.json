@@ -1,187 +1,5 @@
 [
   {
-    "id": "root-dsa",
-    "parentId": null,
-    "type": "folder",
-    "name": "DSA"
-  },
-  {
-    "id": "dsa-arrays",
-    "parentId": "root-dsa",
-    "type": "folder",
-    "name": "Arrays"
-  },
-  {
-    "id": "dsa-arrays-q1",
-    "parentId": "dsa-arrays",
-    "type": "question",
-    "name": "Two Sum Problem",
-    "tags": [
-      "Easy"
-    ],
-    "answers": [
-      {
-        "content": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\n\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.\n\nApproach: Use a hash map to store complement values. For each element, check if its complement (target - current) exists in the map. This gives us O(n) time complexity instead of the brute-force O(n²).",
-        "code": "def two_sum(nums, target):\n    seen = {}\n    for i, num in enumerate(nums):\n        complement = target - num\n        if complement in seen:\n            return [seen[complement], i]\n        seen[num] = i\n    return []\n\n# Example\nprint(two_sum([2, 7, 11, 15], 9))  # Output: [0, 1]",
-        "language": "python"
-      },
-      {
-        "content": "Alternative Brute Force Approach in JavaScript:\nTest every pair until you find the target.",
-        "code": "function twoSum(nums, target) {\n    for (let i = 0; i < nums.length; i++) {\n        for (let j = i + 1; j < nums.length; j++) {\n            if (nums[i] + nums[j] === target) return [i, j];\n        }\n    }\n    return [];\n}",
-        "language": "javascript"
-      }
-    ]
-  },
-  {
-    "id": "dsa-arrays-q1-sub1",
-    "parentId": "dsa-arrays-q1",
-    "type": "question",
-    "name": "Three Sum Extension",
-    "answers": [
-      {
-        "content": "How would you extend this to the Three Sum problem? Sort the array and use two pointers.",
-        "code": "",
-        "language": "plaintext"
-      }
-    ]
-  },
-  {
-    "id": "dsa-arrays-q2",
-    "parentId": "dsa-arrays",
-    "type": "question",
-    "name": "Maximum Subarray (Kadane's Algorithm)",
-    "answers": [
-      {
-        "question": "Q1",
-        "content": "Find the contiguous subarray within an array that has the largest sum.\n\nKadane's Algorithm maintains a running maximum sum ending at each position. At each step, we decide whether to extend the previous subarray or start a new one.\n\nTime Complexity: O(n)\nSpace Complexity: O(1)",
-        "code": "def max_subarray(nums):\n    max_sum = current_sum = nums[0]\n    for num in nums[1:]:\n        current_sum = max(num, current_sum + num)\n        max_sum = max(max_sum, current_sum)\n    return max_sum\n\n# Example\nprint(max_subarray([-2,1,-3,4,-1,2,1,-5,4]))  # Output: 6",
-        "codeLabel": "Code",
-        "language": "python"
-      },
-      {
-        "question": "Q2",
-        "content": "test",
-        "code": "",
-        "codeLabel": "Code",
-        "language": "plaintext"
-      }
-    ]
-  },
-  {
-    "id": "dsa-stack",
-    "parentId": "root-dsa",
-    "type": "folder",
-    "name": "Stack"
-  },
-  {
-    "id": "dsa-stack-q1",
-    "parentId": "dsa-stack",
-    "type": "question",
-    "name": "Valid Parentheses",
-    "tags": [
-      "Easy"
-    ],
-    "content": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.\n\nAn input string is valid if:\n- Open brackets are closed by the same type of brackets.\n- Open brackets are closed in the correct order.\n\nApproach: Use a stack. Push opening brackets, pop and match for closing brackets.",
-    "code": "def is_valid(s):\n    stack = []\n    mapping = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in mapping:\n            top = stack.pop() if stack else '#'\n            if mapping[char] != top:\n                return False\n        else:\n            stack.append(char)\n    \n    return len(stack) == 0\n\n# Examples\nprint(is_valid(\"()[]{}\"))  # True\nprint(is_valid(\"(]\"))      # False",
-    "language": "python"
-  },
-  {
-    "id": "dsa-stack-q2",
-    "parentId": "dsa-stack",
-    "type": "question",
-    "name": "Implement Stack using Arrays",
-    "content": "Implement a basic stack data structure using an array/list with the following operations:\n\n- push(x): Add element to top\n- pop(): Remove and return top element\n- peek(): Return top element without removing\n- isEmpty(): Check if stack is empty\n- size(): Return number of elements\n\nTime Complexity: All operations are O(1)",
-    "code": "class Stack:\n    def __init__(self):\n        self.items = []\n    \n    def push(self, item):\n        self.items.append(item)\n    \n    def pop(self):\n        if self.is_empty():\n            raise IndexError(\"Stack is empty\")\n        return self.items.pop()\n    \n    def peek(self):\n        if self.is_empty():\n            raise IndexError(\"Stack is empty\")\n        return self.items[-1]\n    \n    def is_empty(self):\n        return len(self.items) == 0\n    \n    def size(self):\n        return len(self.items)\n\n# Usage\ns = Stack()\ns.push(10)\ns.push(20)\nprint(s.peek())   # 20\nprint(s.pop())    # 20\nprint(s.size())   # 1",
-    "language": "python"
-  },
-  {
-    "id": "dsa-linkedlist",
-    "parentId": "root-dsa",
-    "type": "folder",
-    "name": "Linked List"
-  },
-  {
-    "id": "dsa-ll-q1",
-    "parentId": "dsa-linkedlist",
-    "type": "question",
-    "name": "Reverse a Linked List",
-    "content": "Reverse a singly linked list iteratively.\n\nApproach: Use three pointers — prev, current, and next. Traverse the list, reversing each node's pointer.\n\nTime Complexity: O(n)\nSpace Complexity: O(1)",
-    "code": "class ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\ndef reverse_list(head):\n    prev = None\n    current = head\n    while current:\n        next_node = current.next\n        current.next = prev\n        prev = current\n        current = next_node\n    return prev",
-    "language": "python"
-  },
-  {
-    "id": "root-dbms",
-    "parentId": null,
-    "type": "folder",
-    "name": "DBMS"
-  },
-  {
-    "id": "dbms-sql",
-    "parentId": "root-dbms",
-    "type": "folder",
-    "name": "SQL Basics"
-  },
-  {
-    "id": "dbms-sql-q1",
-    "parentId": "dbms-sql",
-    "type": "question",
-    "name": "SELECT Statement",
-    "content": "The SELECT statement is used to retrieve data from one or more tables in a database.\n\nSyntax:\n- SELECT columns FROM table\n- Use * to select all columns\n- Use WHERE to filter rows\n- Use ORDER BY to sort results\n- Use LIMIT to restrict number of rows",
-    "code": "-- Select all columns\nSELECT * FROM employees;\n\n-- Select specific columns\nSELECT name, salary FROM employees;\n\n-- With WHERE clause\nSELECT name, salary \nFROM employees \nWHERE salary > 50000\nORDER BY salary DESC\nLIMIT 10;",
-    "language": "sql"
-  },
-  {
-    "id": "dbms-normal",
-    "parentId": "root-dbms",
-    "type": "folder",
-    "name": "Normalization"
-  },
-  {
-    "id": "dbms-normal-q1",
-    "parentId": "dbms-normal",
-    "type": "question",
-    "name": "What are Normal Forms?",
-    "content": "Normalization is the process of organizing data to reduce redundancy and improve data integrity.\n\n1NF (First Normal Form):\n- Each column contains atomic values\n- Each row is unique\n\n2NF (Second Normal Form):\n- Must be in 1NF\n- No partial dependency (all non-key columns depend on the entire primary key)\n\n3NF (Third Normal Form):\n- Must be in 2NF\n- No transitive dependency (non-key columns don't depend on other non-key columns)\n\nBCNF (Boyce-Codd Normal Form):\n- Must be in 3NF\n- Every determinant must be a candidate key",
-    "code": "-- Example: Unnormalized table\n-- | StudentID | Name  | Courses          |\n-- |-----------|-------|------------------|\n-- | 1         | Alice | Math, Science    |  -- violates 1NF\n\n-- 1NF Fix: Separate rows\n-- | StudentID | Name  | Course   |\n-- |-----------|-------|----------|\n-- | 1         | Alice | Math     |\n-- | 1         | Alice | Science  |\n\n-- 2NF Fix: Separate tables\nCREATE TABLE students (\n    student_id INT PRIMARY KEY,\n    name VARCHAR(100)\n);\n\nCREATE TABLE enrollments (\n    student_id INT,\n    course VARCHAR(100),\n    FOREIGN KEY (student_id) REFERENCES students(student_id)\n);",
-    "language": "sql"
-  },
-  {
-    "id": "root-js",
-    "parentId": null,
-    "type": "folder",
-    "name": "JavaScript"
-  },
-  {
-    "id": "js-basics",
-    "parentId": "root-js",
-    "type": "folder",
-    "name": "Fundamentals"
-  },
-  {
-    "id": "js-basics-q1",
-    "parentId": "js-basics",
-    "type": "question",
-    "name": "Closures Explained",
-    "content": "A closure is a function that remembers the variables from its outer scope even after the outer function has finished executing.\n\nClosures are created every time a function is created. They give you access to an outer function's scope from an inner function.\n\nCommon use cases:\n- Data privacy / encapsulation\n- Factory functions\n- Callbacks and event handlers\n- Memoization",
-    "code": "// Basic Closure\nfunction createCounter() {\n    let count = 0;\n    return {\n        increment: () => ++count,\n        decrement: () => --count,\n        getCount: () => count\n    };\n}\n\nconst counter = createCounter();\nconsole.log(counter.increment()); // 1\nconsole.log(counter.increment()); // 2\nconsole.log(counter.getCount());  // 2\n\n// Closure with loop (common gotcha)\nfor (let i = 0; i < 3; i++) {\n    setTimeout(() => console.log(i), 100);\n}\n// Output: 0, 1, 2 (let creates block scope)",
-    "language": "javascript"
-  },
-  {
-    "id": "js-async",
-    "parentId": "root-js",
-    "type": "folder",
-    "name": "Async Programming"
-  },
-  {
-    "id": "js-async-q1",
-    "parentId": "js-async",
-    "type": "question",
-    "name": "Promises and Async/Await",
-    "content": "Promises represent the eventual completion or failure of an asynchronous operation.\n\nA Promise can be in one of three states:\n- Pending: Initial state\n- Fulfilled: Operation completed successfully\n- Rejected: Operation failed\n\nasync/await is syntactic sugar over Promises that makes asynchronous code look synchronous.\n\nKey rules:\n- await can only be used inside async functions\n- async functions always return a Promise\n- Use try/catch for error handling with async/await",
-    "code": "// Promise\nfunction fetchData(url) {\n    return new Promise((resolve, reject) => {\n        setTimeout(() => {\n            if (url) resolve({ data: 'Success!' });\n            else reject(new Error('No URL'));\n        }, 1000);\n    });\n}\n\n// Using .then()\nfetchData('/api')\n    .then(result => console.log(result))\n    .catch(err => console.error(err));\n\n// Using async/await\nasync function getData() {\n    try {\n        const result = await fetchData('/api');\n        console.log(result);\n    } catch (err) {\n        console.error(err);\n    }\n}\n\ngetData();",
-    "language": "javascript"
-  },
-  {
     "id": "node-mn0n8wdh-hyhbnn",
     "parentId": null,
     "type": "folder",
@@ -1415,15 +1233,6 @@
     "name": "Slip 1"
   },
   {
-    "id": "node-079df51c-370b16",
-    "parentId": "node-aba17ffa-5462f5",
-    "type": "question",
-    "name": "Q1",
-    "content": "Implement a Binary search tree (BST) library (btree.h) with operations – create, search, insert, inorder, preorder and postorder. Write a menu driven program that performs the above operations.",
-    "code": "📌 btree.h\n#include<stdio.h>\n#include<stdlib.h>\n\ntypedef struct node\n{\n    int data;\n    struct node *left, *right;\n}BST;\n\nBST* create(BST* root, int key)\n{\n    if(root==NULL)\n    {\n        root=(BST*)malloc(sizeof(BST));\n        root->data=key;\n        root->left=root->right=NULL;\n    }\n    else if(key < root->data)\n        root->left=create(root->left,key);\n    else\n        root->right=create(root->right,key);\n\n    return root;\n}\n\nBST* search(BST* root,int key)\n{\n    if(root==NULL || root->data==key)\n        return root;\n    else if(key < root->data)\n        return search(root->left,key);\n    else\n        return search(root->right,key);\n}\n\nvoid inorder(BST* root)\n{\n    if(root!=NULL)\n    {\n        inorder(root->left);\n        printf(\"%d \",root->data);\n        inorder(root->right);\n    }\n}\n\nvoid preorder(BST* root)\n{\n    if(root!=NULL)\n    {\n        printf(\"%d \",root->data);\n        preorder(root->left);\n        preorder(root->right);\n    }\n}\n\nvoid postorder(BST* root)\n{\n    if(root!=NULL)\n    {\n        postorder(root->left);\n        postorder(root->right);\n        printf(\"%d \",root->data);\n    }\n}\n📌 main.c\n#include<stdio.h>\n#include<stdlib.h>\n#include \"btree.h\"\n\nint main()\n{\n    BST *root=NULL,*temp;\n    int ch,key;\n\n    while(1)\n    {\n        printf(\"\\n1.Create\\n2.Search\\n3.Inorder\\n4.Preorder\\n5.Postorder\\n6.Exit\\n\");\n        scanf(\"%d\",&ch);\n\n        switch(ch)\n        {\n            case 1:\n                printf(\"Enter values (0 to stop):\\n\");\n                while(1)\n                {\n                    scanf(\"%d\",&key);\n                    if(key==0) break;\n                    root=create(root,key);\n                }\n                break;\n\n            case 2:\n                printf(\"Enter key:\");\n                scanf(\"%d\",&key);\n                temp=search(root,key);\n                if(temp) printf(\"Found\\n\");\n                else printf(\"Not Found\\n\");\n                break;\n\n            case 3:\n                inorder(root);\n                break;\n\n            case 4:\n                preorder(root);\n                break;\n\n            case 5:\n                postorder(root);\n                break;\n\n            case 6:\n                exit(0);\n        }\n    }\n}",
-    "language": "c"
-  },
-  {
     "id": "node-b2d4c980-d970e8",
     "parentId": "node-aba17ffa-5462f5",
     "type": "question",
@@ -1446,15 +1255,6 @@
     "parentId": "node-a00e728c-d593b8",
     "type": "folder",
     "name": "Slip 2"
-  },
-  {
-    "id": "node-d3e2cc65-237e24",
-    "parentId": "node-2f772189-e15228",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program that accepts the vertices and edges of a graph. Create and display adjacency list also print indegree, outdegree and total degree of all vertex of graph.",
-    "code": "#include<stdio.h>\n#include<stdlib.h>\n\nstruct node\n{\n    int vertex;\n    struct node* next;\n};\n\nstruct node* adj[10];\n\nvoid addEdge(int u,int v)\n{\n    struct node* newnode=(struct node*)malloc(sizeof(struct node));\n    newnode->vertex=v;\n    newnode->next=adj[u];\n    adj[u]=newnode;\n}\n\nvoid display(int n)\n{\n    for(int i=1;i<=n;i++)\n    {\n        struct node* temp=adj[i];\n        printf(\"%d -> \",i);\n        while(temp)\n        {\n            printf(\"%d \",temp->vertex);\n            temp=temp->next;\n        }\n        printf(\"\\n\");\n    }\n}\n\nvoid indegree(int n)\n{\n    for(int i=1;i<=n;i++)\n    {\n        int count=0;\n        for(int j=1;j<=n;j++)\n        {\n            struct node* temp=adj[j];\n            while(temp)\n            {\n                if(temp->vertex==i) count++;\n                temp=temp->next;\n            }\n        }\n        printf(\"Indegree(%d)=%d\\n\",i,count);\n    }\n}\n\nvoid outdegree(int n)\n{\n    for(int i=1;i<=n;i++)\n    {\n        int count=0;\n        struct node* temp=adj[i];\n        while(temp)\n        {\n            count++;\n            temp=temp->next;\n        }\n        printf(\"Outdegree(%d)=%d\\n\",i,count);\n    }\n}\n\nint main()\n{\n    int n,e,u,v;\n    printf(\"Enter vertices:\");\n    scanf(\"%d\",&n);\n\n    for(int i=1;i<=n;i++)\n        adj[i]=NULL;\n\n    printf(\"Enter edges:\");\n    scanf(\"%d\",&e);\n\n    for(int i=0;i<e;i++)\n    {\n        scanf(\"%d%d\",&u,&v);\n        addEdge(u,v);\n    }\n\n    display(n);\n    indegree(n);\n    outdegree(n);\n\n    return 0;\n}",
-    "language": "c"
   },
   {
     "id": "node-bc8b31ee-4abf1a",
@@ -1481,15 +1281,6 @@
     "name": "Slip 3"
   },
   {
-    "id": "node-f2468d50-7d2d03",
-    "parentId": "node-72954b56-ab8d56",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program that accepts the vertices and edges of a graph and store it as an adjacency matrix. Implement function to traverse the graph using Breadth First Search (BFS) traversal.",
-    "code": "#include<stdio.h>\n\nint adj[10][10], visited[10], queue[10];\nint n;\n\nvoid BFS(int start)\n{\n    int front=0,rear=0;\n    queue[rear++]=start;\n    visited[start]=1;\n\n    while(front<rear)\n    {\n        int v=queue[front++];\n        printf(\"%d \",v);\n\n        for(int i=1;i<=n;i++)\n        {\n            if(adj[v][i]==1 && visited[i]==0)\n            {\n                queue[rear++]=i;\n                visited[i]=1;\n            }\n        }\n    }\n}\n\nint main()\n{\n    int start;\n    printf(\"Enter number of vertices:\");\n    scanf(\"%d\",&n);\n\n    for(int i=1;i<=n;i++)\n    {\n        visited[i]=0;\n        for(int j=1;j<=n;j++)\n        {\n            scanf(\"%d\",&adj[i][j]);\n        }\n    }\n\n    printf(\"Enter starting vertex:\");\n    scanf(\"%d\",&start);\n\n    BFS(start);\n    return 0;\n}",
-    "language": "c"
-  },
-  {
     "id": "node-87864c74-e1106b",
     "parentId": "node-72954b56-ab8d56",
     "type": "question",
@@ -1512,15 +1303,6 @@
     "parentId": "node-a00e728c-d593b8",
     "type": "folder",
     "name": "Slip 4"
-  },
-  {
-    "id": "node-7161946c-b36ce9",
-    "parentId": "node-84f9c6e0-d32b04",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program that accepts the vertices and edges of a graph and store it as an adjacency list. Implement function to traverse the graph using Depth First Search (DFS) traversal.",
-    "code": "#include<stdio.h>\n#include<stdlib.h>\n\nstruct node\n{\n    int vertex;\n    struct node* next;\n};\n\nstruct node* adj[10];\nint visited[10],n;\n\nvoid addEdge(int u,int v)\n{\n    struct node* newnode=(struct node*)malloc(sizeof(struct node));\n    newnode->vertex=v;\n    newnode->next=adj[u];\n    adj[u]=newnode;\n}\n\nvoid DFS(int v)\n{\n    printf(\"%d \",v);\n    visited[v]=1;\n\n    struct node* temp=adj[v];\n    while(temp)\n    {\n        if(!visited[temp->vertex])\n            DFS(temp->vertex);\n        temp=temp->next;\n    }\n}\n\nint main()\n{\n    int e,u,v;\n    scanf(\"%d\",&n);\n\n    for(int i=1;i<=n;i++)\n    {\n        adj[i]=NULL;\n        visited[i]=0;\n    }\n\n    scanf(\"%d\",&e);\n\n    for(int i=0;i<e;i++)\n    {\n        scanf(\"%d%d\",&u,&v);\n        addEdge(u,v);\n    }\n\n    DFS(1);\n}",
-    "language": "c"
   },
   {
     "id": "node-c79d7b40-e5b48d",
@@ -1547,15 +1329,6 @@
     "name": "Slip 5"
   },
   {
-    "id": "node-02f8629c-ba6c39",
-    "parentId": "node-96b23816-0bfa76",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program for the Implementation of Prim’s Minimum spanning tree algorithm.",
-    "code": "#include<stdio.h>\n\nint main()\n{\n    int n,adj[10][10],visited[10]={0};\n    int i,j,min,a,b,cost=0,edges=1;\n\n    scanf(\"%d\",&n);\n\n    for(i=1;i<=n;i++)\n        for(j=1;j<=n;j++)\n            scanf(\"%d\",&adj[i][j]);\n\n    visited[1]=1;\n\n    while(edges<n)\n    {\n        min=999;\n\n        for(i=1;i<=n;i++)\n        {\n            for(j=1;j<=n;j++)\n            {\n                if(adj[i][j]<min && visited[i])\n                {\n                    min=adj[i][j];\n                    a=i; b=j;\n                }\n            }\n        }\n\n        if(!visited[b])\n        {\n            printf(\"%d -> %d = %d\\n\",a,b,min);\n            cost+=min;\n            edges++;\n        }\n\n        visited[b]=1;\n        adj[a][b]=adj[b][a]=999;\n    }\n\n    printf(\"Cost=%d\",cost);\n}",
-    "language": "c"
-  },
-  {
     "id": "node-fac7d554-4594f8",
     "parentId": "node-96b23816-0bfa76",
     "type": "question",
@@ -1578,15 +1351,6 @@
     "parentId": "node-a00e728c-d593b8",
     "type": "folder",
     "name": "Slip 6"
-  },
-  {
-    "id": "node-464aaccf-846264",
-    "parentId": "node-55e4796a-26e933",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program for the Implementation of Kruskal’s Minimum spanning tree algorithm.",
-    "code": "#include<stdio.h>\n\nint parent[10];\n\nint find(int i)\n{\n    while(parent[i])\n        i=parent[i];\n    return i;\n}\n\nint uni(int i,int j)\n{\n    if(i!=j)\n    {\n        parent[j]=i;\n        return 1;\n    }\n    return 0;\n}\n\nint main()\n{\n    int n,cost[10][10],i,j,min,a,b,u,v,ne=1,mincost=0;\n\n    printf(\"Enter vertices:\");\n    scanf(\"%d\",&n);\n\n    for(i=1;i<=n;i++)\n    {\n        for(j=1;j<=n;j++)\n        {\n            scanf(\"%d\",&cost[i][j]);\n            if(cost[i][j]==0)\n                cost[i][j]=999;\n        }\n    }\n\n    while(ne<n)\n    {\n        min=999;\n        for(i=1;i<=n;i++)\n        {\n            for(j=1;j<=n;j++)\n            {\n                if(cost[i][j]<min)\n                {\n                    min=cost[i][j];\n                    a=u=i;\n                    b=v=j;\n                }\n            }\n        }\n\n        u=find(u);\n        v=find(v);\n\n        if(uni(u,v))\n        {\n            printf(\"%d edge (%d,%d)=%d\\n\",ne++,a,b,min);\n            mincost+=min;\n        }\n\n        cost[a][b]=cost[b][a]=999;\n    }\n\n    printf(\"Minimum cost=%d\",mincost);\n}",
-    "language": "c"
   },
   {
     "id": "node-f5d7973c-27eb67",
@@ -1613,15 +1377,6 @@
     "name": "Slip 7"
   },
   {
-    "id": "node-c168f331-174841",
-    "parentId": "node-d76161e9-602551",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program for the implementation of Topological sorting.",
-    "code": "#include<stdio.h>\n\nint adj[10][10],n,indeg[10];\n\nvoid topo()\n{\n    int count=0;\n\n    while(count<n)\n    {\n        for(int i=1;i<=n;i++)\n        {\n            if(indeg[i]==0)\n            {\n                printf(\"%d \",i);\n                indeg[i]=-1;\n\n                for(int j=1;j<=n;j++)\n                {\n                    if(adj[i][j]==1)\n                        indeg[j]--;\n                }\n                count++;\n            }\n        }\n    }\n}\n\nint main()\n{\n    printf(\"Enter vertices:\");\n    scanf(\"%d\",&n);\n\n    for(int i=1;i<=n;i++)\n    {\n        indeg[i]=0;\n        for(int j=1;j<=n;j++)\n        {\n            scanf(\"%d\",&adj[i][j]);\n            if(adj[i][j]==1)\n                indeg[j]++;\n        }\n    }\n\n    topo();\n}",
-    "language": "c"
-  },
-  {
     "id": "node-dd87946b-bb88dd",
     "parentId": "node-d76161e9-602551",
     "type": "question",
@@ -1644,15 +1399,6 @@
     "parentId": "node-a00e728c-d593b8",
     "type": "folder",
     "name": "Slip 8"
-  },
-  {
-    "id": "node-ae25204b-4c437f",
-    "parentId": "node-f72dc012-d2d01b",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a program to sort n randomly generated elements using Heapsort method.",
-    "code": "#include<stdio.h>\n#include<stdlib.h>\n\nvoid swap(int *a,int *b)\n{\n    int t=*a; *a=*b; *b=t;\n}\n\nvoid heapify(int arr[],int n,int i)\n{\n    int largest=i;\n    int l=2*i+1;\n    int r=2*i+2;\n\n    if(l<n && arr[l]>arr[largest])\n        largest=l;\n    if(r<n && arr[r]>arr[largest])\n        largest=r;\n\n    if(largest!=i)\n    {\n        swap(&arr[i],&arr[largest]);\n        heapify(arr,n,largest);\n    }\n}\n\nvoid heapSort(int arr[],int n)\n{\n    for(int i=n/2-1;i>=0;i--)\n        heapify(arr,n,i);\n\n    for(int i=n-1;i>=0;i--)\n    {\n        swap(&arr[0],&arr[i]);\n        heapify(arr,i,0);\n    }\n}\n\nint main()\n{\n    int arr[20],n;\n\n    scanf(\"%d\",&n);\n\n    for(int i=0;i<n;i++)\n        arr[i]=rand()%100;\n\n    heapSort(arr,n);\n\n    for(int i=0;i<n;i++)\n        printf(\"%d \",arr[i]);\n}",
-    "language": "c"
   },
   {
     "id": "node-e14a9c6d-7d6521",
@@ -1679,15 +1425,6 @@
     "name": "Slip 9"
   },
   {
-    "id": "node-30a172e3-e7660f",
-    "parentId": "node-07878eed-3f35dc",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program to implement a hash table using separate chaining with linked lists. Perform insert, search and display.",
-    "code": "#include<stdio.h>\n#include<stdlib.h>\n\nstruct node\n{\n    int data;\n    struct node* next;\n};\n\nstruct node* table[10];\n\nint hash(int key)\n{\n    return key%10;\n}\n\nvoid insert(int key)\n{\n    int h=hash(key);\n    struct node* newnode=(struct node*)malloc(sizeof(struct node));\n    newnode->data=key;\n    newnode->next=table[h];\n    table[h]=newnode;\n}\n\nvoid display()\n{\n    for(int i=0;i<10;i++)\n    {\n        struct node* temp=table[i];\n        printf(\"%d: \",i);\n        while(temp)\n        {\n            printf(\"%d \",temp->data);\n            temp=temp->next;\n        }\n        printf(\"\\n\");\n    }\n}\n\nint main()\n{\n    int n,x;\n    scanf(\"%d\",&n);\n\n    for(int i=0;i<n;i++)\n    {\n        scanf(\"%d\",&x);\n        insert(x);\n    }\n\n    display();\n}",
-    "language": "c"
-  },
-  {
     "id": "node-19d6b53c-d9ab51",
     "parentId": "node-07878eed-3f35dc",
     "type": "question",
@@ -1710,15 +1447,6 @@
     "parentId": "node-a00e728c-d593b8",
     "type": "folder",
     "name": "Slip 10"
-  },
-  {
-    "id": "node-c10ee4b3-9edde2",
-    "parentId": "node-ec18f8bd-99dfb4",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program for the implementation of Floyd Warshall’s algorithm for finding all pairs shortest path.",
-    "code": "#include<stdio.h>\n\n#define INF 999\n\nint main()\n{\n    int n=4;\n    int a[4][4]={{0,3,INF,5},\n                 {2,0,INF,4},\n                 {INF,1,0,INF},\n                 {INF,INF,2,0}};\n\n    for(int k=0;k<n;k++)\n    {\n        for(int i=0;i<n;i++)\n        {\n            for(int j=0;j<n;j++)\n            {\n                if(a[i][k]+a[k][j]<a[i][j])\n                    a[i][j]=a[i][k]+a[k][j];\n            }\n        }\n    }\n\n    for(int i=0;i<n;i++)\n    {\n        for(int j=0;j<n;j++)\n            printf(\"%d \",a[i][j]);\n        printf(\"\\n\");\n    }\n}",
-    "language": "c"
   },
   {
     "id": "node-a3670859-da7719",
@@ -1750,15 +1478,6 @@
     "name": "Slip 11"
   },
   {
-    "id": "node-58a9b723-41dddf",
-    "parentId": "node-adc7a47d-771a20",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a program which uses binary search tree library and counts the total nodes and total leaf nodes in the tree.\nint count(T) – returns total number of nodes\nint countLeaf(T) – returns total number of leaf nodes",
-    "code": "🔸 btree.h\n#include<stdio.h>\n#include<stdlib.h>\n\ntypedef struct node\n{\n    int data;\n    struct node *left,*right;\n}BST;\n\nBST* create(BST* root,int key)\n{\n    if(root==NULL)\n    {\n        root=(BST*)malloc(sizeof(BST));\n        root->data=key;\n        root->left=root->right=NULL;\n    }\n    else if(key<root->data)\n        root->left=create(root->left,key);\n    else\n        root->right=create(root->right,key);\n\n    return root;\n}\n\nint count(BST* root)\n{\n    if(root==NULL)\n        return 0;\n    return 1 + count(root->left) + count(root->right);\n}\n\nint countLeaf(BST* root)\n{\n    if(root==NULL)\n        return 0;\n\n    if(root->left==NULL && root->right==NULL)\n        return 1;\n\n    return countLeaf(root->left) + countLeaf(root->right);\n}\n🔸 main.c\n#include<stdio.h>\n#include<stdlib.h>\n#include \"btree.h\"\n\nint main()\n{\n    BST *root=NULL;\n    int x;\n\n    printf(\"Enter values (0 to stop):\\n\");\n    while(1)\n    {\n        scanf(\"%d\",&x);\n        if(x==0) break;\n        root=create(root,x);\n    }\n\n    printf(\"Total Nodes=%d\\n\",count(root));\n    printf(\"Leaf Nodes=%d\\n\",countLeaf(root));\n}",
-    "language": "c"
-  },
-  {
     "id": "node-687f24f8-6b0b8d",
     "parentId": "node-adc7a47d-771a20",
     "type": "question",
@@ -1781,15 +1500,6 @@
     "parentId": "node-a00e728c-d593b8",
     "type": "folder",
     "name": "Slip 12"
-  },
-  {
-    "id": "node-2443575b-f573fb",
-    "parentId": "node-f24eee03-fd6f6e",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a program to implement various types of hash functions:\na) Division Method\nb) Mid Square Method\nc) Digit Folding Method\nDisplay collision messages",
-    "code": "#include<stdio.h>\n\nint division(int key)\n{\n    return key%10;\n}\n\nint midsquare(int key)\n{\n    int sq=key*key;\n    return (sq/10)%10;\n}\n\nint folding(int key)\n{\n    int sum=0;\n    while(key>0)\n    {\n        sum+=key%10;\n        key/=10;\n    }\n    return sum%10;\n}\n\nint main()\n{\n    int n,key,table[10]={-1};\n\n    scanf(\"%d\",&n);\n\n    for(int i=0;i<n;i++)\n    {\n        scanf(\"%d\",&key);\n\n        int h=division(key);\n\n        if(table[h]!=-1)\n            printf(\"Collision at %d\\n\",h);\n        else\n            table[h]=key;\n    }\n}",
-    "language": "c"
   },
   {
     "id": "node-967a79ce-8354e5",
@@ -1816,15 +1526,6 @@
     "name": "Slip 13"
   },
   {
-    "id": "node-ad724cd8-9efb3a",
-    "parentId": "node-b16138e5-e028ee",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program that accepts vertices and edges, create adjacency list and print indegree, outdegree and total degree.",
-    "code": "#include<stdio.h>\n#include<stdlib.h>\n\nstruct node\n{\n    int v;\n    struct node* next;\n};\n\nstruct node* adj[10];\n\nvoid add(int u,int v)\n{\n    struct node* n=(struct node*)malloc(sizeof(struct node));\n    n->v=v;\n    n->next=adj[u];\n    adj[u]=n;\n}\n\nint main()\n{\n    int n,e,u,v;\n\n    scanf(\"%d%d\",&n,&e);\n\n    for(int i=1;i<=n;i++)\n        adj[i]=NULL;\n\n    for(int i=0;i<e;i++)\n    {\n        scanf(\"%d%d\",&u,&v);\n        add(u,v);\n    }\n\n    for(int i=1;i<=n;i++)\n    {\n        int out=0,in=0;\n        struct node* t=adj[i];\n\n        while(t){ out++; t=t->next; }\n\n        for(int j=1;j<=n;j++)\n        {\n            t=adj[j];\n            while(t)\n            {\n                if(t->v==i) in++;\n                t=t->next;\n            }\n        }\n\n        printf(\"V=%d In=%d Out=%d Total=%d\\n\",i,in,out,in+out);\n    }\n}",
-    "language": "c"
-  },
-  {
     "id": "node-6db8100b-66d661",
     "parentId": "node-b16138e5-e028ee",
     "type": "question",
@@ -1847,15 +1548,6 @@
     "parentId": "node-a00e728c-d593b8",
     "type": "folder",
     "name": "Slip 14"
-  },
-  {
-    "id": "node-7b7c0181-b604de",
-    "parentId": "node-abadc5c5-4adccc",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program to maintain a phonebook using BST (name + phone)",
-    "code": "#include<stdio.h>\n#include<stdlib.h>\n#include<string.h>\n\nstruct node\n{\n    char name[20];\n    int phone;\n    struct node *left,*right;\n};\n\nstruct node* create(struct node* root,char name[],int phone)\n{\n    if(root==NULL)\n    {\n        root=(struct node*)malloc(sizeof(struct node));\n        strcpy(root->name,name);\n        root->phone=phone;\n        root->left=root->right=NULL;\n    }\n    else if(strcmp(name,root->name)<0)\n        root->left=create(root->left,name,phone);\n    else\n        root->right=create(root->right,name,phone);\n\n    return root;\n}\n\nvoid inorder(struct node* root)\n{\n    if(root)\n    {\n        inorder(root->left);\n        printf(\"%s %d\\n\",root->name,root->phone);\n        inorder(root->right);\n    }\n}\n\nint main()\n{\n    struct node* root=NULL;\n    char name[20];\n    int phone;\n\n    for(int i=0;i<3;i++)\n    {\n        scanf(\"%s%d\",name,&phone);\n        root=create(root,name,phone);\n    }\n\n    inorder(root);\n}",
-    "language": "c"
   },
   {
     "id": "node-fab6ff8e-6bfd04",
@@ -1882,15 +1574,6 @@
     "name": "Slip 15"
   },
   {
-    "id": "node-bea6cdee-2049fc",
-    "parentId": "node-d8756273-38f45f",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program to implement hash table using quadratic probing",
-    "code": "#include<stdio.h>\n\nint table[10];\n\nvoid insert(int key)\n{\n    int h=key%10,i=1;\n\n    while(table[h]!=0)\n    {\n        h=(h+i*i)%10;\n        i++;\n    }\n\n    table[h]=key;\n}\n\nvoid display()\n{\n    for(int i=0;i<10;i++)\n        printf(\"%d \",table[i]);\n}\n\nint main()\n{\n    int n,x;\n\n    scanf(\"%d\",&n);\n\n    for(int i=0;i<n;i++)\n    {\n        scanf(\"%d\",&x);\n        insert(x);\n    }\n\n    display();\n}",
-    "language": "c"
-  },
-  {
     "id": "node-8181d2bd-cd4b3d",
     "parentId": "node-d8756273-38f45f",
     "type": "question",
@@ -1913,15 +1596,6 @@
     "parentId": "node-a00e728c-d593b8",
     "type": "folder",
     "name": "Slip 16"
-  },
-  {
-    "id": "node-80d50418-79a81d",
-    "parentId": "node-c35cb6cf-ca8ef5",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program for the implementation of Dijkstra’s shortest path algorithm for finding shortest path from a given source vertex using adjacency cost matrix.",
-    "code": "#include<stdio.h>\n\n#define INF 999\n\nint main()\n{\n    int n, cost[10][10], dist[10], visited[10]={0};\n    int i,j,min,u,source;\n\n    scanf(\"%d\",&n);\n\n    for(i=1;i<=n;i++)\n    {\n        for(j=1;j<=n;j++)\n        {\n            scanf(\"%d\",&cost[i][j]);\n            if(cost[i][j]==0)\n                cost[i][j]=INF;\n        }\n    }\n\n    printf(\"Enter source:\");\n    scanf(\"%d\",&source);\n\n    for(i=1;i<=n;i++)\n    {\n        dist[i]=cost[source][i];\n        visited[i]=0;\n    }\n\n    visited[source]=1;\n\n    for(int count=1;count<n;count++)\n    {\n        min=INF;\n\n        for(i=1;i<=n;i++)\n        {\n            if(!visited[i] && dist[i]<min)\n            {\n                min=dist[i];\n                u=i;\n            }\n        }\n\n        visited[u]=1;\n\n        for(j=1;j<=n;j++)\n        {\n            if(!visited[j] && dist[u]+cost[u][j]<dist[j])\n                dist[j]=dist[u]+cost[u][j];\n        }\n    }\n\n    for(i=1;i<=n;i++)\n        printf(\"Dist to %d = %d\\n\",i,dist[i]);\n}",
-    "language": "c"
   },
   {
     "id": "node-5a0e48b4-91c6d3",
@@ -1948,15 +1622,6 @@
     "name": "Slip 17"
   },
   {
-    "id": "node-da64cf13-6fdc59",
-    "parentId": "node-3847b360-916d05",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program that accepts vertices and edges. Create adjacency list and print indegree, outdegree and total degree of all vertices.",
-    "code": "#include<stdio.h>\n#include<stdlib.h>\n\nstruct node\n{\n    int v;\n    struct node* next;\n};\n\nstruct node* adj[10];\n\nvoid add(int u,int v)\n{\n    struct node* n=(struct node*)malloc(sizeof(struct node));\n    n->v=v;\n    n->next=adj[u];\n    adj[u]=n;\n}\n\nint main()\n{\n    int n,e,u,v;\n    scanf(\"%d%d\",&n,&e);\n\n    for(int i=1;i<=n;i++)\n        adj[i]=NULL;\n\n    for(int i=0;i<e;i++)\n    {\n        scanf(\"%d%d\",&u,&v);\n        add(u,v);\n    }\n\n    for(int i=1;i<=n;i++)\n    {\n        int in=0,out=0;\n        struct node* t=adj[i];\n\n        while(t){ out++; t=t->next; }\n\n        for(int j=1;j<=n;j++)\n        {\n            t=adj[j];\n            while(t)\n            {\n                if(t->v==i) in++;\n                t=t->next;\n            }\n        }\n\n        printf(\"V=%d In=%d Out=%d Total=%d\\n\",i,in,out,in+out);\n    }\n}",
-    "language": "c"
-  },
-  {
     "id": "node-4fed092a-160bff",
     "parentId": "node-3847b360-916d05",
     "type": "question",
@@ -1979,15 +1644,6 @@
     "parentId": "node-a00e728c-d593b8",
     "type": "folder",
     "name": "Slip 18"
-  },
-  {
-    "id": "node-ea6150d7-6d8075",
-    "parentId": "node-7fd5753c-d8b06e",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program that accepts vertices and edges and stores it as adjacency matrix. Display adjacency matrix.",
-    "code": "#include<stdio.h>\n\nint main()\n{\n    int n,adj[10][10];\n\n    scanf(\"%d\",&n);\n\n    for(int i=1;i<=n;i++)\n    {\n        for(int j=1;j<=n;j++)\n        {\n            scanf(\"%d\",&adj[i][j]);\n        }\n    }\n\n    printf(\"Matrix:\\n\");\n\n    for(int i=1;i<=n;i++)\n    {\n        for(int j=1;j<=n;j++)\n            printf(\"%d \",adj[i][j]);\n        printf(\"\\n\");\n    }\n}",
-    "language": "c"
   },
   {
     "id": "node-a98e09af-bf7153",
@@ -2014,15 +1670,6 @@
     "name": "Slip 19"
   },
   {
-    "id": "node-8cd9142d-5c254b",
-    "parentId": "node-15dd708b-468bb3",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program to maintain phonebook using BST (name + phone).\n\n👉 (Same as Slip 14 – reuse code in exam)",
-    "code": "",
-    "language": "python"
-  },
-  {
     "id": "node-12e5ca67-b177b3",
     "parentId": "node-15dd708b-468bb3",
     "type": "question",
@@ -2045,15 +1692,6 @@
     "parentId": "node-a00e728c-d593b8",
     "type": "folder",
     "name": "Slip 20"
-  },
-  {
-    "id": "node-64ca95dc-2464f0",
-    "parentId": "node-8903a148-615497",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program that accepts vertices and edges, create adjacency list and perform DFS traversal.",
-    "code": "#include<stdio.h>\n#include<stdlib.h>\n\nstruct node\n{\n    int v;\n    struct node* next;\n};\n\nstruct node* adj[10];\nint visited[10];\n\nvoid add(int u,int v)\n{\n    struct node* n=(struct node*)malloc(sizeof(struct node));\n    n->v=v;\n    n->next=adj[u];\n    adj[u]=n;\n}\n\nvoid dfs(int v)\n{\n    printf(\"%d \",v);\n    visited[v]=1;\n\n    struct node* t=adj[v];\n\n    while(t)\n    {\n        if(!visited[t->v])\n            dfs(t->v);\n        t=t->next;\n    }\n}\n\nint main()\n{\n    int n,e,u,v;\n\n    scanf(\"%d%d\",&n,&e);\n\n    for(int i=1;i<=n;i++)\n    {\n        adj[i]=NULL;\n        visited[i]=0;\n    }\n\n    for(int i=0;i<e;i++)\n    {\n        scanf(\"%d%d\",&u,&v);\n        add(u,v);\n    }\n\n    dfs(1);\n}",
-    "language": "c"
   },
   {
     "id": "node-ab677fa7-78755f",
@@ -2080,15 +1718,6 @@
     "name": "Slip 21"
   },
   {
-    "id": "node-a2623a21-37a081",
-    "parentId": "node-0593165c-a32fa4",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program for the implementation of Topological sorting.",
-    "code": "#include<stdio.h>\n\nint adj[10][10], indeg[10], n;\n\nvoid topo()\n{\n    int count=0;\n\n    while(count<n)\n    {\n        for(int i=1;i<=n;i++)\n        {\n            if(indeg[i]==0)\n            {\n                printf(\"%d \",i);\n                indeg[i]=-1;\n\n                for(int j=1;j<=n;j++)\n                {\n                    if(adj[i][j]==1)\n                        indeg[j]--;\n                }\n                count++;\n            }\n        }\n    }\n}\n\nint main()\n{\n    scanf(\"%d\",&n);\n\n    for(int i=1;i<=n;i++)\n    {\n        indeg[i]=0;\n        for(int j=1;j<=n;j++)\n        {\n            scanf(\"%d\",&adj[i][j]);\n            if(adj[i][j]==1)\n                indeg[j]++;\n        }\n    }\n\n    topo();\n}",
-    "language": "c"
-  },
-  {
     "id": "node-00265980-cc9727",
     "parentId": "node-0593165c-a32fa4",
     "type": "question",
@@ -2111,15 +1740,6 @@
     "parentId": "node-a00e728c-d593b8",
     "type": "folder",
     "name": "Slip 22"
-  },
-  {
-    "id": "node-73f7b812-a7f605",
-    "parentId": "node-f2920fdc-2027a3",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program to implement hash table using quadratic probing (insert, search, display).",
-    "code": "#include<stdio.h>\n\nint table[10];\n\nvoid insert(int key)\n{\n    int h=key%10,i=1;\n\n    while(table[h]!=0)\n    {\n        h=(h+i*i)%10;\n        i++;\n    }\n\n    table[h]=key;\n}\n\nint search(int key)\n{\n    int h=key%10,i=1;\n\n    while(table[h]!=0)\n    {\n        if(table[h]==key)\n            return 1;\n        h=(h+i*i)%10;\n        i++;\n    }\n    return 0;\n}\n\nvoid display()\n{\n    for(int i=0;i<10;i++)\n        printf(\"%d \",table[i]);\n}\n\nint main()\n{\n    int n,x;\n\n    scanf(\"%d\",&n);\n\n    for(int i=0;i<n;i++)\n    {\n        scanf(\"%d\",&x);\n        insert(x);\n    }\n\n    display();\n}",
-    "language": "c"
   },
   {
     "id": "node-0022dafe-536094",
@@ -2146,15 +1766,6 @@
     "name": "Slip 23"
   },
   {
-    "id": "node-c83d8155-581039",
-    "parentId": "node-5310d0d3-12ac21",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program to find height of tree and check whether tree is balanced or not.",
-    "code": "#include<stdio.h>\n#include<stdlib.h>\n\nstruct node\n{\n    int data;\n    struct node *left,*right;\n};\n\nint height(struct node* root)\n{\n    if(root==NULL) return 0;\n\n    int l=height(root->left);\n    int r=height(root->right);\n\n    return (l>r?l:r)+1;\n}\n\nint main()\n{\n    struct node* root=NULL;\n\n    // assume tree created\n\n    int hl=height(root->left);\n    int hr=height(root->right);\n\n    if(abs(hl-hr)<2)\n        printf(\"Balanced\");\n    else\n        printf(\"Not Balanced\");\n}",
-    "language": "c"
-  },
-  {
     "id": "node-7c13d804-3d0262",
     "parentId": "node-5310d0d3-12ac21",
     "type": "question",
@@ -2177,15 +1788,6 @@
     "parentId": "node-a00e728c-d593b8",
     "type": "folder",
     "name": "Slip 24"
-  },
-  {
-    "id": "node-25d405d7-c0864a",
-    "parentId": "node-e6ae7fd5-178ea4",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program for the implementation of Floyd Warshall algorithm.",
-    "code": "#include<stdio.h>\n#define INF 999\n\nint main()\n{\n    int a[4][4]={{0,3,INF,5},\n                 {2,0,INF,4},\n                 {INF,1,0,INF},\n                 {INF,INF,2,0}};\n\n    for(int k=0;k<4;k++)\n    {\n        for(int i=0;i<4;i++)\n        {\n            for(int j=0;j<4;j++)\n            {\n                if(a[i][k]+a[k][j]<a[i][j])\n                    a[i][j]=a[i][k]+a[k][j];\n            }\n        }\n    }\n\n    for(int i=0;i<4;i++)\n    {\n        for(int j=0;j<4;j++)\n            printf(\"%d \",a[i][j]);\n        printf(\"\\n\");\n    }\n}",
-    "language": "c"
   },
   {
     "id": "node-577b7e02-828a5b",
@@ -2212,15 +1814,6 @@
     "name": "Slip 25"
   },
   {
-    "id": "node-d8728a03-1226aa",
-    "parentId": "node-4b125239-983255",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program for Dijkstra’s algorithm.\n\n👉 (Same as Slip 16 — reuse in exam)",
-    "code": "",
-    "language": "python"
-  },
-  {
     "id": "node-9c068a4e-be5832",
     "parentId": "node-4b125239-983255",
     "type": "question",
@@ -2245,15 +1838,6 @@
     "name": "Slip 26"
   },
   {
-    "id": "node-1bd70eed-6d971d",
-    "parentId": "node-7c6516be-66479e",
-    "type": "question",
-    "name": "Q1",
-    "content": "Write a C program to store graph as adjacency matrix and perform DFS traversal.",
-    "code": "#include<stdio.h>\n\nint adj[10][10],visited[10],n;\n\nvoid dfs(int v)\n{\n    printf(\"%d \",v);\n    visited[v]=1;\n\n    for(int i=1;i<=n;i++)\n    {\n        if(adj[v][i]==1 && !visited[i])\n            dfs(i);\n    }\n}\n\nint main()\n{\n    scanf(\"%d\",&n);\n\n    for(int i=1;i<=n;i++)\n    {\n        visited[i]=0;\n        for(int j=1;j<=n;j++)\n            scanf(\"%d\",&adj[i][j]);\n    }\n\n    dfs(1);\n}",
-    "language": "c"
-  },
-  {
     "id": "node-86462337-97ae77",
     "parentId": "node-7c6516be-66479e",
     "type": "question",
@@ -2270,34 +1854,6 @@
     "content": "",
     "code": "CREATE OR REPLACE PROCEDURE calc_all(a INT,b INT)\nLANGUAGE plpgsql\nAS $$\nBEGIN\n    RAISE NOTICE 'Add=%',a+b;\n    RAISE NOTICE 'Sub=%',a-b;\n    RAISE NOTICE 'Mul=%',a*b;\n    RAISE NOTICE 'Div=%',a/b;\nEND;\n$$;",
     "language": "sql"
-  },
-  {
-    "id": "node-mn964s4w-oi9sge",
-    "parentId": "node-a00e728c-d593b8",
-    "type": "question",
-    "name": "Slip 1",
-    "answers": [
-      {
-        "content": "",
-        "code": "",
-        "language": "plaintext"
-      }
-    ]
-  },
-  {
-    "id": "node-mn96jmj8-kju878",
-    "parentId": "dsa-arrays-q1-sub1",
-    "type": "question",
-    "name": "Slip 1",
-    "answers": [
-      {
-        "question": "test",
-        "content": "test",
-        "code": "test",
-        "codeLabel": "Code",
-        "language": "plaintext"
-      }
-    ]
   },
   {
     "id": "node-mnad8zye-anjhz6",
@@ -2550,5 +2106,11 @@
         ]
       }
     ]
+  },
+  {
+    "id": "node-mneq7zhv-dzmvt2",
+    "parentId": null,
+    "type": "folder",
+    "name": "DS & DBMS Slip"
   }
 ]
